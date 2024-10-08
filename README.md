@@ -1,7 +1,7 @@
 cache me if you can Front End Capstone
 ======================================
 
-getting started
+# getting started
 
 ## run the following commands
  - nvm use 16
