@@ -8,8 +8,9 @@ cache me if you can Front End Capstone
  - npm i
 
 ## configuring enviroment
- - rename example.env to .env and add github token into .env file
+ - copy and rename example.env to .env then add github token into .env file
 
-## To run locally
- - run npm run client-dev
- - then in a seperate terminal run npm run server-dev
+## To spin up locally run the following commands
+ - npm run client-dev
+ - then in a seperate terminal..
+ - npm run server-dev
