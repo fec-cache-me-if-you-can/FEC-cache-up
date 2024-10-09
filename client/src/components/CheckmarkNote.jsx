@@ -1,7 +1,9 @@
+import { useState } from 'react';
 
-export default function ExampleButtonComponent ({ label }) {
+export default function CheckmarkNote () {
 
   return (
-    <button className="">{ label }</button>
+    <>
+    </>
   );
-}
+};
