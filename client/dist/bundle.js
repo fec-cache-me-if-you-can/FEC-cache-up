@@ -10,13 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./client/src/components/app.jsx":
-/*!***************************************!*\
-  !*** ./client/src/components/app.jsx ***!
-  \***************************************/
+/***/ "./client/src/app.jsx":
+/*!****************************!*\
+  !*** ./client/src/app.jsx ***!
+  \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nfunction App() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"app\"\n  }, \" hello world\");\n}\n\n//# sourceURL=webpack://my-webpack-project/./client/src/components/app.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _layouts_productDetails_index_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/productDetails/index.jsx */ \"./client/src/layouts/productDetails/index.jsx\");\n/* harmony import */ var _layouts_ratingsAndReviews_index_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layouts/ratingsAndReviews/index.jsx */ \"./client/src/layouts/ratingsAndReviews/index.jsx\");\n/* harmony import */ var _layouts_questionsAndAnswers_index_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/questionsAndAnswers/index.jsx */ \"./client/src/layouts/questionsAndAnswers/index.jsx\");\n/* harmony import */ var _layouts_relatedItemsAndOutfitCreation_index_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layouts/relatedItemsAndOutfitCreation/index.jsx */ \"./client/src/layouts/relatedItemsAndOutfitCreation/index.jsx\");\n\n\n\n\n\nfunction App() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"app\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_layouts_productDetails_index_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_layouts_ratingsAndReviews_index_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_layouts_questionsAndAnswers_index_jsx__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_layouts_relatedItemsAndOutfitCreation_index_jsx__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null));\n}\n\n//# sourceURL=webpack://my-webpack-project/./client/src/app.jsx?");
 
 /***/ }),
 
@@ -26,7 +26,47 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _components_app_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/app.jsx */ \"./client/src/components/app.jsx\");\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_app_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), document.getElementById('root'));\n\n//# sourceURL=webpack://my-webpack-project/./client/src/index.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _app_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.jsx */ \"./client/src/app.jsx\");\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_app_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), document.getElementById('root'));\n\n//# sourceURL=webpack://my-webpack-project/./client/src/index.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/layouts/productDetails/index.jsx":
+/*!*****************************************************!*\
+  !*** ./client/src/layouts/productDetails/index.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ProductDetails)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nfunction ProductDetails() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"Product Details\");\n}\n\n//# sourceURL=webpack://my-webpack-project/./client/src/layouts/productDetails/index.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/layouts/questionsAndAnswers/index.jsx":
+/*!**********************************************************!*\
+  !*** ./client/src/layouts/questionsAndAnswers/index.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ QuestionsAndAnswers)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nfunction QuestionsAndAnswers() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"Question And Answers\");\n}\n\n//# sourceURL=webpack://my-webpack-project/./client/src/layouts/questionsAndAnswers/index.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/layouts/ratingsAndReviews/index.jsx":
+/*!********************************************************!*\
+  !*** ./client/src/layouts/ratingsAndReviews/index.jsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ RatingsAndReviews)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nfunction RatingsAndReviews() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"Ratings And Reviews\");\n}\n\n//# sourceURL=webpack://my-webpack-project/./client/src/layouts/ratingsAndReviews/index.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/layouts/relatedItemsAndOutfitCreation/index.jsx":
+/*!********************************************************************!*\
+  !*** ./client/src/layouts/relatedItemsAndOutfitCreation/index.jsx ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ RelatedItemsAndOutfitCreation)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nfunction RelatedItemsAndOutfitCreation() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"Related Items And Outfit Creation\");\n}\n\n//# sourceURL=webpack://my-webpack-project/./client/src/layouts/relatedItemsAndOutfitCreation/index.jsx?");
 
 /***/ }),
 
