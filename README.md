@@ -18,6 +18,10 @@ Our outdated client-facing retail web portal has become significantly outdated, 
   - [Constraints](#constraints)
   - [Quality Control and SLAs](#quality-control-and-slas)
   - [Design Decisions](#design-decisions)
+    - [Company Name](#company-name)
+    - [Logo](#logo)
+    - [Typography](#typography)
+    - [Color Palette](#color-palette)
   - [License](#license)
 
 ## Description
@@ -149,6 +153,8 @@ The typography for the brand has been selected.
 ### Color Palette
 
 [Color Palette](https://coolors.co/palette/222222-666666-596b80-ab1b38-f2eded-ffffff)
+[Dark Theme Mockup](https://www.realtimecolors.com/?colors=dedede-000000-7e90a5-999999-e45370&fonts=Poppins-Montserrat)
+[Light Theme Mockup](https://www.realtimecolors.com/?colors=212121-ffffff-5a6c81-666666-ac1b38&fonts=Poppins-Montserrat)
 
 <p align="left">
   <img src="./client/src/assets/Colors/Colors.png" alt="Color palette" style="max-width: 300px;">
