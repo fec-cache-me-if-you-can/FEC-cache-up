@@ -1,7 +1,8 @@
+import React from 'react';
 
-export default function = RelatedProductCard () {
+export default function RelatedProductCard () {
 
   return (
-    <div>=RelatedProductCard</div>
+    <div>RelatedProductCard</div>
   );
 }

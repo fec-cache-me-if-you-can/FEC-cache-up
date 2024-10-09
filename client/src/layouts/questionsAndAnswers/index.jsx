@@ -10,11 +10,13 @@ import SearchQuestions from './features/SearchQuestions.jsx'
 export default function QuestionsAndAnswers () {
 
   return (
-    <AddAnswer />
-    <AddQuestion />
-    <MoreAnsweredQuestions />
-    <Question />
-    <QuestionsList />
-    <SearchQuestions />
+    <div>
+      <AddAnswer />
+      <AddQuestion />
+      <MoreAnsweredQuestions />
+      <Question />
+      <QuestionsList />
+      <SearchQuestions />
+    </div>
   );
 }

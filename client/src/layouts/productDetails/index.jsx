@@ -8,10 +8,12 @@ import StyleSelector from './features/StyleSelector.jsx'
 export default function ProductDetails() {
 
   return (
-    <div>Product Details</div>
-    <ProductInformation />
-    <ImageGallery />
-    <AddToCart />
-    <StyleSelector />
+    <div>
+      <div>Product Details</div>
+      <ProductInformation />
+      <ImageGallery />
+      <AddToCart />
+      <StyleSelector />
+    </div>
   );
 }

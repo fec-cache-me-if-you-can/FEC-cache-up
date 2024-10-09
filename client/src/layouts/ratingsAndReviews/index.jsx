@@ -12,14 +12,15 @@ import WriteNewReview from './features/WriteNewReview.jsx';
 export default function RatingsAndReviews () {
 
   return (
-    <div>Ratings And Reviews</div>
-
-    <KeywordSearch />
-    <ProductBreakdown />
-    <RatingsBreakdown />
-    <ReviewList />
-    <ReviewTile />
-    <SortOptions />
-    <WriteNewReview />
+    <div>
+      <div>Ratings And Reviews</div>
+      <KeywordSearch />
+      <ProductBreakdown />
+      <RatingsBreakdown />
+      <ReviewList />
+      <ReviewTile />
+      <SortOptions />
+      <WriteNewReview />
+    </div>
   );
 }

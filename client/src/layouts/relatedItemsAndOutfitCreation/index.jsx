@@ -7,9 +7,11 @@ import RelatedProductList from './features/RelatedProductList.jsx';
 export default function RelatedItemsAndOutfitCreation () {
 
   return (
-    <div>Related Items And Outfit Creation</div>
-    <OutfitList />
-    <RelatedProductCard />
-    <RelatedProductList />
+    <div>
+      <div>Related Items And Outfit Creation</div>
+      <OutfitList />
+      <RelatedProductCard />
+      <RelatedProductList />
+    </div>
   );
 }
