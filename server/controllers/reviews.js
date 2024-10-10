@@ -1,11 +1,9 @@
 const models = require('../models');
-const { fetchAll } = require('../models/products');
-const { postReview } = require('../models/reviews');
 
 module.exports = {
 
   getReviews: (req, res) => {
-    if (!req.body.product_id) {
+    if (!req.body.review_id) {
       return res.sendStatus(400);
     }
     models.reviews.fetchAll(req.body)
@@ -18,7 +16,7 @@ module.exports = {
       })
   },
   getMeta: (req, res) => {
-    if (!req.body.product_id) {
+    if (!req.body.review_id) {
       return res.sendStatus(400);
     }
     models.reviews.fetchMeta(req.body)
@@ -31,7 +29,7 @@ module.exports = {
       })
   },
   postReview: (req, res) => {
-    if (!req.body.product_id) {
+    if (!req.body.review_id) {
       return res.sendStatus(400);
     }
     models.reviews.createReview(req.body)
@@ -44,9 +42,21 @@ module.exports = {
       })
   },
   putHelpful: (req, res) => {
-
+    console.log(req.body.review_id);
+    models.reviews.helpful(req.body.review_id)
+      .then(result => res.status(204).send('NO CONTENT'))
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      });
   },
   putReport: (req, res) => {
-
+    console.log(req.body.review_id);
+    models.reviews.report(req.body.review_id)
+      .then(result => res.status(204).send('NO CONTENT'))
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      });
   }
 }

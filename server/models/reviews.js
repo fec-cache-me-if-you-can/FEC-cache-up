@@ -24,13 +24,21 @@ module.exports = {
     return axios.post(`${process.env.API_URL}reviews`, body, {
       headers: {
         'Authorization': process.env.GITHUB_TOKEN
-      },
+      }
     })
   },
-  markHelpful: (id) => {
-
+  helpful: (id) => {
+    return axios.put(`${process.env.API_URL}reviews/${id}/helpful`, {}, {
+      headers: {
+        'Authorization': process.env.GITHUB_TOKEN
+      }
+    })
   },
-  Report: (id) => {
-
+  report: (id) => {
+    return axios.put(`${process.env.API_URL}reviews/${id}/report`, {}, {
+      headers: {
+        'Authorization': process.env.GITHUB_TOKEN
+      }
+    })
   }
 }
