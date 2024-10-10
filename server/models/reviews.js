@@ -1,12 +1,16 @@
 const axios = require('axios');
-const { fetchAll } = require('./products');
-const { postHelpful, postReport } = require('../controllers/reviews');
 require('dotenv').config();
+const bodyToParams = require('../lib/bodyToParams.js');
 
 module.exports = {
 
-  fetchAll: (page, count, sort, product_id) => {
-
+  fetchAll: (body) => {
+    params = bodyToParams(body);
+    return axios.get(`${process.env.API_URL}products?${params}`, {
+      headers: {
+        'Authorization': process.env.GITHUB_TOKEN
+      }
+    })
   },
   fetchMeta: (product_id) => {
 

@@ -5,7 +5,17 @@ const { postReview } = require('../models/reviews');
 module.exports = {
 
   getReviews: (req, res) => {
-    models.reviews.fetchAll()
+    if (!req.body.product_id) {
+      return res.sendStatus(400);
+    }
+    models.reviews.fetchAll(req.body)
+      .then(result => {
+        res.send(result.data);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      })
   },
   getMeta: (req, res) => {
 
