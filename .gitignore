@@ -53,6 +53,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+package-lock.json
 
 
 # Optional npm cache directory
@@ -126,3 +127,5 @@ $RECYCLE.BIN/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+client/dist/bundle.js
