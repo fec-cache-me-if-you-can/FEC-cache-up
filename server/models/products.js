@@ -7,7 +7,7 @@ require('dotenv').config();
 
 module.exports = {
   fetchAll: (page, count) => {
-    return axios.get(`${process.env.API_URL}products`, {
+    return axios.get(`${process.env.API_URL}products?page=${page}&count=${count}`, {
       headers: {
         'Authorization': process.env.GITHUB_TOKEN
       }

@@ -2,7 +2,17 @@ const models = require('../models');
 
 module.exports = {
   getAll: (req, res) => {
-    models.products.fetchAll()
+    let reqpage = 1;
+    let reqCount = 5;
+
+    if (req.body.page) {
+      reqpage = req.body.page;
+    }
+    if (req.body.count) {
+      reqCount = req.body.count;
+    }
+
+    models.products.fetchAll(reqpage, reqCount)
       .then(result => {
         res.send(result.data);
       })
