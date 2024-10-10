@@ -31,7 +31,17 @@ module.exports = {
       })
   },
   postReview: (req, res) => {
-
+    if (!req.body.product_id) {
+      return res.sendStatus(400);
+    }
+    models.reviews.createReview(req.body)
+      .then(result => {
+        res.status(201).send('CREATED');
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      })
   },
   putHelpful: (req, res) => {
 

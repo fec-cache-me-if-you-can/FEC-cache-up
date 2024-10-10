@@ -20,8 +20,12 @@ module.exports = {
       }
     })
   },
-  createReview: () => {
-
+  createReview: (body) => {
+    return axios.post(`${process.env.API_URL}reviews`, body, {
+      headers: {
+        'Authorization': process.env.GITHUB_TOKEN
+      },
+    })
   },
   markHelpful: (id) => {
 
