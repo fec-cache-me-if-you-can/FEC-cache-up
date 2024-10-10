@@ -1,22 +1,22 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import pluginReact from "eslint-plugin-react";
-import pluginReactHooks from "eslint-plugin-react-hooks";
-import pluginJsxA11y from "eslint-plugin-jsx-a11y";
-import pluginImport from "eslint-plugin-import";
-import configAirbnb from "eslint-config-airbnb";
-import eslintPluginPrettier from "eslint-plugin-prettier";
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import pluginReact from 'eslint-plugin-react';
+import pluginReactHooks from 'eslint-plugin-react-hooks';
+import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
+import pluginImport from 'eslint-plugin-import';
+import configAirbnb from 'eslint-config-airbnb';
+import eslintPluginPrettier from 'eslint-plugin-prettier';
 
 export default {
-  files: ["**/*.{js,mjs,cjs,jsx}"],
+  files: ['**/*.{js,mjs,cjs,jsx}'],
   languageOptions: {
     globals: {
       ...globals.browser,
       ...globals.node,
     },
     parserOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       ecmaFeatures: {
         jsx: true,
       },
@@ -24,13 +24,13 @@ export default {
   },
   settings: {
     react: {
-      version: "detect",
+      version: 'detect',
     },
   },
   plugins: {
     react: pluginReact,
-    "react-hooks": pluginReactHooks,
-    "jsx-a11y": pluginJsxA11y,
+    'react-hooks': pluginReactHooks,
+    'jsx-a11y': pluginJsxA11y,
     import: pluginImport,
     prettier: eslintPluginPrettier,
   },
@@ -38,13 +38,18 @@ export default {
     ...pluginJs.configs.recommended.rules,
     ...configAirbnb.rules,
     ...pluginReact.configs.recommended.rules,
-    ...pluginReact.configs["jsx-runtime"].rules,
+    ...pluginReact.configs['jsx-runtime'].rules,
     ...pluginReactHooks.configs.recommended.rules,
     ...pluginJsxA11y.configs.recommended.rules,
-    semi: ["error", "always"],
-    "no-unused-vars": ["warn", { varsIgnorePattern: "^React$" }],
-    "prettier/prettier": "error",
-    indent: ["error", 2],
+    semi: ['error', 'always'],
+    'no-unused-vars': ['warn', { varsIgnorePattern: '^React$' }],
+    'prettier/prettier': [
+      'error',
+      {
+        indent: ['error', 2],
+        singleQuote: true,
+      },
+    ],
     // You can add or override rules here
   },
 };
