@@ -28,12 +28,10 @@ PrimaryButton.defaultProps = {
 import React from 'react';
 import { useState } from 'react';
 
-export default function PrimaryButton ({ label, onClick, isDisabled = false, className = ''}) {
-  return (
-    <button
+export default function PrimaryButton () {
 
-    >
-      {label}
-    </button>
+  return (
+    <>
+    </>
   );
-}
+};
