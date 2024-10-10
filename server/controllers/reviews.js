@@ -18,7 +18,17 @@ module.exports = {
       })
   },
   getMeta: (req, res) => {
-
+    if (!req.body.product_id) {
+      return res.sendStatus(400);
+    }
+    models.reviews.fetchMeta(req.body)
+      .then(result => {
+        res.send(result.data);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(400);
+      })
   },
   postReview: (req, res) => {
 
