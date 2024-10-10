@@ -26,7 +26,7 @@ export default function AddToCart () {
     <DropdownSelector
       options={sizeOptions}
       defaultText="Select Size"
-      isDisabled={true}
+      isDisabled={isDropdownDisabled}
       onChange={handleSizeChange}
     />
     </div>
