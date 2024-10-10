@@ -25,8 +25,14 @@ module.exports = {
   },
   getProductStyles: (req, res) => {
     console.log('GET STYLES');
+    models.products.fetchProductStyles(req.body.product_id)
+      .then(result => res.send(result.data))
+      .catch(err => res.status(404).send(err));
   },
   getRelatedProducts: (req, res) => {
     console.log('GET RELATED');
+    models.products.fetchRelatedProducts(req.body.product_id)
+      .then(result => res.send(result.data))
+      .catch(err => res.status(404).send(err));
   },
 }

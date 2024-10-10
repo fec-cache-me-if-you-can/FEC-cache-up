@@ -21,9 +21,17 @@ module.exports = {
     })
   },
   fetchProductStyles: (id) => {
-
+    return axios.get(`${process.env.API_URL}products/${id}/styles`, {
+      headers: {
+        'Authorization': process.env.GITHUB_TOKEN
+      }
+    })
   },
   fetchRelatedProducts: (id) => {
-
+    return axios.get(`${process.env.API_URL}products/${id}/related`, {
+      headers: {
+        'Authorization': process.env.GITHUB_TOKEN
+      }
+    })
   }
 }
