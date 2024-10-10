@@ -5,12 +5,12 @@
 		}
 	],
 	"settings": {
+        "task.allowAutomaticTasks": "on",
         "editor.codeActionsOnSave": {
             "source.fixAll.eslint": "always"
         },
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "javascript.validate.enable": false,
 		"better-comments.tags": [
     {
         // ! important
