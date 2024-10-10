@@ -43,36 +43,97 @@ To set up the project locally, follow these steps:
 
 1. **Clone the repository**:
 
-   ```bash
-   git clone https://github.com/[yourusername]/fec-cache-up.git
-   cd fec-cache-up
+   ```shell
+   $ git clone https://github.com/[yourusername]/fec-cache-up.git
    ```
+1. **Navigate to the project directory**:
 
+   ```shell
+   $ cd fec-cache-up
+   ```
+1. **switch to node version 16.x**:
+
+   ```shell
+   $ nvm use 16
+   ```
+1. set up script node path prepending by running the following command:
+
+   ```shell
+   $ npm set-script-prepend-node-path true
+   ```
 2. **Install dependencies**:
 
    ```bash
-   npm install
+   $ npm install
    ```
-
 3. **Configure environment variables**:
 
-   Rename `example.env` to `.env` and add your necessary environment variables.
+   Rename `example.env` to `.env` and add your necessary environment variables. ex:
 
    ```env
     GITHUB_TOKEN='your_github_token'
+    PORT=3000
     ```
 
-4. **Transpile and bundle assets**:
+4. **Spin up the Application**:
 
-   ```bash
-   npm run build
-   ```
+    Run the following commands in separate terminal windows to start the server and client in development mode:
 
-5. **Run application**:
+    ```shell
+    $ npm run server-dev
+    ```
 
-   ```bash
-   npm start
-   ```
+    ```shell
+    $ npm run client-dev
+    ```
+
+## Npm Scripts
+  This command will run nodemon to watch the server files and restart the server when changes are made.
+
+  ```bash
+  $ npm run server-dev
+  ```
+
+  This command will run the server with webpack.
+
+  ```bash
+  $ npm run serve
+  ```
+
+  This command will run nodemon to watch the server files and restart the server when changes are made.
+
+  ```bash
+  $ npm run server-dev
+  ```
+
+  This command will run the server with webpack.
+
+  ```bash
+  $ npm run serve
+  ```
+  This command will run the webpack build and start the server in development mode and watch the server files for changes.
+
+  ```shell
+  $ npm run client-dev
+  ```
+
+  This command will build the client files for production.
+
+  ```shell
+  $ npm run build:prod
+  ```
+
+  This command will build the application in development mode.
+
+  ```shell
+  $ npm build:dev
+  ```
+
+  This command will run eslint on the files in the current working directory.
+
+  ```shell
+  $ npm run lint
+  ```
 
 ## Usage
 
