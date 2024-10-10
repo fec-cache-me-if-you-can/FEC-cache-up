@@ -14,7 +14,11 @@ module.exports = {
     })
   },
   fetchProductInformation: (id) => {
-
+    return axios.get(`${process.env.API_URL}products/${id}`, {
+      headers: {
+        'Authorization': process.env.GITHUB_TOKEN
+      }
+    })
   },
   fetchProductStyles: (id) => {
 
