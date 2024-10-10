@@ -18,6 +18,7 @@ const config = {
   devServer: {
     open: true,
     host: 'localhost',
+    hot: true,
   },
   plugins: [
     //add plugins here
@@ -65,13 +66,14 @@ const config = {
         use: ['file-loader'],
       },
       {
-        test: /\.(ttf)$/,
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
         use: [
           {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'fonts/',
+              outputPath: 'fonts/', // This will place fonts in 'dist/fonts/'
+              publicPath: 'fonts/', // Ensures the correct path is used in the final output
             },
           },
         ],
