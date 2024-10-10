@@ -4,9 +4,24 @@
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "modules": "auto"
       }
     ],
     "@babel/preset-react"
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            },
+            "modules": "commonjs"
+          }
+        ]
+      ]
+    }
+  }
 }
