@@ -53,7 +53,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-package-lock.json
+
 
 
 # Optional npm cache directory
@@ -129,3 +129,6 @@ $RECYCLE.BIN/
 *.vsix
 
 client/dist/bundle.js
+client/dist/index.html
+client/dist/main.css
+package-lock.json
