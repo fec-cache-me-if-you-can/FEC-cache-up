@@ -1,7 +1,9 @@
 
-export default function ExampleButtonComponent ({ label }) {
+export default function RatingStars ({ rating }) {
 
   return (
-    <button className="">{ label }</button>
+    <>
+    
+    </>
   );
 }

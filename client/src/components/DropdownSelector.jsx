@@ -1,7 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 
-export default function DropdownSelector({ options, defaultText, isDisabled, onChange }) {
+export default function DropdownSelector({
+  options,
+  placeholder = 'Select Size',
+  isDisabled,
+  onChange,
+}) {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleSelectChange = (event) => {
@@ -11,8 +16,12 @@ export default function DropdownSelector({ options, defaultText, isDisabled, onC
   };
 
   return (
-    <select value={selectedOption} onChange={handleSelectChange} disabled={isDisabled || options.length === 0}>
-      <option value="">{defaultText || "Select Size"}</option>
+    <select
+      value={selectedOption}
+      onChange={handleSelectChange}
+      disabled={isDisabled || options.length === 0}
+    >
+      <option value="">{placeholder}</option>
       {options.length === 0 ? (
         <option value="">OUT OF STOCK</option>
       ) : (

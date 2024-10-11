@@ -55,6 +55,7 @@ node_modules/
 jspm_packages/
 
 
+
 # Optional npm cache directory
 .npm
 .npmrc
@@ -126,3 +127,8 @@ $RECYCLE.BIN/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+client/dist/bundle.js
+client/dist/index.html
+client/dist/main.css
+package-lock.json
