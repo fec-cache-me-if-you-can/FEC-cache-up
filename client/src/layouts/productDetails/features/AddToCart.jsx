@@ -3,7 +3,7 @@ import DropdownSelector from '../../../components/DropdownSelector.jsx';
 import PrimaryButton from '../../../components/PrimaryButton.jsx';
 import axios from 'axios';
 
-export default function AddToCart ({productId = 1}) {
+export default function AddToCart ({productId = 40344}) {
 
   const [selectedSize, setSelectedSize] = useState('');
   const [sizeOptions, setSizeOptions] = useState([]);
@@ -14,8 +14,9 @@ export default function AddToCart ({productId = 1}) {
   const [loadingSizes, setLoadingSizes] = useState(true);
 
   useEffect(() => {
-    axios.get(`/api/products/${productId}`)
+    axios.get('/products/styles', { product_id: productId })
       .then((response) => {
+        console.log("response: ", response);
         const skus = response.data.results[0].skus;
         const availableSizes = Object.values(skus).map((sku) => ({
           size: sku.size,
@@ -50,6 +51,7 @@ export default function AddToCart ({productId = 1}) {
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
     setIsButtonDisabled(!quantity);
+
   };
 
   const handleAddToCart = () => {
