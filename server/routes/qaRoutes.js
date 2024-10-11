@@ -2,7 +2,7 @@ const controllers = require('../controllers');
 const router = require('express').Router();
 
 router.get('/questions', controllers.qa.getQuestions);
-router.get('/answers', controllers.qa.getAnswers);
+router.get('/questions/:question_id/answers', controllers.qa.getAnswers);
 
 router.post('/questions', controllers.qa.postQuestions);
 router.post('/answers', controllers.qa.postAnswers);

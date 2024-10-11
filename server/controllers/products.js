@@ -21,21 +21,21 @@ module.exports = {
   getProductInformation: (req, res) => {
     console.log('GET INFORMATION');
     models.products
-      .fetchProductInformation(req.body.product_id)
+      .fetchProductInformation(req.params.product_id)
       .then((result) => res.send(result.data))
       .catch((err) => res.status(404).send(err));
   },
   getProductStyles: (req, res) => {
     console.log('GET STYLES');
     models.products
-      .fetchProductStyles(req.body.product_id)
+      .fetchProductStyles(req.params.product_id)
       .then((result) => res.send(result.data))
       .catch((err) => res.status(404).send(err));
   },
   getRelatedProducts: (req, res) => {
     console.log('GET RELATED');
     models.products
-      .fetchRelatedProducts(req.body.product_id)
+      .fetchRelatedProducts(req.params.product_id)
       .then((result) => res.send(result.data))
       .catch((err) => res.status(404).send(err));
   },
