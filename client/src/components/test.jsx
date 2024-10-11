@@ -2,6 +2,7 @@ import React from 'react';
 
 import PrimaryButton from './PrimaryButton.jsx';
 import DropdownSelector from './DropdownSelector.jsx';
+import RatingStars from './RatingStars.jsx';
 import CheckmarkNote from './CheckmarkNote.jsx';
 
 export default function TestComponent() {
@@ -17,6 +18,7 @@ export default function TestComponent() {
           { size: 'XL', skuId: 4 },
         ]}
       />
+      <RatingStars rating={2.5} />
     </div>
   );
 }
