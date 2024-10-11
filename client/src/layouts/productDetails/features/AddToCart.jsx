@@ -62,13 +62,13 @@ export default function AddToCart ({productId = 40344}) {
     <div>
     <DropdownSelector
       options={sizeOptions}
-      defaultText="Select Size"
+      placeholder="Select Size"
       isDisabled={loadingSizes}
       onChange={handleSizeChange}
     />
     <DropdownSelector
         options={quantityOptions.map((quantity) => ({ size: quantity }))}
-        defaultText="Select Quantity"
+        placeholder="Select Quantity"
         isDisabled={isDropdownDisabled}
         onChange={handleQuantityChange}
       />

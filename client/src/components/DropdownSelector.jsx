@@ -1,12 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-export default function DropdownSelector({
-  options,
-  placeholder = 'Select Size',
-  isDisabled,
-  onChange,
-}) {
+export default function DropdownSelector({ options, placeholder = 'Select Size', isDisabled, onChange,}) {
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleSelectChange = (event) => {
@@ -34,3 +29,5 @@ export default function DropdownSelector({
     </select>
   );
 }
+
+
