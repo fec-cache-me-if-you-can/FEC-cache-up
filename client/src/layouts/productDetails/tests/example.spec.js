@@ -1,7 +1,11 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import DropdownSelector from '../../../components/DropdownSelector';
+import '@testing-library/jest-dom';
+import axios from 'axios';
 
+
+jest.mock('axios');
 
 describe('DropdownSelector Component', () => {
 

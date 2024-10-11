@@ -1,0 +1,17 @@
+@mixin color-scheme($theme) {
+  @if $theme == 'light' {
+    --bs-body-bg: #{$light-background};
+    --bs-secondary-bg: #{$light-secondary-bg};
+    --bs-body-color: #{$light-primary-text};
+    --bs-secondary-color: #{$light-secondary-text};
+    --bs-accent-color: #{$light-accent};
+    --bs-attention-color: #{$light-attention};
+  } @else {
+    --bs-body-bg: #{$dark-background};
+    --bs-secondary-bg: #{$dark-secondary-bg};
+    --bs-body-color: #{$dark-primary-text};
+    --bs-secondary-color: #{$dark-secondary-text};
+    --bs-accent-color: #{$dark-accent};
+    --bs-attention-color: #{$dark-attention};
+  }
+}

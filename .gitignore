@@ -132,3 +132,8 @@ client/dist/bundle.js
 client/dist/index.html
 client/dist/main.css
 package-lock.json
+
+client/dist/*.js
+client/dist/*.css
+client/dist/*.map
+client/dist/*.html

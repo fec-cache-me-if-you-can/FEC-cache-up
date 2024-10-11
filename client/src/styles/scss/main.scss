@@ -1,4 +1,7 @@
-@import "./overrides.scss";
-@import "./fonts.scss";
-@import "./custom.scss";
-@import "bootstrap/scss/bootstrap";
+@import './fonts';
+@import './variables';
+@import './mixins';
+@import 'bootstrap/scss/bootstrap';
+@import './custom';
+@import './components/buttons';
+@import './components/dropdown';

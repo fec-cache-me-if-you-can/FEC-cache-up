@@ -2,20 +2,22 @@ const models = require('../models');
 
 module.exports = {
   getQuestions: (req, res) => {
-    if (!req.body.product_id) {
+    console.log('query.product_id', req);
+    if (!req.query.product_id) {
       return res.sendStatus(400);
     }
     models.qa
-      .fetchQuestions(req.body)
+      .fetchQuestions(req.query)
       .then((result) => res.send(result.data))
       .catch(() => res.sendStatus(400));
   },
   getAnswers: (req, res) => {
-    if (!req.body.question_id) {
+    console.log(req.params.question_id);
+    if (!req.params.question_id) {
       return res.sendStatus(400);
     }
     models.qa
-      .fetchAnswers(req.body.question_id)
+      .fetchAnswers(req.params.question_id)
       .then((result) => res.send(result.data))
       .catch(() => res.sendStatus(400));
   },
