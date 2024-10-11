@@ -1,14 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function PrimaryButton({ label, onClick, isDisabled = false}) {
-  const buttonStyle = "btn btn-primary";
-  const labelStyle = "";
+export default function PrimaryButton({ label, onClick, isDisabled = false }) {
+  const buttonStyle = 'btn btn-primary';
+  const labelStyle = '';
   return (
-    <button 
-      onClick={onClick} 
-      className={buttonStyle}
-    >
+    <button onClick={onClick} className={buttonStyle}>
       <span className={labelStyle}>{label}</span>
     </button>
   );
@@ -24,16 +21,3 @@ PrimaryButton.propTypes = {
 PrimaryButton.defaultProps = {
   onClick: null,
 };
-
-import React from 'react';
-import { useState } from 'react';
-
-export default function PrimaryButton ({ label, onClick, isDisabled = false, className = ''}) {
-  return (
-    <button
-
-    >
-      {label}
-    </button>
-  );
-}
