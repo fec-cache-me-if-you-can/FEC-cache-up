@@ -9,7 +9,7 @@ export default function AddToCart ({productId = 40344}) {
   const [sizeOptions, setSizeOptions] = useState([]);
   const [selectedQuantity, setSelectedQuantity] = useState('');
   const [quantityOptions, setQuantityOptions] = useState([]);
-  const [isDropdownDisabled, setIsDropdownDisabled] = useState(true);
+  const [isDropdownDisabled, setIsDropdownDisabled] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [loadingSizes, setLoadingSizes] = useState(true);
 
