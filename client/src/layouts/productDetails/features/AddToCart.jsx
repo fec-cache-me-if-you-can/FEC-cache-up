@@ -12,17 +12,19 @@ export default function AddToCart({ productId = 40344 }) {
   const [isDropdownDisabled, setIsDropdownDisabled] = useState(true);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [loadingSizes, setLoadingSizes] = useState(true);
+  const [skus, setSkus] = useState({});
 
   useEffect(() => {
     axios
-      .get('/products/styles', { product_id: productId })
+      .get(`/products/${productId}/styles`)
       .then((response) => {
         console.log('response: ', response);
-        const skus = response.data.results[0].skus;
-        const availableSizes = Object.values(skus).map((sku) => ({
+        const styleSkus = response.data.results[0].skus;
+        const availableSizes = Object.values(styleSkus).map((sku) => ({
           size: sku.size,
           quantity: sku.quantity,
         }));
+        setSkus(styleSkus);
         setSizeOptions(availableSizes);
         setLoadingSizes(false);
       })
@@ -34,14 +36,17 @@ export default function AddToCart({ productId = 40344 }) {
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
-
-    const selectedSku = sizeOptions.find((option) => option.size === size);
-    if (selectedSku && selectedSku.quantity > 0) {
+    const selectedSkuKey = Object.keys(skus).find(
+      (key) => skus[key].size === size,
+    );
+    if (selectedSkuKey && skus[selectedSkuKey].quantity > 0) {
+      const selectedSku = skus[selectedSkuKey];
       const quantities = Array.from(
         { length: Math.min(selectedSku.quantity, 15) },
         (_, i) => i + 1,
       );
       setQuantityOptions(quantities);
+      console.log('setQuantityOptions: ', quantities);
       setIsDropdownDisabled(false);
     } else {
       setQuantityOptions([]);
@@ -69,7 +74,7 @@ export default function AddToCart({ productId = 40344 }) {
         onChange={handleSizeChange}
       />
       <DropdownSelector
-        options={quantityOptions.map((quantity) => ({ size: quantity }))}
+        options={quantityOptions}
         placeholder="Select Quantity"
         isDisabled={isDropdownDisabled}
         onChange={handleQuantityChange}

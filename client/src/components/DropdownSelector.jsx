@@ -6,11 +6,14 @@ export default function DropdownSelector({
   options,
   placeholder = 'Select',
   isDisabled,
+  onChange,
 }) {
   const [selectedOption, setSelectedOption] = useState('');
+  const displayKey = options.length > 0 ? Object.keys(options[0])[0] : null;
 
   const handleSelectChange = (option) => {
     setSelectedOption(option);
+    onChange(option);
   };
 
   return (
@@ -30,14 +33,14 @@ export default function DropdownSelector({
             <span className="dropdown-item disabled">OUT OF STOCK</span>
           </li>
         ) : (
-          options.map((option) => (
-            <li key={option.size}>
+          options.map((option, index) => (
+            <li key={index}>
               <button
                 className="dropdown-item text-size-200 p-3"
                 type="button"
-                onClick={() => handleSelectChange(option.size)}
+                onClick={() => handleSelectChange(option[displayKey])}
               >
-                {option.size}
+                {option[displayKey]}
               </button>
             </li>
           ))

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function StyleThumbnail({ name, url, isSelected = false }) {
+export default function StyleThumbnail({ name, url, plus = false }) {
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
   return (
     <div
-      className={`thumbnail-container ${isSelected ? 'selected' : ''}`}
+      className={`thumbnail-container ${plus ? 'selected' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{ position: 'relative', display: 'inline-block', margin: '10px' }}
@@ -20,11 +20,11 @@ export default function StyleThumbnail({ name, url, isSelected = false }) {
           width: '50px',
           height: '50px',
           borderRadius: '5px',
-          border: isSelected ? '2px solid blue' : '1px solid grey',
+          border: plus ? '2px solid blue' : '1px solid grey',
         }}
       />
 
-      {isSelected && (
+      {plus && (
         <div className="checkmark" style={checkmarkStyle}>
           ✔
         </div>
@@ -71,5 +71,5 @@ const hoverNameStyle = {
 StyleThumbnail.propTypes = {
   name: PropTypes.string,
   url: PropTypes.string,
-  isSelected: PropTypes.bool,
+  plus: PropTypes.bool,
 };
