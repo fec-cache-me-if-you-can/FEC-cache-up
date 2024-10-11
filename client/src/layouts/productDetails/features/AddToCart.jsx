@@ -1,33 +1,82 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DropdownSelector from '../../../components/DropdownSelector.jsx';
-// import axios from 'axios';
+import PrimaryButton from '../../../components/PrimaryButton.jsx';
+import axios from 'axios';
 
-export default function AddToCart() {
+export default function AddToCart ({productId = 40344}) {
+
   const [selectedSize, setSelectedSize] = useState('');
-  // const [selectedQuantity, setSelectedQuantity] = useState('');
-  const [isDropdownDisabled, setIsDropdownDisabled] = useState(false);
+  const [sizeOptions, setSizeOptions] = useState([]);
+  const [selectedQuantity, setSelectedQuantity] = useState('');
+  const [quantityOptions, setQuantityOptions] = useState([]);
+  const [isDropdownDisabled, setIsDropdownDisabled] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [loadingSizes, setLoadingSizes] = useState(true);
+
+  useEffect(() => {
+    axios.get('/products/styles', { product_id: productId })
+      .then((response) => {
+        console.log("response: ", response);
+        const skus = response.data.results[0].skus;
+        const availableSizes = Object.values(skus).map((sku) => ({
+          size: sku.size,
+          quantity: sku.quantity,
+        }));
+        setSizeOptions(availableSizes);
+        setLoadingSizes(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching product styles:', error);
+        setLoadingSizes(false);
+      });
+  }, [productId]);
+
 
   const handleSizeChange = (size) => {
-    console.log('Selected size:', size);
     setSelectedSize(size);
+
+  const selectedSku = sizeOptions.find((option) => option.size === size);
+  if (selectedSku && selectedSku.quantity > 0) {
+    const quantities = Array.from({ length: Math.min(selectedSku.quantity, 15) }, (_, i) => i + 1);
+    setQuantityOptions(quantities);
+    setIsDropdownDisabled(false);
+  } else {
+    setQuantityOptions([]);
+    setIsDropdownDisabled(true);
+  }
+  setSelectedQuantity('');
+  setIsButtonDisabled(true);
   };
 
-  const sizeOptions = [
-    { size: 'S', skuId: 1 },
-    { size: 'M', skuId: 2 },
-    { size: 'L', skuId: 3 },
-    { size: 'XL', skuId: 4 },
-  ];
+  const handleQuantityChange = (quantity) => {
+    setSelectedQuantity(quantity);
+    setIsButtonDisabled(!quantity);
+
+  };
+
+  const handleAddToCart = () => {
+    console.log('Adding to cart:', { selectedSize, selectedQuantity });
+  };
 
   return (
     <div>
-      <DropdownSelector
-        options={sizeOptions}
-        placeholder="Select Size"
+    <DropdownSelector
+      options={sizeOptions}
+      placeholder="Select Size"
+      isDisabled={loadingSizes}
+      onChange={handleSizeChange}
+    />
+    <DropdownSelector
+        options={quantityOptions.map((quantity) => ({ size: quantity }))}
+        placeholder="Select Quantity"
         isDisabled={isDropdownDisabled}
-        onChange={handleSizeChange}
+        onChange={handleQuantityChange}
       />
+    <PrimaryButton
+        label="Add to Cart"
+        onClick={handleAddToCart}
+        isDisabled={isButtonDisabled}
+        />
     </div>
   );
 }

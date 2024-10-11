@@ -13,7 +13,7 @@ export default function PrimaryButton({
   const buttonStyle = `btn btn-primary square btn-lg m-3 ${extraStyles}`;
   const labelStyle = '';
   return (
-    <button onClick={onClick} className={buttonStyle}>
+    <button onClick={onClick} className={buttonStyle} disabled={isDisabled}>
       <span className={labelStyle}>{label}</span>
     </button>
   );
