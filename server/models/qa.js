@@ -1,10 +1,10 @@
 const axios = require('axios');
 require('dotenv').config();
-const bodyToParams = require('../lib/bodyToParams.js');
+const objectToParams = require('../lib/objectToParams.js');
 
 module.exports = {
-  fetchQuestions: (body) => {
-    let params = bodyToParams(body);
+  fetchQuestions: (query) => {
+    let params = objectToParams(query);
     return axios.get(`${process.env.API_URL}qa/questions?${params}`, {
       headers: {
         Authorization: process.env.GITHUB_TOKEN,
