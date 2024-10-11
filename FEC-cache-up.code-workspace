@@ -1,51 +1,66 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-        "task.allowAutomaticTasks": "on",
-        "editor.codeActionsOnSave": {
-            "source.fixAll.eslint": "always"
-        },
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        
-        "terminal.integrated.profiles.osx": 
-        {
-            "server-dev": {
-                "path": "bash",
-                "overrideName": true,
-                "args": ["-c", "npm run server-dev"],
-                "icon": "server",
-                "color": "terminal.ansiGreen"
-            },
-            "client-dev": {
-                "path": "bash",
-                "overrideName": true,
-                "args": ["-c", "npm run client-dev"],
-                "icon": "browser",
-                "color": "terminal.ansiBlue"
-            },
-            "Git": {
-                "path": "bash",
-                "overrideName": true,
-                "args": ["-c", "git status; exec $SHELL"],
-                "icon": "git-branch",
-                "color": "terminal.ansiMagenta"
-            },
-            "bash": {
-                "path": "bash",
-                "overrideName": true,
-                "icon": "terminal-bash",
-                "color": "terminal.ansiYellow",
-                "args": ["-c","echo 'Cache Up!!'; exec $SHELL", "source ~/.bash_profile;"]
-            }
-        },
-        "terminal.integrated.defaultProfile.osx": "bash",
-		"better-comments.tags": [
+  "folders": [
     {
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "task.allowAutomaticTasks": "on",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always",
+      "source.fixAll.stylelint": "always",
+      "source.fixAll.prettier": "always",
+    },
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "stylelint.validate": ["css", "scss"],
+    "[scss]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "terminal.integrated.profiles.osx": {
+      "server-dev": {
+        "path": "bash",
+        "overrideName": true,
+        "args": ["-c", "npm run server-dev"],
+        "icon": "server",
+        "color": "terminal.ansiGreen",
+      },
+      "client-dev": {
+        "path": "bash",
+        "overrideName": true,
+        "args": ["-c", "npm run client-dev"],
+        "icon": "browser",
+        "color": "terminal.ansiBlue",
+      },
+      "Git": {
+        "path": "bash",
+        "overrideName": true,
+        "args": ["-c", "git status; exec $SHELL"],
+        "icon": "git-branch",
+        "color": "terminal.ansiMagenta",
+      },
+      "bash": {
+        "path": "bash",
+        "overrideName": true,
+        "icon": "terminal-bash",
+        "color": "terminal.ansiYellow",
+        "args": ["-c", "echo 'Cache Up!!'; exec $SHELL", "source ~/.bash_profile;"],
+      },
+    },
+    "terminal.integrated.defaultProfile.osx": "bash",
+    "better-comments.tags": [
+      {
         // ! important
         "tag": "!",
         "color": "#FDD",
@@ -53,18 +68,18 @@
         "underline": false,
         "backgroundColor": "#E55",
         "bold": true,
-        "italic": false
-    },
-    {
+        "italic": false,
+      },
+      {
         "tag": "?",
         "color": "#3498DB", // ? question
         "strikethrough": false,
         "underline": false,
         "backgroundColor": "#3498DB20",
         "bold": false,
-        "italic": true
-    },
-    {
+        "italic": true,
+      },
+      {
         // - disabled
         "tag": "-",
         "color": "#ffffff12",
@@ -72,9 +87,9 @@
         "underline": false,
         "backgroundColor": "transparent",
         "bold": false,
-        "italic": false
-    },
-    {
+        "italic": false,
+      },
+      {
         // TODO
         "tag": "todo",
         "color": "#FF8C00",
@@ -82,9 +97,9 @@
         "underline": false,
         "backgroundColor": "#FF8C0020",
         "bold": false,
-        "italic": false
-    },
-    {
+        "italic": false,
+      },
+      {
         // * highlight
         "tag": "*",
         "color": "#ffffff42",
@@ -92,9 +107,9 @@
         "underline": false,
         "backgroundColor": "transparent",
         "bold": true,
-        "italic": false
-    },
-    {
+        "italic": false,
+      },
+      {
         // # Title
         "tag": "#",
         "color": "#ffffff80",
@@ -102,9 +117,9 @@
         "underline": true,
         "backgroundColor": "transparent",
         "bold": true,
-        "italic": false
-    },
-    {
+        "italic": false,
+      },
+      {
         // #region
         "tag": "#region",
         "color": "#ffffff12",
@@ -112,13 +127,11 @@
         "underline": true,
         "backgroundColor": "transparent",
         "bold": false,
-        "italic": false
-    },
-],
-	},
-	"extensions": {
-		"recommendations": [
-
-		]
-	}
+        "italic": false,
+      },
+    ],
+  },
+  "extensions": {
+    "recommendations": [],
+  },
 }
