@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
-import PropTypes from 'prop-types';
+import FontAwesomeIcon from './icons';
 
 export default function PrimaryButton({
   label = 'unnamed button',
@@ -10,11 +9,11 @@ export default function PrimaryButton({
   extraStyles = '',
   plus = false,
 }) {
-  const buttonStyle = `btn btn-primary square btn-lg m-3 ${extraStyles}`;
-  const labelStyle = '';
+  const buttonStyle = `btn btn-primary square btn-lg m-3 ${isDisabled && 'disabled'} ${extraStyles}`;
   return (
-    <button onClick={onClick} className={buttonStyle} disabled={isDisabled}>
-      <span className={labelStyle}>{label}</span>
+    <button onClick={onClick} className={buttonStyle}>
+      <span className="me-2">{label}</span>
+      {plus && <FontAwesomeIcon icon="fa-solid fa-sharp fa-plus" />}
     </button>
   );
 }
