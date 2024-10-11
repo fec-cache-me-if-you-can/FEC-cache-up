@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from './icons';
+import Icon from './icons.jsx';
 
 export default function PrimaryButton({
   label = 'unnamed button',
@@ -13,12 +13,11 @@ export default function PrimaryButton({
   return (
     <button onClick={onClick} className={buttonStyle}>
       <span className="me-2">{label}</span>
-      {plus && <FontAwesomeIcon icon="fa-solid fa-sharp fa-plus" />}
+      {plus && <Icon icon="fa-plus" />}
     </button>
   );
 }
 
-// Prop type validation
 PrimaryButton.propTypes = {
   label: PropTypes.string,
   onClick: PropTypes.func,
