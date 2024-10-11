@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function PrimaryButton({ label, onClick, isDisabled = false }) {
-  const buttonStyle = 'btn btn-primary';
+export default function PrimaryButton({
+  label = 'unnamed button',
+  onClick = null,
+  isDisabled = false,
+  extraStyles = '',
+  plus = false,
+}) {
+  const buttonStyle = `btn btn-primary square btn-lg m-3 ${extraStyles}`;
   const labelStyle = '';
   return (
     <button onClick={onClick} className={buttonStyle} disabled={isDisabled}>
@@ -13,11 +21,9 @@ export default function PrimaryButton({ label, onClick, isDisabled = false }) {
 
 // Prop type validation
 PrimaryButton.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onClick: PropTypes.func,
-};
-
-// Default props
-PrimaryButton.defaultProps = {
-  onClick: null,
+  isDisabled: PropTypes.bool,
+  extraStyles: PropTypes.string,
+  plus: PropTypes.bool,
 };

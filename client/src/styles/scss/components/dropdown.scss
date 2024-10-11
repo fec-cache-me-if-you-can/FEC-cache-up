@@ -1,0 +1,23 @@
+.dropdown-menu {
+  background-color: var(--bs-body-bg) !important;
+  border: 1px solid var(--bs-body-color) !important;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--bs-body-color) !important;
+
+  // transform: translateY(57px) !important;
+
+  .dropdown-item {
+    color: var(--bs-body-color) !important;
+
+    &:hover {
+      background-color: var(--bs-body-color) !important;
+      color: var(--bs-body-bg) !important;
+    }
+
+    &:active {
+      background-color: var(--bs-secondary-bg) !important;
+      color: var(--bs-body-color) !important;
+    }
+  }
+}
