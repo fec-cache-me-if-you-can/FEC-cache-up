@@ -1,16 +1,16 @@
 const controllers = require('../controllers');
 const router = require('express').Router();
 
-router.get('/qa/questions', controllers.qa.getQuestions);
-router.get('/qa/answers', controllers.qa.getAnswers);
+router.get('/questions', controllers.qa.getQuestions);
+router.get('/answers', controllers.qa.getAnswers);
 
-router.post('/qa/questions', controllers.qa.postQuestions);
-router.post('/qa/answers', controllers.qa.postAnswers);
+router.post('/questions', controllers.qa.postQuestions);
+router.post('/answers', controllers.qa.postAnswers);
 
-router.put('/qa/questions', controllers.qa.putQuestionsHelpful);
-router.put('/qa/answers', controllers.qa.putAnswerHelpful);
+router.put('/questions/helpful', controllers.qa.putQuestionsHelpful);
+router.put('/answers/helpful', controllers.qa.putAnswerHelpful);
 
-router.put('/qa/questions', controllers.qa.putQuestionReport);
-router.put('/qa/answers', controllers.qa.putAnswerReport);
+router.put('/questions/report', controllers.qa.putQuestionReport);
+router.put('/answers/report', controllers.qa.putAnswerReport);
 
 module.exports = router;
