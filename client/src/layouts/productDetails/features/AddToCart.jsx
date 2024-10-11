@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import DropdownSelector from '../../../components/DropdownSelector.jsx';
 import PrimaryButton from '../../../components/PrimaryButton.jsx';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
-export default function AddToCart ({productId = 40344}) {
-
+export default function AddToCart({ productId = 40344 }) {
   const [selectedSize, setSelectedSize] = useState('');
   const [sizeOptions, setSizeOptions] = useState([]);
   const [selectedQuantity, setSelectedQuantity] = useState('');
@@ -14,9 +14,10 @@ export default function AddToCart ({productId = 40344}) {
   const [loadingSizes, setLoadingSizes] = useState(true);
 
   useEffect(() => {
-    axios.get('/products/styles', { product_id: productId })
+    axios
+      .get('/products/styles', { product_id: productId })
       .then((response) => {
-        console.log("response: ", response);
+        console.log('response: ', response);
         const skus = response.data.results[0].skus;
         const availableSizes = Object.values(skus).map((sku) => ({
           size: sku.size,
@@ -31,27 +32,28 @@ export default function AddToCart ({productId = 40344}) {
       });
   }, [productId]);
 
-
   const handleSizeChange = (size) => {
     setSelectedSize(size);
 
-  const selectedSku = sizeOptions.find((option) => option.size === size);
-  if (selectedSku && selectedSku.quantity > 0) {
-    const quantities = Array.from({ length: Math.min(selectedSku.quantity, 15) }, (_, i) => i + 1);
-    setQuantityOptions(quantities);
-    setIsDropdownDisabled(false);
-  } else {
-    setQuantityOptions([]);
-    setIsDropdownDisabled(true);
-  }
-  setSelectedQuantity('');
-  setIsButtonDisabled(true);
+    const selectedSku = sizeOptions.find((option) => option.size === size);
+    if (selectedSku && selectedSku.quantity > 0) {
+      const quantities = Array.from(
+        { length: Math.min(selectedSku.quantity, 15) },
+        (_, i) => i + 1,
+      );
+      setQuantityOptions(quantities);
+      setIsDropdownDisabled(false);
+    } else {
+      setQuantityOptions([]);
+      setIsDropdownDisabled(true);
+    }
+    setSelectedQuantity('');
+    setIsButtonDisabled(true);
   };
 
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
     setIsButtonDisabled(!quantity);
-
   };
 
   const handleAddToCart = () => {
@@ -60,23 +62,25 @@ export default function AddToCart ({productId = 40344}) {
 
   return (
     <div>
-    <DropdownSelector
-      options={sizeOptions}
-      placeholder="Select Size"
-      isDisabled={loadingSizes}
-      onChange={handleSizeChange}
-    />
-    <DropdownSelector
+      <DropdownSelector
+        options={sizeOptions}
+        placeholder="Select Size"
+        isDisabled={loadingSizes}
+        onChange={handleSizeChange}
+      />
+      <DropdownSelector
         options={quantityOptions.map((quantity) => ({ size: quantity }))}
         placeholder="Select Quantity"
         isDisabled={isDropdownDisabled}
         onChange={handleQuantityChange}
       />
-    <PrimaryButton
+      <PrimaryButton
         label="Add to Cart"
         onClick={handleAddToCart}
         isDisabled={isButtonDisabled}
-        />
+      />
     </div>
   );
 }
+
+AddToCart.propTypes = { productId: PropTypes.number };
