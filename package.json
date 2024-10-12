@@ -13,7 +13,8 @@
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "icons:update": "npm update '@awesome.me/kit-60350fbc81' --silent"
   },
   "dependencies": {
     "@awesome.me/kit-60350fbc81": "^1.0.4",

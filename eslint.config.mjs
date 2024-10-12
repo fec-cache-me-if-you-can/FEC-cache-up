@@ -8,7 +8,10 @@ import configAirbnb from 'eslint-config-airbnb';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
 
 export default {
-  files: ['**/*.{js,mjs,cjs,jsx}'],
+  files: [
+    '**/client/src/**/*.{js,mjs,cjs,jsx}',
+    '**/server/**/*.{js,mjs,cjs,jsx}',
+  ],
   languageOptions: {
     globals: {
       ...globals.browser,
