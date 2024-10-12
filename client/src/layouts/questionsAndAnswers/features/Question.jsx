@@ -14,6 +14,8 @@ export default function Question({ question }) {
     question_helpfulness,
     reported,
   } = question;
+
+  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   return (
     <div
       className="question-card border border-dark-subtle shadow-sm p-3"
@@ -28,7 +30,9 @@ export default function Question({ question }) {
       </div>
       <div className="question-footer">
         <AnswersList answers={answers} />
-        <div className="question-date">{question_date}</div>
+        <div className="question-date">
+          {new Date(question_date).toLocaleDateString('en-US', dateOptions)}
+        </div>
       </div>
     </div>
   );
