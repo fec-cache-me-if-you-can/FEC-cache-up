@@ -14,7 +14,7 @@ body {
   --text-size-700: 2.986rem;
 
   font-family: Montserrat, sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.6;
 }
 
@@ -123,4 +123,44 @@ h1,
 
 [data-bs-theme='dark'] {
   @include color-scheme('dark');
+}
+
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+}
+
+.star-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  font-size: 1rem;
+  margin-right: 2px;
+}
+
+.star-back {
+  color: var(--bs-secondary-bg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.star-front {
+  color: #222;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.star-mask {
+  color: var(--bs-body-bg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  opacity: 0.5;
 }

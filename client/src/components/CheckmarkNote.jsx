@@ -1,9 +1,17 @@
-import { useState } from 'react';
-
-export default function CheckmarkNote () {
-
+import React from 'react';
+import PropTypes from 'prop-types';
+import Icon from './icons.jsx';
+function CheckmarkNote({ label = 'undefined label' }) {
   return (
-    <>
-    </>
+    <div className="container">
+      <Icon icon="fa-check" />
+      <span className="body-color ms-2">{label}</span>
+    </div>
   );
+}
+
+CheckmarkNote.propTypes = {
+  label: PropTypes.string,
 };
+
+export default CheckmarkNote;
