@@ -7,7 +7,7 @@ import { PropTypes } from 'prop-types';
 library.add(...all);
 export default function Icon({ icon }) {
   return icon ? (
-    <FontAwesomeIcon icon={'fa-solid fa-sharp ' + icon} />
+    <FontAwesomeIcon icon={'fa-sharp ' + icon} />
   ) : (
     <div className="text-danger">missing prop value for icon</div>
   );
