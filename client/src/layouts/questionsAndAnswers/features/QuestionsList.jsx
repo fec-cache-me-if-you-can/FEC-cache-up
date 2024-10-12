@@ -18,8 +18,9 @@ export default function QuestionsList({ productId }) {
   }, [productId]);
 
   return (
-    <div className="question-list">
+    <div className="question-list container-xl ">
       {questions.map((question) => {
+        console.log(question);
         return <Question key={question.question_id} question={question} />;
       })}
     </div>
