@@ -1,28 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import PropTypes from 'prop-types';
 import StyleThumbnail from '../../../components/StyleThumbnail.jsx';
 
-export default function StyleSelector({ productId = 40344 }) {
-  const [selectedStyle, setSelectedStyle] = useState('');
-  const [styleOptions, setStyleOptions] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`/products/${productId}/styles`)
-      .then((response) => {
-        setStyleOptions(response.data.results);
-        setSelectedStyle(response.data.results[0]);
-      })
-      .catch((error) => {
-        console.error('Error fetching product styles:', error);
-      });
-  }, [productId]);
-
-  const handleStyleClick = (style) => {
-    setSelectedStyle(style);
-  };
-
+export default function StyleSelector({
+  selectedStyle,
+  styleOptions,
+  onChange,
+}) {
+  if (!selectedStyle || !styleOptions.length) {
+    return <div>Loading styles...</div>;
+  }
   return (
     <div>
       <p>
@@ -33,10 +21,10 @@ export default function StyleSelector({ productId = 40344 }) {
         {styleOptions.map((style) => (
           <StyleThumbnail
             key={style.style_id}
-            url={style.photos[0].thumbnail_url}
             name={style.name}
+            url={style.photos[0].thumbnail_url}
             isSelected={style.style_id === selectedStyle.style_id}
-            onClick={() => handleStyleClick(style)}
+            onClick={() => onChange(style)}
           />
         ))}
       </div>
@@ -44,4 +32,8 @@ export default function StyleSelector({ productId = 40344 }) {
   );
 }
 
-StyleSelector.propTypes = { productId: PropTypes.number };
+StyleSelector.propTypes = {
+  selectedStyle: PropTypes.object,
+  styleOptions: PropTypes.array,
+  onChange: PropTypes.func,
+};

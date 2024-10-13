@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 export default function ProductDetails({ product }) {
   const [name, setName] = useState(product.name);
   const [category, setCategory] = useState(product.category);
-  const [price, setPrice] = useState(product.default_price);
+  const [price, setPrice] = useState('');
   const [slogan, setSlogan] = useState(product.slogan);
   const [description, setDescription] = useState(product.description);
   const [rating, setRating] = useState(0);
@@ -20,11 +20,13 @@ export default function ProductDetails({ product }) {
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState([]);
+  const [selectedQuantity, setSelectedQuantity] = useState(null);
   const [photos, setPhotos] = useState([]);
 
   //pull info on styles
   useEffect(() => {
     axios.get(`products/${product.id}/styles`).then((response) => {
+      console.log('response with styles: ', response);
       setStyleOptions(response.data.results);
       setSelectedStyle(response.data.results[0]);
     });
@@ -32,13 +34,13 @@ export default function ProductDetails({ product }) {
 
   //pull info on reviews
   useEffect(() => {
-    axios.get(`reviews/meta${product.id}`).then((response) => {
-      const totalReviews = Object.values(response.ratings).reduce(
-        (sum, count) => sum + count,
+    axios.get(`reviews/meta?product_id=${product.id}`).then((response) => {
+      const totalReviews = Object.values(response.data.ratings).reduce(
+        (sum, count) => sum + parseInt(count, 10),
         0,
       );
       const averageScore =
-        Object.entries(response.ratings).reduce((sum, [rating, count]) => {
+        Object.entries(response.data.ratings).reduce((sum, [rating, count]) => {
           return sum + rating * count;
         }, 0) / totalReviews;
       setRating(averageScore);
@@ -53,6 +55,7 @@ export default function ProductDetails({ product }) {
         (sku) => sku.size,
       );
       setSizes(sizesArray);
+      setPrice(selectedStyle.original_price);
       setPhotos(selectedStyle.photos);
     }
   }, [selectedStyle]);
@@ -70,6 +73,7 @@ export default function ProductDetails({ product }) {
           (_, i) => i + 1,
         );
         setQuantity(quantitiesArray);
+        setSelectedQuantity(null);
       } else {
         setQuantity([]);
       }
@@ -82,6 +86,11 @@ export default function ProductDetails({ product }) {
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
+    setSelectedQuantity(null);
+  };
+
+  const handleQuantityChange = (quantity) => {
+    setSelectedQuantity(quantity);
   };
 
   return (
@@ -90,7 +99,7 @@ export default function ProductDetails({ product }) {
 
       <ImageGallery photos={photos} />
 
-      <AdditionalInfo slogan={slogan} description={description} />
+      <AdditionalInfo slogan={slogan || ''} description={description || ''} />
 
       <ProductInformation
         name={name}
@@ -111,7 +120,9 @@ export default function ProductDetails({ product }) {
         sizes={sizes}
         selectedSize={selectedSize}
         quantity={quantity}
-        onChange={handleSizeChange}
+        selectedQuantity={selectedQuantity}
+        onSizeChange={handleSizeChange}
+        onQuanChange={handleQuantityChange}
       />
     </div>
   );
