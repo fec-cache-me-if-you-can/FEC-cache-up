@@ -12,7 +12,7 @@ export default function DropdownSelector({
   const [localSelectedOption, setLocalSelectedOption] = useState('');
 
   useEffect(() => {
-    setLocalSelectedOption(selectedOption || ''); // If no option is selected, reset to default
+    setLocalSelectedOption(selectedOption || '');
   }, [selectedOption]);
 
   const handleSelectChange = (option) => {

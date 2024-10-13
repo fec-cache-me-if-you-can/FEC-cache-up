@@ -73,7 +73,7 @@ export default function ProductDetails({ product }) {
           (_, i) => i + 1,
         );
         setQuantity(quantitiesArray);
-        setSelectedQuantity(null);
+        setSelectedQuantity(1);
       } else {
         setQuantity([]);
       }
@@ -88,7 +88,7 @@ export default function ProductDetails({ product }) {
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
-    setSelectedQuantity(null);
+    setSelectedQuantity(1);
   };
 
   const handleQuantityChange = (quantity) => {
