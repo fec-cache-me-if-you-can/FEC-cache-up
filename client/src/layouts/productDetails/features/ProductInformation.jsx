@@ -7,6 +7,7 @@ export default function ProductInformation({
   name,
   category,
   price,
+  salePrice,
   rating,
   numberOfRatings,
 }) {
@@ -38,7 +39,14 @@ export default function ProductInformation({
       <a href="#ratings">View all {numberOfRatings} reviews </a>
       <p>{category}</p>
       <h2>{name}</h2>
-      <p>$ {price}</p>
+
+      {salePrice ? (
+        <div>
+          <span style={{ color: '#AB1B38' }}>${salePrice}</span> <s>${price}</s>
+        </div>
+      ) : (
+        <p>${price}</p>
+      )}
 
       {/* Social Media Share Buttons */}
       <div className="share-buttons">

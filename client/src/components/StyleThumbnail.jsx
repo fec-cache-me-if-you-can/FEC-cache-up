@@ -34,7 +34,7 @@ export default function StyleThumbnail({
           width: '100%',
           height: '100%',
           borderRadius: '35px',
-          border: isSelected ? '2px solid blue' : '1px solid grey',
+          border: isSelected ? '3px solid #AB1B38' : '1px solid grey',
           objectFit: 'cover',
           objectPosition: 'center',
         }}

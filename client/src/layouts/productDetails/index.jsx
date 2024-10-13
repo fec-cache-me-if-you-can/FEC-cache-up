@@ -11,6 +11,7 @@ export default function ProductDetails({ product }) {
   const [name, setName] = useState(product.name);
   const [category, setCategory] = useState(product.category);
   const [price, setPrice] = useState('');
+  const [salePrice, setSalePrice] = useState(null);
   const [slogan, setSlogan] = useState(product.slogan);
   const [description, setDescription] = useState(product.description);
   const [rating, setRating] = useState(0);
@@ -58,6 +59,7 @@ export default function ProductDetails({ product }) {
       );
       setSizes(sizesArray);
       setPrice(selectedStyle.original_price);
+      setSalePrice(selectedStyle.sale_price);
       setPhotos(selectedStyle.photos);
       setSelectedStyleId(selectedStyle.style_id);
     }
@@ -110,6 +112,7 @@ export default function ProductDetails({ product }) {
         name={name}
         category={category}
         price={price}
+        salePrice={salePrice}
         rating={rating}
         numberOfRatings={numberOfRatings}
       />
