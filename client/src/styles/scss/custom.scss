@@ -187,3 +187,63 @@ h1,
   box-shadow: 0 0 5px rgb(0 0 0 / 30%);
   scale: 1.005;
 }
+
+.border-05 {
+  border-width: 1px !important;
+}
+
+.two-line-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: calc(1em * 2);
+  line-height: 1em;
+}
+
+.two-line-title:hover {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+
+// a custom animation for a favorite icon that scales up and down when clicked
+.favorite-icon {
+  transition: all 0.3s;
+}
+
+.is-favorite {
+  animation: bounce 0.3s;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+// a custom animation for a scale and skew effect when a user clicks on a button
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  75% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

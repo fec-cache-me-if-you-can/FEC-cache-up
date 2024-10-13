@@ -9,7 +9,7 @@ export default function RelatedItemsAndOutfitCreation() {
     <div>
       <div>Related Items And Outfit Creation</div>
       <OutfitList />
-      <RelatedProductCard />
+      <RelatedProductCard productId={'40344'} />
       <RelatedProductList />
     </div>
   );
