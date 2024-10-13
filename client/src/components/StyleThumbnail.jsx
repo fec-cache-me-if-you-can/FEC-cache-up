@@ -17,16 +17,25 @@ export default function StyleThumbnail({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      style={{ position: 'relative', display: 'inline-block', margin: '10px' }}
+      style={{
+        width: '50px',
+        height: '50px',
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'inline-block',
+        margin: '10px',
+      }}
     >
       <img
         src={url}
         alt={name}
         style={{
-          width: '50px',
-          height: '50px',
-          borderRadius: '5px',
+          width: '100%',
+          height: '100%',
+          borderRadius: '25px',
           border: isSelected ? '2px solid blue' : '1px solid grey',
+          objectFit: 'cover',
+          objectPosition: 'center',
         }}
       />
 
