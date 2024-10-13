@@ -82,6 +82,8 @@ export default function ProductDetails({ product }) {
 
   const handleStyleChange = (style) => {
     setSelectedStyle(style);
+    setSelectedSize('');
+    setSelectedQuantity(null);
   };
 
   const handleSizeChange = (size) => {

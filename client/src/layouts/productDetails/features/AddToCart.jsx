@@ -35,6 +35,7 @@ export default function AddToCart({
         placeholder="Select Size"
         isDisabled={false}
         onChange={onSizeChange}
+        selectedOption={selectedSize}
       />
       {/* quantities */}
       <DropdownSelector
@@ -42,6 +43,7 @@ export default function AddToCart({
         placeholder="Select Quantity"
         isDisabled={isDropdownDisabled}
         onChange={onQuanChange}
+        selectedOption={selectedQuantity}
       />
       <PrimaryButton
         label="Add to Cart"
