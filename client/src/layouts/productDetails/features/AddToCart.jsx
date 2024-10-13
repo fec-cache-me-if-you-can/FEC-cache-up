@@ -4,7 +4,8 @@ import PrimaryButton from '../../../components/PrimaryButton.jsx';
 import PropTypes from 'prop-types';
 
 export default function AddToCart({
-  selectedStyle,
+  productId,
+  selectedStyleId,
   sizes,
   selectedSize,
   quantity,
@@ -24,7 +25,12 @@ export default function AddToCart({
   }, [selectedSize, selectedQuantity]);
 
   const handleAddToCart = () => {
-    console.log('Adding to cart:', { selectedSize, selectedQuantity });
+    console.log('Adding to cart:', {
+      productId,
+      selectedStyleId,
+      selectedSize,
+      selectedQuantity,
+    });
   };
 
   return (
@@ -55,7 +61,8 @@ export default function AddToCart({
 }
 
 AddToCart.propTypes = {
-  selectedStyle: PropTypes.object,
+  productId: PropTypes.number,
+  selectedStyleId: PropTypes.number,
   sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedSize: PropTypes.string,
   quantity: PropTypes.arrayOf(PropTypes.number).isRequired,

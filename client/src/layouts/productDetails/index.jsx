@@ -16,6 +16,7 @@ export default function ProductDetails({ product }) {
   const [rating, setRating] = useState(0);
   const [numberOfRatings, setNumberOfRatings] = useState(0);
   const [selectedStyle, setSelectedStyle] = useState(null);
+  const [selectedStyleId, setSelectedStyleId] = useState(0);
   const [styleOptions, setStyleOptions] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState('');
@@ -29,6 +30,7 @@ export default function ProductDetails({ product }) {
       console.log('response with styles: ', response);
       setStyleOptions(response.data.results);
       setSelectedStyle(response.data.results[0]);
+      setSelectedStyleId(response.data.results[0].style_id);
     });
   }, [product.id]);
 
@@ -57,6 +59,7 @@ export default function ProductDetails({ product }) {
       setSizes(sizesArray);
       setPrice(selectedStyle.original_price);
       setPhotos(selectedStyle.photos);
+      setSelectedStyleId(selectedStyle.style_id);
     }
   }, [selectedStyle]);
 
@@ -118,7 +121,8 @@ export default function ProductDetails({ product }) {
       />
 
       <AddToCart
-        selectedStyle={selectedStyle}
+        productId={product.id}
+        selectedStyleId={selectedStyleId}
         sizes={sizes}
         selectedSize={selectedSize}
         quantity={quantity}
