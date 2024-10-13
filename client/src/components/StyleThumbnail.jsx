@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import CheckmarkNote from './CheckmarkNote.jsx';
 
 export default function StyleThumbnail({
   name,
@@ -18,8 +19,8 @@ export default function StyleThumbnail({
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       style={{
-        width: '50px',
-        height: '50px',
+        width: '70px',
+        height: '70px',
         position: 'relative',
         overflow: 'hidden',
         display: 'inline-block',
@@ -32,7 +33,7 @@ export default function StyleThumbnail({
         style={{
           width: '100%',
           height: '100%',
-          borderRadius: '25px',
+          borderRadius: '35px',
           border: isSelected ? '2px solid blue' : '1px solid grey',
           objectFit: 'cover',
           objectPosition: 'center',
@@ -40,8 +41,8 @@ export default function StyleThumbnail({
       />
 
       {isSelected && (
-        <div className="checkmark" style={checkmarkStyle}>
-          ✔
+        <div style={checkmarkNoteStyle}>
+          <CheckmarkNote label="Selected" />
         </div>
       )}
 
@@ -54,20 +55,14 @@ export default function StyleThumbnail({
   );
 }
 
-const checkmarkStyle = {
+const checkmarkNoteStyle = {
   position: 'absolute',
-  top: '5px',
-  right: '5px',
-  backgroundColor: 'white',
-  borderRadius: '50%',
-  width: '20px',
-  height: '20px',
+  top: '-5px',
+  right: '-5px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  fontSize: '14px',
-  color: 'green',
-  border: '2px solid green',
+  zIndex: 1,
 };
 
 const hoverNameStyle = {

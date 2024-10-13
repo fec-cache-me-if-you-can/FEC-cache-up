@@ -118,11 +118,11 @@ h1,
 }
 
 :root {
-  @include color-scheme('light');
+  @include color-scheme("light");
 }
 
-[data-bs-theme='dark'] {
-  @include color-scheme('dark');
+[data-bs-theme="dark"] {
+  @include color-scheme("dark");
 }
 
 .star-rating {

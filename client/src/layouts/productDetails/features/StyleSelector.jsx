@@ -8,6 +8,15 @@ export default function StyleSelector({
   styleOptions,
   onChange,
 }) {
+  const thumbnailGridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, auto)', // Each column adjusts to the size of its content
+    gap: '5px', // Adds small spacing between the thumbnails
+    justifyContent: 'left', // Centers the grid
+    maxWidth: '500px', // Optional: restricts the width of the grid container to avoid spreading out too much
+    margin: '0 5px', // Adds spacing between the thumbnails
+  };
+
   if (!selectedStyle || !styleOptions.length) {
     return <div>Loading styles...</div>;
   }
@@ -17,7 +26,7 @@ export default function StyleSelector({
         <strong>STYLE</strong> &gt; {selectedStyle.name || 'SELECTED STYLE'}
       </p>
 
-      <div className="style-thumbnails">
+      <div className="style-thumbnails" style={thumbnailGridStyle}>
         {styleOptions.map((style) => (
           <StyleThumbnail
             key={style.style_id}
