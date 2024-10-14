@@ -15,15 +15,13 @@ export default function FavoriteToggle({ productId, onToggle }) {
   };
 
   return (
-    <>
-      <div classList="favorite-icon" onClick={handleFavoriteToggle}>
-        {isFavorite ? (
-          <Icon icon={'fa-heart fa-solid fa-xl'} />
-        ) : (
-          <Icon icon={'fa-heart fa-regular fa-xl'} />
-        )}
-      </div>
-    </>
+    <button className="transparent-button" onClick={handleFavoriteToggle}>
+      {isFavorite ? (
+        <Icon icon={'fa-heart fa-solid fa-xl'} />
+      ) : (
+        <Icon icon={'fa-heart fa-regular fa-xl'} />
+      )}
+    </button>
   );
 }
 
