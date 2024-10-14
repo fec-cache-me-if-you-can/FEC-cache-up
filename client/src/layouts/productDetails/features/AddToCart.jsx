@@ -1,82 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import DropdownSelector from '../../../components/DropdownSelector.jsx';
 import PrimaryButton from '../../../components/PrimaryButton.jsx';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
-export default function AddToCart({ productId = 40344 }) {
-  const [selectedSize, setSelectedSize] = useState('');
-  const [sizeOptions, setSizeOptions] = useState([]);
-  const [selectedQuantity, setSelectedQuantity] = useState('');
-  const [quantityOptions, setQuantityOptions] = useState([]);
-  const [isDropdownDisabled, setIsDropdownDisabled] = useState(true);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [loadingSizes, setLoadingSizes] = useState(true);
+export default function AddToCart({
+  productId,
+  selectedStyleId,
+  sizes,
+  selectedSize,
+  quantity,
+  selectedQuantity,
+  onSizeChange,
+  onQuanChange,
+  showSizeError,
+  handleAddToCart,
+}) {
+  const [isSizesDisabled, setIsSizesDisabled] = useState(true);
+  const [isQuantDisabled, setIsQuantDisabled] = useState(true);
 
   useEffect(() => {
-    axios
-      .get('/products/40444/styles')
-      .then((response) => {
-        const skus = response.data.results[0].skus;
-        const availableSizes = Object.values(skus).map((sku) => ({
-          size: sku.size,
-          quantity: sku.quantity,
-        }));
-        setSizeOptions(availableSizes);
-        setLoadingSizes(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching product styles:', error);
-        setLoadingSizes(false);
-      });
-  }, [productId]);
+    setIsSizesDisabled(sizes.length === 0);
+  }, [sizes]);
 
-  const handleSizeChange = (size) => {
-    setSelectedSize(size);
-
-    const selectedSku = sizeOptions.find((option) => option.size === size);
-    if (selectedSku && selectedSku.quantity > 0) {
-      const quantities = Array.from(
-        { length: Math.min(selectedSku.quantity, 15) },
-        (_, i) => i + 1,
-      );
-      setQuantityOptions(quantities);
-      setIsDropdownDisabled(false);
-    } else {
-      setQuantityOptions([]);
-      setIsDropdownDisabled(true);
-    }
-    setSelectedQuantity('');
-    setIsButtonDisabled(true);
-  };
-
-  const handleQuantityChange = (quantity) => {
-    setSelectedQuantity(quantity);
-    setIsButtonDisabled(!quantity);
-  };
-
-  const handleAddToCart = () => {
-    console.log('Adding to cart:', { selectedSize, selectedQuantity });
-  };
+  useEffect(() => {
+    setIsQuantDisabled(!selectedSize);
+  }, [selectedSize]);
 
   return (
     <div>
+      {showSizeError && <p style={{ color: 'red' }}>Please select a size</p>}
+      {/* sizes */}
       <DropdownSelector
-        options={sizeOptions}
-        placeholder="Select Size"
-        isDisabled={loadingSizes}
-        onChange={handleSizeChange}
+        options={sizes}
+        placeholder={sizes.length === 0 ? 'OUT OF STOCK' : 'Select Size'}
+        isDisabled={isSizesDisabled}
+        onChange={onSizeChange}
+        selectedOption={selectedSize}
       />
+      {/* quantities */}
       <DropdownSelector
-        options={quantityOptions.map((quantity) => ({ size: quantity }))}
-        placeholder="Select Quantity"
-        isDisabled={isDropdownDisabled}
-        onChange={handleQuantityChange}
+        options={quantity}
+        placeholder="-"
+        isDisabled={isQuantDisabled}
+        onChange={onQuanChange}
+        selectedOption={selectedQuantity}
       />
-      <PrimaryButton
-        label="Add to Cart"
-        onClick={handleAddToCart}
-        isDisabled={isButtonDisabled}
-      />
+      {sizes.length !== 0 ? (
+        <PrimaryButton label="Add to Cart" onClick={handleAddToCart} />
+      ) : null}
     </div>
   );
 }
+
+AddToCart.propTypes = {
+  productId: PropTypes.number,
+  selectedStyleId: PropTypes.number,
+  sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedSize: PropTypes.string,
+  quantity: PropTypes.arrayOf(PropTypes.number).isRequired,
+  selectedQuantity: PropTypes.number,
+  onSizeChange: PropTypes.func,
+  onQuanChange: PropTypes.func,
+  showSizeError: PropTypes.bool,
+  handleAddToCart: PropTypes.func,
+};

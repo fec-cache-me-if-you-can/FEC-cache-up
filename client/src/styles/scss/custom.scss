@@ -1,3 +1,4 @@
+// Base Styles
 html {
   font-size: 100%;
 }
@@ -18,6 +19,7 @@ body {
   line-height: 1.6;
 }
 
+// Headings
 h1,
 .h1,
 h2,
@@ -38,33 +40,9 @@ h6,
   letter-spacing: -0.022em;
 }
 
-p {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-small {
-  font-size: var(--text-size-90);
-}
-
-h6,
-.h6 {
-  font-size: var(--text-size-200);
-}
-
-h5,
-.h5 {
-  font-size: var(--text-size-300);
-}
-
-h4,
-.h4 {
-  font-size: var(--text-size-400);
-}
-
-h3,
-.h3 {
-  font-size: var(--text-size-500);
+h1,
+.h1 {
+  font-size: var(--text-size-700);
 }
 
 h2,
@@ -72,11 +50,27 @@ h2,
   font-size: var(--text-size-600);
 }
 
-h1,
-.h1 {
-  font-size: var(--text-size-700);
+h3,
+.h3 {
+  font-size: var(--text-size-500);
 }
 
+h4,
+.h4 {
+  font-size: var(--text-size-400);
+}
+
+h5,
+.h5 {
+  font-size: var(--text-size-300);
+}
+
+h6,
+.h6 {
+  font-size: var(--text-size-200);
+}
+
+// Text Sizes
 .text-size-80 {
   font-size: var(--text-size-80);
 }
@@ -113,18 +107,35 @@ h1,
   font-size: var(--text-size-700);
 }
 
+// Paragraphs and Small Text
+p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+small {
+  font-size: var(--text-size-90);
+}
+
+// Utility Classes
 .square {
   border-radius: 0;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Color Schemes
 :root {
-  @include color-scheme('light');
+  @include color-scheme("light");
 }
 
-[data-bs-theme='dark'] {
-  @include color-scheme('dark');
+[data-bs-theme="dark"] {
+  @include color-scheme("dark");
 }
 
+// Star Rating
 .star-rating {
   display: inline-flex;
   align-items: center;
@@ -135,7 +146,7 @@ h1,
   display: inline-block;
   width: 1em;
   height: 1em;
-  font-size: 1rem;
+  font-size: 0.9rem; // this changes the size of the stars
   margin-right: 2px;
 }
 
@@ -148,7 +159,7 @@ h1,
 }
 
 .star-front {
-  color: #222;
+  color: var(--bs-body-color);
   position: absolute;
   top: 0;
   left: 0;
@@ -165,6 +176,84 @@ h1,
   opacity: 0.5;
 }
 
-.text-secondary {
-  color: var(--bs-secondary-color);
+// Carousel
+.carousel-container {
+  max-width: 100%;
+}
+
+.carousel-thumbnail {
+  max-width: 90px;
+  max-height: 90px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.carousel-thumbnail img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-thumbnail:hover {
+  cursor: pointer;
+  box-shadow: 0 0 5px rgb(0 0 0 / 30%);
+  scale: 1.005;
+}
+
+// Borders
+.border-05 {
+  border-width: 1px !important;
+}
+
+// Titles
+.two-line-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: calc(1em * 2);
+  line-height: 1em;
+}
+
+.two-line-title:hover {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+
+// Favorite Icon
+.favorite-icon {
+  transition: all 0.3s;
+}
+
+.is-favorite {
+  animation: bounce 0.3s;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+// Animations
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  75% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
