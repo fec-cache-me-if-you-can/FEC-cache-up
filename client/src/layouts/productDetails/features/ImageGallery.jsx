@@ -7,9 +7,11 @@ export default function ImageGallery({ photos }) {
   const [imageGallery, setImageGallery] = useState([]);
   const [index, setIndex] = useState(0);
   const [thumbnails, setThumbnails] = useState([]);
-
+  const [visibleThumbnails, setVisibleThumbnails] = useState([]);
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedThumbnail, setSelectedThumbnail] = useState('');
+
+  const maxThumbnails = 5;
 
   useEffect(() => {
     const photosArray = photos.map((photo) => photo.url);
@@ -17,6 +19,7 @@ export default function ImageGallery({ photos }) {
     setImageGallery(photosArray);
     setSelectedImage(photosArray[0]);
     setThumbnails(thumbnailArray);
+    setVisibleThumbnails(thumbnailArray.slice(0, maxThumbnails));
     setSelectedThumbnail(thumbnailArray[0]);
   }, [photos]);
 
@@ -27,12 +30,32 @@ export default function ImageGallery({ photos }) {
     setSelectedImage(imageGallery[i]);
   };
 
+  const scrollThumbnailsUp = () => {
+    if (index > 0) {
+      const newIndex = index - 1;
+      setIndex(newIndex);
+      setVisibleThumbnails(
+        thumbnails.slice(newIndex, newIndex + maxThumbnails),
+      );
+    }
+  };
+
+  const scrollThumbnailsDown = () => {
+    if (index + maxThumbnails < thumbnails.length) {
+      const newIndex = index + 1;
+      setIndex(newIndex);
+      setVisibleThumbnails(
+        thumbnails.slice(newIndex, newIndex + maxThumbnails),
+      );
+    }
+  };
+
   const thumbnailGridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(7, auto)',
+    gridTemplateColumns: '1fr',
     gap: '5px',
-    justifyContent: 'left',
-    maxWidth: '500px',
+    justifyContent: 'center',
+    maxWidth: '70px',
     margin: '0 5px',
   };
 
@@ -41,14 +64,29 @@ export default function ImageGallery({ photos }) {
       <div className="row">
         {/* Thumbnails Column */}
         <div className="col-2 d-flex flex-column align-items-center">
-          {thumbnails.map((thumbnail) => (
-            <CarouselThumbnail
-              key={thumbnail}
-              selected={thumbnail === selectedThumbnail}
-              imageUrl={thumbnail}
-              onClick={() => handleThumbnail(thumbnail)}
-            />
-          ))}
+          {/* Up Arrow */}
+          {index > 0 && (
+            <div onClick={scrollThumbnailsUp} style={{ cursor: 'pointer' }}>
+              <Icon icon="fa-chevron-up" />
+            </div>
+          )}
+          <div className="style-thumbnails" style={thumbnailGridStyle}>
+            {visibleThumbnails.map((thumbnail) => (
+              <CarouselThumbnail
+                key={thumbnail}
+                selected={thumbnail === selectedThumbnail}
+                imageUrl={thumbnail}
+                onClick={() => handleThumbnail(thumbnail)}
+              />
+            ))}
+          </div>
+
+          {/* Down Arrow */}
+          {index + maxThumbnails < thumbnails.length && (
+            <div onClick={scrollThumbnailsDown} style={{ cursor: 'pointer' }}>
+              <Icon icon="fa-chevron-down" />
+            </div>
+          )}
         </div>
 
         {/* Main Image */}
