@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
+import SearchQuestions from './SearchQuestions.jsx';
 import Question from './Question.jsx';
+import PrimaryButton from '../../../components/PrimaryButton.jsx';
 
 export default function QuestionsList({ productId }) {
   const [questions, setQuestions] = useState([]);
@@ -24,6 +27,11 @@ export default function QuestionsList({ productId }) {
 
   return (
     <div className="question-list container-xl ">
+      <div className="d-flex align-items-lg-start">
+        <SearchQuestions />
+        <PrimaryButton label={'More Questions'} plus={true} />
+        <PrimaryButton label={'Add a Question'} plus={false} />
+      </div>
       {questions.map((question) => {
         console.log(question);
         return <Question key={question.question_id} question={question} />;
