@@ -1,5 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 
 const StarRating = ({ rating }) => {
   const stars = [];
@@ -37,4 +38,7 @@ const StarRating = ({ rating }) => {
   return <div className="star-rating">{stars}</div>;
 };
 
+StarRating.propTypes = {
+  rating: PropTypes.number,
+};
 export default StarRating;
