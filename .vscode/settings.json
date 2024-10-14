@@ -49,7 +49,7 @@
       "overrideName": true,
       "icon": "terminal-bash",
       "color": "terminal.ansiYellow",
-      "args": ["-c", "echo 'Cache Up!!'; exec $SHELL", "source ~/.bash_profile;"]
+      "args": ["-c", "echo 'Cache Up!!'; exec $SHELL"]
     },
     "Lint": {
       "path": "bash",
