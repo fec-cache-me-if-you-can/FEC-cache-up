@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import StarRating from '../../../components/StarRating.jsx';
-import FavoriteToggle from './favoriteToggle.jsx';
-import {
-  getProductInformation,
-  getProductStyles,
-  getProductReviewsMeta,
-} from './api.js';
-import { calculateAverageRating } from './utils';
+import { fetchProductData } from './api.js';
+import { processProductData } from './utils.js';
+import LoadingSpinner from '../../../components/LoadingSpinner.jsx';
+import ProductImage from './ProductImage.jsx';
+import ProductDetails from './ProductDetails.jsx';
+import Placeholder from './Placeholder.jsx';
 
 const RelatedProductCard = ({ productId, toggleFavorite }) => {
+  const [fetchError, setFetchError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [productDetails, setProductDetails] = useState({
     name: '',
     category: '',
@@ -17,33 +17,20 @@ const RelatedProductCard = ({ productId, toggleFavorite }) => {
     rating: 0,
     imageUrl: '',
   });
-  const [fetchError, setFetchError] = useState(null);
 
   useEffect(() => {
     const loadProductData = async () => {
+      setIsLoading(true);
       try {
-        const [productInfo, styleInfo, reviewMeta] = await Promise.all([
-          getProductInformation(productId),
-          getProductStyles(productId),
-          getProductReviewsMeta(productId),
-        ]);
-
-        const { name, category } = productInfo;
-        const { original_price: price, photos } = styleInfo.results[0];
-        const imageUrl = photos[0].url;
-        const rating = calculateAverageRating(reviewMeta.ratings);
-
-        setProductDetails({
-          name,
-          category,
-          price,
-          imageUrl,
-          rating,
-        });
+        const productData = await fetchProductData(productId);
+        const details = processProductData(productData);
+        setProductDetails(details);
         setFetchError(null);
       } catch (error) {
         console.error(error);
         setFetchError(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -56,28 +43,37 @@ const RelatedProductCard = ({ productId, toggleFavorite }) => {
 
   return (
     <div
-      className="card square border-05 border-dark cursor-pointer"
+      className="card square border-05 cursor-pointer card-border"
       style={{ width: '18rem' }}
     >
-      <div className="ratio" style={{ '--bs-aspect-ratio': '100%' }}>
-        <img
-          src={productDetails.imageUrl}
-          alt={productDetails.name}
-          className="card-img-top object-fit-cover"
-        />
+      <div
+        className="ratio ratio d-flex justify-content-center align-items-center"
+        style={{
+          '--bs-aspect-ratio': '100%',
+        }}
+      >
+        {isLoading ? (
+          <div
+            className={
+              'd-flex justify-content-center align-items-center w-100 h-100'
+            }
+          >
+            <LoadingSpinner size={48} />
+          </div>
+        ) : (
+          <ProductImage
+            src={productDetails.imageUrl}
+            alt={productDetails.name}
+          />
+        )}
       </div>
-      <div className="position-absolute top-1 end-0 p-2 pe-3 text-size-300 hover">
-        <FavoriteToggle onToggle={toggleFavorite}></FavoriteToggle>
-      </div>
-      <div className="card-body p-2">
-        <p className="card-text fw-light h5 text-size-90 mt-0 mb-2">
-          {productDetails.category.toUpperCase()}
-        </p>
-        <h5 className="card-title my-1 text-size-300 fw-semibold text-dark two-line-title">
-          {productDetails.name}
-        </h5>
-        <p className="text-size-80 my-2">${productDetails.price}</p>
-        <StarRating rating={productDetails.rating} />
+
+      <div className="card-body p-3 position-relative">
+        {isLoading ? (
+          <Placeholder />
+        ) : (
+          <ProductDetails productDetails={productDetails} />
+        )}
       </div>
     </div>
   );
@@ -85,6 +81,7 @@ const RelatedProductCard = ({ productId, toggleFavorite }) => {
 
 RelatedProductCard.propTypes = {
   productId: PropTypes.string.isRequired,
+  toggleFavorite: PropTypes.func.isRequired,
 };
 
 RelatedProductCard.displayName = 'RelatedProductCard';
