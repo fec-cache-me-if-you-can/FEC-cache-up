@@ -1,9 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function AddAnswer() {
+export default function AddAnswer({ onClick }) {
+  const handleClick = () => {
+    onClick();
+  };
+
   return (
-    <div className="fw-lighter text-size-90 text-decoration-underline d-inline-flex p-2">
-      Add Answer
-    </div>
+    <button
+      className="helpfulness d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+      onClick={handleClick}
+    >
+      AddAnswer
+    </button>
   );
 }
+
+AddAnswer.propTypes = {
+  helpfulness: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
