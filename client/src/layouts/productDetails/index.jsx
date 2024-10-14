@@ -11,6 +11,7 @@ export default function ProductDetails({ product }) {
   const [name, setName] = useState(product.name);
   const [category, setCategory] = useState(product.category);
   const [price, setPrice] = useState('');
+  const [salePrice, setSalePrice] = useState(null);
   const [slogan, setSlogan] = useState(product.slogan);
   const [description, setDescription] = useState(product.description);
   const [rating, setRating] = useState(0);
@@ -19,10 +20,11 @@ export default function ProductDetails({ product }) {
   const [selectedStyleId, setSelectedStyleId] = useState(0);
   const [styleOptions, setStyleOptions] = useState([]);
   const [sizes, setSizes] = useState([]);
-  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState([]);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
   const [photos, setPhotos] = useState([]);
+  const [showSizeError, setShowSizeError] = useState(false);
 
   //pull info on styles
   useEffect(() => {
@@ -58,6 +60,7 @@ export default function ProductDetails({ product }) {
       );
       setSizes(sizesArray);
       setPrice(selectedStyle.original_price);
+      setSalePrice(selectedStyle.sale_price);
       setPhotos(selectedStyle.photos);
       setSelectedStyleId(selectedStyle.style_id);
     }
@@ -77,6 +80,7 @@ export default function ProductDetails({ product }) {
         );
         setQuantity(quantitiesArray);
         setSelectedQuantity(1);
+        setShowSizeError(false);
       } else {
         setQuantity([]);
       }
@@ -87,15 +91,32 @@ export default function ProductDetails({ product }) {
     setSelectedStyle(style);
     setSelectedSize('');
     setSelectedQuantity(null);
+    setShowSizeError(false);
   };
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
     setSelectedQuantity(1);
+    setShowSizeError(false);
   };
 
   const handleQuantityChange = (quantity) => {
     setSelectedQuantity(quantity);
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      setShowSizeError(true);
+    } else {
+      setShowSizeError(false);
+      console.log('Adding to cart:', {
+        productId: product.id,
+        selectedStyleId,
+        selectedSize,
+        selectedQuantity,
+      });
+      //TODO Perform actual add to cart logic
+    }
   };
 
   return (
@@ -110,6 +131,7 @@ export default function ProductDetails({ product }) {
         name={name}
         category={category}
         price={price}
+        salePrice={salePrice}
         rating={rating}
         numberOfRatings={numberOfRatings}
       />
@@ -129,6 +151,8 @@ export default function ProductDetails({ product }) {
         selectedQuantity={selectedQuantity}
         onSizeChange={handleSizeChange}
         onQuanChange={handleQuantityChange}
+        showSizeError={showSizeError}
+        handleAddToCart={handleAddToCart}
       />
     </div>
   );

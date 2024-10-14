@@ -12,50 +12,42 @@ export default function AddToCart({
   selectedQuantity,
   onSizeChange,
   onQuanChange,
+  showSizeError,
+  handleAddToCart,
 }) {
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [isDropdownDisabled, setIsDropdownDisabled] = useState(true);
+  const [isSizesDisabled, setIsSizesDisabled] = useState(true);
+  const [isQuantDisabled, setIsQuantDisabled] = useState(true);
 
   useEffect(() => {
-    setIsDropdownDisabled(!selectedSize);
+    setIsSizesDisabled(sizes.length === 0);
+  }, [sizes]);
+
+  useEffect(() => {
+    setIsQuantDisabled(!selectedSize);
   }, [selectedSize]);
-
-  useEffect(() => {
-    setIsButtonDisabled(!(selectedSize && selectedQuantity));
-  }, [selectedSize, selectedQuantity]);
-
-  const handleAddToCart = () => {
-    console.log('Adding to cart:', {
-      productId,
-      selectedStyleId,
-      selectedSize,
-      selectedQuantity,
-    });
-  };
 
   return (
     <div>
+      {showSizeError && <p style={{ color: 'red' }}>Please select a size</p>}
       {/* sizes */}
       <DropdownSelector
         options={sizes}
-        placeholder="Select Size"
-        isDisabled={false}
+        placeholder={sizes.length === 0 ? 'OUT OF STOCK' : 'Select Size'}
+        isDisabled={isSizesDisabled}
         onChange={onSizeChange}
         selectedOption={selectedSize}
       />
       {/* quantities */}
       <DropdownSelector
         options={quantity}
-        placeholder="Select Quantity"
-        isDisabled={isDropdownDisabled}
+        placeholder="-"
+        isDisabled={isQuantDisabled}
         onChange={onQuanChange}
         selectedOption={selectedQuantity}
       />
-      <PrimaryButton
-        label="Add to Cart"
-        onClick={handleAddToCart}
-        isDisabled={isButtonDisabled}
-      />
+      {sizes.length !== 0 ? (
+        <PrimaryButton label="Add to Cart" onClick={handleAddToCart} />
+      ) : null}
     </div>
   );
 }
@@ -69,4 +61,6 @@ AddToCart.propTypes = {
   selectedQuantity: PropTypes.number,
   onSizeChange: PropTypes.func,
   onQuanChange: PropTypes.func,
+  showSizeError: PropTypes.bool,
+  handleAddToCart: PropTypes.func,
 };
