@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import ProductDetails from './layouts/productDetails/index.jsx';
 import RatingsAndReviews from './layouts/ratingsAndReviews/index.jsx';
 import QuestionsAndAnswers from './layouts/questionsAndAnswers/index.jsx';
@@ -14,6 +14,21 @@ const toggleTheme = () => {
   document.documentElement.setAttribute('data-bs-theme', newTheme);
 };
 export default function App() {
+  const [product, setProduct] = useState(null); // ! initialize as object
+  const productId = 40344;
+
+  useEffect(() => {
+    // Fetch product data
+    axios
+      .get(`/products/${productId}/information`) //! /information endpoint returning 404 in postman
+      .then((response) => {
+        setProduct(response.data); // Store the product data in state
+      })
+      .catch((error) => {
+        console.error('Error fetching product data:', error);
+      });
+  }, [productId]);
+
   return (
     <div id="app" className="container my-5">
       <div className="text-center mb-4">
@@ -22,7 +37,11 @@ export default function App() {
       <p className="lead">hello world</p>
       <h1 className="display-4">Hello World, but bigger.</h1>
       <div className="my-4">
-        <ProductDetails />
+        {product ? (
+          <ProductDetails product={product} />
+        ) : (
+          <p>Loading product...</p>
+        )}
       </div>
       <div className="my-4">
         <RatingsAndReviews />
@@ -34,7 +53,8 @@ export default function App() {
         <RelatedItemsAndOutfitCreation />
       </div>
       <div className="my-4">
-        <TestComponent />
+        {/* leave this line commented out, only for Daniel to turn on and off: */}
+        {/* <TestComponent /> */}
       </div>
     </div>
   );
