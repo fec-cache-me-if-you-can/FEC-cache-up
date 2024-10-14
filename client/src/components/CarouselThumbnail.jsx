@@ -1,15 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CarouselThumbnail = ({ selected = false, imageUrl }) => {
+const CarouselThumbnail = ({ selected = false, imageUrl, onClick }) => {
   return (
     <div
-      className={`d-inline-flex ${selected ? 'border-dark border-bottom border-3' : ''}`}
+      className={`${selected ? 'border-dark border-bottom border-3' : ''}`}
+      onClick={onClick}
+      style={{
+        width: '70px',
+        height: '70px',
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'inline-block',
+        margin: '10px',
+      }}
     >
-      <div className={`carousel-thumbnail mb-2`}>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingBottom: '5px', // Space below the image, while keeping the square aspect ratio
+        }}
+      >
         <img
           src={imageUrl}
-          className={`img-fluid square border border-dark mb-5`}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+          }}
+          className={`border ${selected ? 'border-dark' : 'border-light'}`}
           alt="carousel-thumbnail"
         />
       </div>
@@ -20,6 +44,7 @@ const CarouselThumbnail = ({ selected = false, imageUrl }) => {
 CarouselThumbnail.propTypes = {
   selected: PropTypes.bool,
   imageUrl: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default CarouselThumbnail;

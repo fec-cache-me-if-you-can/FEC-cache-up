@@ -29,7 +29,6 @@ export default function ProductDetails({ product }) {
   //pull info on styles
   useEffect(() => {
     axios.get(`products/${product.id}/styles`).then((response) => {
-      console.log('response with styles: ', response);
       setStyleOptions(response.data.results);
       setSelectedStyle(response.data.results[0]);
       setSelectedStyleId(response.data.results[0].style_id);
