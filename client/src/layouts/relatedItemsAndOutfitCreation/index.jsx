@@ -1,19 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import OutfitList from './features/OutfitList.jsx';
 import RelatedProductCard from './features/RelatedProductCard.jsx';
 import RelatedProductList from './features/RelatedProductList.jsx';
 
-export default function RelatedItemsAndOutfitCreation({ productId = '40344' }) {
+export default function RelatedItemsAndOutfitCreation() {
   return (
     <div>
-      {/* <OutfitList /> */}
-      <RelatedProductList productId={'40344'} />
+      <div>Related Items And Outfit Creation</div>
+      <OutfitList />
+      <RelatedProductCard productId={'40344'} />
+      <RelatedProductList />
     </div>
   );
 }
-
-RelatedItemsAndOutfitCreation.propTypes = {
-  productId: PropTypes.string.isRequired,
-};
