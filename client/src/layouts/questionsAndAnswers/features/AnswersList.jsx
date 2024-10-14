@@ -7,6 +7,10 @@ import Answer from './Answer.jsx';
 export default function AnswersList({ answers }) {
   const [displayedAnswers, setDisplayedAnswers] = useState(1);
   const [moreIsHidden, setMoreIsHidden] = useState(true);
+  const [cantLoadMore, setCantLoadMore] = useState(false);
+  const [maxLoadedAnswers, setMaxLoadedAnswers] = useState(
+    Object.keys(answers).length,
+  );
 
   useEffect(() => {
     if (displayedAnswers > 1) {
@@ -16,7 +20,15 @@ export default function AnswersList({ answers }) {
     }
   }, [displayedAnswers]);
 
-  const handleLoadMoreAnswers = (e) => {
+  useEffect(() => {
+    if (displayedAnswers >= maxLoadedAnswers) {
+      setCantLoadMore(true);
+    } else {
+      setCantLoadMore(false);
+    }
+  }, [displayedAnswers, maxLoadedAnswers]);
+
+  const handleLoadMoreAnswers = () => {
     setDisplayedAnswers((displayedAnswers) => displayedAnswers + 2);
   };
 
@@ -34,7 +46,9 @@ export default function AnswersList({ answers }) {
           console.log(answer);
           return <Answer key={answer.id} answer={answer} />;
         })}
-      <button onClick={handleLoadMoreAnswers}>Load More Answers</button>
+      <button onClick={handleLoadMoreAnswers} hidden={cantLoadMore}>
+        Load More Answers
+      </button>
       <button onClick={hideMoreAnswers} hidden={moreIsHidden}>
         Hide More Answers
       </button>
