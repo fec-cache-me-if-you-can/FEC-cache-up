@@ -41,7 +41,7 @@ export default function ProductInformation({
       <p>$ {price}</p>
 
       {/* Social Media Share Buttons */}
-      <div className="share-buttons">
+      <div className="share-icons cursor-pointer">
         <span onClick={() => handleShare('facebook')}>
           <Icon icon="fa-facebook-f" />
         </span>

@@ -14,7 +14,7 @@ export default function StyleThumbnail({
 
   return (
     <div
-      className={`thumbnail-container ${isSelected ? 'selected' : ''}`}
+      className={`cursor-pointer ${isSelected ? 'selected' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}

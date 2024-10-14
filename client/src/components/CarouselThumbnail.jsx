@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const CarouselThumbnail = ({ selected = false, imageUrl, onClick }) => {
   return (
     <div
-      className={`${selected ? 'border-dark border-bottom border-3' : ''}`}
+      className={`carousel-thumbnail ${selected ? 'border-dark border-bottom border-3' : ''}`}
       onClick={onClick}
       style={{
         width: '70px',
@@ -22,7 +22,7 @@ const CarouselThumbnail = ({ selected = false, imageUrl, onClick }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingBottom: '5px', // Space below the image, while keeping the square aspect ratio
+          paddingBottom: '5px',
         }}
       >
         <img

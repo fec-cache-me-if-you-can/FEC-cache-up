@@ -120,8 +120,6 @@ export default function ProductDetails({ product }) {
 
   return (
     <div>
-      <div>Product Details</div>
-
       <ImageGallery photos={photos} />
 
       <AdditionalInfo slogan={slogan || ''} description={description || ''} />
