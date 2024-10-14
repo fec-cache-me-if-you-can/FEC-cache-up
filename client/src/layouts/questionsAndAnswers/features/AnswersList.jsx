@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import Answer from './Answer.jsx';
 
 export default function AnswersList({ answers }) {
+  const [displayedAnswers, setDisplayedAnswers] = useState(1);
+
+  const handleLoadMoreAnswers = (e) => {
+    setDisplayedAnswers((displayedAnswers) => displayedAnswers + 2);
+  };
+
   console.log('answers object: ', answers);
   return (
     <div className="answers-list">

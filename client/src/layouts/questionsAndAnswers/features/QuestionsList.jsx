@@ -1,11 +1,16 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
 
 export default function QuestionsList({ productId }) {
   const [questions, setQuestions] = useState([]);
+  const [displayedQuestions, setDisplayedQuestions] = useState(1);
+
+  const handleLoadMoreQuestions = (e) => {
+    setDisplayedQuestions((displayedQuestions) => displayedQuestions + 2);
+  };
 
   useEffect(() => {
     axios
@@ -26,7 +31,6 @@ export default function QuestionsList({ productId }) {
     </div>
   );
 }
-
 QuestionsList.propTypes = {
   productId: PropTypes.number.isRequired,
 };
