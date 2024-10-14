@@ -8,10 +8,12 @@ import ReviewTile from './features/ReviewTile.jsx';
 import SortOptions from './features/SortOptions.jsx';
 import WriteNewReview from './features/WriteNewReview.jsx';
 
-export default function RatingsAndReviews() {
+
+export default function RatingsAndReviews () {
+
   return (
     <div>
-      <div id="ratings">Ratings And Reviews</div>
+      <div>Ratings And Reviews</div>
       <KeywordSearch />
       <ProductBreakdown />
       <RatingsBreakdown />

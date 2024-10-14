@@ -1,23 +1,16 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function DropdownSelector({
   options,
   placeholder = 'Select',
   isDisabled,
-  onChange,
-  selectedOption,
 }) {
-  const [localSelectedOption, setLocalSelectedOption] = useState('');
-
-  useEffect(() => {
-    setLocalSelectedOption(selectedOption || '');
-  }, [selectedOption]);
+  const [selectedOption, setSelectedOption] = useState('');
 
   const handleSelectChange = (option) => {
-    setLocalSelectedOption(option);
-    onChange(option);
+    setSelectedOption(option);
   };
 
   return (
@@ -29,7 +22,7 @@ export default function DropdownSelector({
         aria-expanded="false"
         disabled={isDisabled || options.length === 0}
       >
-        {localSelectedOption || placeholder}
+        {selectedOption || placeholder}
       </button>
       <ul className="dropdown-menu square w-100 my-0 py-0">
         {options.length === 0 ? (
@@ -37,14 +30,14 @@ export default function DropdownSelector({
             <span className="dropdown-item disabled">OUT OF STOCK</span>
           </li>
         ) : (
-          options.map((option, index) => (
-            <li key={index}>
+          options.map((option) => (
+            <li key={option.size}>
               <button
                 className="dropdown-item text-size-200 p-3"
                 type="button"
-                onClick={() => handleSelectChange(option)}
+                onClick={() => handleSelectChange(option.size)}
               >
-                {option}
+                {option.size}
               </button>
             </li>
           ))
@@ -55,9 +48,12 @@ export default function DropdownSelector({
 }
 
 DropdownSelector.propTypes = {
-  options: PropTypes.array,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      size: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  selectedOption: PropTypes.any,
+  onChange: PropTypes.func.isRequired,
 };

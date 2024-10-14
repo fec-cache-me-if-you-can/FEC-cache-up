@@ -4,10 +4,16 @@ import DropdownSelector from '../../../components/DropdownSelector';
 import '@testing-library/jest-dom';
 import axios from 'axios';
 
+
 jest.mock('axios');
 
 describe('DropdownSelector Component', () => {
-  const mockOptions = ['XS', 'S', 'M'];
+
+  const mockOptions = [
+    { size: 'S', skuId: 1 },
+    { size: 'M', skuId: 2 },
+    { size: 'L', skuId: 3 }
+  ];
 
   test('renders without crashing', () => {
     render(
@@ -16,7 +22,7 @@ describe('DropdownSelector Component', () => {
         defaultText="Select Size"
         isDisabled={false}
         onChange={() => {}}
-      />,
+      />
     );
     const dropdown = screen.getByText('Select Size');
     expect(dropdown).not.toBeNull();
@@ -29,7 +35,7 @@ describe('DropdownSelector Component', () => {
         defaultText="Select Size"
         isDisabled={false}
         onChange={() => {}}
-      />,
+      />
     );
     const options = screen.getAllByRole('option');
     expect(options.length).toBe(4);
@@ -46,7 +52,7 @@ describe('DropdownSelector Component', () => {
         defaultText="Select Size"
         isDisabled={false}
         onChange={mockOnChange}
-      />,
+      />
     );
 
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'M' } });
@@ -60,7 +66,7 @@ describe('DropdownSelector Component', () => {
         defaultText="Select Size"
         isDisabled={false}
         onChange={() => {}}
-      />,
+      />
     );
 
     const dropdown = screen.getByRole('combobox');
