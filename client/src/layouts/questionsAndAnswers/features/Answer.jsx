@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Helpful from '../../../components/helpful.jsx';
 import Report from '../../../components/report.jsx';
 import AnswerPhoto from './AnswerPhoto.jsx';

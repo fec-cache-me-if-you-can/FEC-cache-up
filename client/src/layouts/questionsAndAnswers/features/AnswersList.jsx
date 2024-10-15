@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
+import axios from 'axios';
 import Answer from './Answer.jsx';
 
-export default function AnswersList({ answers }) {
+export default function AnswersList({ answers, question_id }) {
   const [displayedAnswers, setDisplayedAnswers] = useState(1);
   const [moreIsHidden, setMoreIsHidden] = useState(true);
   const [cantLoadMore, setCantLoadMore] = useState(false);
@@ -58,4 +59,5 @@ export default function AnswersList({ answers }) {
 
 AnswersList.propTypes = {
   answers: PropTypes.object.isRequired,
+  question_id: PropTypes.number.isRequired,
 };

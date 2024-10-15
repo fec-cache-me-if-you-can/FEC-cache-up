@@ -5,9 +5,11 @@ import Helpful from '../../../components/helpful.jsx';
 import AddAnswer from './AddAnswer.jsx';
 import AnswersList from './AnswersList.jsx';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export default function Question({ question }) {
   const {
+    question_id,
     answers,
     asker_name,
     question_body,
@@ -17,6 +19,16 @@ export default function Question({ question }) {
   } = question;
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  const createAnswer = ({ body }) => {
+    axios
+      .post(`/qa/questions/${question_id}/answers`, {
+        body: body,
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div
       className="question-card border border-dark-subtle shadow-sm p-3"
@@ -26,11 +38,11 @@ export default function Question({ question }) {
         <div className="question-text fs-4 col">Q: {question_body}</div>
         <div className="header-interaction col">
           <Helpful helpfulness={question_helpfulness} />
-          <AddAnswer />
+          <AddAnswer onClick={createAnswer} />
         </div>
       </div>
       <div className="question-footer">
-        <AnswersList answers={answers} />
+        <AnswersList answers={answers} question_id={question_id} />
         <div className="question-date">
           {new Date(question_date).toLocaleDateString('en-US', dateOptions)}
         </div>
