@@ -96,66 +96,64 @@ export default function ImageGallery({ photos }) {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        {/* Thumbnails Column */}
-        <div className="col-2 d-flex flex-column align-items-center">
-          {/* Up Arrow */}
-          {!visibleThumbnails.includes(thumbnails[0]) && (
-            <div onClick={scrollThumbnailsUp} style={{ cursor: 'pointer' }}>
-              <Icon icon="fa-chevron-up" />
-            </div>
-          )}
-          <div className="style-thumbnails" style={thumbnailGridStyle}>
-            {visibleThumbnails.map((thumbnail) => (
-              <CarouselThumbnail
-                key={thumbnail}
-                selected={thumbnail === selectedThumbnail}
-                imageUrl={thumbnail}
-                onClick={() => handleThumbnail(thumbnail)}
-              />
-            ))}
+    <div className="gallery-container">
+      {/* Thumbnails Column */}
+      <div className="gallery-thumbnails-column">
+        {/* Up Arrow */}
+        {!visibleThumbnails.includes(thumbnails[0]) && (
+          <div onClick={scrollThumbnailsUp} style={{ cursor: 'pointer' }}>
+            <Icon icon="fa-chevron-up" />
           </div>
-
-          {/* Down Arrow */}
-          {!visibleThumbnails.includes(thumbnails[thumbnails.length - 1]) && (
-            <div onClick={scrollThumbnailsDown} style={{ cursor: 'pointer' }}>
-              <Icon icon="fa-chevron-down" />
-            </div>
-          )}
+        )}
+        <div className="gallery-thumbnails" style={thumbnailGridStyle}>
+          {visibleThumbnails.map((thumbnail) => (
+            <CarouselThumbnail
+              key={thumbnail}
+              selected={thumbnail === selectedThumbnail}
+              imageUrl={thumbnail}
+              onClick={() => handleThumbnail(thumbnail)}
+            />
+          ))}
         </div>
 
-        {/* Main Image Carousel */}
-        <div className="gallery-carousel-container">
-          {/* Carousel Image */}
-          <div className="gallery-carousel-main" onClick={handleImageClick}>
-            <img
-              src={imageGallery[index]}
-              alt={`Slide ${index}`}
-              className="gallery-carousel-image"
-            />
+        {/* Down Arrow */}
+        {!visibleThumbnails.includes(thumbnails[thumbnails.length - 1]) && (
+          <div onClick={scrollThumbnailsDown} style={{ cursor: 'pointer' }}>
+            <Icon icon="fa-chevron-down" />
           </div>
+        )}
+      </div>
 
-          {/* Navigation */}
-          <div className="gallery-carousel-controls">
-            {index > 0 && (
-              <button
-                onClick={handlePrevImage}
-                className="gallery-carousel-btn gallery-prev"
-              >
-                <Icon icon="fa-chevron-left" />
-              </button>
-            )}
+      {/* Main Image Carousel */}
+      <div className="gallery-carousel-container">
+        {/* Carousel Image */}
+        <div className="gallery-carousel-main" onClick={handleImageClick}>
+          <img
+            src={imageGallery[index]}
+            alt={`Slide ${index}`}
+            className="gallery-carousel-image"
+          />
+        </div>
 
-            {index < imageGallery.length - 1 && (
-              <button
-                onClick={handleNextImage}
-                className="gallery-carousel-btn gallery-next"
-              >
-                <Icon icon="fa-chevron-right" />
-              </button>
-            )}
-          </div>
+        {/* Navigation */}
+        <div className="gallery-carousel-controls">
+          {index > 0 && (
+            <button
+              onClick={handlePrevImage}
+              className="gallery-carousel-btn gallery-prev"
+            >
+              <Icon icon="fa-chevron-left" />
+            </button>
+          )}
+
+          {index < imageGallery.length - 1 && (
+            <button
+              onClick={handleNextImage}
+              className="gallery-carousel-btn gallery-next"
+            >
+              <Icon icon="fa-chevron-right" />
+            </button>
+          )}
         </div>
       </div>
     </div>
