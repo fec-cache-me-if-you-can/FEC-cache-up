@@ -1,15 +1,20 @@
 import React from 'react';
-
 import OutfitList from './features/OutfitList.jsx';
-import RelatedProductCard from './features/RelatedProductCard.jsx';
 import RelatedProductList from './features/RelatedProductList.jsx';
+import PropTypes from 'prop-types';
 
-export default function RelatedItemsAndOutfitCreation() {
+// TODO: receive productId from the parent component
+const RelatedItemsAndOutfitCreation = ({ productId = '40344' }) => {
   return (
     <div>
-      <div>Related Items And Outfit Creation</div>
       <OutfitList />
-      <RelatedProductList productId={'40344'} />
+      <RelatedProductList productId={productId} />
     </div>
   );
-}
+};
+
+RelatedItemsAndOutfitCreation.propTypes = {
+  productId: PropTypes.string.isRequired,
+};
+
+export default RelatedItemsAndOutfitCreation;

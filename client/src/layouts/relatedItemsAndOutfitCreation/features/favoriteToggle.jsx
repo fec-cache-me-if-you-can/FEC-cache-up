@@ -6,6 +6,7 @@ export default function FavoriteToggle({ productId, onToggle }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteToggle = (e) => {
+    e.preventDefault();
     e.target.classList.add('is-favorite');
     setTimeout(() => {
       e.target.classList.remove('is-favorite');
