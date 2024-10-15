@@ -22,43 +22,43 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  // "terminal.integrated.profiles.osx": {
-  //   "server-dev": {
-  //     "path": "bash",
-  //     "overrideName": true,
-  //     "args": ["-c", "npm run server-dev"],
-  //     "icon": "server",
-  //     "color": "terminal.ansiGreen"
-  //   },
-  //   "client-dev": {
-  //     "path": "bash",
-  //     "overrideName": true,
-  //     "args": ["-c", "npm run client-dev"],
-  //     "icon": "browser",
-  //     "color": "terminal.ansiBlue"
-  //   },
-  //   "Git": {
-  //     "path": "bash",
-  //     "overrideName": true,
-  //     "args": ["-c", "git status; exec $SHELL"],
-  //     "icon": "git-branch",
-  //     "color": "terminal.ansiMagenta"
-  //   },
-  //   "bash": {
-  //     "path": "bash",
-  //     "overrideName": true,
-  //     "icon": "terminal-bash",
-  //     "color": "terminal.ansiYellow",
-  //     "args": ["-c", "echo 'Cache Up!!'; exec $SHELL", "source ~/.bash_profile;"]
-  //   },
-  //   "Lint": {
-  //     "path": "bash",
-  //     "overrideName": true,
-  //     "args": ["-c", "npm run lint; exec $SHELL"],
-  //     "icon": "bracket-error",
-  //     "color": "terminal.ansiRed"
-  //   }
-  // },
+  "terminal.integrated.profiles.osx": {
+    "server-dev": {
+      "path": "bash",
+      "overrideName": true,
+      "args": ["-c", "npm run server-dev"],
+      "icon": "server",
+      "color": "terminal.ansiGreen"
+    },
+    "client-dev": {
+      "path": "bash",
+      "overrideName": true,
+      "args": ["-c", "npm run client-dev"],
+      "icon": "browser",
+      "color": "terminal.ansiBlue"
+    },
+    "Git": {
+      "path": "bash",
+      "overrideName": true,
+      "args": ["-c", "git status; exec $SHELL"],
+      "icon": "git-branch",
+      "color": "terminal.ansiMagenta"
+    },
+    "bash": {
+      "path": "bash",
+      "overrideName": true,
+      "icon": "terminal-bash",
+      "color": "terminal.ansiYellow",
+      "args": ["-c", "echo 'Cache Up!!'; exec $SHELL"]
+    },
+    "Lint": {
+      "path": "bash",
+      "overrideName": true,
+      "args": ["-c", "npm run lint; exec $SHELL"],
+      "icon": "bracket-error",
+      "color": "terminal.ansiRed"
+    }
+  },
   "terminal.integrated.defaultProfile.osx": "bash",
   "better-comments.tags": [
     {
