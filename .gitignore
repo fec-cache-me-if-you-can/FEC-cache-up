@@ -133,7 +133,20 @@ client/dist/index.html
 client/dist/main.css
 package-lock.json
 
+client/dist/
 client/dist/*.js
 client/dist/*.css
 client/dist/*.map
 client/dist/*.html
+client/dist/*.json
+client/dist/*.ico
+client/dist/*.png
+client/dist/*.svg
+client/dist/*.jpg
+client/dist/*.jpeg
+client/dist/*.gif
+client/dist/*.webp
+client/dist/*.woff
+client/dist/*.woff2
+client/dist/*.ttf
+

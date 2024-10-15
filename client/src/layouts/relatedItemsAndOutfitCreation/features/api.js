@@ -1,14 +1,8 @@
 // api.js
 import axios from 'axios';
 
-const cache = new Map();
-
 const fetchData = async (url) => {
-  if (cache.has(url)) {
-    return cache.get(url);
-  }
   const { data } = await axios.get(url);
-  cache.set(url, data);
   return data;
 };
 
