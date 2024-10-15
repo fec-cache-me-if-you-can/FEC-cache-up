@@ -10,6 +10,7 @@ export default function ImageGallery({ photos }) {
   const [visibleThumbnails, setVisibleThumbnails] = useState([]);
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedThumbnail, setSelectedThumbnail] = useState('');
+  const [expandedView, setExpandedView] = useState(false);
 
   const maxThumbnails = 5;
 
@@ -21,6 +22,7 @@ export default function ImageGallery({ photos }) {
     setThumbnails(thumbnailArray);
     setVisibleThumbnails(thumbnailArray.slice(0, maxThumbnails));
     setSelectedThumbnail(thumbnailArray[0]);
+    setIndex(0);
   }, [photos]);
 
   const handleThumbnail = (thumbnail) => {
@@ -31,10 +33,9 @@ export default function ImageGallery({ photos }) {
   };
 
   const scrollThumbnailsUp = () => {
-    // Calculate the previous set of thumbnails
     const firstVisibleIndex = thumbnails.indexOf(visibleThumbnails[0]);
     if (firstVisibleIndex > 0) {
-      const newStartIndex = Math.max(firstVisibleIndex - maxThumbnails, 0); // Ensure we don't go below index 0
+      const newStartIndex = Math.max(firstVisibleIndex - maxThumbnails, 0);
       setVisibleThumbnails(
         thumbnails.slice(newStartIndex, newStartIndex + maxThumbnails),
       );
@@ -42,7 +43,6 @@ export default function ImageGallery({ photos }) {
   };
 
   const scrollThumbnailsDown = () => {
-    // Calculate the next set of thumbnails
     const lastVisibleIndex = thumbnails.indexOf(
       visibleThumbnails[visibleThumbnails.length - 1],
     );
@@ -54,6 +54,36 @@ export default function ImageGallery({ photos }) {
         ),
       );
     }
+  };
+
+  const handleNextImage = () => {
+    const nextIndex = (index + 1) % imageGallery.length;
+    setIndex(nextIndex);
+    setSelectedImage(imageGallery[nextIndex]);
+    setSelectedThumbnail(thumbnails[nextIndex]);
+
+    const lastVisibleIndex = thumbnails.indexOf(
+      visibleThumbnails[visibleThumbnails.length - 1],
+    );
+    if (nextIndex > lastVisibleIndex) {
+      scrollThumbnailsDown();
+    }
+  };
+
+  const handlePrevImage = () => {
+    const prevIndex = (index - 1 + imageGallery.length) % imageGallery.length;
+    setIndex(prevIndex);
+    setSelectedImage(imageGallery[prevIndex]);
+    setSelectedThumbnail(thumbnails[prevIndex]);
+
+    const firstVisibleIndex = thumbnails.indexOf(visibleThumbnails[0]);
+    if (prevIndex < firstVisibleIndex) {
+      scrollThumbnailsUp();
+    }
+  };
+
+  const handleImageClick = () => {
+    setExpandedView(true);
   };
 
   const thumbnailGridStyle = {
@@ -95,70 +125,41 @@ export default function ImageGallery({ photos }) {
           )}
         </div>
 
-        {/* Main Image */}
-        <div className="col-10 d-flex justify-content-center align-items-center">
-          <div
-            className="main-image"
-            style={{
-              width: '700px',
-              height: '550px',
-              position: 'relative',
-              overflow: 'hidden',
-              display: 'inline-block',
-              margin: '10px',
-            }}
-          >
+        {/* Main Image Carousel */}
+        <div className="gallery-carousel-container">
+          {/* Carousel Image */}
+          <div className="gallery-carousel-main" onClick={handleImageClick}>
             <img
-              src={selectedImage}
-              alt="Main Product"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center',
-              }}
+              src={imageGallery[index]}
+              alt={`Slide ${index}`}
+              className="gallery-carousel-image"
             />
+          </div>
+
+          {/* Navigation */}
+          <div className="gallery-carousel-controls">
+            {index > 0 && (
+              <button
+                onClick={handlePrevImage}
+                className="gallery-carousel-btn gallery-prev"
+              >
+                <Icon icon="fa-chevron-left" />
+              </button>
+            )}
+
+            {index < imageGallery.length - 1 && (
+              <button
+                onClick={handleNextImage}
+                className="gallery-carousel-btn gallery-next"
+              >
+                <Icon icon="fa-chevron-right" />
+              </button>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
-
-  //   (
-  //   <div>
-  //     <div className="style-thumbnails" style={thumbnailGridStyle}>
-  //       {thumbnails.map((thumbnail) => (
-  //         <CarouselThumbnail
-  //           selected={thumbnail === selectedThumbnail}
-  //           imageUrl={thumbnail}
-  //           onClick={() => handleThumbnail(thumbnail)}
-  //         />
-  //       ))}
-  //     </div>
-
-  //     <div
-  //       className="main-image"
-  //       style={{
-  //         width: '700px',
-  //         height: '600px',
-  //         position: 'relative',
-  //         overflow: 'hidden',
-  //         display: 'inline-block',
-  //         margin: '10px',
-  //       }}
-  //     >
-  //       <img
-  //         src={selectedImage}
-  //         style={{
-  //           width: '100%',
-  //           height: '100%',
-  //           objectFit: 'contain',
-  //           objectPosition: 'center',
-  //         }}
-  //       />
-  //     </div>
-  //   </div>
-  // );
 }
 
 ImageGallery.propTypes = { photos: PropTypes.array };

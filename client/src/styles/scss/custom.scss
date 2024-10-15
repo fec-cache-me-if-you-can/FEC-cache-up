@@ -257,3 +257,82 @@ small {
     transform: scale(1);
   }
 }
+
+//Eve's image gallery carousel
+.gallery-carousel-container {
+  width: 550px;
+  height: 550px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Ensure padding and borders are included in total size */
+}
+
+.gallery-carousel-main {
+  width: 100%;
+  height: 100%;
+  max-width: 550px; /* Constrain to the container size */
+  max-height: 550px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden; /* Ensure no child elements overflow */
+  box-sizing: border-box;
+}
+
+.gallery-carousel-main:hover {
+  cursor: zoom-in;
+}
+
+.gallery-carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gallery-carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%; /* Full width to match the image */
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensures only the buttons receive clicks */
+}
+
+.gallery-carousel-btn {
+  background: rgb(0 0 0 / 50%);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  pointer-events: auto;
+  position: absolute;
+}
+
+.gallery-carousel-btn:hover {
+  background: rgb(0 0 0 / 80%);
+}
+
+.gallery-prev {
+  left: 0;
+}
+
+.gallery-next {
+  right: 0;
+}
+
+//the end of Eve's image gallery carousel
