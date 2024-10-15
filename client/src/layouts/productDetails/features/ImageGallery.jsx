@@ -31,21 +31,27 @@ export default function ImageGallery({ photos }) {
   };
 
   const scrollThumbnailsUp = () => {
-    if (index > 0) {
-      const newIndex = index - 1;
-      setIndex(newIndex);
+    // Calculate the previous set of thumbnails
+    const firstVisibleIndex = thumbnails.indexOf(visibleThumbnails[0]);
+    if (firstVisibleIndex > 0) {
+      const newStartIndex = Math.max(firstVisibleIndex - maxThumbnails, 0); // Ensure we don't go below index 0
       setVisibleThumbnails(
-        thumbnails.slice(newIndex, newIndex + maxThumbnails),
+        thumbnails.slice(newStartIndex, newStartIndex + maxThumbnails),
       );
     }
   };
 
   const scrollThumbnailsDown = () => {
-    if (index + maxThumbnails < thumbnails.length) {
-      const newIndex = index + 1;
-      setIndex(newIndex);
+    // Calculate the next set of thumbnails
+    const lastVisibleIndex = thumbnails.indexOf(
+      visibleThumbnails[visibleThumbnails.length - 1],
+    );
+    if (lastVisibleIndex < thumbnails.length - 1) {
       setVisibleThumbnails(
-        thumbnails.slice(newIndex, newIndex + maxThumbnails),
+        thumbnails.slice(
+          lastVisibleIndex + 1,
+          lastVisibleIndex + 1 + maxThumbnails,
+        ),
       );
     }
   };
@@ -65,7 +71,7 @@ export default function ImageGallery({ photos }) {
         {/* Thumbnails Column */}
         <div className="col-2 d-flex flex-column align-items-center">
           {/* Up Arrow */}
-          {index > 0 && (
+          {!visibleThumbnails.includes(thumbnails[0]) && (
             <div onClick={scrollThumbnailsUp} style={{ cursor: 'pointer' }}>
               <Icon icon="fa-chevron-up" />
             </div>
@@ -82,7 +88,7 @@ export default function ImageGallery({ photos }) {
           </div>
 
           {/* Down Arrow */}
-          {index + maxThumbnails < thumbnails.length && (
+          {!visibleThumbnails.includes(thumbnails[thumbnails.length - 1]) && (
             <div onClick={scrollThumbnailsDown} style={{ cursor: 'pointer' }}>
               <Icon icon="fa-chevron-down" />
             </div>
