@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import StarRating from '../../../components/StarRating.jsx';
 import Icon from '../../../components/icons.jsx';
+import PinterestIcon from '../../../components/PinterestIcon.jsx';
+import FacebookIcon from '../../../components/FacebookIcon.jsx';
+import XIcon from '../../../components/XIcon.jsx';
 
 export default function ProductInformation({
   name,
@@ -35,21 +38,26 @@ export default function ProductInformation({
   return (
     <div>
       <StarRating rating={rating} />
-      <a href="#ratings">View all {numberOfRatings} reviews </a>
+      <a href="#ratings" style={{ marginLeft: '10px' }}>
+        View all {numberOfRatings} reviews{' '}
+      </a>
       <p>{category}</p>
       <h2>{name}</h2>
       <p>$ {price}</p>
 
       {/* Social Media Share Buttons */}
-      <div className="share-icons cursor-pointer">
+      <div
+        className="share-icons cursor-pointer"
+        style={{ display: 'flex', gap: '10px' }}
+      >
         <span onClick={() => handleShare('facebook')}>
-          <Icon icon="fa-facebook-f" />
+          <FacebookIcon size={'xl'} />
         </span>
         <span onClick={() => handleShare('x')}>
-          <Icon icon="fa-x" />
+          <XIcon size={'xl'} />
         </span>
         <span onClick={() => handleShare('pinterest')}>
-          <Icon icon="fa-pinterest" />
+          <PinterestIcon size={'xl'} />
         </span>
       </div>
     </div>
