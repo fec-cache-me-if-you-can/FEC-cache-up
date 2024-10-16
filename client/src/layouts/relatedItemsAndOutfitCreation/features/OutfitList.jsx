@@ -1,46 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import OutfitCard from './OutfitCard.jsx';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/scss/navigation';
+// components/OutfitList.jsx
+import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { useOutfitData } from './hooks/UseOutfitData.jsx';
+import OutfitCard from './components/OutfitCard.jsx';
+import AbstractList from './AbstractList.jsx';
 
 const OutfitList = () => {
-  const [outfitIds, setOutfitIds] = useState([]);
+  const { outfitIds, isLoading, error, addProduct, removeProduct } =
+    useOutfitData();
 
-  const mockOutfitIds = [
-    40345, 40346, 40351, 40350, 40349, 40349, 40351, 40352, 40344, 40346,
-  ];
+  console.log('OutfitList rendered with:', {
+    outfitIds,
+  });
 
-  useEffect(() => {
-    // TODO: fetch users outfitIds from the server
-    setOutfitIds(mockOutfitIds);
-  }, []);
+  const createTestOutfit = useCallback(
+    (e) => {
+      e.preventDefault();
+      console.log('createTestOutfit called');
+      addProduct('40344');
+    },
+    [addProduct],
+  );
 
-  // TODO: implement static "add" card
+  console.log('OutfitList rendered with addProduct:', addProduct);
+
   return (
-    <div className="container flex-grow-1">
-      <h5>Your Outfit</h5>
-      <Swiper
-        spaceBetween={10}
-        slidesPerView={3}
-        loop={true}
-        centeredSlides={true}
-        navigation={true}
-        modules={[Navigation]}
-        className="mySwiper"
-      >
-        {outfitIds.map((id) => {
-          return (
-            <div key={id} className="container bg-secondary">
-              <SwiperSlide>
-                <OutfitCard productId={id} />
-              </SwiperSlide>
-            </div>
-          );
-        })}
-      </Swiper>
-    </div>
+    <>
+      <button onClick={createTestOutfit}>Add Test Outfit product</button>
+      <AbstractList
+        items={outfitIds}
+        isLoading={isLoading}
+        error={error}
+        heading="Your Outfit"
+        CardComponent={OutfitCard}
+        action={removeProduct}
+      />
+    </>
   );
 };
 
