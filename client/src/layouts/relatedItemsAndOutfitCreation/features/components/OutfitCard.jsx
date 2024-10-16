@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import AbstractProductCard from './AbstractProductCard.jsx';
 import DeleteButton from './DeleteButton.jsx';
 
-const OutfitCard = ({ productId, removeProduct }) => {
+const OutfitCard = ({ productId, action }) => {
   const handleDelete = useCallback(() => {
-    removeProduct(productId);
-  }, [productId, removeProduct]);
+    action(productId);
+  }, [productId, action]);
 
   const renderDeleteIcon = (id) => (
-    <DeleteButton productId={id} onDelete={removeProduct} />
+    <DeleteButton productId={id} onDelete={action} />
   );
 
   return (
