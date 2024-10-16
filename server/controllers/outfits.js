@@ -7,8 +7,12 @@ const addProductToSessionOutfit = (request, response) => {
       return response.status(400).json({ error: 'Invalid product ID' });
     }
 
+    if (productExistsInSession(request, productId)) {
+      return response.status(409).json({ error: 'Product already exists' });
+    }
+
     request.session.outfit[productId] = productData;
-    response.status(201).json({ message: 'Product added' });
+    response.status(201).json(Object.values(request.session.outfit));
   } catch (error) {
     console.error('Error adding product:', error);
     response.status(500).json({ error: 'Internal Server Error' });
@@ -17,7 +21,7 @@ const addProductToSessionOutfit = (request, response) => {
 
 const removeProductFromSessionOutfit = (request, response) => {
   try {
-    const { id: productId } = request.body;
+    const { id: productId } = request.params;
 
     if (!productId || !productExistsInSession(request, productId)) {
       return response.status(404).json({ error: 'Product not found' });
