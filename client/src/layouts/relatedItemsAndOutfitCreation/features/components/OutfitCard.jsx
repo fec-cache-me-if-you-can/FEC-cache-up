@@ -4,7 +4,7 @@ import AbstractProductCard from './AbstractProductCard.jsx';
 import DeleteButton from './DeleteButton.jsx';
 
 const OutfitCard = ({ productId, removeProduct }) => {
-  const handleDelete = React.useCallback(() => {
+  const handleDelete = useCallback(() => {
     removeProduct(productId);
   }, [productId, removeProduct]);
 
