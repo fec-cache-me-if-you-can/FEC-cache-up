@@ -14,19 +14,16 @@ const toggleTheme = () => {
   document.documentElement.setAttribute('data-bs-theme', newTheme);
 };
 export default function App() {
-  const [product, setProduct] = useState(null); // ! initialize as object
-  const productId = 40344;
+  const [product, setProduct] = useState({});
+  const [productId, setProductId] = useState('40344');
 
   useEffect(() => {
-    // Fetch product data
-    axios
-      .get(`/products/${productId}/information`) //! /information endpoint returning 404 in postman
-      .then((response) => {
-        setProduct(response.data); // Store the product data in state
-      })
-      .catch((error) => {
-        console.error('Error fetching product data:', error);
-      });
+    const fetchData = async (productId) => {
+      const { data } = await axios.get(`/products/${productId}/information`);
+      setProduct(data);
+    };
+
+    fetchData(productId);
   }, [productId]);
 
   return (
@@ -37,7 +34,7 @@ export default function App() {
       <p className="lead">hello world</p>
       <h1 className="display-4">Hello World, but bigger.</h1>
       <div className="my-4">
-        {product ? (
+        {product.id ? (
           <ProductDetails product={product} />
         ) : (
           <p>Loading product...</p>
@@ -50,7 +47,7 @@ export default function App() {
         <QuestionsAndAnswers />
       </div>
       <div className="my-4">
-        <RelatedItemsAndOutfitCreation />
+        {productId && <RelatedItemsAndOutfitCreation productId={product.id} />}
       </div>
       <div className="my-4">
         {/* leave this line commented out, only for Daniel to turn on and off: */}
