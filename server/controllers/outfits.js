@@ -28,7 +28,7 @@ const removeProductFromSessionOutfit = (request, response) => {
     }
 
     delete request.session.outfit[productId];
-    response.status(200).json({ message: 'Product removed' });
+    response.status(200).json(Object.values(request.session.outfit));
   } catch (error) {
     console.error('Error removing product:', error);
     response.status(500).json({ error: 'Internal Server Error' });
