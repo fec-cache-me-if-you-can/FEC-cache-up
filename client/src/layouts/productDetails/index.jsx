@@ -29,7 +29,6 @@ export default function ProductDetails({ product }) {
   //pull info on styles
   useEffect(() => {
     axios.get(`products/${product.id}/styles`).then((response) => {
-      console.log('response with styles: ', response);
       setStyleOptions(response.data.results);
       setSelectedStyle(response.data.results[0]);
       setSelectedStyleId(response.data.results[0].style_id);
@@ -120,40 +119,41 @@ export default function ProductDetails({ product }) {
   };
 
   return (
-    <div>
-      <div>Product Details</div>
+    <div className="product-details-container">
+      {/* Left Column: Image Gallery and Additional Info */}
+      <div className="product-details-left-column">
+        <ImageGallery photos={photos} />
+        <AdditionalInfo slogan={slogan || ''} description={description || ''} />
+      </div>
 
-      <ImageGallery photos={photos} />
-
-      <AdditionalInfo slogan={slogan || ''} description={description || ''} />
-
-      <ProductInformation
-        name={name}
-        category={category}
-        price={price}
-        salePrice={salePrice}
-        rating={rating}
-        numberOfRatings={numberOfRatings}
-      />
-
-      <StyleSelector
-        selectedStyle={selectedStyle}
-        styleOptions={styleOptions}
-        onChange={handleStyleChange}
-      />
-
-      <AddToCart
-        productId={product.id}
-        selectedStyleId={selectedStyleId}
-        sizes={sizes}
-        selectedSize={selectedSize}
-        quantity={quantity}
-        selectedQuantity={selectedQuantity}
-        onSizeChange={handleSizeChange}
-        onQuanChange={handleQuantityChange}
-        showSizeError={showSizeError}
-        handleAddToCart={handleAddToCart}
-      />
+      {/* Right Column: Product Info, Style Selector, and Add to Cart */}
+      <div className="product-details-right-column">
+        <ProductInformation
+          name={name}
+          category={category}
+          price={price}
+          salePrice={salePrice}
+          rating={rating}
+          numberOfRatings={numberOfRatings}
+        />
+        <StyleSelector
+          selectedStyle={selectedStyle}
+          styleOptions={styleOptions}
+          onChange={handleStyleChange}
+        />
+        <AddToCart
+          productId={product.id}
+          selectedStyleId={selectedStyleId}
+          sizes={sizes}
+          selectedSize={selectedSize}
+          quantity={quantity}
+          selectedQuantity={selectedQuantity}
+          onSizeChange={handleSizeChange}
+          onQuanChange={handleQuantityChange}
+          showSizeError={showSizeError}
+          handleAddToCart={handleAddToCart}
+        />
+      </div>
     </div>
   );
 }

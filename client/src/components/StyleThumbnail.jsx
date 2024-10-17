@@ -14,13 +14,13 @@ export default function StyleThumbnail({
 
   return (
     <div
-      className={`thumbnail-container ${isSelected ? 'selected' : ''}`}
+      className={`cursor-pointer ${isSelected ? 'selected' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       style={{
-        width: '70px',
-        height: '70px',
+        width: '60px',
+        height: '60px',
         position: 'relative',
         overflow: 'hidden',
         display: 'inline-block',
