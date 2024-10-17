@@ -7,8 +7,10 @@ import ReviewList from './features/ReviewsList.jsx';
 import ReviewTile from './features/ReviewTile.jsx';
 import SortOptions from './features/SortOptions.jsx';
 import WriteNewReview from './features/WriteNewReview.jsx';
+import PropTypes from 'prop-types';
 
-export default function RatingsAndReviews() {
+export default function RatingsAndReviews({ metaReviews }) {
+  // console.log('meta reviews from rating section: ', metaReviews);
   return (
     <div>
       <div id="ratings">Ratings And Reviews</div>
@@ -22,3 +24,7 @@ export default function RatingsAndReviews() {
     </div>
   );
 }
+
+RatingsAndReviews.propTypes = {
+  metaReviews: PropTypes.object.isRequired,
+};

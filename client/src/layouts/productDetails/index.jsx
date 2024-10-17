@@ -7,15 +7,13 @@ import AddToCart from './features/AddToCart.jsx';
 import StyleSelector from './features/StyleSelector.jsx';
 import PropTypes from 'prop-types';
 
-export default function ProductDetails({ product }) {
+export default function ProductDetails({ product, rating, numberOfRatings }) {
   const [name, setName] = useState(product.name);
   const [category, setCategory] = useState(product.category);
   const [price, setPrice] = useState('');
   const [salePrice, setSalePrice] = useState(null);
   const [slogan, setSlogan] = useState(product.slogan);
   const [description, setDescription] = useState(product.description);
-  const [rating, setRating] = useState(0);
-  const [numberOfRatings, setNumberOfRatings] = useState(0);
   const [selectedStyle, setSelectedStyle] = useState(null);
   const [selectedStyleId, setSelectedStyleId] = useState(0);
   const [styleOptions, setStyleOptions] = useState([]);
@@ -32,22 +30,6 @@ export default function ProductDetails({ product }) {
       setStyleOptions(response.data.results);
       setSelectedStyle(response.data.results[0]);
       setSelectedStyleId(response.data.results[0].style_id);
-    });
-  }, [product.id]);
-
-  //pull info on reviews
-  useEffect(() => {
-    axios.get(`reviews/meta?product_id=${product.id}`).then((response) => {
-      const totalReviews = Object.values(response.data.ratings).reduce(
-        (sum, count) => sum + parseInt(count, 10),
-        0,
-      );
-      const averageScore =
-        Object.entries(response.data.ratings).reduce((sum, [rating, count]) => {
-          return sum + rating * count;
-        }, 0) / totalReviews;
-      setRating(averageScore);
-      setNumberOfRatings(totalReviews);
     });
   }, [product.id]);
 
@@ -114,7 +96,14 @@ export default function ProductDetails({ product }) {
         selectedSize,
         selectedQuantity,
       });
-      //TODO Perform actual add to cart logic
+      axios
+        .post('/cart', { sku_id: product.id })
+        .then((response) => {
+          console.log('Item successfully added to cart!');
+        })
+        .catch((error) => {
+          console.error('Error adding item to cart:', error);
+        });
     }
   };
 
@@ -158,4 +147,8 @@ export default function ProductDetails({ product }) {
   );
 }
 
-ProductDetails.propTypes = { product: PropTypes.object.isRequired };
+ProductDetails.propTypes = {
+  product: PropTypes.object.isRequired,
+  rating: PropTypes.number,
+  numberOfRatings: PropTypes.number,
+};
