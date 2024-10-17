@@ -1,9 +1,9 @@
 // hooks/useOutfitData.js
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  getOutfit,
-  addProductToOutfit,
-  removeProductFromOutfit,
+  fetchOutfitProductIds,
+  addProductByIdToOutfit,
+  removeProductByIdFromOutfit,
 } from '../../api';
 
 export const useOutfitData = () => {
@@ -14,7 +14,7 @@ export const useOutfitData = () => {
   const fetchOutfitIds = async () => {
     setIsLoading(true);
     try {
-      const ids = await getOutfit();
+      const ids = await fetchOutfitProductIds();
       setOutfitIds(ids);
       setError(null);
     } catch (error) {
@@ -32,7 +32,7 @@ export const useOutfitData = () => {
   const addProduct = useCallback(async (productId) => {
     console.log('Hook: addProduct called with:', productId);
     try {
-      const updatedOutfit = await addProductToOutfit(productId);
+      const updatedOutfit = await addProductByIdToOutfit(productId);
       console.log('Hook: Received updated outfit:', updatedOutfit);
       setOutfitIds((prev) => updatedOutfit.map((product) => product.id));
     } catch (error) {
@@ -42,7 +42,7 @@ export const useOutfitData = () => {
 
   const removeProduct = useCallback(async (productId) => {
     try {
-      const updatedOutfit = await removeProductFromOutfit(productId);
+      const updatedOutfit = await removeProductByIdFromOutfit(productId);
       setOutfitIds((prev) => updatedOutfit.map((product) => product.id));
     } catch (error) {
       console.error('Error removing product from outfit:', error);

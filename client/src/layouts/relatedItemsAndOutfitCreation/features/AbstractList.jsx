@@ -6,33 +6,19 @@ import 'swiper/css';
 import 'swiper/scss/navigation';
 
 const AbstractList = ({
-  items,
-  isLoading,
-  error,
-  heading,
+  items = [],
+  isLoading = false,
+  error = '',
+  heading = '',
   CardComponent,
   action,
 }) => {
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  const renderContent = () => {
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p className="secondary-color">{error}</p>;
+    if (!items.length) return <p>No items found</p>;
 
-  if (error) {
-    return <p className="secondary-color">{error}</p>;
-  }
-
-  if (!items.length) {
     return (
-      <div className="container flex-grow-1">
-        <h5>{heading}</h5>
-        <p>No items found</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="container flex-grow-1">
-      <h5>{heading}</h5>
       <Swiper
         spaceBetween={10}
         slidesPerView={3}
@@ -42,14 +28,21 @@ const AbstractList = ({
         modules={[Navigation]}
         className="mySwiper"
       >
-        {items.map((id, i) => (
-          <div key={id + 'i'} className="container bg-secondary">
+        {items.map((itemId, index) => (
+          <div key={`${itemId}-${index}`} className="container bg-secondary">
             <SwiperSlide>
-              <CardComponent productId={id} action={action} />
+              <CardComponent productId={itemId} action={action} />
             </SwiperSlide>
           </div>
         ))}
       </Swiper>
+    );
+  };
+
+  return (
+    <div className="container flex-grow-1">
+      <h5 className="section-header">{heading}</h5>
+      {renderContent()}
     </div>
   );
 };
@@ -60,6 +53,7 @@ AbstractList.propTypes = {
   error: PropTypes.string,
   heading: PropTypes.string,
   CardComponent: PropTypes.elementType.isRequired,
+  action: PropTypes.func,
 };
 
 export default AbstractList;

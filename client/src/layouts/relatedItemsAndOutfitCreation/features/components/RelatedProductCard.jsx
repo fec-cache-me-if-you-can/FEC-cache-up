@@ -4,12 +4,9 @@ import PropTypes from 'prop-types';
 import AbstractProductCard from './AbstractProductCard.jsx';
 import FavoriteToggle from './favoriteToggle.jsx';
 
-const RelatedProductCard = ({ productId }) => {
+const RelatedProductCard = ({ productId, action }) => {
   const renderFavoriteIcon = (id) => (
-    <FavoriteToggle
-      productId={id}
-      onToggle={() => console.log('FavoriteToggle')}
-    />
+    <FavoriteToggle productId={id} action={action} />
   );
 
   return (
@@ -22,8 +19,7 @@ const RelatedProductCard = ({ productId }) => {
 
 RelatedProductCard.propTypes = {
   productId: PropTypes.string.isRequired,
+  action: PropTypes.func.isRequired,
 };
-
-RelatedProductCard.displayName = 'RelatedProductCard';
 
 export default RelatedProductCard;

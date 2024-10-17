@@ -25,3 +25,19 @@ export function processProductData({ productInfo, styleInfo, reviewMeta }) {
     rating,
   };
 }
+
+export const getFeatureValue = (features, featureName) => {
+  const feature = features.find((f) => f.feature === featureName);
+  return feature ? feature.value : '-';
+};
+
+export const createFeatureMap = (features) => {
+  return new Map(features.map((feature) => [feature.feature, feature.value]));
+};
+
+export const getAllFeatureNames = (relatedFeatures, selectedFeatures) => {
+  return new Set([
+    ...relatedFeatures.map((f) => f.feature),
+    ...selectedFeatures.map((f) => f.feature),
+  ]);
+};

@@ -2,31 +2,24 @@ import React, { useState } from 'react';
 import Icon from '../../../../components/icons.jsx';
 import PropTypes from 'prop-types';
 
-export default function FavoriteToggle({ productId, onToggle }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const handleFavoriteToggle = (e) => {
+export default function FavoriteToggle({ productId, action }) {
+  const handleClick = (e) => {
     e.preventDefault();
     e.target.classList.add('is-favorite');
     setTimeout(() => {
       e.target.classList.remove('is-favorite');
     }, 1000);
-    setIsFavorite(!isFavorite);
-    onToggle(productId);
+    action(productId);
   };
 
   return (
-    <button className="transparent-button" onClick={handleFavoriteToggle}>
-      {isFavorite ? (
-        <Icon icon={'fa-heart fa-solid fa-xl'} />
-      ) : (
-        <Icon icon={'fa-heart fa-regular fa-xl'} />
-      )}
+    <button className="transparent-button" onClick={handleClick}>
+      <Icon icon={'fa-star fa-regular fa-xl'} />
     </button>
   );
 }
 
 FavoriteToggle.propTypes = {
   productId: PropTypes.string.isRequired,
-  onToggle: PropTypes.func.isRequired,
+  action: PropTypes.func.isRequired,
 };
