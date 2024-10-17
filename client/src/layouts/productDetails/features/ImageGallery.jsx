@@ -11,6 +11,8 @@ export default function ImageGallery({ photos }) {
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedThumbnail, setSelectedThumbnail] = useState('');
   const [expandedView, setExpandedView] = useState(false);
+  const [zoom, setZoom] = useState(false);
+  const [mousePosition, setMousePosition] = useState(null);
 
   const maxThumbnails = 5;
 
@@ -95,6 +97,30 @@ export default function ImageGallery({ photos }) {
     }
   };
 
+  const toggleZoomView = () => {
+    setZoom(!zoom);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!zoom) return;
+    const rect = e.target.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const smoothingFactor = 0.5;
+    setMousePosition({
+      x: (x - 50) * smoothingFactor + 50,
+      y: (y - 50) * smoothingFactor + 50,
+    });
+  };
+
+  const getTransformStyle = () => {
+    if (!zoom || !mousePosition) return {};
+    const { x, y } = mousePosition;
+    return {
+      transform: `scale(2.5) translate(${-(x - 50)}%, ${-(y - 50)}%)`,
+    };
+  };
+
   const thumbnailGridStyle = {
     display: 'grid',
     gridTemplateColumns: '1fr',
@@ -110,53 +136,63 @@ export default function ImageGallery({ photos }) {
       {expandedView && (
         <div className="gallery-expanded-overlay">
           {/* Thumbnails/Icons for Expanded View */}
-          <div className="gallery-expanded-thumbnails">
-            {thumbnails.map((thumbnail, i) => (
-              <div
-                key={thumbnail}
-                className="gallery-icon-wrapper"
-                onClick={() => handleThumbnail(thumbnail)}
-                style={{
-                  color: thumbnail === selectedThumbnail ? 'white' : 'grey', // Conditionally apply color
-                  fontSize: '24px',
-                  transition: 'color 0.3s',
-                  cursor: 'pointer',
-                }}
-              >
-                <Icon
-                  icon={
-                    thumbnail === selectedThumbnail
-                      ? 'fa-solid fa-circle-dot'
-                      : 'fa-solid fa-circle'
-                  }
-                />
-              </div>
-            ))}
-          </div>
+          {!zoom && (
+            <div className="gallery-expanded-thumbnails">
+              {thumbnails.map((thumbnail, i) => (
+                <div
+                  key={thumbnail}
+                  className="gallery-icon-wrapper"
+                  onClick={() => handleThumbnail(thumbnail)}
+                  style={{
+                    color: thumbnail === selectedThumbnail ? 'white' : 'grey', // Conditionally apply color
+                    fontSize: '24px',
+                    transition: 'color 0.3s',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Icon
+                    icon={
+                      thumbnail === selectedThumbnail
+                        ? 'fa-solid fa-circle-dot'
+                        : 'fa-solid fa-circle'
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="gallery-expanded-main">
             {/* Navigation */}
-            <div className="gallery-carousel-controls">
-              {index > 0 && (
-                <button
-                  onClick={handlePrevImage}
-                  className="gallery-carousel-btn gallery-prev"
-                >
-                  <Icon icon="fa-chevron-left" />
-                </button>
-              )}
+            {!zoom && (
+              <div className="gallery-carousel-controls">
+                {index > 0 && (
+                  <button
+                    onClick={handlePrevImage}
+                    className="gallery-carousel-btn gallery-prev"
+                  >
+                    <Icon icon="fa-chevron-left" />
+                  </button>
+                )}
+                {index < imageGallery.length - 1 && (
+                  <button
+                    onClick={handleNextImage}
+                    className="gallery-carousel-btn gallery-next"
+                  >
+                    <Icon icon="fa-chevron-right" />
+                  </button>
+                )}
+              </div>
+            )}
 
-              {index < imageGallery.length - 1 && (
-                <button
-                  onClick={handleNextImage}
-                  className="gallery-carousel-btn gallery-next"
-                >
-                  <Icon icon="fa-chevron-right" />
-                </button>
-              )}
-            </div>
             {/* Expand Image */}
-            <img src={imageGallery[index]} className="gallery-expanded-image" />
+            <img
+              src={imageGallery[index]}
+              onClick={toggleZoomView}
+              onMouseMove={handleMouseMove}
+              className={`gallery-expanded-image ${zoom ? 'zoomed' : ''}`}
+              style={zoom ? getTransformStyle() : {}}
+            />
             {/* Expand Icon */}
             <div className="gallery-expand-icon" onClick={toggleExpandedView}>
               <Icon icon="fa regular fa-compress" />
