@@ -29,24 +29,32 @@ export default function AddToCart({
   return (
     <div>
       {showSizeError && <p style={{ color: 'red' }}>Please select a size</p>}
-      {/* sizes */}
-      <DropdownSelector
-        options={sizes}
-        placeholder={sizes.length === 0 ? 'OUT OF STOCK' : 'Select Size'}
-        isDisabled={isSizesDisabled}
-        onChange={onSizeChange}
-        selectedOption={selectedSize}
-      />
-      {/* quantities */}
-      <DropdownSelector
-        options={quantity}
-        placeholder="-"
-        isDisabled={isQuantDisabled}
-        onChange={onQuanChange}
-        selectedOption={selectedQuantity}
-      />
+      <div className="cart-selectors-container">
+        {/* sizes */}
+        <DropdownSelector
+          options={sizes}
+          placeholder={sizes.length === 0 ? 'OUT OF STOCK' : 'Select Size'}
+          isDisabled={isSizesDisabled}
+          onChange={onSizeChange}
+          selectedOption={selectedSize}
+          className="size-selector"
+        />
+        {/* quantities */}
+        <DropdownSelector
+          options={quantity}
+          placeholder="-"
+          isDisabled={isQuantDisabled}
+          onChange={onQuanChange}
+          selectedOption={selectedQuantity}
+          className="quantity-selector"
+        />
+      </div>
       {sizes.length !== 0 ? (
-        <PrimaryButton label="Add to Cart" onClick={handleAddToCart} />
+        <PrimaryButton
+          label="Add to Cart"
+          onClick={handleAddToCart}
+          className="full-width-button"
+        />
       ) : null}
     </div>
   );
