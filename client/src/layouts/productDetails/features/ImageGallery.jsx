@@ -109,6 +109,31 @@ export default function ImageGallery({ photos }) {
       {/* Expanded View Content */}
       {expandedView && (
         <div className="gallery-expanded-overlay">
+          {/* Thumbnails/Icons for Expanded View */}
+          <div className="gallery-expanded-thumbnails">
+            {thumbnails.map((thumbnail, i) => (
+              <div
+                key={thumbnail}
+                className="gallery-icon-wrapper"
+                onClick={() => handleThumbnail(thumbnail)}
+                style={{
+                  color: thumbnail === selectedThumbnail ? 'white' : 'grey', // Conditionally apply color
+                  fontSize: '24px',
+                  transition: 'color 0.3s',
+                  cursor: 'pointer',
+                }}
+              >
+                <Icon
+                  icon={
+                    thumbnail === selectedThumbnail
+                      ? 'fa-solid fa-circle-dot'
+                      : 'fa-solid fa-circle'
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
           <div className="gallery-expanded-main">
             {/* Navigation */}
             <div className="gallery-carousel-controls">
@@ -140,6 +165,7 @@ export default function ImageGallery({ photos }) {
         </div>
       )}
 
+      {/* Defualt View */}
       <div className="gallery-container">
         {/* Thumbnails Column */}
         <div className="gallery-thumbnails-column">
