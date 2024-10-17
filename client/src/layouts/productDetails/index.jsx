@@ -19,6 +19,7 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   const [styleOptions, setStyleOptions] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedSkuId, setSelectedSkuId] = useState(null);
   const [quantity, setQuantity] = useState([]);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
   const [photos, setPhotos] = useState([]);
@@ -72,6 +73,7 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
     setSelectedStyle(style);
     setSelectedSize('');
     setSelectedQuantity(null);
+    setSelectedSkuId(null);
     setShowSizeError(false);
   };
 
@@ -79,6 +81,13 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
     setSelectedSize(size);
     setSelectedQuantity(1);
     setShowSizeError(false);
+    const selectedSku = Object.entries(selectedStyle.skus).find(
+      ([sku, details]) => details.size === size,
+    );
+
+    if (selectedSku) {
+      setSelectedSkuId(selectedSku[0]); // SKU ID is the key
+    }
   };
 
   const handleQuantityChange = (quantity) => {
@@ -90,14 +99,8 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
       setShowSizeError(true);
     } else {
       setShowSizeError(false);
-      console.log('Adding to cart:', {
-        productId: product.id,
-        selectedStyleId,
-        selectedSize,
-        selectedQuantity,
-      });
       axios
-        .post('/cart', { sku_id: product.id })
+        .post('/cart', { sku_id: selectedSkuId })
         .then((response) => {
           console.log('Item successfully added to cart!');
         })
