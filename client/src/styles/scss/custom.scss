@@ -289,12 +289,14 @@ small {
 
 //Eve's image gallery carousel
 
+/* General Gallery Container */
 .gallery-container {
   display: flex;
-  gap: 20px;
+  gap: 20px; /* Gap between thumbnails and main image */
   align-items: center;
 }
 
+/* Thumbnails Column */
 .gallery-thumbnails-column {
   display: flex;
   flex-direction: column;
@@ -310,6 +312,7 @@ small {
   justify-content: center;
 }
 
+/* Main Carousel Container */
 .gallery-carousel-container {
   width: 650px;
   height: 650px;
@@ -327,13 +330,11 @@ small {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   overflow: hidden;
-}
-
-.gallery-carousel-main:hover {
   cursor: zoom-in;
+  position: relative;
 }
 
 .gallery-carousel-image {
@@ -343,10 +344,11 @@ small {
   object-position: center;
 }
 
+/* Carousel Controls */
 .gallery-carousel-controls {
   position: absolute;
   top: 50%;
-  width: 100%;
+  width: 100%; /* Align controls with the image */
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
@@ -360,14 +362,13 @@ small {
   padding: 10px;
   cursor: pointer;
   font-size: 24px;
-  z-index: 1;
   width: 30px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   pointer-events: auto;
-  position: absolute;
+  z-index: 2;
 }
 
 .gallery-carousel-btn:hover {
@@ -375,11 +376,70 @@ small {
 }
 
 .gallery-prev {
+  position: absolute;
   left: 0;
+  margin-left: 0; /* Small gap from left edge */
 }
 
 .gallery-next {
+  position: absolute;
   right: 0;
+  margin-right: 0; /* Small gap from right edge */
+}
+
+/* Expand Icon */
+.gallery-expand-icon {
+  color: white;
+  background: rgb(0 0 0 / 50%);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 2; /* Ensure it stays above the image */
+  pointer-events: auto;
+}
+
+.gallery-expand-icon:hover {
+  background: rgb(0 0 0 / 80%);
+}
+
+/* Expanded View Overlay */
+.gallery-expanded-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 90%); /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.gallery-expanded-main {
+  max-width: 1500px;
+  max-height: 1500px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Keep icon aligned relative to the container */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.gallery-expanded-image {
+  max-width: 100%; /* Ensure it scales correctly */
+  max-height: 100%; /* Maintain proportions within the container */
+  object-fit: contain; /* Preserve aspect ratio, no cropping */
+  display: block; /* Ensure proper layout inside the flexbox */
 }
 
 .product-details-container {

@@ -86,6 +86,15 @@ export default function ImageGallery({ photos }) {
     setExpandedView(true);
   };
 
+  const toggleExpandedView = () => {
+    setExpandedView(!expandedView);
+    if (!expandedView) {
+      document.body.classList.add('expanded-view-active');
+    } else {
+      document.body.classList.remove('expanded-view-active');
+    }
+  };
+
   const thumbnailGridStyle = {
     display: 'grid',
     gridTemplateColumns: '1fr',
@@ -96,67 +105,107 @@ export default function ImageGallery({ photos }) {
   };
 
   return (
-    <div className="gallery-container">
-      {/* Thumbnails Column */}
-      <div className="gallery-thumbnails-column">
-        {/* Up Arrow */}
-        {!visibleThumbnails.includes(thumbnails[0]) && (
-          <div onClick={scrollThumbnailsUp} style={{ cursor: 'pointer' }}>
-            <Icon icon="fa-chevron-up" />
+    <>
+      {/* Expanded View Content */}
+      {expandedView && (
+        <div className="gallery-expanded-overlay">
+          <div className="gallery-expanded-main">
+            {/* Navigation */}
+            <div className="gallery-carousel-controls">
+              {index > 0 && (
+                <button
+                  onClick={handlePrevImage}
+                  className="gallery-carousel-btn gallery-prev"
+                >
+                  <Icon icon="fa-chevron-left" />
+                </button>
+              )}
+
+              {index < imageGallery.length - 1 && (
+                <button
+                  onClick={handleNextImage}
+                  className="gallery-carousel-btn gallery-next"
+                >
+                  <Icon icon="fa-chevron-right" />
+                </button>
+              )}
+            </div>
+            {/* Expand Image */}
+            <img src={imageGallery[index]} className="gallery-expanded-image" />
+            {/* Expand Icon */}
+            <div className="gallery-expand-icon" onClick={toggleExpandedView}>
+              <Icon icon="fa regular fa-compress" />
+            </div>
           </div>
-        )}
-        <div className="gallery-thumbnails" style={thumbnailGridStyle}>
-          {visibleThumbnails.map((thumbnail) => (
-            <CarouselThumbnail
-              key={thumbnail}
-              selected={thumbnail === selectedThumbnail}
-              imageUrl={thumbnail}
-              onClick={() => handleThumbnail(thumbnail)}
+        </div>
+      )}
+
+      <div className="gallery-container">
+        {/* Thumbnails Column */}
+        <div className="gallery-thumbnails-column">
+          {/* Up Arrow */}
+          {!visibleThumbnails.includes(thumbnails[0]) && (
+            <div onClick={scrollThumbnailsUp} style={{ cursor: 'pointer' }}>
+              <Icon icon="fa-chevron-up" />
+            </div>
+          )}
+          <div className="gallery-thumbnails" style={thumbnailGridStyle}>
+            {visibleThumbnails.map((thumbnail) => (
+              <CarouselThumbnail
+                key={thumbnail}
+                selected={thumbnail === selectedThumbnail}
+                imageUrl={thumbnail}
+                onClick={() => handleThumbnail(thumbnail)}
+              />
+            ))}
+          </div>
+
+          {/* Down Arrow */}
+          {!visibleThumbnails.includes(thumbnails[thumbnails.length - 1]) && (
+            <div onClick={scrollThumbnailsDown} style={{ cursor: 'pointer' }}>
+              <Icon icon="fa-chevron-down" />
+            </div>
+          )}
+        </div>
+
+        {/* Main Image Carousel */}
+        <div className="gallery-carousel-container">
+          {/* Carousel Image */}
+          <div className="gallery-carousel-main" onClick={handleImageClick}>
+            <img
+              src={imageGallery[index]}
+              alt={`Slide ${index}`}
+              className="gallery-carousel-image"
             />
-          ))}
-        </div>
-
-        {/* Down Arrow */}
-        {!visibleThumbnails.includes(thumbnails[thumbnails.length - 1]) && (
-          <div onClick={scrollThumbnailsDown} style={{ cursor: 'pointer' }}>
-            <Icon icon="fa-chevron-down" />
+            {/* Expand Icon */}
+            <div className="gallery-expand-icon" onClick={toggleExpandedView}>
+              <Icon icon="fa regular fa-expand" />
+            </div>
           </div>
-        )}
-      </div>
 
-      {/* Main Image Carousel */}
-      <div className="gallery-carousel-container">
-        {/* Carousel Image */}
-        <div className="gallery-carousel-main" onClick={handleImageClick}>
-          <img
-            src={imageGallery[index]}
-            alt={`Slide ${index}`}
-            className="gallery-carousel-image"
-          />
-        </div>
+          {/* Navigation */}
+          <div className="gallery-carousel-controls">
+            {index > 0 && (
+              <button
+                onClick={handlePrevImage}
+                className="gallery-carousel-btn gallery-prev"
+              >
+                <Icon icon="fa-chevron-left" />
+              </button>
+            )}
 
-        {/* Navigation */}
-        <div className="gallery-carousel-controls">
-          {index > 0 && (
-            <button
-              onClick={handlePrevImage}
-              className="gallery-carousel-btn gallery-prev"
-            >
-              <Icon icon="fa-chevron-left" />
-            </button>
-          )}
-
-          {index < imageGallery.length - 1 && (
-            <button
-              onClick={handleNextImage}
-              className="gallery-carousel-btn gallery-next"
-            >
-              <Icon icon="fa-chevron-right" />
-            </button>
-          )}
+            {index < imageGallery.length - 1 && (
+              <button
+                onClick={handleNextImage}
+                className="gallery-carousel-btn gallery-next"
+              >
+                <Icon icon="fa-chevron-right" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
