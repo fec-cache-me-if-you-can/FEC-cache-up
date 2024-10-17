@@ -6,7 +6,7 @@ import axios from 'axios';
 import Answer from './Answer.jsx';
 
 export default function AnswersList({ answers, question_id }) {
-  const [displayedAnswers, setDisplayedAnswers] = useState(1);
+  const [displayedAnswers, setDisplayedAnswers] = useState(2);
   const [moreIsHidden, setMoreIsHidden] = useState(true);
   const [cantLoadMore, setCantLoadMore] = useState(false);
   const [maxLoadedAnswers, setMaxLoadedAnswers] = useState(
@@ -14,7 +14,7 @@ export default function AnswersList({ answers, question_id }) {
   );
 
   useEffect(() => {
-    if (displayedAnswers > 1) {
+    if (displayedAnswers > 2) {
       setMoreIsHidden(false);
     } else {
       setMoreIsHidden(true);
@@ -34,7 +34,7 @@ export default function AnswersList({ answers, question_id }) {
   };
 
   const hideMoreAnswers = () => {
-    setDisplayedAnswers(1);
+    setDisplayedAnswers(2);
   };
 
   console.log('answers object: ', answers);

@@ -9,12 +9,12 @@ import PrimaryButton from '../../../components/PrimaryButton.jsx';
 
 export default function QuestionsList({ productId }) {
   const [questions, setQuestions] = useState([]);
-  const [displayedQuestions, setDisplayedQuestions] = useState(1);
+  const [displayedQuestions, setDisplayedQuestions] = useState(4);
   const [moreIsHidden, setMoreIsHidden] = useState(true);
   const [hideButton, setHideButton] = useState(false);
 
   useEffect(() => {
-    if (displayedQuestions > 1) {
+    if (displayedQuestions > 4) {
       setMoreIsHidden(false);
     } else {
       setMoreIsHidden(true);
@@ -33,7 +33,7 @@ export default function QuestionsList({ productId }) {
     setDisplayedQuestions((displayedQuestions) => displayedQuestions + 2);
   };
   const resetDisplayedQuestions = () => {
-    setDisplayedQuestions(1);
+    setDisplayedQuestions(4);
   };
 
   useEffect(() => {
