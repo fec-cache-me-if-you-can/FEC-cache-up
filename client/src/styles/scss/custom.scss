@@ -282,12 +282,14 @@ small {
 
 //Eve's image gallery carousel
 
+/* General Gallery Container */
 .gallery-container {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
+/* Thumbnails Column */
 .gallery-thumbnails-column {
   display: flex;
   flex-direction: column;
@@ -303,6 +305,7 @@ small {
   justify-content: center;
 }
 
+/* Main Carousel Container */
 .gallery-carousel-container {
   width: 650px;
   height: 650px;
@@ -320,13 +323,11 @@ small {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   overflow: hidden;
-}
-
-.gallery-carousel-main:hover {
   cursor: zoom-in;
+  position: relative;
 }
 
 .gallery-carousel-image {
@@ -336,10 +337,11 @@ small {
   object-position: center;
 }
 
+/* Carousel Controls */
 .gallery-carousel-controls {
   position: absolute;
   top: 50%;
-  width: 100%;
+  width: calc(100% - 20px);
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
@@ -347,20 +349,20 @@ small {
 }
 
 .gallery-carousel-btn {
+  margin: 0;
   background: rgb(0 0 0 / 30%);
   border: none;
   color: white;
   padding: 10px;
   cursor: pointer;
   font-size: 24px;
-  z-index: 1;
   width: 30px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   pointer-events: auto;
-  position: absolute;
+  z-index: 2;
 }
 
 .gallery-carousel-btn:hover {
@@ -368,11 +370,105 @@ small {
 }
 
 .gallery-prev {
+  position: absolute;
   left: 0;
+  margin-left: 0;
 }
 
 .gallery-next {
+  position: absolute;
   right: 0;
+  margin-right: 0;
+}
+
+/* Expand Icon */
+.gallery-expand-icon {
+  color: white;
+  background: rgb(0 0 0 / 50%);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.gallery-expand-icon:hover {
+  background: rgb(0 0 0 / 80%);
+}
+
+/* Expanded View Overlay */
+.gallery-expanded-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 90%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.gallery-expanded-main {
+  max-width: 1500px;
+  max-height: 1500px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.gallery-expanded-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  cursor: zoom-in;
+  z-index: 1;
+}
+
+.gallery-expanded-thumbnails {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+.gallery-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.gallery-icon {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.gallery-expanded-image.zoomed {
+  transform-origin: center;
+  transition: transform 0.1s ease-out;
+  cursor: zoom-out;
+  position: relative;
 }
 
 .product-details-container {
@@ -400,24 +496,24 @@ small {
 
 .cart-selectors-container {
   display: flex;
-  gap: 10px; /* Adjust spacing between the selectors */
+  gap: 10px;
   align-items: center;
-  width: 100% !important; /* Ensure container spans full width */
+  width: 100% !important;
 }
 
 .size-selector {
-  flex: 2 !important; /* 2/3 of the space */
-  width: 100% !important; /* Force full width within flex container */
+  flex: 2 !important;
+  width: 100% !important;
 }
 
 .quantity-selector {
-  flex: 1 !important; /* 1/3 of the space */
-  width: 100% !important; /* Force full width within flex container */
+  flex: 1 !important;
+  width: 100% !important;
 }
 
 .full-width-button {
-  width: 100% !important; /* Make button full width */
-  margin-top: 10px !important; /* Add some space above the button */
+  width: 100% !important;
+  margin-top: 10px !important;
 }
 
 //the end of Eve's CSS
