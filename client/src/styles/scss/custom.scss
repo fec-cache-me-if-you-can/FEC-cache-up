@@ -280,7 +280,7 @@ small {
   padding: 0;
 }
 
-//Eve's image gallery carousel
+// Eve's image gallery carousel
 
 /* General Gallery Container */
 .gallery-container {
@@ -516,7 +516,7 @@ small {
   margin-top: 10px !important;
 }
 
-//the end of Eve's CSS
+// the end of Eve's CSS
 
 .trash-button.clicked {
   animation: trash-shake 0.3s ease-in-out;
@@ -543,4 +543,22 @@ small {
   font-weight: 400;
   margin-top: 5rem;
   margin-bottom: 3rem;
+}
+
+.test-border {
+  border: solid red;
+  border-width: 1px;
+}
+
+.modal-header {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
 }
