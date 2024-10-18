@@ -22,7 +22,12 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
   };
 
   const handleSubmit = () => {
-    const submitObject = { name, body, email, photos };
+    const submitObject = {
+      name: name,
+      body: body,
+      email: email,
+      photos: photos,
+    };
     onSubmit(submitObject);
   };
 

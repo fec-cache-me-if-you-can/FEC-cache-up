@@ -20,11 +20,11 @@ export default function Question({ question }) {
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
-  const createAnswer = ({ body }) => {
+  const createAnswer = (body) => {
+    console.log(body);
+    body.question_id = question_id;
     axios
-      .post(`/qa/questions/${question_id}/answers`, {
-        body: body,
-      })
+      .post(`/qa/answers`, body)
       .then(() => {})
       .catch((err) => console.log(err));
   };
