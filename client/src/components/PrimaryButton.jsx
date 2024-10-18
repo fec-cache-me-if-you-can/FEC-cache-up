@@ -9,7 +9,7 @@ export default function PrimaryButton({
   extraStyles = '',
   plus = false,
 }) {
-  const buttonStyle = `btn btn-primary square btn-lg m-3 ${isDisabled && 'disabled'} ${extraStyles}`;
+  const buttonStyle = `btn btn-primary square btn-lg ${isDisabled && 'disabled'} ${extraStyles}`;
   return (
     <button onClick={onClick} className={buttonStyle}>
       <span className="me-2">{label}</span>
