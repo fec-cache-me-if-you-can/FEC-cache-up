@@ -23,7 +23,7 @@ export default function Question({ question }) {
   const createAnswer = (body) => {
     console.log(body);
     body.question_id = question_id;
-    axios
+    return axios
       .post(`/qa/answers`, body)
       .then(() => {})
       .catch((err) => console.log(err));

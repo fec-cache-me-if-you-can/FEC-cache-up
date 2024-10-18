@@ -28,7 +28,9 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
       email: email,
       photos: photos,
     };
-    onSubmit(submitObject);
+    onSubmit(submitObject)
+      .then(() => toggleModal())
+      .catch((err) => console.log(err));
   };
 
   return (
