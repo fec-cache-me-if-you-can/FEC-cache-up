@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug React App",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/client",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/src/*",
+        "webpack://*/src/*": "${webRoot}/src/*",
+        "webpack:///./~/*": "${workspaceFolder}/node_modules/*"
+      },
+      "disableNetworkCache": true
+    }
+  ]
+}

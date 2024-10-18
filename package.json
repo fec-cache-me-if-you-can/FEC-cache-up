@@ -6,12 +6,12 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "client-dev": "webpack --mode development --watch",
+    "client-dev": "webpack --mode development --watch --devtool source-map",
     "server-dev": "npx nodemon server/index.js",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "serve": "webpack serve",
+    "serve": "webpack serve --mode development",
     "lint": "eslint .",
     "test": "jest",
     "icons:update": "npm update '@awesome.me/kit-60350fbc81' --silent"
