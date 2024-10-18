@@ -29,8 +29,7 @@ const fetchApiData = (url) =>
     `Failed to fetch data from ${url}`,
   );
 
-export const fetchRelatedProducts = async (productId) => {
-  if (!productId) productId = '40344';
+export const fetchRelatedProductIds = async (productId) => {
   const { data } = await axios.get(`/products/${productId}/related`);
   return data.map((id) => String(id));
 };
