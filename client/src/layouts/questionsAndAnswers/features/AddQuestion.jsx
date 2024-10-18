@@ -12,12 +12,17 @@ export default function AddQuestion({ onClick }) {
   };
 
   return (
-    <button className="add-question btn btn-primary square btn-lg">
-      Add a Question
+    <div>
+      <button
+        className="add-question btn btn-primary square btn-lg m-3"
+        onClick={toggleModal}
+      >
+        Add a Question
+      </button>
       {showModal && (
         <QuestionModal onSubmit={onClick} toggleModal={toggleModal} />
       )}
-    </button>
+    </div>
   );
 }
 
