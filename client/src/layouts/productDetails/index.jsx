@@ -7,20 +7,19 @@ import AddToCart from './features/AddToCart.jsx';
 import StyleSelector from './features/StyleSelector.jsx';
 import PropTypes from 'prop-types';
 
-export default function ProductDetails({ product }) {
+export default function ProductDetails({ product, rating, numberOfRatings }) {
   const [name, setName] = useState(product.name);
   const [category, setCategory] = useState(product.category);
   const [price, setPrice] = useState('');
   const [salePrice, setSalePrice] = useState(null);
   const [slogan, setSlogan] = useState(product.slogan);
   const [description, setDescription] = useState(product.description);
-  const [rating, setRating] = useState(0);
-  const [numberOfRatings, setNumberOfRatings] = useState(0);
   const [selectedStyle, setSelectedStyle] = useState(null);
   const [selectedStyleId, setSelectedStyleId] = useState(0);
   const [styleOptions, setStyleOptions] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedSkuId, setSelectedSkuId] = useState(null);
   const [quantity, setQuantity] = useState([]);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
   const [photos, setPhotos] = useState([]);
@@ -32,22 +31,6 @@ export default function ProductDetails({ product }) {
       setStyleOptions(response.data.results);
       setSelectedStyle(response.data.results[0]);
       setSelectedStyleId(response.data.results[0].style_id);
-    });
-  }, [product.id]);
-
-  //pull info on reviews
-  useEffect(() => {
-    axios.get(`reviews/meta?product_id=${product.id}`).then((response) => {
-      const totalReviews = Object.values(response.data.ratings).reduce(
-        (sum, count) => sum + parseInt(count, 10),
-        0,
-      );
-      const averageScore =
-        Object.entries(response.data.ratings).reduce((sum, [rating, count]) => {
-          return sum + rating * count;
-        }, 0) / totalReviews;
-      setRating(averageScore);
-      setNumberOfRatings(totalReviews);
     });
   }, [product.id]);
 
@@ -90,6 +73,7 @@ export default function ProductDetails({ product }) {
     setSelectedStyle(style);
     setSelectedSize('');
     setSelectedQuantity(null);
+    setSelectedSkuId(null);
     setShowSizeError(false);
   };
 
@@ -97,6 +81,13 @@ export default function ProductDetails({ product }) {
     setSelectedSize(size);
     setSelectedQuantity(1);
     setShowSizeError(false);
+    const selectedSku = Object.entries(selectedStyle.skus).find(
+      ([sku, details]) => details.size === size,
+    );
+
+    if (selectedSku) {
+      setSelectedSkuId(selectedSku[0]); // SKU ID is the key
+    }
   };
 
   const handleQuantityChange = (quantity) => {
@@ -108,13 +99,14 @@ export default function ProductDetails({ product }) {
       setShowSizeError(true);
     } else {
       setShowSizeError(false);
-      console.log('Adding to cart:', {
-        productId: product.id,
-        selectedStyleId,
-        selectedSize,
-        selectedQuantity,
-      });
-      //TODO Perform actual add to cart logic
+      axios
+        .post('/cart', { sku_id: selectedSkuId })
+        .then((response) => {
+          console.log('Item successfully added to cart!');
+        })
+        .catch((error) => {
+          console.error('Error adding item to cart:', error);
+        });
     }
   };
 
@@ -158,4 +150,8 @@ export default function ProductDetails({ product }) {
   );
 }
 
-ProductDetails.propTypes = { product: PropTypes.object.isRequired };
+ProductDetails.propTypes = {
+  product: PropTypes.object.isRequired,
+  rating: PropTypes.number,
+  numberOfRatings: PropTypes.number,
+};
