@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Icon from '../../../../components/icons.jsx';
 import PropTypes from 'prop-types';
 
-export default function FavoriteToggle({ productId, action }) {
+export default function CompareButton({ productId, action }) {
   const handleClick = (e) => {
     e.preventDefault();
     e.target.classList.add('is-favorite');
@@ -19,7 +19,7 @@ export default function FavoriteToggle({ productId, action }) {
   );
 }
 
-FavoriteToggle.propTypes = {
+CompareButton.propTypes = {
   productId: PropTypes.string,
   action: PropTypes.func,
 };
