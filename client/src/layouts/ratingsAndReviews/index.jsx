@@ -5,7 +5,6 @@ import ProductBreakdown from './features/ProductBreakdown.jsx';
 import RatingsBreakdown from './features/RatingsBreakdown.jsx';
 import ReviewList from './features/ReviewsList.jsx';
 import ReviewTile from './features/ReviewTile.jsx';
-import SortOptions from './features/SortOptions.jsx';
 import WriteNewReview from './features/WriteNewReview.jsx';
 import PropTypes from 'prop-types';
 
@@ -31,7 +30,6 @@ export default function RatingsAndReviews({
       <ProductBreakdown />
       <RatingsBreakdown rating={rating} numberOfRatings={numberOfRatings} />
       <ReviewList numberOfRatings={numberOfRatings} reviews={reviews} />
-      <SortOptions />
       <WriteNewReview />
     </div>
   );

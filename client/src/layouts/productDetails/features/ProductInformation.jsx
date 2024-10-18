@@ -10,6 +10,7 @@ export default function ProductInformation({
   name,
   category,
   price,
+  salePrice,
   rating,
   numberOfRatings,
 }) {
@@ -43,7 +44,16 @@ export default function ProductInformation({
       </a>
       <p>{category}</p>
       <h2>{name}</h2>
-      <p>$ {price}</p>
+      {salePrice ? (
+        <p>
+          <span style={{ color: 'red', marginRight: '8px' }}>${salePrice}</span>
+          <span style={{ textDecoration: 'line-through', color: 'grey' }}>
+            ${price}
+          </span>
+        </p>
+      ) : (
+        <p>${price}</p>
+      )}
 
       {/* Social Media Share Buttons */}
       <div
