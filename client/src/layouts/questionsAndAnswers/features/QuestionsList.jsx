@@ -41,7 +41,6 @@ export default function QuestionsList({ productId }) {
     axios
       .get(`/qa/questions?product_id=${productId}`)
       .then((result) => {
-        console.log(result.data.results);
         setQuestions(result.data.results);
       })
       .catch((err) => console.log(err));
@@ -62,7 +61,6 @@ export default function QuestionsList({ productId }) {
         <AddQuestion onClick={createQuestion} />
       </div>
       {questions.slice(0, displayedQuestions).map((question) => {
-        console.log(question);
         return <Question key={question.question_id} question={question} />;
       })}
       <button hidden={moreIsHidden} onClick={resetDisplayedQuestions}>

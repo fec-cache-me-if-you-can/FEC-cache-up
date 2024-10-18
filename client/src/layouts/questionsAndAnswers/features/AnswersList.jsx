@@ -37,14 +37,12 @@ export default function AnswersList({ answers, question_id }) {
     setDisplayedAnswers(2);
   };
 
-  console.log('answers object: ', answers);
   return (
     <div className="answers-list">
       {Object.keys(answers)
         .slice(0, displayedAnswers)
         .map((key) => {
           let answer = answers[key];
-          console.log(answer);
           return <Answer key={answer.id} answer={answer} />;
         })}
       <button
