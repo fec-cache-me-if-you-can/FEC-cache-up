@@ -287,7 +287,7 @@ small {
   padding: 0;
 }
 
-//Eve's image gallery carousel
+// Eve's image gallery carousel
 
 .gallery-container {
   display: flex;
@@ -427,4 +427,22 @@ small {
   margin-top: 10px !important; /* Add some space above the button */
 }
 
-//the end of Eve's CSS
+// the end of Eve's CSS
+
+.test-border {
+  border: solid red;
+  border-width: 1px;
+}
+
+.modal-header {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}

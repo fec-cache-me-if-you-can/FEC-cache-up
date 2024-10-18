@@ -6,6 +6,7 @@ import axios from 'axios';
 import SearchQuestions from './SearchQuestions.jsx';
 import Question from './Question.jsx';
 import PrimaryButton from '../../../components/PrimaryButton.jsx';
+import AddQuestion from './AddQuestion.jsx';
 
 export default function QuestionsList({ productId }) {
   const [questions, setQuestions] = useState([]);
@@ -46,6 +47,8 @@ export default function QuestionsList({ productId }) {
       .catch((err) => console.log(err));
   }, [productId]);
 
+  const createQuestion = () => {}; // TODO: make axios post question call
+
   return (
     <div className="question-list container-xl ">
       <div className="d-flex align-items-lg-start">
@@ -56,7 +59,7 @@ export default function QuestionsList({ productId }) {
           plus={true}
           onClick={handleLoadMoreQuestions}
         />
-        <PrimaryButton label={'Add a Question'} plus={false} />
+        <AddQuestion onClick={createQuestion} />
       </div>
       {questions.slice(0, displayedQuestions).map((question) => {
         console.log(question);

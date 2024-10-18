@@ -2,11 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function AnswerModal({ onSubmit, toggleModal }) {
+export default function QuestionModal({ onSubmit, toggleModal }) {
   const [name, setName] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
-  const [photos, setPhotos] = useState([]);
 
   const changeName = (e) => {
     setName(e.target.value);
@@ -17,12 +16,9 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
   const changeEmail = (e) => {
     setEmail(e.target.value);
   };
-  const changePhotos = (e) => {
-    setPhotos(e.target.value);
-  };
 
   const handleSubmit = () => {
-    const submitObject = { name, body, email, photos };
+    const submitObject = { name, body, email };
     onSubmit(submitObject);
   };
 
@@ -70,7 +66,7 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
               </div>
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label">
-                  Answer
+                  Question
                 </label>
                 <textarea
                   className="form-control"
@@ -92,9 +88,9 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={handleSubmit}
+              onClick={onSubmit}
             >
-              Add Answer
+              Add Question
             </button>
           </div>
         </div>
@@ -103,7 +99,7 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
   );
 }
 
-AnswerModal.propTypes = {
+QuestionModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };

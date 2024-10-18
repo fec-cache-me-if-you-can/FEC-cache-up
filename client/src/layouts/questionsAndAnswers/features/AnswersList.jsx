@@ -47,10 +47,18 @@ export default function AnswersList({ answers, question_id }) {
           console.log(answer);
           return <Answer key={answer.id} answer={answer} />;
         })}
-      <button onClick={handleLoadMoreAnswers} hidden={cantLoadMore}>
+      <button
+        className="d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+        onClick={handleLoadMoreAnswers}
+        hidden={cantLoadMore}
+      >
         Load More Answers
       </button>
-      <button onClick={hideMoreAnswers} hidden={moreIsHidden}>
+      <button
+        className="d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+        onClick={hideMoreAnswers}
+        hidden={moreIsHidden}
+      >
         Hide More Answers
       </button>
     </div>

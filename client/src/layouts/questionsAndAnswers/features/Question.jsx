@@ -34,16 +34,24 @@ export default function Question({ question }) {
       className="question-card border border-dark-subtle shadow-sm p-3"
       hidden={reported}
     >
-      <div className="-question-header row">
-        <div className="question-text fs-4 col">Q: {question_body}</div>
-        <div className="header-interaction col">
+      <div className="-question-header row text-start d-flex">
+        <div className="question-main col-8 d-inline-flex">
+          <div className="question-text fs-4 d-inline-flex test-border pe-2">
+            Q:
+          </div>
+          <div className="question-text fs-5 d-inline-flex test-border">
+            {question_body}
+          </div>
+        </div>
+        <div className="header-interaction col-3 d--flex test-border">
           <Helpful helpfulness={question_helpfulness} />
+          <div className="divider ps-1 pe-1 d-inline-flex test-border">|</div>
           <AddAnswer onClick={createAnswer} />
         </div>
       </div>
       <div className="question-footer">
         <AnswersList answers={answers} question_id={question_id} />
-        <div className="question-date">
+        <div className="question-date fs-12">
           {new Date(question_date).toLocaleDateString('en-US', dateOptions)}
         </div>
       </div>
