@@ -11,7 +11,10 @@ const ProductDetails = ({ details, renderIcon }) => (
     <h5 className="card-title my-1 text-size-300 fw-semibold two-line-title hover-scale w-75">
       {details.name}
     </h5>
-    <p className="text-size-90 my-2">${details.price}</p>
+    <p className="text-size-90 my-2">
+      ${details.sale || details.price}
+      {details.sale && <span className="discount-slash"> {details.price}</span>}
+    </p>
     <StarRating rating={details.rating} />
   </>
 );
@@ -23,6 +26,7 @@ ProductDetails.propTypes = {
     category: PropTypes.string,
     price: PropTypes.string,
     rating: PropTypes.number,
+    sale: PropTypes.string,
   }),
   renderIcon: PropTypes.func,
 };

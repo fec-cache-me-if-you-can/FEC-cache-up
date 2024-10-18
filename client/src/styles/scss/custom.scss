@@ -1,3 +1,36 @@
+// Define variables globally
+$light-background: #fff;
+$light-secondary-bg: #f2eded;
+$light-primary-text: #222;
+$light-secondary-text: #666;
+$light-accent: #596b80;
+$light-attention: #ab1b38;
+$dark-background: #000;
+$dark-secondary-bg: #1f1f1f;
+$dark-primary-text: #fff;
+$dark-secondary-text: #a8aaaf;
+$dark-accent: #7e90a5;
+$dark-attention: #c50d32;
+
+// Color Schemes
+:root {
+  --background: #{$light-background};
+  --secondary-bg: #{$light-secondary-bg};
+  --primary-text: #{$light-primary-text};
+  --secondary-text: #{$light-secondary-text};
+  --accent: #{$light-accent};
+  --attention: #{$light-attention};
+}
+
+[data-bs-theme='dark'] {
+  --background: #{$dark-background};
+  --secondary-bg: #{$dark-secondary-bg};
+  --primary-text: #{$dark-primary-text};
+  --secondary-text: #{$dark-secondary-text};
+  --accent: #{$dark-accent};
+  --attention: #{$dark-attention};
+}
+
 // Base Styles
 html {
   font-size: 100%;
@@ -124,15 +157,6 @@ small {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-// Color Schemes
-:root {
-  @include color-scheme('light');
-}
-
-[data-bs-theme='dark'] {
-  @include color-scheme('dark');
 }
 
 // Star Rating
@@ -561,4 +585,9 @@ small {
   background: none;
   border: none;
   font-size: 1.5rem;
+}
+
+span.discount-slash {
+  color: var(--attention) !important;
+  text-decoration: line-through;
 }
