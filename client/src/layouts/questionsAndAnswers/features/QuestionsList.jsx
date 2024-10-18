@@ -46,7 +46,10 @@ export default function QuestionsList({ productId }) {
       .catch((err) => console.log(err));
   }, [productId]);
 
-  const createQuestion = () => {}; // TODO: make axios post question call
+  const createQuestion = (body) => {
+    body.product_id = productId;
+    return axios.post('/qa/questions', body);
+  };
 
   return (
     <div className="question-list container-xl ">

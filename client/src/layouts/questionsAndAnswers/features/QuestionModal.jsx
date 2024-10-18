@@ -18,8 +18,10 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
   };
 
   const handleSubmit = () => {
-    const submitObject = { name, body, email };
-    onSubmit(submitObject);
+    const submitObject = { name: name, body: body, email: email };
+    onSubmit(submitObject)
+      .then(() => toggleModal())
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -88,7 +90,7 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={onSubmit}
+              onClick={handleSubmit}
             >
               Add Question
             </button>
