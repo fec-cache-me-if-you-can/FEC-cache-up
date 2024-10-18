@@ -27,35 +27,45 @@ export default function AddToCart({
   }, [selectedSize]);
 
   return (
-    <div>
+    <div className="d-flex flex-column gap-3">
       {showSizeError && <p style={{ color: 'red' }}>Please select a size</p>}
-      <div className="cart-selectors-container">
-        {/* sizes */}
-        <DropdownSelector
-          options={sizes}
-          placeholder={sizes.length === 0 ? 'OUT OF STOCK' : 'Select Size'}
-          isDisabled={isSizesDisabled}
-          onChange={onSizeChange}
-          selectedOption={selectedSize}
-          className="size-selector"
-        />
-        {/* quantities */}
-        <DropdownSelector
-          options={quantity}
-          placeholder="-"
-          isDisabled={isQuantDisabled}
-          onChange={onQuanChange}
-          selectedOption={selectedQuantity}
-          className="quantity-selector"
-        />
+      <div className="d-flex gap-3">
+        {/* d-flex: creates a flex container */}
+        {/* gap-3: adds spacing between flex items */}
+        <div className="flex-grow-1 flex-basis-0">
+          {/* flex-grow-1: allows the item to grow */}
+          {/* flex-basis-0: sets the initial main size of the item to 0 */}
+          <DropdownSelector
+            options={sizes}
+            placeholder={sizes.length === 0 ? 'OUT OF STOCK' : 'Select Size'}
+            isDisabled={isSizesDisabled}
+            onChange={onSizeChange}
+            selectedOption={selectedSize}
+          />
+        </div>
+        <div className="flex-grow-1 flex-basis-0">
+          {/* flex-grow-1: allows the item to grow */}
+          {/* flex-basis-0: sets the initial main size of the item to 0 */}
+          <DropdownSelector
+            options={quantity}
+            placeholder="-"
+            isDisabled={isQuantDisabled}
+            onChange={onQuanChange}
+            selectedOption={selectedQuantity}
+          />
+        </div>
       </div>
+      {/* <div> */}
+      {/* uncomment above div for a half width button (prevents button from acting a flex item) */}
+
       {sizes.length !== 0 ? (
         <PrimaryButton
           label="Add to Cart"
           onClick={handleAddToCart}
-          className="full-width-button"
+          plus={true}
         />
       ) : null}
+      {/* </div> */}
     </div>
   );
 }
