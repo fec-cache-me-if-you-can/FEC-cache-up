@@ -16,7 +16,7 @@ const ProductImage = ({ src, alt }) => {
 
 ProductImage.propTypes = {
   src: PropTypes.string,
-  alt: PropTypes.string.isRequired,
+  alt: PropTypes.string,
 };
 
 export default ProductImage;

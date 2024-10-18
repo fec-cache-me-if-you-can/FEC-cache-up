@@ -30,7 +30,7 @@ const AbstractList = ({
       >
         {items.map((itemId, index) => (
           <div key={`${itemId}-${index}`} className="container bg-secondary">
-            <SwiperSlide>
+            <SwiperSlide key={`${itemId}-${index}`}>
               <CardComponent productId={itemId} action={action} />
             </SwiperSlide>
           </div>
@@ -48,11 +48,11 @@ const AbstractList = ({
 };
 
 AbstractList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  items: PropTypes.arrayOf(PropTypes.string),
   isLoading: PropTypes.bool,
   error: PropTypes.string,
   heading: PropTypes.string,
-  CardComponent: PropTypes.elementType.isRequired,
+  CardComponent: PropTypes.elementType,
   action: PropTypes.func,
 };
 

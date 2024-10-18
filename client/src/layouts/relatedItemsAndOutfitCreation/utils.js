@@ -17,7 +17,7 @@ export function processProductData({ productInfo, styleInfo, reviewMeta }) {
   const rating = calculateAverageRating(reviewMeta.ratings);
 
   return {
-    id,
+    id: String(id),
     name,
     category,
     price,

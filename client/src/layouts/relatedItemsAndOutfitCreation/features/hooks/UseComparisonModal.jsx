@@ -26,17 +26,13 @@ export const useComparisonModal = (productId) => {
 
   const handleCardClick = useCallback(
     async (relatedProductId) => {
-      try {
-        const { relatedProduct, selectedProduct } = await fetchProductDetails(
-          relatedProductId,
-          productId,
-        );
-        setRelatedProduct(relatedProduct);
-        setSelectedProduct(selectedProduct);
-        setShowModal(true);
-      } catch (error) {
-        // Handle error (e.g., show error message to user)
-      }
+      const { relatedProduct, selectedProduct } = await fetchProductDetails(
+        relatedProductId,
+        productId,
+      );
+      setRelatedProduct(relatedProduct);
+      setSelectedProduct(selectedProduct);
+      setShowModal(true);
     },
     [productId],
   );

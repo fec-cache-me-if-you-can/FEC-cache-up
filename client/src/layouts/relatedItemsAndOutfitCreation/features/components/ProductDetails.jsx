@@ -18,13 +18,13 @@ const ProductDetails = ({ details, renderIcon }) => (
 
 ProductDetails.propTypes = {
   details: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-  }).isRequired,
-  renderIcon: PropTypes.func.isRequired,
+    id: PropTypes.string,
+    name: PropTypes.string,
+    category: PropTypes.string,
+    price: PropTypes.string,
+    rating: PropTypes.number,
+  }),
+  renderIcon: PropTypes.func,
 };
 
 export default ProductDetails;

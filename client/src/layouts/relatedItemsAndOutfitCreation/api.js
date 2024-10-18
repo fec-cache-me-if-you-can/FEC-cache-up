@@ -29,6 +29,12 @@ const fetchApiData = (url) =>
     `Failed to fetch data from ${url}`,
   );
 
+export const fetchRelatedProducts = async (productId) => {
+  if (!productId) productId = '40344';
+  const { data } = await axios.get(`/products/${productId}/related`);
+  return data.map((id) => String(id));
+};
+
 export const fetchOutfitProductIds = () =>
   handleApiCall(
     () =>

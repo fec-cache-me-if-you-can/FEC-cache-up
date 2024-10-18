@@ -37,7 +37,7 @@ const RelatedProductList = ({ productId }) => {
 };
 
 RelatedProductList.propTypes = {
-  productId: PropTypes.string.isRequired,
+  productId: PropTypes.string,
 };
 
 export default RelatedProductList;

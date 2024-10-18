@@ -18,8 +18,8 @@ const OutfitCard = ({ productId, action }) => {
 };
 
 OutfitCard.propTypes = {
-  productId: PropTypes.string.isRequired,
-  removeProduct: PropTypes.func.isRequired,
+  productId: PropTypes.string,
+  action: PropTypes.func,
 };
 
 OutfitCard.displayName = 'OutfitCard';

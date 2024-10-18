@@ -18,8 +18,8 @@ const RelatedProductCard = ({ productId, action }) => {
 };
 
 RelatedProductCard.propTypes = {
-  productId: PropTypes.string.isRequired,
-  action: PropTypes.func.isRequired,
+  productId: PropTypes.string,
+  action: PropTypes.func,
 };
 
 export default RelatedProductCard;

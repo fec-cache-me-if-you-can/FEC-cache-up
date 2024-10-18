@@ -50,13 +50,13 @@ const FeatureTable = ({ relatedProduct, selectedProduct }) => {
 
 FeatureTable.propTypes = {
   relatedProduct: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    features: PropTypes.array.isRequired,
-  }).isRequired,
+    name: PropTypes.string,
+    features: PropTypes.array,
+  }),
   selectedProduct: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    features: PropTypes.array.isRequired,
-  }).isRequired,
+    name: PropTypes.string,
+    features: PropTypes.array,
+  }),
 };
 
 export default FeatureTable;

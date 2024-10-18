@@ -47,7 +47,9 @@ export default function App() {
         <QuestionsAndAnswers />
       </div>
       <div className="my-4">
-        {productId && <RelatedItemsAndOutfitCreation productId={product.id} />}
+        {productId && (
+          <RelatedItemsAndOutfitCreation productId={String(product.id)} />
+        )}
       </div>
       <div className="my-4">
         {/* leave this line commented out, only for Daniel to turn on and off: */}

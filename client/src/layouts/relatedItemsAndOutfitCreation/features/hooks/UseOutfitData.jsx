@@ -30,10 +30,8 @@ export const useOutfitData = () => {
   }, []);
 
   const addProduct = useCallback(async (productId) => {
-    console.log('Hook: addProduct called with:', productId);
     try {
       const updatedOutfit = await addProductByIdToOutfit(productId);
-      console.log('Hook: Received updated outfit:', updatedOutfit);
       setOutfitIds((prev) => updatedOutfit.map((product) => product.id));
     } catch (error) {
       console.error('Hook: Error adding product to outfit:', error);
@@ -48,14 +46,6 @@ export const useOutfitData = () => {
       console.error('Error removing product from outfit:', error);
     }
   }, []);
-
-  console.log('useOutfitData hook returning:', {
-    outfitIds,
-    isLoading,
-    error,
-    addProduct,
-    removeProduct,
-  });
 
   return {
     outfitIds,

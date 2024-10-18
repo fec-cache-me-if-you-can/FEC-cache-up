@@ -20,6 +20,6 @@ export default function FavoriteToggle({ productId, action }) {
 }
 
 FavoriteToggle.propTypes = {
-  productId: PropTypes.string.isRequired,
-  action: PropTypes.func.isRequired,
+  productId: PropTypes.string,
+  action: PropTypes.func,
 };

@@ -34,10 +34,10 @@ const ProductComparisonModal = ({
 };
 
 ProductComparisonModal.propTypes = {
-  show: PropTypes.bool.isRequired,
-  onHide: PropTypes.func.isRequired,
-  relatedProduct: PropTypes.object.isRequired,
-  selectedProduct: PropTypes.object.isRequired,
+  show: PropTypes.bool,
+  onHide: PropTypes.func,
+  relatedProduct: PropTypes.object,
+  selectedProduct: PropTypes.object,
 };
 
 export default ProductComparisonModal;
