@@ -1,22 +1,11 @@
 import React from 'react';
 
-import AddAnswer from './features/AddAnswer.jsx'
-import AddQuestion from './features/AddQuestion.jsx'
-import MoreAnsweredQuestions from './features/MoreAnsweredQuestions.jsx'
-import Question from './features/Question.jsx'
-import QuestionsList from './features/QuestionsList.jsx'
-import SearchQuestions from './features/SearchQuestions.jsx'
+import QuestionsList from './features/QuestionsList.jsx';
 
-export default function QuestionsAndAnswers () {
-
+export default function QuestionsAndAnswers() {
   return (
-    <div>
-      <AddAnswer />
-      <AddQuestion />
-      <MoreAnsweredQuestions />
-      <Question />
-      <QuestionsList />
-      <SearchQuestions />
+    <div className="border border-black p-1">
+      <QuestionsList productId={40444} />
     </div>
   );
 }

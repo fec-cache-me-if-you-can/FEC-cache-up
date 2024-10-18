@@ -1,8 +1,13 @@
 import React from 'react';
 
-export default function SearchQuestions () {
-
+export default function SearchQuestions() {
   return (
-    <div>SearchQuestions</div>
+    <div className="input-group">
+      <input
+        type="text"
+        className="form-control btn btn-primary square btn-lg m-3"
+        placeholder="Search Questions"
+      />
+    </div>
   );
 }

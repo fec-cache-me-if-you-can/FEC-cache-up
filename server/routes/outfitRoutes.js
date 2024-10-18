@@ -8,7 +8,7 @@ const { Router } = require('express');
 const router = Router();
 
 router.post('/', addProductToSessionOutfit);
-router.delete('/', removeProductFromSessionOutfit);
+router.delete('/:id', removeProductFromSessionOutfit);
 router.get('/', getSessionOutfit);
 
 module.exports = router;
