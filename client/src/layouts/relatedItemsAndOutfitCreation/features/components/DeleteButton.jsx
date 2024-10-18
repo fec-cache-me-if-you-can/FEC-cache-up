@@ -21,6 +21,6 @@ export default function DeleteButton({ productId, onDelete }) {
 }
 
 DeleteButton.propTypes = {
-  productId: PropTypes.number,
+  productId: PropTypes.string,
   onDelete: PropTypes.func,
 };
