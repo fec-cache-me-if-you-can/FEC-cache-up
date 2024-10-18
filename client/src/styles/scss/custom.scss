@@ -562,3 +562,58 @@ small {
   border: none;
   font-size: 1.5rem;
 }
+
+/* Base class for revealing structure */
+.reveal-structure {
+  background-clip: content-box;
+  box-shadow: 0 0 0 1px red inset;
+}
+
+/* Reveal margin */
+.reveal-margin {
+  background-color: rgb(255 0 0 / 20%) !important;
+}
+
+/* Reveal padding */
+.reveal-padding {
+  background-color: rgb(0 255 0 / 20%) !important;
+  background-clip: content-box !important;
+}
+
+/* Reveal border */
+.reveal-border {
+  border-color: rgb(0 0 255 / 50%) !important;
+  border-style: solid !important;
+}
+
+/* Reveal all (margin, padding, and border) */
+.reveal-all {
+  background-color: rgb(255 0 0 / 20%) !important;
+  background-clip: content-box !important;
+  box-shadow:
+    0 0 0 1px blue inset,
+    0 0 0 2px rgb(0 255 0 / 20%);
+}
+
+// changes the color of search icon when cursor is placed in .search-field
+// used for FAQ search bar
+.custom-search-input:focus + .search-icon {
+  transition: all 0.3s;
+  color: var(--bs-body-color);
+  opacity: 1;
+}
+
+.custom-search-input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.no-outline {
+  outline: none;
+  box-shadow: none;
+}
+
+.faded-icon {
+  opacity: 0.7;
+}
+
+// end FAQ search bar
