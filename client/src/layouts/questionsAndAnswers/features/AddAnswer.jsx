@@ -12,7 +12,7 @@ export default function AddAnswer({ onClick }) {
   };
 
   return (
-    <div className="add-answer">
+    <div className="add-answer d-inline-flex">
       <button
         className="helpfulness d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
         onClick={toggleModal}

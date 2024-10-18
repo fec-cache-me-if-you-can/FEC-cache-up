@@ -36,16 +36,14 @@ export default function Question({ question }) {
     >
       <div className="-question-header row text-start d-flex">
         <div className="question-main col-8 d-inline-flex">
-          <div className="question-text fs-4 d-inline-flex test-border pe-2">
-            Q:
-          </div>
-          <div className="question-text fs-5 d-inline-flex test-border">
+          <div className="question-text fs-4 d-inline-flex pe-2">Q:</div>
+          <div className="question-text fs-5 d-inline-flex ">
             {question_body}
           </div>
         </div>
-        <div className="header-interaction col-3 d--flex test-border">
+        <div className="header-interaction col-4 d--flex ">
           <Helpful helpfulness={question_helpfulness} />
-          <div className="divider ps-1 pe-1 d-inline-flex test-border">|</div>
+          <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
           <AddAnswer onClick={createAnswer} />
         </div>
       </div>
