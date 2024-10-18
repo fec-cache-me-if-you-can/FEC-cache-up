@@ -11,15 +11,20 @@ import AddQuestion from './AddQuestion.jsx';
 export default function QuestionsList({ productId }) {
   const [questions, setQuestions] = useState([]);
   const [displayedQuestions, setDisplayedQuestions] = useState(4);
-  const [moreIsHidden, setMoreIsHidden] = useState(true);
+  const [moreIsHidden, setMoreIsHidden] = useState(false);
   const [hideButton, setHideButton] = useState(false);
 
   useEffect(() => {
-    if (displayedQuestions > 4) {
-      setMoreIsHidden(false);
-    } else {
-      setMoreIsHidden(true);
-    }
+    console.log('==================================');
+    console.log('displayedQuestions', displayedQuestions);
+    console.log('moreIsHidden', moreIsHidden);
+    console.log('hideButton', hideButton);
+    console.log('questions.length', questions.length);
+    console.log('==================================');
+  }, [displayedQuestions, moreIsHidden, hideButton, questions]);
+
+  useEffect(() => {
+    displayedQuestions > 4 ? setMoreIsHidden(false) : setMoreIsHidden(true);
   }, [displayedQuestions]);
 
   useEffect(() => {
@@ -39,7 +44,7 @@ export default function QuestionsList({ productId }) {
 
   useEffect(() => {
     axios
-      .get(`/qa/questions?product_id=${productId}`)
+      .get(`/qa/questions?product_id=${productId}&count=20`)
       .then((result) => {
         setQuestions(result.data.results);
       })
@@ -48,6 +53,7 @@ export default function QuestionsList({ productId }) {
 
   const createQuestion = (body) => {
     body.product_id = productId;
+    console.log(body);
     return axios.post('/qa/questions', body);
   };
 
@@ -66,9 +72,9 @@ export default function QuestionsList({ productId }) {
       {questions.slice(0, displayedQuestions).map((question) => {
         return <Question key={question.question_id} question={question} />;
       })}
-      <button hidden={moreIsHidden} onClick={resetDisplayedQuestions}>
-        Hide More Questions
-      </button>
+      {!moreIsHidden && (
+        <button onClick={resetDisplayedQuestions}>Hide More Questions</button>
+      )}
     </div>
   );
 }
