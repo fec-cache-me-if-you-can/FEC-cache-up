@@ -5,7 +5,7 @@ export default function SearchQuestions() {
     <div className="input-group">
       <input
         type="text"
-        className="form-control btn btn-primary square btn-lg m-3"
+        className="form-control search-primary square m-3"
         placeholder="Search Questions"
       />
     </div>
