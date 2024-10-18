@@ -31,7 +31,6 @@ export default function RatingsAndReviews({
       <ProductBreakdown />
       <RatingsBreakdown rating={rating} numberOfRatings={numberOfRatings} />
       <ReviewList numberOfRatings={numberOfRatings} reviews={reviews} />
-      <ReviewTile />
       <SortOptions />
       <WriteNewReview />
     </div>
