@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import placeholder from '../../../assets/public/placeholder.jpeg';
+import placeholder from '../../../../assets/public/placeholder.jpeg';
 
 const ProductImage = ({ src, alt }) => {
   const validSrc = src || placeholder;
@@ -16,7 +16,7 @@ const ProductImage = ({ src, alt }) => {
 
 ProductImage.propTypes = {
   src: PropTypes.string,
-  alt: PropTypes.string.isRequired,
+  alt: PropTypes.string,
 };
 
 export default ProductImage;

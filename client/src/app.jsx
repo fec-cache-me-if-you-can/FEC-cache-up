@@ -4,7 +4,6 @@ import ProductDetails from './layouts/productDetails/index.jsx';
 import RatingsAndReviews from './layouts/ratingsAndReviews/index.jsx';
 import QuestionsAndAnswers from './layouts/questionsAndAnswers/index.jsx';
 import RelatedItemsAndOutfitCreation from './layouts/relatedItemsAndOutfitCreation/index.jsx';
-import TestComponent from './components/test.jsx';
 import PrimaryButton from './components/PrimaryButton.jsx';
 
 //! styling helper
@@ -14,7 +13,7 @@ const toggleTheme = () => {
   document.documentElement.setAttribute('data-bs-theme', newTheme);
 };
 export default function App() {
-  const [product, setProduct] = useState({ id: null });
+  const [product, setProduct] = useState({ id: 40344 });
   const [loadingProduct, setLoadingProduct] = useState(true);
   const [metaReviews, setMetaReviews] = useState({});
   const [rating, setRating] = useState(0);
@@ -85,11 +84,9 @@ export default function App() {
         <QuestionsAndAnswers />
       </div>
       <div className="my-4">
-        <RelatedItemsAndOutfitCreation />
-      </div>
-      <div className="my-4">
-        {/* leave this line commented out, only for Daniel to turn on and off: */}
-        {/* <TestComponent /> */}
+        {productId && (
+          <RelatedItemsAndOutfitCreation productId={String(product.id)} />
+        )}
       </div>
     </div>
   );

@@ -1,47 +1,37 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
-
 const Path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
-const isProduction = process.env.NODE_ENV == 'production';
-
-const stylesHandler = 'style-loader';
+const isProduction = process.env.NODE_ENV === 'production';
 
 const config = {
   entry: Path.join(__dirname, '/client/src/index.jsx'),
+  devtool: isProduction ? 'source-map' : 'eval-source-map',
   output: {
     path: Path.join(__dirname, '/client/dist'),
     filename: 'bundle.js',
-  },
-  devServer: {
-    open: true,
-    host: 'localhost',
-    hot: true,
+    devtoolModuleFilenameTemplate: info => Path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   plugins: [
-    //add plugins here
     new HtmlWebpackPlugin({
       template: Path.join(__dirname, 'client/src/index.html'),
     }),
-    new miniCssExtractPlugin(),
-  ],
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+    new webpack.ProgressPlugin(),
+    !isProduction && new webpack.HotModuleReplacementPlugin()
+  ].filter(Boolean),
   module: {
     rules: [
       {
         test: /\.(scss|css)$/,
         use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           {
-            // Adds CSS to the DOM by injecting a `<style>` tag
-            loader: miniCssExtractPlugin.loader,
-          },
-          {
-            // Interprets `@import` and `url()` like `import/require()` and will resolve them
-            loader: 'css-loader',
-          },
-          {
-            // Loader for webpack to process CSS with PostCSS
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
@@ -49,44 +39,58 @@ const config = {
               },
             },
           },
-          {
-            // Loads a SASS/SCSS file and compiles it to CSS
-            loader: 'sass-loader',
-          },
+          'sass-loader',
         ],
       },
       {
         test: /\.(js|jsx)$/i,
-        exclude: /nodeModules/,
-        loader: 'babel-loader',
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       {
         test: /\.(ico|svg|png|jpg|jpeg|gif)$/i,
-        type: 'asset',
-        use: ['file-loader'],
+        type: 'asset/resource',
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/', // This will place fonts in 'dist/fonts/'
-              publicPath: 'fonts/', // Ensures the correct path is used in the final output
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext][query]',
+        },
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
+  devServer: {
+    static: {
+      directory: Path.join(__dirname, 'client/dist'),
+    },
+    compress: true,
+    port: 3000,
+    hot: true,
+    open: true,
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true,
+      },
+    },
+  },
+  ignoreWarnings: [
+    {
+      message: /deprecation warning/i,
+    },
+  ],
 };
 
 module.exports = () => {
-  if (isProduction) {
-    config.mode = 'production';
-  } else {
-    config.mode = 'development';
-  }
+  config.mode = isProduction ? 'production' : 'development';
   return config;
 };
