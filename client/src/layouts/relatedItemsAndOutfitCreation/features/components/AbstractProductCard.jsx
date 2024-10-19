@@ -81,6 +81,7 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
 AbstractProductCard.propTypes = {
   productId: PropTypes.string,
   renderIcon: PropTypes.func,
+  setProductId: PropTypes.func,
 };
 
 export default AbstractProductCard;
