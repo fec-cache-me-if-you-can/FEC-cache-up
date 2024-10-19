@@ -24,12 +24,18 @@ export default function RatingsAndReviews({
   }, [product.id]);
 
   return (
-    <div>
-      <div id="ratings">Ratings And Reviews</div>
+    <div className="ratings-reviews-container">
+      <div id="ratings-header">Ratings And Reviews</div>
       <KeywordSearch />
       <ProductBreakdown />
-      <RatingsBreakdown rating={rating} numberOfRatings={numberOfRatings} />
-      <ReviewList numberOfRatings={numberOfRatings} reviews={reviews} />
+      <div className="ratings-reviews-content">
+        <RatingsBreakdown
+          rating={rating}
+          numberOfRatings={numberOfRatings}
+          metaReviews={metaReviews}
+        />
+        <ReviewList numberOfRatings={numberOfRatings} reviews={reviews} />
+      </div>
       <WriteNewReview />
     </div>
   );
