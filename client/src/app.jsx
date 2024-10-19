@@ -7,6 +7,7 @@ import RelatedItemsAndOutfitCreation from './layouts/relatedItemsAndOutfitCreati
 import PrimaryButton from './components/PrimaryButton.jsx';
 
 const DEFAULT_PRODUCT_ID = 40344;
+
 const toggleTheme = () => {
   const currentTheme = document.documentElement.getAttribute('data-bs-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
