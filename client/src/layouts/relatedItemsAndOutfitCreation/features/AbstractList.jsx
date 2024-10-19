@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/scss/navigation';
+import AddToOutfitCard from './components/AddToOutfitCard.jsx';
 
 const AbstractList = ({
   items = [],
@@ -12,30 +13,48 @@ const AbstractList = ({
   heading = '',
   CardComponent,
   action,
+  isOutfit = false,
+  selectedProduct,
+  handleAddToOutfit,
+  setProductId,
 }) => {
   const renderContent = () => {
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p className="secondary-color">{error}</p>;
-    if (!items.length) return <p>No items found</p>;
 
     return (
-      <Swiper
-        spaceBetween={10}
-        slidesPerView={3}
-        loop
-        centeredSlides
-        navigation
-        modules={[Navigation]}
-        className="mySwiper"
+      <div
+        className="d-flex flex-nowrap justify-content-between align-items-stretch"
+        style={{ minHeight: '20rem', transition: 'height 0.5s' }}
       >
-        {items.map((itemId, index) => (
-          <div key={`${itemId}-${index}`} className="container bg-secondary">
-            <SwiperSlide key={`${itemId}-${index}`}>
-              <CardComponent productId={itemId} action={action} />
-            </SwiperSlide>
-          </div>
-        ))}
-      </Swiper>
+        {isOutfit && (
+          <AddToOutfitCard
+            productId={selectedProduct}
+            action={handleAddToOutfit}
+          />
+        )}
+        <Swiper
+          spaceBetween={20}
+          slidesPerView={3}
+          loop
+          centeredSlides
+          navigation
+          modules={[Navigation]}
+          className="mySwiper"
+        >
+          {items.map((itemId, index) => (
+            <div key={`${itemId}-${index}`} className="container bg-secondary">
+              <SwiperSlide key={`${itemId}-${index}`}>
+                <CardComponent
+                  productId={itemId}
+                  action={action}
+                  setProductId={setProductId}
+                />
+              </SwiperSlide>
+            </div>
+          ))}
+        </Swiper>
+      </div>
     );
   };
 
@@ -54,6 +73,10 @@ AbstractList.propTypes = {
   heading: PropTypes.string,
   CardComponent: PropTypes.elementType,
   action: PropTypes.func,
+  isOutfit: PropTypes.bool,
+  selectedProduct: PropTypes.string,
+  handleAddToOutfit: PropTypes.func,
+  setProductId: PropTypes.func,
 };
 
 export default AbstractList;
