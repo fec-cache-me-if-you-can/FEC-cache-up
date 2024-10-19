@@ -7,7 +7,7 @@ import ProductImage from './ProductImage.jsx';
 import Placeholder from './Placeholder.jsx';
 import ProductDetails from './ProductDetails.jsx';
 
-const AbstractProductCard = ({ productId, renderIcon }) => {
+const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productDetails, setProductDetails] = useState(null);
@@ -54,7 +54,11 @@ const AbstractProductCard = ({ productId, renderIcon }) => {
       {isLoading ? (
         <Placeholder />
       ) : (
-        <ProductDetails details={productDetails} renderIcon={renderIcon} />
+        <ProductDetails
+          details={productDetails}
+          renderIcon={renderIcon}
+          setProductId={setProductId}
+        />
       )}
     </div>
   );
