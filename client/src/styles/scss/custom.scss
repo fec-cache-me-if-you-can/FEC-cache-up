@@ -516,6 +516,11 @@ small {
   margin-top: 10px !important;
 }
 
+.review-list {
+  flex: 2;
+  max-width: 66%;
+}
+
 .review-list-container {
   max-width: 800px;
   margin: 0 auto;
@@ -674,6 +679,24 @@ small {
 
 .bar-container:hover {
   background-color: rgb(196 228 239);
+}
+
+.ratings-breakdown-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 40%; /* Ensure it only takes 1/3 of the width */
+}
+
+.product-breakdown-container {
+  width: 80%; /* Ensures it takes the full width of its parent */
+  display: flex;
+  justify-content: center; /* Centers the content horizontally */
+}
+
+.product-breakdown {
+  width: 100%; /* Limits the width of the actual content */
+  margin: 0 auto; /* Centers the inner content */
 }
 
 // the end of Eve's CSS

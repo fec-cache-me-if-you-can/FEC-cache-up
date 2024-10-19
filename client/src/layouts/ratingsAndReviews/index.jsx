@@ -43,21 +43,30 @@ export default function RatingsAndReviews({
     <div className="ratings-reviews-container">
       <div id="ratings-header">Ratings And Reviews</div>
       <KeywordSearch />
-      <ProductBreakdown />
+
       <div className="ratings-reviews-content">
-        <RatingsBreakdown
-          rating={rating}
-          numberOfRatings={numberOfRatings}
-          metaReviews={metaReviews}
-          selectedFilters={selectedFilters}
-          onFilterClick={handleFilterClick}
-          onClearFilters={clearFilters}
-        />
+        {/* Left Column: Ratings + Product Breakdown */}
+        <div className="ratings-breakdown-column">
+          <RatingsBreakdown
+            rating={rating}
+            numberOfRatings={numberOfRatings}
+            metaReviews={metaReviews}
+            selectedFilters={selectedFilters}
+            onFilterClick={handleFilterClick}
+            onClearFilters={clearFilters}
+          />
+          <div className="product-breakdown-container">
+            <ProductBreakdown metaReviews={metaReviews} />
+          </div>
+        </div>
+
+        {/* Right Column: Review List */}
         <ReviewList
           numberOfRatings={numberOfRatings}
           reviews={filteredReviews}
         />
       </div>
+
       <WriteNewReview />
     </div>
   );
