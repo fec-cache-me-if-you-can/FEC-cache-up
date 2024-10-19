@@ -6,7 +6,7 @@ import { useRelatedProducts } from './hooks/useRelatedProducts.jsx';
 import ProductComparisonModal from './components/ProductComparisonModal.jsx';
 import { useComparisonModal } from './hooks/useComparisonModal.jsx';
 
-const RelatedProductList = ({ productId }) => {
+const RelatedProductList = ({ productId, setProductId }) => {
   const { relatedProducts, isLoading, error } = useRelatedProducts(productId);
   const {
     showModal,
@@ -31,6 +31,7 @@ const RelatedProductList = ({ productId }) => {
         heading="Related Products"
         CardComponent={RelatedProductCard}
         action={handleCardClick}
+        setProductId={setProductId}
       />
     </>
   );
@@ -38,6 +39,7 @@ const RelatedProductList = ({ productId }) => {
 
 RelatedProductList.propTypes = {
   productId: PropTypes.string,
+  setProductId: PropTypes.func,
 };
 
 export default RelatedProductList;
