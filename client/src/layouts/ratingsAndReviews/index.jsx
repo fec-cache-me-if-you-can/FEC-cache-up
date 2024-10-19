@@ -15,6 +15,7 @@ export default function RatingsAndReviews({
   numberOfRatings,
 }) {
   const [reviews, setReviews] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState([]);
 
   useEffect(() => {
     axios.get(`reviews/?product_id=${product.id}`).then((response) => {
@@ -22,6 +23,21 @@ export default function RatingsAndReviews({
       setReviews(response.data.results);
     });
   }, [product.id]);
+
+  const handleFilterClick = (starRating) => {
+    setSelectedFilters((prevFilters) =>
+      prevFilters.includes(starRating)
+        ? prevFilters.filter((filter) => filter !== starRating)
+        : [...prevFilters, starRating],
+    );
+  };
+
+  const filteredReviews = reviews.filter(
+    (review) =>
+      selectedFilters.length === 0 || selectedFilters.includes(review.rating),
+  );
+
+  const clearFilters = () => setSelectedFilters([]);
 
   return (
     <div className="ratings-reviews-container">
@@ -33,8 +49,14 @@ export default function RatingsAndReviews({
           rating={rating}
           numberOfRatings={numberOfRatings}
           metaReviews={metaReviews}
+          selectedFilters={selectedFilters}
+          onFilterClick={handleFilterClick}
+          onClearFilters={clearFilters}
         />
-        <ReviewList numberOfRatings={numberOfRatings} reviews={reviews} />
+        <ReviewList
+          numberOfRatings={numberOfRatings}
+          reviews={filteredReviews}
+        />
       </div>
       <WriteNewReview />
     </div>

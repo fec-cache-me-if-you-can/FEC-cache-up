@@ -6,6 +6,7 @@ export default function Bar({
   ratingCount,
   starRating,
   onClick,
+  style,
 }) {
   const percentage = totalReviews > 0 ? (ratingCount / totalReviews) * 100 : 0;
 
@@ -16,7 +17,8 @@ export default function Bar({
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
-        marginBottom: '8px', // Adds some space between each bar entry
+        marginBottom: '8px',
+        ...style,
       }}
     >
       {/* Clickable Star Rating Label */}
@@ -70,4 +72,5 @@ Bar.propTypes = {
   ratingCount: PropTypes.number,
   starRating: PropTypes.number,
   onClick: PropTypes.func,
+  style: PropTypes.object,
 };
