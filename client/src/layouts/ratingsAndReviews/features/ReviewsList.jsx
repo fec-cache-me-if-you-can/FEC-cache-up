@@ -131,6 +131,7 @@ export default function ReviewList({ numberOfRatings, reviews }) {
         {hasMoreReviews && (
           <Button label="More reviews" onClick={loadMoreReviews} />
         )}
+        <Button label="add a review +" onClick={addReview} />
       </div>
     </div>
   );

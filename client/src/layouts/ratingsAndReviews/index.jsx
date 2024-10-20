@@ -67,7 +67,7 @@ export default function RatingsAndReviews({
         />
       </div>
 
-      <WriteNewReview />
+      <WriteNewReview productName={product.name} product_id={product.id} />
     </div>
   );
 }
