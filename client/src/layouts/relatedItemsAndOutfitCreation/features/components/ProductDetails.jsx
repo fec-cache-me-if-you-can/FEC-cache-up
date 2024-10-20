@@ -8,7 +8,7 @@ const ProductDetails = ({ details, renderIcon, setProductId }) => {
   };
 
   return (
-    <>
+    <div className="mt-2">
       <div className="favorite-icon">{renderIcon(details.id)}</div>
       <p className="card-text fw-light h5 text-size-100 mt-0 mb-2">
         {details.category.toUpperCase()}
@@ -28,7 +28,7 @@ const ProductDetails = ({ details, renderIcon, setProductId }) => {
 
       <p className="text-size-90 my-2">${details.price}</p>
       <StarRating rating={details.rating} />
-    </>
+    </div>
   );
 };
 
