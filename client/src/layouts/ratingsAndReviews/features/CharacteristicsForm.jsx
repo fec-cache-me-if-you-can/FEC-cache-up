@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function CharacteristicsForm({ name, value, onChange, labels }) {
+export default function CharacteristicsForm({
+  name,
+  charId,
+  value,
+  onChange,
+  labels,
+}) {
+  const handleRadioChange = (event) => {
+    const selectedValue = Number(event.target.value); // Ensure the value is numeric.
+    onChange(charId, selectedValue); // Update state with ID and selected value.
+  };
   return (
     <div>
       <p>
@@ -12,10 +22,10 @@ export default function CharacteristicsForm({ name, value, onChange, labels }) {
           <label key={num}>
             <input
               type="radio"
-              name={name}
+              name={`characteristic-${charId}`}
               value={num}
               checked={value === num}
-              onChange={() => onChange(name, num)}
+              onChange={handleRadioChange}
             />
             {num === 1 && ` ${labels[0]}`}
             {num === 2 && ` ${labels[1]}`}
@@ -31,6 +41,7 @@ export default function CharacteristicsForm({ name, value, onChange, labels }) {
 
 CharacteristicsForm.propTypes = {
   name: PropTypes.string.isRequired,
+  charId: PropTypes.string.isRequired,
   value: PropTypes.number,
   onChange: PropTypes.func.isRequired,
   labels: PropTypes.arrayOf(PropTypes.string).isRequired,

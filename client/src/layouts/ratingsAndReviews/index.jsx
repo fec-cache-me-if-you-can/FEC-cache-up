@@ -19,7 +19,6 @@ export default function RatingsAndReviews({
 
   useEffect(() => {
     axios.get(`reviews/?product_id=${product.id}`).then((response) => {
-      console.log('response with reviews: ', response);
       setReviews(response.data.results);
     });
   }, [product.id]);
@@ -41,7 +40,9 @@ export default function RatingsAndReviews({
 
   return (
     <div className="ratings-reviews-container">
-      <div id="ratings-header">Ratings And Reviews</div>
+      <div id="ratings-header">
+        <h6>Ratings And Reviews</h6>{' '}
+      </div>
       <KeywordSearch />
 
       <div className="ratings-reviews-content">

@@ -13,7 +13,6 @@ export default function RatingsBreakdown({
   onClearFilters,
 }) {
   rating = Math.round(rating * 10) / 10;
-  console.log('meta reviews:', metaReviews);
   const recommended =
     numberOfRatings > 0
       ? (Math.round(
@@ -27,7 +26,6 @@ export default function RatingsBreakdown({
 
   return (
     <div>
-      RatingsBreakdown
       <div className="rating-breakdown">
         <h1>{rating}</h1>
         <StarRating rating={rating} />

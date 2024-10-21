@@ -68,8 +68,22 @@ export default function WriteNewReview({ productName, product_id }) {
     setRecommend(event.target.value === 'yes');
   };
 
-  const handleCharacteristicChange = (charName, value) => {
-    setCharacteristics((prev) => ({ ...prev, [charName]: value }));
+  const characteristicIds = {
+    Size: '135223',
+    Width: '135224',
+    Comfort: '135221',
+    Quality: '135222',
+    Length: '135220',
+    Fit: '135219',
+  };
+
+  const handleCharacteristicChange = (charId, value) => {
+    if (charId) {
+      setCharacteristics((prev) => ({
+        ...prev,
+        [charId]: value,
+      }));
+    }
   };
 
   const handleSummary = (event) => {
@@ -119,7 +133,6 @@ export default function WriteNewReview({ productName, product_id }) {
   const submitReview = () => {
     if (validateForm()) {
       console.log('Submitting review...');
-      // TODO API call to submit the review
       axios
         .post('/reviews', {
           product_id: product_id,
@@ -198,7 +211,8 @@ export default function WriteNewReview({ productName, product_id }) {
           <CharacteristicsForm
             key={charName}
             name={charName}
-            value={characteristics[charName]}
+            charId={characteristicIds[charName]}
+            value={characteristics[characteristicIds[charName]] || null}
             onChange={handleCharacteristicChange}
             labels={labels}
           />
