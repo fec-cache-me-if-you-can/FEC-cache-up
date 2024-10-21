@@ -15,10 +15,11 @@ export default function Question({ question }) {
     question_body,
     question_date,
     question_helpfulness,
-    reported,
   } = question;
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  const [howHelpful, setHowHelpful] = useState(question_helpfulness);
 
   const createAnswer = (body) => {
     console.log(body);
@@ -26,6 +27,15 @@ export default function Question({ question }) {
     return axios
       .post(`/qa/answers`, body)
       .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
+  const isHelpful = () => {
+    axios
+      .put('/qa/questions/helpful', { question_id: question_id })
+      .then(() => {
+        setHowHelpful((current) => current + 1);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -39,7 +49,7 @@ export default function Question({ question }) {
           </div>
         </div>
         <div className="header-interaction col-4 d--flex ">
-          <Helpful helpfulness={question_helpfulness} />
+          <Helpful onClick={isHelpful} helpfulness={howHelpful} />
           <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
           <AddAnswer onClick={createAnswer} />
         </div>

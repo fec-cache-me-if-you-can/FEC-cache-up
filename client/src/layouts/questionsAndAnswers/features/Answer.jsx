@@ -1,12 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import Helpful from '../../../components/helpful.jsx';
 import Report from '../../../components/report.jsx';
 import AnswerPhoto from './AnswerPhoto.jsx';
+import axios from 'axios';
 
 export default function Answer({ answer }) {
   const { id, body, date, answerer_name, helpfulness, photos } = answer;
+  const [howHelpful, setHowHelpful] = useState(helpfulness);
+
+  const isHelpful = () => {
+    axios
+      .put('/qa/answers/helpful', { answer_id: id })
+      .then(() => {
+        setHowHelpful((current) => current + 1);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   return (
@@ -25,7 +37,7 @@ export default function Answer({ answer }) {
         <div className="fw-lighter text-size-90 d-inline-flex p-2">
           {new Date(date).toLocaleDateString('en-US', dateOptions)}
         </div>
-        <Helpful helpfulness={helpfulness} />
+        <Helpful onClick={isHelpful} helpfulness={howHelpful} />
         <Report />
       </div>
     </div>

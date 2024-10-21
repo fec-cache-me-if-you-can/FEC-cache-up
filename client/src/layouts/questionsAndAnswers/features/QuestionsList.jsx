@@ -96,9 +96,12 @@ export default function QuestionsList({ productId }) {
         />
         <AddQuestion onClick={createQuestion} />
       </div>
-      {questions.slice(0, displayedQuestions).map((question) => {
-        return <Question key={question.question_id} question={question} />;
-      })}
+      {questions
+        .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+        .slice(0, displayedQuestions)
+        .map((question) => {
+          return <Question key={question.question_id} question={question} />;
+        })}
       {!moreIsHidden && (
         <div className="d-inline-flex">
           {!hidePreviousPage && (
