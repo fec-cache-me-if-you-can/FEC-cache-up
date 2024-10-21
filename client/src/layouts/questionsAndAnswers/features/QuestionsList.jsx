@@ -85,13 +85,14 @@ export default function QuestionsList({ productId }) {
 
   return (
     <div className="question-list container-xl ">
-      <div className="d-flex align-items-lg-start">
+      <div className="d-flex">
         <SearchQuestions />
         <PrimaryButton
           isDisabled={hideButton}
           label={'More Questions'}
           plus={true}
           onClick={handleLoadMoreQuestions}
+          extraStyles={'m-3'}
         />
         <AddQuestion onClick={createQuestion} />
       </div>
