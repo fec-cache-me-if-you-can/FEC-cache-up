@@ -24,7 +24,7 @@ export default function AnswersList({ answers, question_id }) {
   }, [displayedAnswers, maxLoadedAnswers]);
 
   const handleLoadMoreAnswers = () => {
-    setDisplayedAnswers((displayedAnswers) => displayedAnswers + 2);
+    setDisplayedAnswers(Object.keys(answers).length);
   };
 
   const hideMoreAnswers = () => {
