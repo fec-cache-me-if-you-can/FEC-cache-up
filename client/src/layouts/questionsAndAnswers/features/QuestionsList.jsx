@@ -10,6 +10,7 @@ import AddQuestion from './AddQuestion.jsx';
 
 export default function QuestionsList({ productId }) {
   const [questions, setQuestions] = useState([]);
+  const [query, setQuery] = useState('');
   const [displayedQuestions, setDisplayedQuestions] = useState(4);
   const [moreIsHidden, setMoreIsHidden] = useState(false);
   const [hideButton, setHideButton] = useState(false);
@@ -55,6 +56,8 @@ export default function QuestionsList({ productId }) {
       .catch((err) => console.log(err));
   }, [currentPage]);
 
+  const updateQuery = (value) => setQuery(value);
+
   const handleLoadMoreQuestions = () => {
     setDisplayedQuestions(10);
   };
@@ -86,7 +89,7 @@ export default function QuestionsList({ productId }) {
   return (
     <div className="question-list container-xl ">
       <div className="d-flex">
-        <SearchQuestions />
+        <SearchQuestions update={updateQuery} />
         <PrimaryButton
           isDisabled={hideButton}
           label={'More Questions'}
@@ -96,12 +99,35 @@ export default function QuestionsList({ productId }) {
         />
         <AddQuestion onClick={createQuestion} />
       </div>
-      {questions
-        .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
-        .slice(0, displayedQuestions)
-        .map((question) => {
-          return <Question key={question.question_id} question={question} />;
-        })}
+      {!query.length
+        ? questions
+            .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+            .slice(0, displayedQuestions)
+            .map((question) => {
+              return (
+                <Question key={question.question_id} question={question} />
+              );
+            })
+        : questions
+            .reduce((acc, question) => {
+              console.log(acc);
+              console.log(question.question_body.toLowerCase());
+              if (
+                question.question_body
+                  .toLowerCase()
+                  .includes(query.toLowerCase())
+              ) {
+                acc.push(question);
+              }
+              return acc;
+            }, [])
+            .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+            .slice(0, displayedQuestions)
+            .map((question) => {
+              return (
+                <Question key={question.question_id} question={question} />
+              );
+            })}
       {!moreIsHidden && (
         <div className="d-inline-flex">
           {!hidePreviousPage && (

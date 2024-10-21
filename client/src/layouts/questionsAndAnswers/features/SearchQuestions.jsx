@@ -2,17 +2,12 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../../../components/icons.jsx';
 
-export default function SearchBar() {
+export default function SearchQuestions({ update }) {
   const [query, setQuery] = useState('');
-  const searchInputRef = useRef(null);
 
-  const updateQuery = ({ target: { value } }) => setQuery(value);
-
-  const clearSearchAndFocusInput = () => {
-    if (query) {
-      setQuery('');
-    }
-    searchInputRef.current?.focus();
+  const updateQuery = (e) => {
+    setQuery(e.target.value);
+    update(e.target.value);
   };
 
   return (
@@ -25,21 +20,15 @@ export default function SearchBar() {
         aria-label="Search"
         id="search-input"
         onChange={updateQuery}
-        ref={searchInputRef}
         style={{ boxShadow: 'none', outline: 'none' }}
       />
-      <button
-        className="search-icon input-group-text border-0 bg-body secondary-color cursor-pointer"
-        onClick={clearSearchAndFocusInput}
-      >
-        <Icon
-          icon={`fa-regular ${query ? 'fa-xmark' : 'fa-search'}`}
-          size="lg"
-          style={!query && { opacity: 0.7 }}
-        />
-      </button>
+      <Icon
+        icon={`fa-regular ${query ? 'fa-xmark' : 'fa-search'}`}
+        size="lg"
+        style={!query && { opacity: 0.7 }}
+      />
     </div>
   );
 }
 
-SearchBar.propTypes = {};
+SearchQuestions.propTypes = { update: PropTypes.func.isRequired };
