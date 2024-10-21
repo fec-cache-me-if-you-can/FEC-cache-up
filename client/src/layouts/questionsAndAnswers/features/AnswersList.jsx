@@ -34,6 +34,7 @@ export default function AnswersList({ answers, question_id }) {
   return (
     <div className="answers-list">
       {Object.keys(answers)
+        .sort((a, b) => answers[b].helpfulness - answers[a].helpfulness)
         .slice(0, displayedAnswers)
         .map((key) => {
           let answer = answers[key];
