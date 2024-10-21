@@ -5,7 +5,7 @@ import { useOutfitData } from './hooks/UseOutfitData.jsx';
 import OutfitCard from './components/OutfitCard.jsx';
 import AbstractList from './AbstractList.jsx';
 
-const OutfitList = ({ selectedProduct }) => {
+const OutfitList = ({ selectedProduct, setProductId }) => {
   const { outfitIds, isLoading, error, addProduct, removeProduct } =
     useOutfitData();
 
@@ -17,23 +17,24 @@ const OutfitList = ({ selectedProduct }) => {
   );
 
   return (
-    <>
-      <AbstractList
-        items={outfitIds}
-        isLoading={isLoading}
-        error={error}
-        heading="Your Outfit"
-        CardComponent={OutfitCard}
-        action={removeProduct}
-        isOutfit={true}
-        selectedProduct={selectedProduct}
-        handleAddToOutfit={handleAddToOutfit}
-      />
-    </>
+    <AbstractList
+      items={outfitIds}
+      isLoading={isLoading}
+      error={error}
+      heading="Your Outfit"
+      CardComponent={OutfitCard}
+      action={removeProduct}
+      isOutfit={true}
+      selectedProduct={selectedProduct}
+      handleAddToOutfit={handleAddToOutfit}
+      setProductId={setProductId}
+    />
   );
 };
+
 OutfitList.propTypes = {
   selectedProduct: PropTypes.object.isRequired,
+  setProductId: PropTypes.func.isRequired,
 };
 
 export default OutfitList;

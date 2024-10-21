@@ -17,7 +17,7 @@ const RelatedProductList = ({ productId, setProductId }) => {
   } = useComparisonModal(productId);
 
   return (
-    <>
+    <div className={''}>
       <ProductComparisonModal
         show={showModal}
         onHide={handleCloseModal}
@@ -33,7 +33,7 @@ const RelatedProductList = ({ productId, setProductId }) => {
         action={handleCardClick}
         setProductId={setProductId}
       />
-    </>
+    </div>
   );
 };
 

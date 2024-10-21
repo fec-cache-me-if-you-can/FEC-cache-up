@@ -8,7 +8,7 @@ const RelatedItemsAndOutfitCreation = ({ productId, setProductId }) => {
   return (
     <div>
       <RelatedProductList productId={productId} setProductId={setProductId} />
-      <OutfitList selectedProduct={productId} />
+      <OutfitList selectedProduct={productId} setProductId={setProductId} />
     </div>
   );
 };

@@ -1,37 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../../../../components/icons.jsx';
+import PrimaryButton from '../../../../components/PrimaryButton.jsx';
 
-const AddToOutfitCard = ({ productId, action }) => {
-  const handleAddToOutfit = (e) => {
-    e.preventDefault();
-    action(productId);
+const AddToOutfitCard = ({ productId, action, items = [] }) => {
+  const handleAddToOutfit = (event) => {
+    event.preventDefault();
+    if (typeof action === 'function') {
+      action(productId);
+    } else {
+      console.error('action is not a function');
+    }
   };
 
+  const isProductInOutfit = items.includes(productId);
+
   return (
-    <div
-      className="card square border-1 fs-5 fw-normal me-4 cursor-pointer card-border d-flex justify-content-center align-items-center "
-      style={{ width: '200px' }}
-      role="button"
-      tabIndex="0"
+    <button
       onClick={handleAddToOutfit}
-      onKeyPress={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          action();
-        }
-      }}
+      className={`btn btn-primary square m-3 pe-1 ps-1 ${isProductInOutfit ? 'disabled' : ''}`}
+      style={{ minWidth: '40px', minHeight: '40px', padding: '0' }}
+      disabled={isProductInOutfit}
+      aria-label={
+        isProductInOutfit
+          ? 'Product already in outfit'
+          : 'Add product to outfit'
+      }
     >
-      <div className="hover-scale d-flex flex-column justify-content-center align-items-center">
-        <Icon icon="fa-plus fa-solid" />
-        <p className="m-0">Add to outfit</p>
-      </div>
-    </div>
+      <Icon icon={isProductInOutfit ? 'fa-check' : 'fa-plus'} />
+    </button>
   );
 };
 
 AddToOutfitCard.propTypes = {
   productId: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default AddToOutfitCard;
