@@ -65,10 +65,9 @@ export default function RatingsAndReviews({
         <ReviewList
           numberOfRatings={numberOfRatings}
           reviews={filteredReviews}
+          product={product}
         />
       </div>
-
-      <WriteNewReview productName={product.name} product_id={product.id} />
     </div>
   );
 }

@@ -3,13 +3,23 @@ import ReviewTile from './ReviewTile.jsx';
 import PropTypes from 'prop-types';
 import Button from '../../../components/PrimaryButton.jsx';
 import DropdownSelector from '../../../components/DropdownSelector.jsx';
+import WriteNewReview from './WriteNewReview.jsx';
 
-export default function ReviewList({ numberOfRatings, reviews }) {
+export default function ReviewList({ numberOfRatings, reviews, product }) {
   const [visibleReviews, setVisibleReviews] = useState([]);
   const [hasMoreReviews, setHasMoreReviews] = useState(false);
   const [sortOrder, setSortOrder] = useState('relevant');
   const [sortedReviews, setSortedReviews] = useState([]);
   const [index, setIndex] = useState(2);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  useEffect(() => {
+    if (isModalVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isModalVisible]);
 
   useEffect(() => {
     if (reviews.length) {
@@ -32,10 +42,8 @@ export default function ReviewList({ numberOfRatings, reviews }) {
     setIndex(index + 2);
   };
 
-  const addReview = () => {
-    return null;
-    //TODO add review
-  };
+  const openModal = () => setIsModalVisible(true);
+  const closeModal = () => setIsModalVisible(false);
 
   const onSortChange = (selectedOption) => {
     setSortOrder(selectedOption);
@@ -92,7 +100,7 @@ export default function ReviewList({ numberOfRatings, reviews }) {
       {visibleReviews.length === 0 && (
         <div>
           <p>Be the first to review! </p>
-          <Button label="Submit a review!" onClick={addReview} />
+          <Button label="Submit a review!" onClick={openModal} />
         </div>
       )}
 
@@ -131,7 +139,24 @@ export default function ReviewList({ numberOfRatings, reviews }) {
         {hasMoreReviews && (
           <Button label="More reviews" onClick={loadMoreReviews} />
         )}
-        <Button label="add a review +" onClick={addReview} />
+        <Button label="add a review +" onClick={openModal} />
+
+        {/* Modal Section */}
+        <div
+          className={`review-modal-overlay ${isModalVisible ? 'visible' : ''}`}
+          onClick={closeModal}
+        >
+          <div
+            className="review-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <WriteNewReview
+              productName={product.name}
+              product_id={product.id}
+              onClose={closeModal}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -140,4 +165,5 @@ export default function ReviewList({ numberOfRatings, reviews }) {
 ReviewList.propTypes = {
   numberOfRatings: PropTypes.number,
   reviews: PropTypes.array,
+  product: PropTypes.object,
 };

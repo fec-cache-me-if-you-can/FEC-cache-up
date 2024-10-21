@@ -5,7 +5,7 @@ import PrimaryButton from '../../../components/PrimaryButton.jsx';
 import CharacteristicsForm from './CharacteristicsForm.jsx';
 import PropTypes from 'prop-types';
 
-export default function WriteNewReview({ productName, product_id }) {
+export default function WriteNewReview({ productName, product_id, onClose }) {
   const [rating, setRating] = useState(null);
   const [recommend, setRecommend] = useState(null);
   const [characteristics, setCharacteristics] = useState({});
@@ -15,6 +15,7 @@ export default function WriteNewReview({ productName, product_id }) {
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
   const [errors, setErrors] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const characteristicOptions = {
     Size: [
@@ -147,6 +148,8 @@ export default function WriteNewReview({ productName, product_id }) {
         })
         .then(() => {
           console.log('review submitted sucessfully!');
+          setIsSubmitted(true); // Show thank-you message
+          setTimeout(onClose, 2000);
         })
         .catch((error) => {
           console.log('error submitting review: ', error);
@@ -155,6 +158,10 @@ export default function WriteNewReview({ productName, product_id }) {
       console.log('Form is not validated');
     }
   };
+
+  if (isSubmitted) {
+    return <p>Thank you! Your review has been submitted.</p>;
+  }
 
   return (
     <div>
@@ -369,4 +376,5 @@ export default function WriteNewReview({ productName, product_id }) {
 WriteNewReview.propTypes = {
   productName: PropTypes.string,
   product_id: PropTypes.number,
+  onClose: PropTypes.func.isRequired,
 };
