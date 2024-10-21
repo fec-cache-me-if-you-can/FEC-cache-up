@@ -6,7 +6,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx'],
   transformIgnorePatterns: ["/node_modules/"],
   setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
-  "moduleNameMapper": {
+  moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/client/src/$1"
   }
 };
