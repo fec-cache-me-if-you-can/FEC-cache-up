@@ -1,3 +1,24 @@
+@import './variables';
+@import './mixins';
+
+@mixin color-scheme($theme) {
+  @if $theme == 'light' {
+    --bs-body-bg: #{$light-background};
+    --bs-secondary-bg: #{$light-secondary-bg};
+    --bs-body-color: #{$light-primary-text};
+    --bs-secondary-color: #{$light-secondary-text};
+    --bs-accent-color: #{$light-accent};
+    --bs-attention-color: #{$light-attention};
+  } @else {
+    --bs-body-bg: #{$dark-background};
+    --bs-secondary-bg: #{$dark-secondary-bg};
+    --bs-body-color: #{$dark-primary-text};
+    --bs-secondary-color: #{$dark-secondary-text};
+    --bs-accent-color: #{$dark-accent};
+    --bs-attention-color: #{$dark-attention};
+  }
+}
+
 // Base Styles
 html {
   font-size: 100%;
@@ -262,7 +283,7 @@ small {
 
 .hover-scale:hover {
   transition: all ease 0.1s;
-  transform: scale(1.01);
+  transform: scale(1.05);
   cursor: pointer;
 }
 
@@ -561,4 +582,22 @@ small {
   background: none;
   border: none;
   font-size: 1.5rem;
+}
+
+.add-to-outfit-card {
+  border-color: var(--bs-secondary-bg);
+}
+
+.secondary-bg {
+  background-color: var(--bs-secondary-bg);
+}
+
+.section {
+  margin-top: 3rem;
+  padding: 6rem 1.2rem;
+}
+
+.outfit-container {
+  margin-top: 3rem;
+  padding: 6rem;
 }
