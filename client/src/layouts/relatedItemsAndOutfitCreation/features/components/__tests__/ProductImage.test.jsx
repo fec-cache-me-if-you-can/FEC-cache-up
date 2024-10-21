@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ProductImage from '../ProductImage';
 
-// Mock the placeholder import
 jest.mock('@/assets/public/placeholder.jpeg', () => 'mocked-placeholder.jpg');
 
 describe('ProductImage Component', () => {
@@ -11,7 +10,7 @@ describe('ProductImage Component', () => {
     const src = 'test-image.jpg';
     const alt = 'Test Image';
     render(<ProductImage src={src} alt={alt} />);
-    
+
     const img = screen.getByAltText(alt);
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', src);
@@ -21,7 +20,7 @@ describe('ProductImage Component', () => {
   test('renders placeholder image when src is not provided', () => {
     const alt = 'Placeholder Image';
     render(<ProductImage alt={alt} />);
-    
+
     const img = screen.getByAltText(alt);
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', 'mocked-placeholder.jpg');
@@ -31,7 +30,7 @@ describe('ProductImage Component', () => {
     const src = '';
     const alt = 'Empty Source Image';
     render(<ProductImage src={src} alt={alt} />);
-    
+
     const img = screen.getByAltText(alt);
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', 'mocked-placeholder.jpg');
@@ -39,14 +38,14 @@ describe('ProductImage Component', () => {
 
   test('applies correct CSS classes', () => {
     render(<ProductImage src="test.jpg" alt="Test" />);
-    
+
     const img = screen.getByAltText('Test');
     expect(img).toHaveClass('card-img-top', 'object-fit-cover', 'square');
   });
 
   test('handles missing alt prop gracefully', () => {
     render(<ProductImage src="test.jpg" />);
-    
+
     const img = screen.getByRole('presentation');
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('alt', '');
@@ -56,7 +55,7 @@ describe('ProductImage Component', () => {
 
   test('uses placeholder when src is not provided', () => {
     render(<ProductImage alt="Default Placeholder" />);
-    
+
     const img = screen.getByAltText('Default Placeholder');
     expect(img).toHaveAttribute('src', 'mocked-placeholder.jpg');
   });

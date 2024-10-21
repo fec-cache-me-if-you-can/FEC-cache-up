@@ -5,6 +5,9 @@
   "author": "cache-me-if-you-can",
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": ">=20.11.1"
+  },
   "scripts": {
     "client-dev": "webpack --watch",
     "server-dev": "npx nodemon server/index.js",
