@@ -10,7 +10,7 @@ export default function Answer({ answer }) {
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   return (
-    <div className="answer-card border-2 border border-dark-subtle shadow-sm p-3">
+    <div className="answer-card p-3">
       <div className="fs-5 d-inline-flex">A: </div>
       <div className="fs-7 d-inline-flex ps-1">{body}</div>
       <div className="photoList">

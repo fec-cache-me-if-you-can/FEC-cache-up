@@ -30,10 +30,7 @@ export default function Question({ question }) {
   };
 
   return (
-    <div
-      className="question-card border border-dark-subtle shadow-sm p-3"
-      hidden={reported}
-    >
+    <div className="question-card p-3">
       <div className="-question-header row text-start d-flex">
         <div className="question-main col-8 d-inline-flex">
           <div className="question-text fs-4 d-inline-flex pe-2">Q:</div>
