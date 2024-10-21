@@ -5,4 +5,5 @@ module.exports = {
   testEnvironment: 'jest-environment-jsdom',
   moduleFileExtensions: ['js', 'jsx'],
   transformIgnorePatterns: ["/node_modules/"],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.js'], // Add this line
 };

@@ -11,7 +11,7 @@ const ProductDetails = ({ details, renderIcon, setProductId }) => {
     <div className="mt-2">
       <div className="favorite-icon">{renderIcon(details.id)}</div>
       <p className="card-text fw-light h5 text-size-100 mt-0 mb-2">
-        {details.category.toUpperCase()}
+        {(details.category || '').toUpperCase()}
       </p>
       <button
         className="card-title my-1 text-size-300 fw-semibold two-line-title hover-scale w-75"
@@ -23,10 +23,10 @@ const ProductDetails = ({ details, renderIcon, setProductId }) => {
           textAlign: 'left',
         }}
       >
-        {details.name}
+        {details.name || 'N/A'}
       </button>
 
-      <p className="text-size-90 my-2">${details.price}</p>
+      <p className="text-size-90 my-2">${details.price || 'N/A'}</p>
       <StarRating rating={details.rating} />
     </div>
   );
