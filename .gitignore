@@ -150,3 +150,6 @@ client/dist/*.woff
 client/dist/*.woff2
 client/dist/*.ttf
 
+# jest generated files
+coverage/
+
