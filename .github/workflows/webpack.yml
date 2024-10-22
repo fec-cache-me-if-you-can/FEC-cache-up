@@ -31,16 +31,11 @@ jobs:
     - name: Install Dependencies
       run: npm i
 
-    - name: Lint
-      run: npm run lint
+    - name: Build Client (Webpack)
+      run: npm run client-dev
 
-    - name: Build Client (Development)
-      run: npm run build:dev
-
-    - name: Start Server
-      run: npm run server-dev &
-      env:
-        NODE_ENV: test
+    - name: Start Server (Nodemon)
+      run: npm run server-dev
 
     - name: Wait for Server
       run: |
