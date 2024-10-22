@@ -195,7 +195,7 @@ export default function ImageGallery({ photos }) {
             />
             {/* Expand Icon */}
             <div className="gallery-expand-icon" onClick={toggleExpandedView}>
-              <Icon icon="fa regular fa-compress" />
+              <Icon icon="fa-regular fa-compress" />
             </div>
           </div>
         </div>

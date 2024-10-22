@@ -78,7 +78,12 @@ export default function App() {
         )}
       </div>
       <div className="my-4">
-        <RatingsAndReviews metaReviews={metaReviews} />
+        <RatingsAndReviews
+          metaReviews={metaReviews}
+          product={product}
+          rating={rating}
+          numberOfRatings={numberOfRatings}
+        />
       </div>
       <div className="my-4">
         <QuestionsAndAnswers />
