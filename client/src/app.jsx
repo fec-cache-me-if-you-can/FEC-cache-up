@@ -5,6 +5,7 @@ import RatingsAndReviews from './layouts/ratingsAndReviews/index.jsx';
 import QuestionsAndAnswers from './layouts/questionsAndAnswers/index.jsx';
 import RelatedItemsAndOutfitCreation from './layouts/relatedItemsAndOutfitCreation/index.jsx';
 import PrimaryButton from './components/PrimaryButton.jsx';
+import NavBar from './layouts/navBar/index.jsx';
 
 const DEFAULT_PRODUCT_ID = 40344;
 
@@ -63,6 +64,7 @@ export default function App() {
 
   return (
     <div id="app" className="container my-5">
+      <NavBar />
       <div className="text-center mb-4">
         <PrimaryButton onClick={toggleTheme} label="Toggle Theme" />
       </div>
