@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import QuestionModal from './QuestionModal.jsx';
 
-export default function AddQuestion({ onClick, refreshQuestions }) {
+export default function AddQuestion({ onClick, refreshQuestions, setQuestions }) {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
@@ -22,6 +22,7 @@ export default function AddQuestion({ onClick, refreshQuestions }) {
       {showModal && (
         <QuestionModal
           refreshQuestions={refreshQuestions}
+          setQuestions={setQuestions}
           onSubmit={onClick}
           toggleModal={toggleModal}
         />

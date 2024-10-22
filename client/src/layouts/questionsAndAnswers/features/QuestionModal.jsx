@@ -6,7 +6,8 @@ export default function QuestionModal({
   onSubmit,
   toggleModal,
   refreshQuestions,
-}) {
+  setQuestions,
+  }) {
   const [name, setName] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
@@ -47,7 +48,11 @@ export default function QuestionModal({
 
       onSubmit(submitObject)
         .then(() => toggleModal())
-        .then(() => refreshQuestions())
+        .then(() => {
+          refreshQuestions()
+            .then((result) => setQuestions(result.data.results))
+            .catch((err) => console.log(err));
+        })
         .catch((err) => console.log(err));
     } else {
       setValidName(validateName(name));

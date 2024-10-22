@@ -18,7 +18,7 @@ export default function QuestionsList({ productId }) {
   const [hideNextPage, setHideNextPage] = useState(false);
   const [hidePreviousPage, setHidePreviousPage] = useState(true);
 
-  const getQuestions = (product_id = productId, page = 1, count = 10) => {
+  const getQuestions = (product_id = productId, page = 1, count = 10000000) => {
     return axios.get(
       `/qa/questions?product_id=${product_id}&page=${page}&count=${count}`,
     );
@@ -65,7 +65,7 @@ export default function QuestionsList({ productId }) {
   const updateQuery = (value) => setQuery(value);
 
   const handleLoadMoreQuestions = () => {
-    setDisplayedQuestions(10);
+    setDisplayedQuestions(questions.length);
   };
 
   const handlePreviousPage = () => {
@@ -90,7 +90,7 @@ export default function QuestionsList({ productId }) {
     <div className="question-list container-xl">
       <div className="qa-list-header d-flex">
         <SearchQuestions update={updateQuery} />
-        <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} />
+        <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} setQuestions={setQuestions} />
       </div>
       <div className="scrollable-qa">
       {!query.length
