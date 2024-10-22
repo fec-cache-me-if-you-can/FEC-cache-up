@@ -29,22 +29,27 @@ jobs:
           ${{ runner.OS }}-node-
 
     - name: Install Dependencies
-      run: npm i
+      run: |
+        npm i
+        npm list --depth=0
 
     - name: Build Client (Webpack)
       run: npm run build:dev
 
-    - name: Start Server (Node)
+    - name: Start and Wait for Server
       run: |
         npm run server-start &
-        echo $! > server.pid
-        sleep 10
-
-    - name: Wait for Server
-      run: |
-        while ! nc -z localhost 3000; do   
+        for i in {1..10}; do
+          if nc -z localhost 3000; then
+            echo "Server is up"
+            break
+          fi
           sleep 1
         done
+        if ! nc -z localhost 3000; then
+          echo "Server failed to start" >&2
+          exit 1
+        fi
 
     - name: Run Tests
       run: npm test
@@ -52,4 +57,4 @@ jobs:
         NODE_ENV: test
 
     - name: Stop Server
-      run: pkill -f "node server/index.js" || true
+      run: pkill -f "node server/index.js" || echo "Server process not found"
