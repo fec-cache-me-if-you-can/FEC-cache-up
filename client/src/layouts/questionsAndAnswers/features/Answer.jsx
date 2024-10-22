@@ -38,7 +38,7 @@ export default function Answer({ answer }) {
     </div>
   );
 }
-
+//
 Answer.propTypes = {
   answer: PropTypes.object.isRequired,
 };
