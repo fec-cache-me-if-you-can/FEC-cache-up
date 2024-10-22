@@ -87,11 +87,12 @@ export default function QuestionsList({ productId }) {
   };
 
   return (
-    <div className="question-list container-xl ">
-      <div className="d-flex">
+    <div className="question-list container-xl">
+      <div className="qa-list-header d-flex">
         <SearchQuestions update={updateQuery} />
         <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} />
       </div>
+      <div className="scrollable-qa">
       {!query.length
         ? questions
             .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
@@ -155,6 +156,7 @@ export default function QuestionsList({ productId }) {
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 }
