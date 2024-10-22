@@ -8,6 +8,7 @@ export default function PrimaryButton({
   isDisabled = false,
   extraStyles = '',
   plus = false,
+  type = 'button',
 }) {
   const buttonStyle = `btn btn-primary square btn-lg ${isDisabled && 'disabled'} ${extraStyles}`;
   return (
@@ -24,4 +25,5 @@ PrimaryButton.propTypes = {
   isDisabled: PropTypes.bool,
   extraStyles: PropTypes.string,
   plus: PropTypes.bool,
+  type: PropTypes.string,
 };

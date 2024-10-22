@@ -1,112 +1,103 @@
 import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import PrimaryButton from '../../../components/PrimaryButton.jsx';
+
+const srOnly = {
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: '0',
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  border: '0',
+};
 
 export default function AnswerModal({ onSubmit, toggleModal }) {
-  const [name, setName] = useState('');
-  const [body, setBody] = useState('');
-  const [email, setEmail] = useState('');
-  const [photos, setPhotos] = useState([]);
+  const [formData, setFormData] = useState({
+    name: '',
+    body: '',
+    email: '',
+    photos: [],
+  });
 
-  const changeName = (e) => {
-    setName(e.target.value);
-  };
-  const changeBody = (e) => {
-    setBody(e.target.value);
-  };
-  const changeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const changePhotos = (e) => {
-    setPhotos(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = () => {
-    const submitObject = {
-      name: name,
-      body: body,
-      email: email,
-      photos: photos,
-    };
-    onSubmit(submitObject)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData)
       .then(() => toggleModal())
       .catch((err) => console.log(err));
   };
 
   return (
-    <div
-      className="modal "
-      id="exampleModal"
-      tabIndex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="false"
-      style={{ display: 'block' }}
-    >
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Add Answer</h5>
-            <button
-              type="button"
-              className="close-button"
-              data-dismiss="modal"
-              aria-label="Close"
-              onClick={toggleModal}
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <form>
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control m-2"
-                  id="name"
-                  placeholder="Name"
-                  onChange={changeName}
-                />
-                <input
-                  type="text"
-                  className="form-control m-2"
-                  id="email"
-                  placeholder="Email"
-                  onChange={changeEmail}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="message-text" className="col-form-label">
-                  Answer
-                </label>
-                <textarea
-                  className="form-control"
-                  id="body"
-                  onChange={changeBody}
-                ></textarea>
-              </div>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
-              onClick={toggleModal}
-            >
-              Close
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handleSubmit}
-            >
-              Add Answer
-            </button>
-          </div>
-        </div>
+    <form onSubmit={handleSubmit} aria-labelledby="answer-modal-title">
+      <div>
+        <label htmlFor="name" style={srOnly}>
+          Name
+        </label>
+        <input
+          type="text"
+          className="form-control mb-4 square fs-5"
+          id="name"
+          placeholder="Name"
+          onChange={handleChange}
+          required
+          name="name"
+          aria-required="true"
+          autoComplete="name"
+        />
       </div>
-    </div>
+
+      <div>
+        <label htmlFor="email" style={srOnly}>
+          Email
+        </label>
+        <input
+          type="email"
+          name="email"
+          className="form-control my-4 square fs-5"
+          id="email"
+          placeholder="Email"
+          onChange={handleChange}
+          required
+          aria-required="true"
+          autoComplete="email"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="body" style={srOnly}>
+          Answer
+        </label>
+        <textarea
+          className="form-control mb-4 square fs-5"
+          id="body"
+          name="body"
+          onChange={handleChange}
+          rows="5"
+          placeholder="Answer"
+          required
+          aria-required="true"
+          autoComplete="off"
+        ></textarea>
+      </div>
+
+      <PrimaryButton
+        label="Add Answer"
+        extraStyles="my-3"
+        type="submit"
+        aria-label="Add your answer"
+      />
+    </form>
   );
 }
 
