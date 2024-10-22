@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Helpful from '../../../components/helpful.jsx';
 import AddAnswer from './AddAnswer.jsx';
 import AnswersList from './AnswersList.jsx';
@@ -8,14 +8,19 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 export default function Question({ question }) {
-  const {
-    question_id,
-    answers,
-    asker_name,
-    question_body,
-    question_date,
-    question_helpfulness,
-  } = question;
+  const [currentQuestion, setCurrentQuestion] = useState(question);
+  const [question_id, setQuestion_id] = useState(question.question_id);
+  const [answers, setAnswers] = useState(question.answers);
+  const [question_body, setQuestion_body] = useState(question.question_body);
+  const [question_date, setQuestionDate] = useState(question.question_date);
+  const [question_helpfulness, setQuestion_helpfulness] = useState(
+    question.question_helpfulness,
+  );
+
+  useEffect(() => {
+    console.log(currentQuestion);
+    setAnswers(currentQuestion.answers);
+  }, [currentQuestion]);
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -27,7 +32,13 @@ export default function Question({ question }) {
     body.question_id = question_id;
     return axios
       .post(`/qa/answers`, body)
-      .then(() => {})
+      .then(() => {
+        console.log('aaa');
+        axios
+          .get(`/qa/questions/${question_id}/answers`)
+          .then((result) => setAnswers(result.data.results))
+          .catch((err) => console.log(err));
+      })
       .catch((err) => console.log(err));
   };
 
@@ -60,7 +71,7 @@ export default function Question({ question }) {
       </div>
       <div className="question-footer">
         <AnswersList answers={answers} question_id={question_id} />
-        <div className="question-date fs-12">
+        <div className="question-date d-inline-flex fs-12">
           {new Date(question_date).toLocaleDateString('en-US', dateOptions)}
         </div>
       </div>
@@ -71,7 +82,3 @@ export default function Question({ question }) {
 Question.propTypes = {
   question: PropTypes.object.isRequired,
 };
-
-{
-  /* <div className="asker-name">{asker_name}</div> */
-}

@@ -2,7 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function QuestionModal({ onSubmit, toggleModal }) {
+export default function QuestionModal({
+  onSubmit,
+  toggleModal,
+  refreshQuestions,
+}) {
   const [name, setName] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
@@ -21,6 +25,7 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
     const submitObject = { name: name, body: body, email: email };
     onSubmit(submitObject)
       .then(() => toggleModal())
+      .then(() => refreshQuestions())
       .catch((err) => console.log(err));
   };
 
@@ -104,4 +109,5 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
 QuestionModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  refreshQuestions: PropTypes.func.isRequired,
 };

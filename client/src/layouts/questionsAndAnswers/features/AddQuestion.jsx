@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import QuestionModal from './QuestionModal.jsx';
 
-export default function AddQuestion({ onClick }) {
+export default function AddQuestion({ onClick, refreshQuestions }) {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
@@ -20,7 +20,11 @@ export default function AddQuestion({ onClick }) {
         Add a Question
       </button>
       {showModal && (
-        <QuestionModal onSubmit={onClick} toggleModal={toggleModal} />
+        <QuestionModal
+          refreshQuestions={refreshQuestions}
+          onSubmit={onClick}
+          toggleModal={toggleModal}
+        />
       )}
     </div>
   );
@@ -28,4 +32,5 @@ export default function AddQuestion({ onClick }) {
 
 AddQuestion.propTypes = {
   onClick: PropTypes.func.isRequired,
+  refreshQuestions: PropTypes.func.isRequired,
 };

@@ -97,7 +97,7 @@ export default function QuestionsList({ productId }) {
           onClick={handleLoadMoreQuestions}
           extraStyles={'m-3'}
         />
-        <AddQuestion onClick={createQuestion} />
+        <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} />
       </div>
       {!query.length
         ? questions
