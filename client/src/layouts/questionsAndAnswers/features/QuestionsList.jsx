@@ -99,7 +99,7 @@ export default function QuestionsList({ productId }) {
             .slice(0, displayedQuestions)
             .map((question) => {
               return (
-                <Question key={question.question_id} question={question} />
+                <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} />
               );
             })
         : questions
@@ -119,7 +119,7 @@ export default function QuestionsList({ productId }) {
             .slice(0, displayedQuestions)
             .map((question) => {
               return (
-                <Question key={question.question_id} question={question} />
+                <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} />
               );
             })}
       {!hideButton && (

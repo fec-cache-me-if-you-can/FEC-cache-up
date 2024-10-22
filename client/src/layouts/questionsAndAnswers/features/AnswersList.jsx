@@ -6,12 +6,18 @@ import axios from 'axios';
 import Answer from './Answer.jsx';
 
 export default function AnswersList({ answers, question_id }) {
+
+  const [currentAnswers, setCurrentAnswers] = useState(answers);
   const [displayedAnswers, setDisplayedAnswers] = useState(2);
   const [moreIsHidden, setMoreIsHidden] = useState(false);
   const [cantLoadMore, setCantLoadMore] = useState(false);
   const [maxLoadedAnswers, setMaxLoadedAnswers] = useState(
     Object.keys(answers).length,
   );
+
+  useEffect(() => {
+    setMaxLoadedAnswers(Object.keys(currentAnswers).length);
+  }, [currentAnswers])
 
   useEffect(() => {
     displayedAnswers > 2 ? setMoreIsHidden(false) : setMoreIsHidden(true);
@@ -29,6 +35,12 @@ export default function AnswersList({ answers, question_id }) {
 
   const hideMoreAnswers = () => {
     setDisplayedAnswers(2);
+  };
+
+  const reloadAnswers = () => {
+    axios.get(`/qa/answers?question_id=${question_id}`)
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
 
   return (
