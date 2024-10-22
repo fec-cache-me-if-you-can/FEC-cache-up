@@ -48,6 +48,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      '@': Path.resolve(__dirname, 'client/src/'),
+    }
   },
   cache: {
     type: 'filesystem',
