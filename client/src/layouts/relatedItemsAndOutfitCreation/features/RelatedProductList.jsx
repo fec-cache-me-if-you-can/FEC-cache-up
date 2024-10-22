@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RelatedProductCard from './components/RelatedProductCard.jsx';
 import AbstractList from './AbstractList.jsx';
-import { useRelatedProducts } from './hooks/useRelatedProducts.jsx';
+import { useRelatedProducts } from './hooks/UseRelatedProducts.jsx';
 import ProductComparisonModal from './components/ProductComparisonModal.jsx';
 import { useComparisonModal } from './hooks/UseComparisonModal.jsx';
 
