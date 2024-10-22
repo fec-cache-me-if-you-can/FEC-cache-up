@@ -7,10 +7,10 @@ export default function Helpful({ helpfulness, onClick = () => {} }) {
   };
 
   return (
-    <div className="helpful-button d-inline-flex p-2 align-items-center">
+    <div className="helpful-button d-inline-flex align-items-start">
       <div className="text-secondary text-size-90">Helpful?</div>
       <button
-        className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+        className="helpfulness text-secondary text-size-90 bg-transparent border-0 shadow-none text-decoration-underline d-flex align-content-center pt-0"
         onClick={handleClick}
       >
         yes ({helpfulness})

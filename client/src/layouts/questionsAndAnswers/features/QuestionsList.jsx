@@ -84,16 +84,15 @@ export default function QuestionsList({ productId }) {
   };
 
   return (
-    <div className="question-list container-xl ">
-      <div className="d-flex">
+    <div className="question-list">
+      <div className="d-flex flex-fill pb-2 mt-0 my-5">
         <SearchQuestions />
-        <PrimaryButton
-          isDisabled={hideButton}
-          label={'More Questions'}
-          plus={true}
+        <button
           onClick={handleLoadMoreQuestions}
-          extraStyles={'m-3'}
-        />
+          className={`btn btn-primary square btn-lg mx-3 ${hideButton ? 'disabled' : ''}`}
+        >
+          MORE QUESTIONS
+        </button>
         <AddQuestion onClick={createQuestion} />
       </div>
       {questions.slice(0, displayedQuestions).map((question) => {

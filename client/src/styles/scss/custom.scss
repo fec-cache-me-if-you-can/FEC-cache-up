@@ -129,6 +129,8 @@ small {
 // Color Schemes
 :root {
   @include color-scheme('light');
+
+  --secondary-bg: #f2eded;
 }
 
 [data-bs-theme='dark'] {
@@ -617,3 +619,11 @@ small {
 }
 
 // end FAQ search bar
+
+.question-card {
+  background-color: var(--bs-secondary-bg);
+}
+
+.underline-link:hover {
+  text-decoration: underline;
+}

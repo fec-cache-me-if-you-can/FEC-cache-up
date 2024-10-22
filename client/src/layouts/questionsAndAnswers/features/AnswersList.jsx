@@ -39,22 +39,27 @@ export default function AnswersList({ answers, question_id }) {
           let answer = answers[key];
           return <Answer key={answer.id} answer={answer} />;
         })}
-      {!cantLoadMore && (
-        <button
-          className="d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-          onClick={handleLoadMoreAnswers}
-        >
-          Load More Answers
-        </button>
-      )}
-      {!moreIsHidden && (
-        <button
-          className="d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-          onClick={hideMoreAnswers}
-        >
-          Hide More Answers
-        </button>
-      )}
+      <div className="d-flex">
+        <div className="px-3"></div>
+        <div className="d-flex flex-column">
+          {!cantLoadMore && (
+            <button
+              className="text-secondary fw-semibold text-size-90 bg-transparent border-0 shadow-none px-0 mt-3 underline-link"
+              onClick={handleLoadMoreAnswers}
+            >
+              LOAD MORE ANSWERS
+            </button>
+          )}
+          {!moreIsHidden && (
+            <button
+              className="d-inline-flex text-secondary text-size-90 bg-transparent border-0 shadow-none mt-3 underline-link"
+              onClick={hideMoreAnswers}
+            >
+              Hide More Answers
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

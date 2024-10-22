@@ -4,7 +4,8 @@ import QuestionsList from './features/QuestionsList.jsx';
 
 export default function QuestionsAndAnswers() {
   return (
-    <div className="p-1">
+    <div>
+      <h5 className="section-header fw-medium">Q & A</h5>
       <QuestionsList productId={40444} />
     </div>
   );

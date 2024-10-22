@@ -10,23 +10,30 @@ export default function Answer({ answer }) {
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   return (
-    <div className="answer-card p-3">
-      <div className="fs-5 d-inline-flex">A: </div>
-      <div className="fs-7 d-inline-flex ps-1">{body}</div>
+    <div className="answer-card my-2">
+      <div className="d-flex align-content-center fw-normal">
+        <div className="fs-5 fw-semibold d-inline-flex me-1">A: </div>
+        <div className="fs-7 ps-2 align-content-start mt-1">
+          {body}
+          <div className="photoList">
+            {photos.map((photo) => {
+              <AnswerPhoto photo={photo} />;
+            })}
+          </div>
+          <div className="answer-footer text-secondary d-flex align-content-center justify-content-start">
+            <div className="text-size-90 me-2">{answerer_name}</div>
+            <div className="text-size-90 d-inline-flex px-2">
+              {new Date(date).toLocaleDateString('en-US', dateOptions)}
+            </div>
+            <Helpful helpfulness={helpfulness} />
+            <Report />
+          </div>
+        </div>
+      </div>
       <div className="photoList">
         {photos.map((photo) => {
           <AnswerPhoto photo={photo} />;
         })}
-      </div>
-      <div className="answer-footer">
-        <div className="fw-light text-size-90 d-inline-flex p-2">
-          {answerer_name}
-        </div>
-        <div className="fw-lighter text-size-90 d-inline-flex p-2">
-          {new Date(date).toLocaleDateString('en-US', dateOptions)}
-        </div>
-        <Helpful helpfulness={helpfulness} />
-        <Report />
       </div>
     </div>
   );

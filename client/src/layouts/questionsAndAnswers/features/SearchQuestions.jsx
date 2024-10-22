@@ -16,7 +16,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="input-group border border-dark square m-3">
+    <div className="input-group border border-dark square ms-0 me-3">
       <input
         type="search"
         placeholder="Search..."

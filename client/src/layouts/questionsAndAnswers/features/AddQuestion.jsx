@@ -14,7 +14,7 @@ export default function AddQuestion({ onClick }) {
   return (
     <div>
       <button
-        className="add-question btn btn-primary square btn-lg m-3"
+        className="add-question btn btn-primary square btn-lg ms-3"
         onClick={toggleModal}
       >
         Add a Question

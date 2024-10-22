@@ -30,23 +30,23 @@ export default function Question({ question }) {
   };
 
   return (
-    <div className="question-card p-3">
-      <div className="-question-header row text-start d-flex">
-        <div className="question-main col-8 d-inline-flex">
-          <div className="question-text fs-4 d-inline-flex pe-2">Q:</div>
-          <div className="question-text fs-5 d-inline-flex ">
-            {question_body}
-          </div>
+    <div className="question-card mb-5 mt-4 p-5 secondary-bg">
+      <div className="d-flex flex-nowrap align-content- align-content-start justify-content-between">
+        <div className="col-row-8 d-flex justify-content-center fs-4 fw-semibold">
+          <div className="question-text d-inline-flex me-2">Q:</div>
+          <div className="question-text mb-2">{question_body}</div>
         </div>
-        <div className="header-interaction col-4 d--flex ">
+        <div className="header-interaction hstack col-4 d-flex align-content-start justify-content-end align-items-start">
           <Helpful helpfulness={question_helpfulness} />
-          <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
+          <div className="divider d-flex text-secondary align-items-start text-size-90">
+            |
+          </div>
           <AddAnswer onClick={createAnswer} />
         </div>
       </div>
       <div className="question-footer">
         <AnswersList answers={answers} question_id={question_id} />
-        <div className="question-date fs-12">
+        <div className="question-date text-size-90 text-secondary ms-4 px-2">
           {new Date(question_date).toLocaleDateString('en-US', dateOptions)}
         </div>
       </div>
