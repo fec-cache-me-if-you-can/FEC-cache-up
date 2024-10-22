@@ -16,6 +16,7 @@ export default function RatingsAndReviews({
 }) {
   const [reviews, setReviews] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     axios.get(`reviews/?product_id=${product.id}`).then((response) => {
@@ -31,10 +32,20 @@ export default function RatingsAndReviews({
     );
   };
 
-  const filteredReviews = reviews.filter(
-    (review) =>
-      selectedFilters.length === 0 || selectedFilters.includes(review.rating),
-  );
+  const handleSearchFilter = (query) => {
+    setSearchTerm(query);
+  };
+
+  const filteredReviews = reviews.filter((review) => {
+    const matchesSearch =
+      searchTerm.length < 3 ||
+      review.body.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesFilter =
+      selectedFilters.length === 0 || selectedFilters.includes(review.rating);
+
+    return matchesSearch && matchesFilter;
+  });
 
   const clearFilters = () => setSelectedFilters([]);
 
@@ -43,11 +54,12 @@ export default function RatingsAndReviews({
       <div id="ratings-header">
         <h6>Ratings And Reviews</h6>{' '}
       </div>
-      <KeywordSearch />
 
       <div className="ratings-reviews-content">
         {/* Left Column: Ratings + Product Breakdown */}
+
         <div className="ratings-breakdown-column">
+          <KeywordSearch handleSearchFilter={handleSearchFilter} />
           <RatingsBreakdown
             rating={rating}
             numberOfRatings={numberOfRatings}

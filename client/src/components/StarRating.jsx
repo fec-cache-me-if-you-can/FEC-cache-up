@@ -6,7 +6,6 @@ const StarRating = ({ rating, onClick }) => {
   const stars = [];
   const totalStars = 5;
 
-  // Ensure rating is between 0 and 5
   const clampedRating = Math.max(0, Math.min(5, rating));
 
   const handleStarClick = (starIndex) => {
