@@ -6,20 +6,20 @@ import QuestionsAndAnswers from './layouts/questionsAndAnswers/index.jsx';
 import RelatedItemsAndOutfitCreation from './layouts/relatedItemsAndOutfitCreation/index.jsx';
 import PrimaryButton from './components/PrimaryButton.jsx';
 
-//! styling helper
+const DEFAULT_PRODUCT_ID = 40344;
+
 const toggleTheme = () => {
   const currentTheme = document.documentElement.getAttribute('data-bs-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-bs-theme', newTheme);
 };
 export default function App() {
-  const [product, setProduct] = useState({ id: 40344 });
+  const [productId, setProductId] = useState(DEFAULT_PRODUCT_ID);
+  const [product, setProduct] = useState({ id: DEFAULT_PRODUCT_ID });
   const [loadingProduct, setLoadingProduct] = useState(true);
   const [metaReviews, setMetaReviews] = useState({});
   const [rating, setRating] = useState(0);
   const [numberOfRatings, setNumberOfRatings] = useState(0);
-
-  const productId = 40344;
 
   // Fetch product data
   useEffect(() => {
@@ -90,7 +90,10 @@ export default function App() {
       </div>
       <div className="my-4">
         {productId && (
-          <RelatedItemsAndOutfitCreation productId={String(product.id)} />
+          <RelatedItemsAndOutfitCreation
+            productId={String(product.id)}
+            setProductId={setProductId}
+          />
         )}
       </div>
     </div>

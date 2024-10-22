@@ -15,7 +15,7 @@ export default function DeleteButton({ productId, onDelete }) {
 
   return (
     <button className="transparent-button trash-button" onClick={handleDelete}>
-      <Icon icon={'fa-trash-alt fa-solid fa-lg'} />
+      <Icon icon={'fa-trash fa-solid'} />
     </button>
   );
 }

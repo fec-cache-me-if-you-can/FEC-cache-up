@@ -12,6 +12,7 @@
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve --mode development",
+    "server-start": "node server/index.js",
     "lint": "eslint .",
     "test": "jest",
     "icons:update": "npm update '@awesome.me/kit-60350fbc81' --silent"

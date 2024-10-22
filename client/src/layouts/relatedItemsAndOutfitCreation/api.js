@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+export const reloadPage = () => {
+  window.location.reload();
+};
+
 const API_ENDPOINTS = {
   OUTFIT: '/outfit',
   PRODUCT_INFORMATION: (productId) => `/products/${productId}/information`,
@@ -15,9 +19,26 @@ class ApiError extends Error {
   }
 }
 
-const handleApiCall = async (apiCall, errorMessage) => {
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // 1 second
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const retryApiCall = async (apiCall, retries = MAX_RETRIES) => {
   try {
     return await apiCall();
+  } catch (error) {
+    if (retries > 0) {
+      await wait(RETRY_DELAY);
+      return retryApiCall(apiCall, retries - 1);
+    }
+    throw error;
+  }
+};
+
+const handleApiCall = async (apiCall, errorMessage) => {
+  try {
+    return await retryApiCall(apiCall);
   } catch (error) {
     throw new ApiError(errorMessage, error);
   }
@@ -30,7 +51,10 @@ const fetchApiData = (url) =>
   );
 
 export const fetchRelatedProductIds = async (productId) => {
-  const { data } = await axios.get(`/products/${productId}/related`);
+  const data = await handleApiCall(
+    () => axios.get(`/products/${productId}/related`).then(({ data }) => data),
+    `Failed to fetch related product IDs for ${productId}`,
+  );
   return data.map((id) => String(id));
 };
 
@@ -44,7 +68,9 @@ export const fetchOutfitProductIds = () =>
   );
 
 export const addProductByIdToOutfit = (productId) => {
-  if (!productId) throw new Error('Product ID is required');
+  if (!productId) {
+    return Promise.reject(new Error('Product ID is required'));
+  }
   return handleApiCall(
     () =>
       axios
@@ -55,7 +81,9 @@ export const addProductByIdToOutfit = (productId) => {
 };
 
 export const removeProductByIdFromOutfit = (productId) => {
-  if (!productId) throw new Error('Product ID is required');
+  if (!productId) {
+    return Promise.reject(new Error('Product ID is required'));
+  }
   return handleApiCall(
     () =>
       axios
@@ -66,7 +94,9 @@ export const removeProductByIdFromOutfit = (productId) => {
 };
 
 export const fetchProductFeaturesById = (productId) => {
-  if (!productId) throw new Error('Product ID is required');
+  if (!productId) {
+    return Promise.reject(new Error('Product ID is required'));
+  }
   return handleApiCall(
     () =>
       fetchApiData(API_ENDPOINTS.PRODUCT_INFORMATION(productId)).then(
@@ -77,7 +107,9 @@ export const fetchProductFeaturesById = (productId) => {
 };
 
 export const fetchProductInformationById = (productId) => {
-  if (!productId) throw new Error('Product ID is required');
+  if (!productId) {
+    return Promise.reject(new Error('Product ID is required'));
+  }
   return handleApiCall(
     () =>
       axios
@@ -88,7 +120,9 @@ export const fetchProductInformationById = (productId) => {
 };
 
 export const fetchCompleteProductDataById = (productId) => {
-  if (!productId) throw new Error('Product ID is required');
+  if (!productId) {
+    return Promise.reject(new Error('Product ID is required'));
+  }
   return handleApiCall(
     () =>
       Promise.all([

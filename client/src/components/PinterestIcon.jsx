@@ -15,7 +15,7 @@ const PinterestIcon = ({ size = '' }) => {
 };
 
 PinterestIcon.propTypes = {
-  size: PropTypes.string.isRequired,
+  size: PropTypes.string,
 };
 
 export default PinterestIcon;

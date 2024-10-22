@@ -8,7 +8,7 @@ const FacebookIcon = ({ size = '' }) => {
 };
 
 FacebookIcon.propTypes = {
-  size: PropTypes.string.isRequired,
+  size: PropTypes.string,
 };
 
 export default FacebookIcon;

@@ -28,10 +28,12 @@ const StarRating = ({ rating, onClick }) => {
         <FontAwesomeIcon
           icon="fa-solid fa-star fa-sharp fa-xs"
           className="star-back"
+          role="img"
         />
         <FontAwesomeIcon
           icon="fa-solid fa-star fa-sharp fa-xs"
           className="star-front"
+          role="img"
           style={{ clipPath: `inset(0 ${100 - percentage}% 0 0)` }}
         />
       </div>,
