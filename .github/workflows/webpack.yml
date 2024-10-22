@@ -32,7 +32,7 @@ jobs:
       run: npm i
 
     - name: Build Client (Webpack)
-      run: npm run client-dev
+      run: npm run build:dev
 
     - name: Start Server (Nodemon)
       run: npm run server-dev
