@@ -2,12 +2,13 @@ import React from 'react';
 
 import { useState, useEffect } from 'react';
 import Helpful from '../../../components/helpful.jsx';
+import Report from '../../../components/report.jsx'
 import AddAnswer from './AddAnswer.jsx';
 import AnswersList from './AnswersList.jsx';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-export default function Question({ question }) {
+export default function Question({ question, getQuestions, setQuestions }) {
   const [currentQuestion, setCurrentQuestion] = useState(question);
   const [question_id, setQuestion_id] = useState(question.question_id);
   const [answers, setAnswers] = useState(question.answers);
@@ -18,7 +19,6 @@ export default function Question({ question }) {
   );
 
   useEffect(() => {
-    console.log(currentQuestion);
     setAnswers(currentQuestion.answers);
   }, [currentQuestion]);
 
@@ -54,6 +54,17 @@ export default function Question({ question }) {
     }
   };
 
+  const reportQuestion = () => {
+    axios
+      .put('/qa/questions/report', { question_id: question_id })
+      .then(() => {
+        getQuestions()
+          .then((result) => setQuestions(result.data.results))
+          .catch((err) => console.log(err));
+       })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="question-card p-3">
       <div className="-question-header row text-start d-flex">
@@ -67,6 +78,8 @@ export default function Question({ question }) {
           <Helpful onClick={isHelpful} helpfulness={howHelpful} />
           <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
           <AddAnswer onClick={createAnswer} />
+          <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
+          <Report onClick={reportQuestion} />
         </div>
       </div>
       <div className="question-footer">
@@ -81,4 +94,6 @@ export default function Question({ question }) {
 
 Question.propTypes = {
   question: PropTypes.object.isRequired,
+  getQuestions: PropTypes.func.isRequired,
+  setQuestions: PropTypes.func.isRequired,
 };

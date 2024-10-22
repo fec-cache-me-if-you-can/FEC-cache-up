@@ -44,6 +44,7 @@ export default function QuestionModal({
       validateBody(body)
     ) {
       const submitObject = { name: name, body: body, email: email };
+
       onSubmit(submitObject)
         .then(() => toggleModal())
         .then(() => refreshQuestions())

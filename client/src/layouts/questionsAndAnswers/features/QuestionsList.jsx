@@ -18,6 +18,12 @@ export default function QuestionsList({ productId }) {
   const [hideNextPage, setHideNextPage] = useState(false);
   const [hidePreviousPage, setHidePreviousPage] = useState(true);
 
+  const getQuestions = (product_id = productId, page = 1, count = 10) => {
+    return axios.get(
+      `/qa/questions?product_id=${product_id}&page=${page}&count=${count}`,
+    );
+  };
+
   useEffect(() => {
     getQuestions(productId)
       .then((result) => setQuestions(result.data.results))
@@ -60,12 +66,6 @@ export default function QuestionsList({ productId }) {
 
   const handleLoadMoreQuestions = () => {
     setDisplayedQuestions(10);
-  };
-
-  const getQuestions = (product_id, page = 1, count = 10) => {
-    return axios.get(
-      `/qa/questions?product_id=${product_id}&page=${page}&count=${count}`,
-    );
   };
 
   const handlePreviousPage = () => {
