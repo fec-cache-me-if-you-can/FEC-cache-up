@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const reloadPage = () => {
+export const reloadPage = () => {
   window.location.reload();
 };
 

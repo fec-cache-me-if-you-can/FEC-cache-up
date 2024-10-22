@@ -7,6 +7,7 @@ import {
   fetchProductFeaturesById,
   fetchProductInformationById,
   fetchCompleteProductDataById,
+  reloadPage,
 } from '../api';
 
 jest.mock('axios');
@@ -103,6 +104,17 @@ describe('API Service', () => {
         'Product ID is required',
       );
       expect(axios.get).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('reloadPage', () => {
+    test('calls window.location.reload', () => {
+      const originalLocation = window.location;
+      delete window.location;
+      window.location = { reload: jest.fn() };
+      reloadPage();
+      expect(window.location.reload).toHaveBeenCalledTimes(1);
+      window.location = originalLocation;
     });
   });
 

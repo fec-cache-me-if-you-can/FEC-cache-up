@@ -33,6 +33,30 @@ describe('StarRating Component', () => {
     expect(starFrontElements[4].style.clipPath).toBe('inset(0 100% 0 0)');
   });
 
+  test('renders stars at 1/4 fill', () => {
+    render(<StarRating rating={3.25} />);
+    const starFrontElements = screen
+      .getAllByRole('img', { hidden: true })
+      .filter((el) => el.classList.contains('star-front'));
+    expect(starFrontElements[0].style.clipPath).toBe('inset(0 0% 0 0)');
+    expect(starFrontElements[1].style.clipPath).toBe('inset(0 0% 0 0)');
+    expect(starFrontElements[2].style.clipPath).toBe('inset(0 0% 0 0)');
+    expect(starFrontElements[3].style.clipPath).toBe('inset(0 75% 0 0)');
+    expect(starFrontElements[4].style.clipPath).toBe('inset(0 100% 0 0)');
+  });
+
+  test('renders stars at 3/4 fill', () => {
+    render(<StarRating rating={3.75} />);
+    const starFrontElements = screen
+      .getAllByRole('img', { hidden: true })
+      .filter((el) => el.classList.contains('star-front'));
+    expect(starFrontElements[0].style.clipPath).toBe('inset(0 0% 0 0)');
+    expect(starFrontElements[1].style.clipPath).toBe('inset(0 0% 0 0)');
+    expect(starFrontElements[2].style.clipPath).toBe('inset(0 0% 0 0)');
+    expect(starFrontElements[3].style.clipPath).toBe('inset(0 25% 0 0)');
+    expect(starFrontElements[4].style.clipPath).toBe('inset(0 100% 0 0)');
+  });
+
   test('clamps rating between 0 and 5', () => {
     const { rerender } = render(<StarRating rating={-1} />);
     let starFrontElements = screen
