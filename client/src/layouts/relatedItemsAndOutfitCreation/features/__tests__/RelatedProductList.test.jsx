@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import RelatedProductList from '../RelatedProductList';
-import { useRelatedProducts } from '../hooks/useRelatedProducts';
+import RelatedProductList from '../RelatedProductList.jsx';
+import { useRelatedProducts } from '../hooks/UseRelatedProducts.jsx';
 
-jest.mock('../hooks/useRelatedProducts', () => ({
+jest.mock('../hooks/UseRelatedProducts.jsx', () => ({
   useRelatedProducts: jest.fn(),
 }));
 
-jest.mock('../AbstractList', () => {
+jest.mock('../AbstractList.jsx', () => {
   /* eslint-disable */
   return function MockAbstractList({ heading, items, CardComponent }) {
     return (
@@ -23,7 +23,7 @@ jest.mock('../AbstractList', () => {
   };
 });
 
-jest.mock('../components/RelatedProductCard', () => {
+jest.mock('../components/RelatedProductCard.jsx', () => {
   return function MockRelatedProductCard({ productId }) { // eslint-disable-line
     return <div data-testid="related-product-card">{productId}</div>;
   };

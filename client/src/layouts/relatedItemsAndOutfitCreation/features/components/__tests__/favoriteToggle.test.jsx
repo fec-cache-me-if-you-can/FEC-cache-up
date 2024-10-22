@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FavoriteToggle from '../FavoriteToggle';
+import FavoriteToggle from '../favoriteToggle.jsx';
 
 jest.mock('@/components/icons.jsx', () => ({
   __esModule: true,
