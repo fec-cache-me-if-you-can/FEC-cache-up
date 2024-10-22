@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RelatedProductCard from '../RelatedProductCard';
 import AbstractProductCard from '../AbstractProductCard';
-import FavoriteToggle from '../favoriteToggle';
+import CompareButton from '../CompareButton.jsx';
 
 jest.mock('../AbstractProductCard', () =>
   jest.fn(({ renderIcon }) => {
@@ -14,7 +14,7 @@ jest.mock('../AbstractProductCard', () =>
     );
   }),
 );
-jest.mock('../favoriteToggle', () =>
+jest.mock('../CompareButton', () =>
   jest.fn(() => <div data-testid="favorite-toggle" />),
 );
 
@@ -55,7 +55,7 @@ describe('RelatedProductCard', () => {
       />,
     );
 
-    expect(FavoriteToggle).toHaveBeenCalledWith(
+    expect(CompareButton).toHaveBeenCalledWith(
       {
         productId: 'mocked-id',
         action: mockAction,

@@ -18,6 +18,7 @@ describe('ProductDetails Component', () => {
     name: 'Test Product',
     category: 'electronics',
     price: '99.99',
+    sale: '89.99',
     rating: 4.5,
   };
 
@@ -43,6 +44,7 @@ describe('ProductDetails Component', () => {
     expect(screen.getByText('Test Product')).toBeInTheDocument();
     expect(screen.getByText('$99.99')).toBeInTheDocument();
     expect(screen.getByTestId('star-rating')).toHaveTextContent('Rating: 4.5');
+    expect(screen.getByText('$89.99')).toBeInTheDocument();
   });
 
   test('calls renderIcon with correct id', () => {

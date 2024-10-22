@@ -2,11 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AbstractProductCard from './AbstractProductCard.jsx';
-import FavoriteToggle from './favoriteToggle.jsx';
+import CompareButton from './CompareButton.jsx';
 
 const RelatedProductCard = ({ productId, action, setProductId }) => {
   const renderFavoriteIcon = (id) => (
-    <FavoriteToggle productId={id} action={action} />
+    <CompareButton productId={id} action={action} />
   );
 
   return (

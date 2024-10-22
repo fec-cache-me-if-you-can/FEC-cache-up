@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import FavoriteToggle from '../favoriteToggle.jsx';
+import CompareButton from '../CompareButton.jsx';
 
 jest.mock('@/components/icons.jsx', () => ({
   __esModule: true,
@@ -22,7 +22,7 @@ describe('FavoriteToggle Component', () => {
   });
 
   test('renders correctly', () => {
-    render(<FavoriteToggle productId={mockProductId} action={mockAction} />);
+    render(<CompareButton productId={mockProductId} action={mockAction} />);
 
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('FavoriteToggle Component', () => {
   });
 
   test('calls action with productId when clicked', () => {
-    render(<FavoriteToggle productId={mockProductId} action={mockAction} />);
+    render(<CompareButton productId={mockProductId} action={mockAction} />);
 
     const button = screen.getByRole('button');
     fireEvent.click(button);
@@ -43,7 +43,7 @@ describe('FavoriteToggle Component', () => {
   });
 
   test('adds and removes is-favorite class when clicked', () => {
-    render(<FavoriteToggle productId={mockProductId} action={mockAction} />);
+    render(<CompareButton productId={mockProductId} action={mockAction} />);
 
     const button = screen.getByRole('button');
     fireEvent.click(button);

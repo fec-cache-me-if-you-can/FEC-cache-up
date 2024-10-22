@@ -12,7 +12,11 @@ export const calculateAverageRating = (ratings) => {
 
 export function processProductData({ productInfo, styleInfo, reviewMeta }) {
   const { id, name, category } = productInfo;
-  const { original_price: price, photos } = styleInfo.results[0];
+  const {
+    original_price: price,
+    photos,
+    sale_price: sale,
+  } = styleInfo.results[0];
   const imageUrl = photos[0].url;
   const rating = calculateAverageRating(reviewMeta.ratings);
 
@@ -21,6 +25,7 @@ export function processProductData({ productInfo, styleInfo, reviewMeta }) {
     name,
     category,
     price,
+    sale,
     imageUrl,
     rating,
   };
