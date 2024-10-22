@@ -93,70 +93,70 @@ export default function QuestionsList({ productId }) {
         <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} setQuestions={setQuestions} />
       </div>
       <div className="scrollable-qa">
-      {!query.length
-        ? questions
-            .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
-            .slice(0, displayedQuestions)
-            .map((question) => {
-              return (
-                <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} />
-              );
-            })
-        : questions
-            .reduce((acc, question) => {
-              console.log(acc);
-              console.log(question.question_body.toLowerCase());
-              if (
-                question.question_body
-                  .toLowerCase()
-                  .includes(query.toLowerCase())
-              ) {
-                acc.push(question);
-              }
-              return acc;
-            }, [])
-            .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
-            .slice(0, displayedQuestions)
-            .map((question) => {
-              return (
-                <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} />
-              );
-            })}
+        {!query.length
+          ? questions
+              .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+              .slice(0, displayedQuestions)
+              .map((question) => {
+                return (
+                  <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} />
+                );
+              })
+          : questions
+              .reduce((acc, question) => {
+                console.log(acc);
+                console.log(question.question_body.toLowerCase());
+                if (
+                  question.question_body
+                    .toLowerCase()
+                    .includes(query.toLowerCase())
+                ) {
+                  acc.push(question);
+                }
+                return acc;
+              }, [])
+              .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+              .slice(0, displayedQuestions)
+              .map((question) => {
+                return (
+                  <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} />
+                );
+              })}
+      </div>
       {!hideButton && (
-        <button
-          className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-          onClick={handleLoadMoreQuestions}
-        >
-          More Questions
-        </button>
-      )}
-      {!moreIsHidden && (
-        <div className="d-inline-flex">
-          {!hidePreviousPage && (
-            <button
-              className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-              onClick={handlePreviousPage}
-            >
-              previous page
-            </button>
-          )}
-          {!hideNextPage && (
-            <button
-              className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-              onClick={handleNextPage}
-            >
-              next page
-            </button>
-          )}
           <button
             className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-            onClick={resetDisplayedQuestions}
+            onClick={handleLoadMoreQuestions}
           >
-            Hide More Questions
+            More Questions
           </button>
-        </div>
-      )}
-      </div>
+        )}
+        {!moreIsHidden && (
+          <div className="d-inline-flex">
+            {!hidePreviousPage && (
+              <button
+                className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+                onClick={handlePreviousPage}
+              >
+                previous page
+              </button>
+            )}
+            {!hideNextPage && (
+              <button
+                className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+                onClick={handleNextPage}
+              >
+                next page
+              </button>
+            )}
+            <button
+              className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+              onClick={resetDisplayedQuestions}
+            >
+              Hide More Questions
+            </button>
+          </div>
+        )}
     </div>
   );
 }
