@@ -1,16 +1,16 @@
-name: NodeJS with Webpack
+name: NodeJS CI
 
 on:
   pull_request:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
 
     steps:
     - uses: actions/checkout@v4
@@ -20,7 +20,38 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
+    - name: Cache npm dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-node-
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Lint
+      run: npm run lint
+
+    - name: Build Client (Development)
+      run: npm run build:dev
+
+    - name: Start Server
+      run: npm run server-dev &
+      env:
+        NODE_ENV: test
+
+    - name: Wait for Server
       run: |
-        npm install
-        npm run build:dev
+        while ! nc -z localhost 3000; do   
+          sleep 1
+        done
+
+    - name: Run Tests
+      run: npm test
+      env:
+        NODE_ENV: test
+
+    - name: Stop Server
+      run: pkill -f "node server/index.js" || true
