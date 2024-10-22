@@ -152,4 +152,5 @@ client/dist/*.ttf
 
 # jest generated files
 coverage/
+*/coverage/
 
