@@ -8,6 +8,27 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
 
+  const [validName, setValidName] = useState(true);
+  const [validBody, setValidBody] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPhotos, setValidPhotos] = useState(true);
+
+  const validateName = (v) => {
+    return v.length && v.length <= 60;
+  };
+
+  const validateBody = (v) => {
+    return v.length && v.length <= 1000;
+  };
+
+  const validateEmail = (v) => {
+    return v.includes('.') && v.includes('@') && v.length >= 5;
+  };
+
+  const validatePhotos = (v) => {
+    return v.every((i) => typeof i === 'string') && v.length < 6;
+  };
+
   const changeName = (e) => {
     setName(e.target.value);
   };
@@ -22,16 +43,28 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
   };
 
   const handleSubmit = () => {
-    const submitObject = {
-      name: name,
-      body: body,
-      email: email,
-      photos: photos,
-    };
-    onSubmit(submitObject)
-      .then(() => toggleModal())
-      .catch((err) => console.log(err));
-  };
+    if (
+      validateName(name) &&
+      validateEmail(email) &&
+      validateBody(body) &&
+      validatePhotos(photos)
+    ) {
+      const submitObject = {
+        name: name,
+        body: body,
+        email: email,
+        photos: photos,
+      };
+      onSubmit(submitObject)
+        .then(() => toggleModal())
+        .catch((err) => console.log(err));
+    } else {
+      setValidName(validateName(name));
+      setValidEmail(validateEmail(email));
+      setValidBody(validateBody(body));
+      setValidPhotos(validatePhotos(photos));
+    }
+};
 
   return (
     <div
@@ -67,6 +100,9 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
                   placeholder="Name"
                   onChange={changeName}
                 />
+                {!validName && (
+                  <div className="modal-warning">input is not valid</div>
+                )}
                 <input
                   type="text"
                   className="form-control m-2"
@@ -74,6 +110,9 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
                   placeholder="Email"
                   onChange={changeEmail}
                 />
+                {!validEmail && (
+                  <div className="modal-warning">input is not valid</div>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label">
@@ -84,6 +123,9 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
                   id="body"
                   onChange={changeBody}
                 ></textarea>
+                {!validBody && (
+                  <div className="modal-warning">input is not valid</div>
+                )}
               </div>
             </form>
           </div>
