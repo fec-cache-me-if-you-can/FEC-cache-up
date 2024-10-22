@@ -20,6 +20,7 @@ export default function Question({ question }) {
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
 
   const [howHelpful, setHowHelpful] = useState(question_helpfulness);
+  const [hasVotedHelpful, setHasVotedHelpful] = useState(false);
 
   const createAnswer = (body) => {
     console.log(body);
@@ -31,12 +32,15 @@ export default function Question({ question }) {
   };
 
   const isHelpful = () => {
-    axios
-      .put('/qa/questions/helpful', { question_id: question_id })
-      .then(() => {
-        setHowHelpful((current) => current + 1);
-      })
-      .catch((err) => console.log(err));
+    if (!hasVotedHelpful) {
+      axios
+        .put('/qa/questions/helpful', { question_id: question_id })
+        .then(() => {
+          setHowHelpful((current) => current + 1);
+          setHasVotedHelpful(true);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (

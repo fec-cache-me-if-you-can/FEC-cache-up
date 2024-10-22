@@ -10,14 +10,18 @@ import axios from 'axios';
 export default function Answer({ answer }) {
   const { id, body, date, answerer_name, helpfulness, photos } = answer;
   const [howHelpful, setHowHelpful] = useState(helpfulness);
+  const [hasVotedHelpful, setHasVotedHelpful] = useState(false);
 
   const isHelpful = () => {
-    axios
-      .put('/qa/answers/helpful', { answer_id: id })
-      .then(() => {
-        setHowHelpful((current) => current + 1);
-      })
-      .catch((err) => console.log(err));
+    if (!hasVotedHelpful) {
+      axios
+        .put('/qa/answers/helpful', { answer_id: id })
+        .then(() => {
+          setHowHelpful((current) => current + 1);
+          setHasVotedHelpful(true);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
