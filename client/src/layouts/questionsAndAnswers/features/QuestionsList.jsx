@@ -90,13 +90,6 @@ export default function QuestionsList({ productId }) {
     <div className="question-list container-xl ">
       <div className="d-flex">
         <SearchQuestions update={updateQuery} />
-        <PrimaryButton
-          isDisabled={hideButton}
-          label={'More Questions'}
-          plus={true}
-          onClick={handleLoadMoreQuestions}
-          extraStyles={'m-3'}
-        />
         <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} />
       </div>
       {!query.length
@@ -128,11 +121,18 @@ export default function QuestionsList({ productId }) {
                 <Question key={question.question_id} question={question} />
               );
             })}
+      {!hideButton && (
+        <button
+          className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+          onClick={handleLoadMoreQuestions}
+        >
+          More Questions
+        </button>
+      )}
       {!moreIsHidden && (
         <div className="d-inline-flex">
           {!hidePreviousPage && (
             <button
-              hidden={hidePreviousPage}
               className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
               onClick={handlePreviousPage}
             >
@@ -141,7 +141,6 @@ export default function QuestionsList({ productId }) {
           )}
           {!hideNextPage && (
             <button
-              hidden={hideNextPage}
               className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
               onClick={handleNextPage}
             >
