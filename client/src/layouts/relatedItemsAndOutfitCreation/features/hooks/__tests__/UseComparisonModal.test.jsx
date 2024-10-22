@@ -1,5 +1,5 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
-import { useComparisonModal } from '../useComparisonModal';
+import { useComparisonModal } from '../UseComparisonModal.jsx';
 import { fetchProductInformationById } from '../../../api.js';
 
 jest.mock('../../../api.js', () => ({
