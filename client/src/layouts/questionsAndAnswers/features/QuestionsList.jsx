@@ -54,7 +54,7 @@ export default function QuestionsList({ productId }) {
     getQuestions(productId, currentPage)
       .then((result) => setQuestions(result.data.results))
       .catch((err) => console.log(err));
-  }, [currentPage]);
+  }, [currentPage, productId]);
 
   const updateQuery = (value) => setQuery(value);
 
