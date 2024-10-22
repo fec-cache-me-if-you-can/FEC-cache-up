@@ -30,7 +30,7 @@ module.exports = {
       });
   },
   postReview: (req, res) => {
-    if (!req.body.review_id) {
+    if (!req.body.product_id) {
       return res.sendStatus(400);
     }
     models.reviews
