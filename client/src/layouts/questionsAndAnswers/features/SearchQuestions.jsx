@@ -1,14 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../../../components/icons.jsx';
 
 export default function SearchQuestions({ update }) {
   const [query, setQuery] = useState('');
 
-  const updateQuery = (e) => {
-    setQuery(e.target.value);
-    update(e.target.value);
-  };
+  useEffect(() => {
+    query.length >= 3 ? update(query) : update('');
+  }, [query, update]);
+
+  const updateQuery = (e) => setQuery(e.target.value);
 
   return (
     <div className="input-group border border-dark square m-3">
