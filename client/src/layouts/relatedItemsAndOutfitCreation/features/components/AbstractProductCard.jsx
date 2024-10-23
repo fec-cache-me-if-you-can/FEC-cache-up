@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { fetchCompleteProductDataById } from '../../api.js';
-import { processProductData } from '../../utils.js';
+import { processProductData, scrollToTop } from '../../utils.js';
 import LoadingSpinner from '../../../../components/LoadingSpinner.jsx';
 import ProductImage from './ProductImage.jsx';
 import Placeholder from './Placeholder.jsx';
@@ -11,6 +11,11 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productDetails, setProductDetails] = useState(null);
+
+  const handleCardClick = (e) => {
+    setProductId(productId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const fetchAndProcessProductData = async () => {
     setIsLoading(true);
@@ -71,6 +76,11 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
     <div
       className="card square border-05 cursor-pointer card-border"
       style={{ width: '20rem' }}
+      onClick={handleCardClick}
+      role="button"
+      tabIndex="0"
+      aria-label={`View details for ${productDetails?.name}`}
+      onKeyDown={(e) => e.key === 'Enter' && setProductId(productId)}
     >
       {renderImageSection()}
       {renderDetailsSection()}
