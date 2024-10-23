@@ -55,11 +55,6 @@ export default function Question({ question, getQuestions, setQuestions, product
   const reportQuestion = () => {
     axios
       .put('/qa/questions/report', { question_id: question_id })
-      .then(() => {
-        getQuestions()
-          .then((result) => setQuestions(result.data.results))
-          .catch((err) => console.log(err));
-       })
       .catch((err) => console.log(err));
   };
 
