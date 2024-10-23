@@ -104,8 +104,6 @@ export default function QuestionsList({ productId }) {
               })
           : questions
               .reduce((acc, question) => {
-                console.log(acc);
-                console.log(question.question_body.toLowerCase());
                 if (
                   question.question_body
                     .toLowerCase()
