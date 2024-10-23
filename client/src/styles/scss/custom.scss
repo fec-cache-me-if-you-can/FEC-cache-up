@@ -14,21 +14,21 @@ $dark-attention: #c50d32;
 
 // Color Schemes
 :root {
-  --background: #{$light-background};
-  --secondary-bg: #{$light-secondary-bg};
-  --primary-text: #{$light-primary-text};
-  --secondary-text: #{$light-secondary-text};
-  --accent: #{$light-accent};
-  --attention: #{$light-attention};
+  --background: var($light-background);
+  --secondary-bg: var($light-secondary-bg);
+  --primary-text: var($light-primary-text);
+  --secondary-text: var($light-secondary-text);
+  --accent: var($light-accent);
+  --attention: var($light-attention);
 }
 
 [data-bs-theme='dark'] {
-  --background: #{$dark-background};
-  --secondary-bg: #{$dark-secondary-bg};
-  --primary-text: #{$dark-primary-text};
-  --secondary-text: #{$dark-secondary-text};
-  --accent: #{$dark-accent};
-  --attention: #{$dark-attention};
+  --background: var($dark-background);
+  --secondary-bg: var($dark-secondary-bg);
+  --primary-text: var($dark-primary-text);
+  --secondary-text: var($dark-secondary-text);
+  --accent: var($dark-accent);
+  --attention: var($dark-attention);
 }
 
 // Base Styles
@@ -287,6 +287,11 @@ small {
 .hover-scale:hover {
   transition: all ease 0.1s;
   transform: scale(1.05);
+  cursor: pointer;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -821,4 +826,28 @@ small {
 span.discount-slash {
   color: var(--attention) !important;
   text-decoration: line-through;
+}
+
+.bg-main {
+  background-color: var(--background) !important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary-bg) !important;
+}
+
+.text-primary {
+  color: var(--primary-text) !important;
+}
+
+.text-secondary {
+  color: var(--secondary-text) !important;
+}
+
+.accent {
+  color: var(--accent) !important;
+}
+
+.attention {
+  color: var(--attention) !important;
 }
