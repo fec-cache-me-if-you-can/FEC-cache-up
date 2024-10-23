@@ -50,15 +50,11 @@ export default function RatingsAndReviews({
   const clearFilters = () => setSelectedFilters([]);
 
   return (
-    <div className="ratings-reviews-container">
-      <div id="ratings-header">
-        <h6>Ratings And Reviews</h6>{' '}
-      </div>
-
-      <div className="ratings-reviews-content">
+    <>
+      <h5 className="section-header">Ratings And Reviews</h5>{' '}
+      <div className="d-flex gap-5">
         {/* Left Column: Ratings + Product Breakdown */}
-
-        <div className="ratings-breakdown-column">
+        <div className="col-3">
           <KeywordSearch handleSearchFilter={handleSearchFilter} />
           <RatingsBreakdown
             rating={rating}
@@ -68,19 +64,21 @@ export default function RatingsAndReviews({
             onFilterClick={handleFilterClick}
             onClearFilters={clearFilters}
           />
-          <div className="product-breakdown-container">
+          <div>
             <ProductBreakdown metaReviews={metaReviews} />
           </div>
         </div>
 
         {/* Right Column: Review List */}
+        <div className="w-100">
         <ReviewList
           numberOfRatings={numberOfRatings}
           reviews={filteredReviews}
           product={product}
         />
       </div>
-    </div>
+      </div>
+    </>
   );
 }
 

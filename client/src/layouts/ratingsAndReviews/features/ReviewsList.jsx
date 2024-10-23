@@ -96,7 +96,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
   };
 
   return (
-    <div>
+    <div className="ms-5">
       {visibleReviews.length === 0 && (
         <div>
           <p>Be the first to review! </p>
@@ -104,7 +104,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
         </div>
       )}
 
-      <div className="review-list-container">
+      <div>
         <div className="review-header">
           <span>
             {numberOfRatings} reviews, sorted by{' '}
@@ -118,7 +118,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
           </span>
         </div>
 
-        <div className="scrollable-reviews">
+        <div className="overflow-y-scroll scrollable-reviews">
           {visibleReviews.map((review) => (
             <ReviewTile
               key={review.review_id}

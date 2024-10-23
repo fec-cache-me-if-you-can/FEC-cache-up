@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 // TODO: receive productId from the parent component
 const RelatedItemsAndOutfitCreation = ({ productId, setProductId }) => {
   return (
-    <div>
+    <>
       <RelatedProductList productId={productId} setProductId={setProductId} />
       <OutfitList selectedProduct={productId} setProductId={setProductId} />
-    </div>
+    </>
   );
 };
 

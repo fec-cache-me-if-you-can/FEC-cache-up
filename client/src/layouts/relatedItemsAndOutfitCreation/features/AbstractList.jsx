@@ -84,7 +84,7 @@ const AbstractList = ({
   };
 
   return (
-    <div className="container flex-grow-1">
+    <>
       <h5 className="section-header">
         {heading}
         {isOutfit && (
@@ -96,7 +96,7 @@ const AbstractList = ({
         )}
       </h5>
       <div className="secondary-bg z-n1 section">{renderContent()}</div>
-    </div>
+    </>
   );
 };
 
