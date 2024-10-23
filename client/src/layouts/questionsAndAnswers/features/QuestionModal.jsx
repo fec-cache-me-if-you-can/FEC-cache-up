@@ -63,7 +63,7 @@ export default function QuestionModal({
 
   return (
     <div
-      className="modal "
+      className="modal review-modal-overlay"
       id="exampleModal"
       tabIndex="-1"
       role="dialog"
