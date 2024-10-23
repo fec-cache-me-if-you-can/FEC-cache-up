@@ -2,7 +2,6 @@ const models = require('../models');
 
 module.exports = {
   getQuestions: (req, res) => {
-    console.log('query.product_id', req);
     if (!req.query.product_id) {
       return res.sendStatus(400);
     }

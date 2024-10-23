@@ -2,10 +2,31 @@ import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function QuestionModal({ onSubmit, toggleModal }) {
+export default function QuestionModal({
+  onSubmit,
+  toggleModal,
+  refreshQuestions,
+  setQuestions,
+  }) {
   const [name, setName] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
+
+  const [validName, setValidName] = useState(true);
+  const [validBody, setValidBody] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
+
+  const validateName = (v) => {
+    return v.length && v.length <= 60;
+  };
+
+  const validateBody = (v) => {
+    return v.length && v.length <= 1000;
+  };
+
+  const validateEmail = (v) => {
+    return v.includes('.') && v.includes('@') && v.length >= 5;
+  };
 
   const changeName = (e) => {
     setName(e.target.value);
@@ -18,8 +39,26 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
   };
 
   const handleSubmit = () => {
-    const submitObject = { name, body, email };
-    onSubmit(submitObject);
+    if (
+      validateName(name) &&
+      validateEmail(email) &&
+      validateBody(body)
+    ) {
+      const submitObject = { name: name, body: body, email: email };
+
+      onSubmit(submitObject)
+        .then(() => toggleModal())
+        .then(() => {
+          refreshQuestions()
+            .then((result) => setQuestions(result.data.results))
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setValidName(validateName(name));
+      setValidEmail(validateEmail(email));
+      setValidBody(validateBody(body));
+    }
   };
 
   return (
@@ -56,6 +95,9 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
                   placeholder="Name"
                   onChange={changeName}
                 />
+                {!validName && (
+                  <div className="modal-warning">input is not valid</div>
+                )}
                 <input
                   type="text"
                   className="form-control m-2"
@@ -63,6 +105,9 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
                   placeholder="Email"
                   onChange={changeEmail}
                 />
+                {!validEmail && (
+                  <div className="modal-warning">input is not valid</div>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label">
@@ -73,6 +118,9 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
                   id="body"
                   onChange={changeBody}
                 ></textarea>
+                {!validBody && (
+                  <div className="modal-warning">input is not valid</div>
+                )}
               </div>
             </form>
           </div>
@@ -88,7 +136,7 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={onSubmit}
+              onClick={handleSubmit}
             >
               Add Question
             </button>
@@ -102,4 +150,5 @@ export default function QuestionModal({ onSubmit, toggleModal }) {
 QuestionModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  refreshQuestions: PropTypes.func.isRequired,
 };
