@@ -567,10 +567,7 @@ small {
 
 /* Scrollable Review List */
 .scrollable-reviews {
-  max-height: 650px; /* Set a height limit */
-  overflow-y: scroll; /* Enable vertical scrolling */
-  padding: 10px;
-  box-sizing: border-box;
+  max-height: 80vh; /* Set a height limit */
 }
 
 /* Button: Positioned outside the scrollable list */
@@ -669,11 +666,11 @@ small {
   flex: 2; /* Equivalent to 2/3 of the space */
 }
 
-.ratings-reviews-container {
-  max-width: 1200px; /* Ensures it doesn't stretch across the whole page */
-  margin: 0 auto; /* Centers the container horizontally */
-  padding: 20px; /* Adds space around the content */
-}
+// .ratings-reviews-container {
+//   max-width: 1200px; /* Ensures it doesn't stretch across the whole page */
+//   margin: 0 auto; /* Centers the container horizontally */
+//   padding: 20px; /* Adds space around the content */
+// }
 
 .rating-breakdown {
   display: flex;

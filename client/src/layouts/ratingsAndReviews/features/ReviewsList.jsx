@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import PropTypes from 'prop-types';
 import Button from '../../../components/PrimaryButton.jsx';
-import DropdownSelector from '../../../components/DropdownSelector.jsx';
+import DropdownSelectorSecondary from '../../../components/DropdownSelectorSecondary.jsx';
 import WriteNewReview from './WriteNewReview.jsx';
 
 export default function ReviewList({ numberOfRatings, reviews, product }) {
@@ -116,7 +116,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
 
 
   return (
-    <div>
+    <div className="ms-5">
       {visibleReviews.length === 0 && (
         <div>
           <p>Be the first to review! </p>
@@ -124,11 +124,10 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
         </div>
       )}
 {visibleReviews.length > 0 && (
-      <div className="review-list-container">
-        <div className="review-header">
-          <span>
+      <div>
+        <span className="fs-5 fw-medium">
             {numberOfRatings} reviews, sorted by{' '}
-            <DropdownSelector
+            <DropdownSelectorSecondary
               options={['relevant', 'helpful', 'newest']}
               placeholder={sortOrder}
               isDisabled={false}
@@ -141,10 +140,9 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
                 cursor: 'pointer'
               }}
             />
-          </span>
-        </div>
+        </span>
 
-        <div className="scrollable-reviews">
+        <div className="overflow-y-scroll scrollable-reviews">
           {visibleReviews.map((review) => (
             <ReviewTile
               key={review.review_id}

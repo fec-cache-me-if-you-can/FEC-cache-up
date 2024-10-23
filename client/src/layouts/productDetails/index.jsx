@@ -123,15 +123,15 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   };
 
   return (
-    <div className="product-details-container">
+    <div className="d-flex align-content-between">
       {/* Left Column: Image Gallery and Additional Info */}
-      <div className="product-details-left-column">
+      <div className="">
         <ImageGallery photos={photos} />
         <AdditionalInfo slogan={slogan || ''} description={description || ''} />
       </div>
 
       {/* Right Column: Product Info, Style Selector, and Add to Cart */}
-      <div className="product-details-right-column">
+      <div className="">
         <ProductInformation
           name={name}
           category={category}

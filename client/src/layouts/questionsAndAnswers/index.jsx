@@ -5,9 +5,10 @@ import QuestionsList from './features/QuestionsList.jsx';
 
 export default function QuestionsAndAnswers({ productId, productName }) {
   return (
-    <div className="p-1">
+    <>
+      <h5 className="section-header">Questions And Answers</h5>
       <QuestionsList productId={productId} productName={productName} />
-    </div>
+    </>
   );
 }
 
