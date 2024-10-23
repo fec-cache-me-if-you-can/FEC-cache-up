@@ -32,7 +32,6 @@ const ProductDetails = ({ details, renderIcon, setProductId }) => {
           <span className="discount-slash"> {details.price}</span>
         )}
       </p>
-      <p className="text-size-90 my-2">${details.price || 'N/A'}</p>
       <StarRating rating={details.rating} />
     </div>
   );
