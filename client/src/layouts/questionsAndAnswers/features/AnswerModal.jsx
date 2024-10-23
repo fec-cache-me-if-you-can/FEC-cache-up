@@ -81,7 +81,7 @@ export default function AnswerModal({ onSubmit, toggleModal, productName, questi
           <div className="modal-header">
             <div>
               <div><h5 className="modal-title">Submit your Answer</h5></div>
-              <div><h7 className="modal-sub-title">{productName}: {questionBody}</h7></div>
+              <div>{productName}: {questionBody}</div>
             </div>
             <button
               type="button"

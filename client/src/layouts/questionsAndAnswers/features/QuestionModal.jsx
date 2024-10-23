@@ -77,7 +77,7 @@ export default function QuestionModal({
           <div className="modal-header">
             <div>
               <div><h5 className="modal-title">Ask Your Question</h5></div>
-              <div><h7 className="modal-sub-title">about the {productName}</h7></div>
+              <div>about the {productName}</div>
             </div>
             <button
               type="button"
