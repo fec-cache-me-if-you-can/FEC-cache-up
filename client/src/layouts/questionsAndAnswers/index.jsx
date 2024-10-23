@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import QuestionsList from './features/QuestionsList.jsx';
 
-export default function QuestionsAndAnswers({ productId }) {
+export default function QuestionsAndAnswers({ productId, productName }) {
   return (
     <>
       <h5 className="section-header">Questions And Answers</h5>
-      <QuestionsList productId={productId} />
+      <QuestionsList productId={productId} productName={productName} />
     </>
   );
 }
@@ -15,4 +15,5 @@ export default function QuestionsAndAnswers({ productId }) {
 
 QuestionsAndAnswers.propTypes = {
   productId: PropTypes.number.isRequired,
+  productName: PropTypes.string.isRequired,
 };

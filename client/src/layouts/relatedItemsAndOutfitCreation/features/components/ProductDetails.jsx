@@ -29,10 +29,9 @@ const ProductDetails = ({ details, renderIcon, setProductId }) => {
       <p className="text-size-90 my-2">
         ${details.sale || details.price}
         {details.sale && (
-          <span className="discount-slash"> {details.price}</span>
+          <span className="discount-slash"> ${details.price}</span>
         )}
       </p>
-      <p className="text-size-90 my-2">${details.price || 'N/A'}</p>
       <StarRating rating={details.rating} />
     </div>
   );

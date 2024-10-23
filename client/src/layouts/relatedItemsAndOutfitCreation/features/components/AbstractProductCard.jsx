@@ -40,6 +40,11 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
     <div
       className="ratio d-flex justify-content-center align-items-center"
       style={{ '--bs-aspect-ratio': '100%' }}
+      onClick={handleCardClick}
+      role="button"
+      tabIndex="0"
+      aria-label={`View details for ${productDetails?.name}`}
+      onKeyDown={(e) => e.key === 'Enter' && setProductId(productId)}
     >
       {isLoading ? (
         <div className="d-flex justify-content-center align-items-center w-100 h-100">
@@ -76,11 +81,6 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
     <div
       className="card square border-05 cursor-pointer card-border"
       style={{ width: '20rem' }}
-      onClick={handleCardClick}
-      role="button"
-      tabIndex="0"
-      aria-label={`View details for ${productDetails?.name}`}
-      onKeyDown={(e) => e.key === 'Enter' && setProductId(productId)}
     >
       {renderImageSection()}
       {renderDetailsSection()}

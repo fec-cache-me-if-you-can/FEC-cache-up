@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import AnswerModal from './AnswerModal.jsx';
 
-export default function AddAnswer({ onClick }) {
+export default function AddAnswer({ onClick, productName, questionBody }) {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
@@ -20,7 +20,7 @@ export default function AddAnswer({ onClick }) {
         Add Answer
       </button>
       {showModal && (
-        <AnswerModal onSubmit={onClick} toggleModal={toggleModal} />
+        <AnswerModal onSubmit={onClick} toggleModal={toggleModal} productName={productName} questionBody={questionBody} />
       )}
     </div>
   );

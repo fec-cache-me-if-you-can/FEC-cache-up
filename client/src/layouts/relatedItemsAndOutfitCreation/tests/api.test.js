@@ -23,14 +23,14 @@ describe('API Service', () => {
       const result = await fetchRelatedProductIds('123');
       expect(result).toEqual(['1', '2', '3']);
       expect(axios.get).toHaveBeenCalledWith('/products/123/related');
-    });
+    }, 10000);
 
     it('should throw ApiError on failure', async () => {
       axios.get.mockRejectedValueOnce(new Error('Network error'));
       await expect(fetchRelatedProductIds('123')).rejects.toThrow(
         'Failed to fetch related product IDs for 123',
       );
-    });
+    }, 10000);
   });
 
   describe('fetchOutfitProductIds', () => {
@@ -39,7 +39,7 @@ describe('API Service', () => {
       const result = await fetchOutfitProductIds();
       expect(result).toEqual(['1', '2']);
       expect(axios.get).toHaveBeenCalledWith('/outfit');
-    });
+    }, 10000);
   });
 
   describe('addProductByIdToOutfit', () => {
@@ -47,7 +47,7 @@ describe('API Service', () => {
       axios.post.mockResolvedValueOnce({ data: { success: true } });
       await addProductByIdToOutfit('123');
       expect(axios.post).toHaveBeenCalledWith('/outfit', { id: '123' });
-    });
+    }, 10000);
 
     it('should reject with error if productId is not provided', async () => {
       await expect(addProductByIdToOutfit()).rejects.toThrow(
@@ -55,14 +55,14 @@ describe('API Service', () => {
       );
       expect(axios.post).not.toHaveBeenCalled();
     });
-  });
+  }, 10000);
 
   describe('removeProductByIdFromOutfit', () => {
     it('should remove product from outfit', async () => {
       axios.delete.mockResolvedValueOnce({ data: { success: true } });
       await removeProductByIdFromOutfit('123');
       expect(axios.delete).toHaveBeenCalledWith('/outfit/123');
-    });
+    }, 10000);
 
     it('should reject with error if productId is not provided', async () => {
       await expect(removeProductByIdFromOutfit()).rejects.toThrow(
@@ -70,7 +70,7 @@ describe('API Service', () => {
       );
       expect(axios.delete).not.toHaveBeenCalled();
     });
-  });
+  }, 10000);
 
   describe('fetchProductFeaturesById', () => {
     it('should fetch product features', async () => {
@@ -80,14 +80,14 @@ describe('API Service', () => {
       const result = await fetchProductFeaturesById('123');
       expect(result).toEqual(['feature1', 'feature2']);
       expect(axios.get).toHaveBeenCalledWith('/products/123/information');
-    });
+    }, 10000);
 
     it('should reject with error if productId is not provided', async () => {
       await expect(fetchProductFeaturesById()).rejects.toThrow(
         'Product ID is required',
       );
       expect(axios.get).not.toHaveBeenCalled();
-    });
+    }, 10000);
   });
 
   describe('fetchProductInformationById', () => {
@@ -97,14 +97,14 @@ describe('API Service', () => {
       const result = await fetchProductInformationById('123');
       expect(result).toEqual(mockData);
       expect(axios.get).toHaveBeenCalledWith('/products/123/information');
-    });
+    }, 10000);
 
     it('should reject with error if productId is not provided', async () => {
       await expect(fetchProductInformationById()).rejects.toThrow(
         'Product ID is required',
       );
       expect(axios.get).not.toHaveBeenCalled();
-    });
+    }, 10000);
   });
 
   describe('reloadPage', () => {
@@ -115,7 +115,7 @@ describe('API Service', () => {
       reloadPage();
       expect(window.location.reload).toHaveBeenCalledTimes(1);
       window.location = originalLocation;
-    });
+    }, 10000);
   });
 
   describe('fetchCompleteProductDataById', () => {
@@ -140,13 +140,13 @@ describe('API Service', () => {
       expect(axios.get).toHaveBeenCalledWith('/products/123/information');
       expect(axios.get).toHaveBeenCalledWith('/products/123/styles');
       expect(axios.get).toHaveBeenCalledWith('/reviews/meta?product_id=123');
-    });
+    }, 10000);
 
     it('should reject with error if productId is not provided', async () => {
       await expect(fetchCompleteProductDataById()).rejects.toThrow(
         'Product ID is required',
       );
       expect(axios.get).not.toHaveBeenCalled();
-    });
+    }, 10000);
   });
 });

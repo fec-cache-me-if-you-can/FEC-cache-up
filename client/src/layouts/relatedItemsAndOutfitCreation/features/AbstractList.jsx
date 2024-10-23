@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/scss/navigation';
 import AddToOutfitCard from './components/AddToOutfitCard.jsx';
 import Icon from '@/components/icons.jsx';
+import LoadingSpinner from '@/components/LoadingSpinner.jsx';
 
 const AbstractList = ({
   items = [],
@@ -19,13 +20,13 @@ const AbstractList = ({
   handleAddToOutfit = () => {},
   setProductId = () => {},
 }) => {
-  const renderLoadingMessage = () => <p>Loading...</p>;
+  const renderLoadingMessage = () => <LoadingSpinner />
 
   const renderErrorMessage = () => (
-    <p className="error-message secondary-color">{error}</p>
+    <p className="error-message text-center secondary-color">{error}</p>
   );
 
-  const renderNoItemsMessage = () => <p>No items found</p>;
+  const renderNoItemsMessage = () => <p data-testid="no-items-message" className={"text-center text-secondary"}>You don't have any items added to your outfit.</p>;
 
   const renderNavigationButton = (direction) => (
     <button

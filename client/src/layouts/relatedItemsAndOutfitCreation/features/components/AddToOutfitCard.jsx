@@ -18,8 +18,12 @@ const AddToOutfitCard = ({ productId, action, items = [] }) => {
   return (
     <button
       onClick={handleAddToOutfit}
-      className={`btn btn-primary square m-3 pe-1 ps-1 ${isProductInOutfit ? 'disabled' : ''}`}
-      style={{ minWidth: '40px', minHeight: '40px', padding: '0' }}
+      className={`btn btn-primary square m-3 px-3 py-2 fs-5 ${isProductInOutfit ? 'disabled' : ''}`}
+      style={{
+        minWidth: '40px',
+        minHeight: '40px',
+        padding: '0',
+      }}
       disabled={isProductInOutfit}
       aria-label={
         isProductInOutfit
@@ -28,6 +32,9 @@ const AddToOutfitCard = ({ productId, action, items = [] }) => {
       }
     >
       <Icon icon={isProductInOutfit ? 'fa-check' : 'fa-plus'} />
+      <span className="ms-2">
+        {isProductInOutfit ? 'added' : 'add to outfit'}
+      </span>
     </button>
   );
 };

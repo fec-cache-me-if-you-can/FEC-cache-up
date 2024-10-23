@@ -8,7 +8,7 @@ import AnswersList from './AnswersList.jsx';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-export default function Question({ question, getQuestions, setQuestions }) {
+export default function Question({ question, getQuestions, setQuestions, productName }) {
   const [currentQuestion, setCurrentQuestion] = useState(question);
   const [question_id, setQuestion_id] = useState(question.question_id);
   const [answers, setAnswers] = useState(question.answers);
@@ -75,13 +75,13 @@ export default function Question({ question, getQuestions, setQuestions }) {
         <div className="header-interaction col-4 d--flex ">
           <Helpful onClick={isHelpful} helpfulness={howHelpful} />
           <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
-          <AddAnswer onClick={createAnswer} />
+          <AddAnswer onClick={createAnswer} productName={productName} questionBody={question_body} />
           <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
           <Report onClick={reportQuestion} />
         </div>
       </div>
       <div className="question-footer">
-        <AnswersList answers={answers} question_id={question_id} />
+        <AnswersList answers={answers} question_id={question_id} productName={productName}/>
         <div className="question-date d-inline-flex fs-12">
           {new Date(question_date).toLocaleDateString('en-US', dateOptions)}
         </div>

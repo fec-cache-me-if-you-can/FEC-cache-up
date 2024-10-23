@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import placeholder from '@/assets/public/placeholder.jpeg';
 
-const ProductImage = ({ src, alt = ''}) => {
+const ProductImage = ({ src, alt = '' }) => {
   const validSrc = src || placeholder;
 
   return (

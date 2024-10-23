@@ -19,8 +19,8 @@ class ApiError extends Error {
   }
 }
 
-const MAX_RETRIES = 3;
-const RETRY_DELAY = 1000; // 1 second
+const MAX_RETRIES = 1;
+const RETRY_DELAY = 6000; // 6 seconds
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
