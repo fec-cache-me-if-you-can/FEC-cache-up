@@ -51,11 +51,12 @@ export default function RatingsAndReviews({
 
   return (
     <>
-      <h5 className="section-header">Ratings And Reviews</h5>{' '}
+
+
       <div className="d-flex gap-5">
         {/* Left Column: Ratings + Product Breakdown */}
         <div className="col-3">
-          <KeywordSearch handleSearchFilter={handleSearchFilter} />
+        <h5 className="section-header">Ratings And Reviews</h5>{' '}
           <RatingsBreakdown
             rating={rating}
             numberOfRatings={numberOfRatings}
@@ -71,6 +72,7 @@ export default function RatingsAndReviews({
 
         {/* Right Column: Review List */}
         <div className="w-100">
+        <KeywordSearch handleSearchFilter={handleSearchFilter} />
         <ReviewList
           numberOfRatings={numberOfRatings}
           reviews={filteredReviews}
