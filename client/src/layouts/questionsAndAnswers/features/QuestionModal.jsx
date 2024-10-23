@@ -127,14 +127,6 @@ export default function QuestionModal({
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
-              onClick={toggleModal}
-            >
-              Close
-            </button>
-            <button
-              type="button"
               className="btn btn-primary"
               onClick={handleSubmit}
             >
