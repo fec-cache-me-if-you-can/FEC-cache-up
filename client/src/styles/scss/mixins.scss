@@ -1,3 +1,5 @@
+@import 'variables';
+
 @mixin color-scheme($theme) {
   @if $theme == 'light' {
     --bs-body-bg: #{$light-background};
