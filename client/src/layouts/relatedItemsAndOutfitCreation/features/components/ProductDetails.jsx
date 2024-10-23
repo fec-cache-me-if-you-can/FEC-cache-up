@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StarRating from '../../../../components/StarRating.jsx';
-import { scrollToTop } from '../../utils.js';
 
 const ProductDetails = ({ details, renderIcon, setProductId }) => {
   const handleTitleClick = () => {
