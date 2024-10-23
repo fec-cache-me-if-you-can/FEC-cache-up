@@ -14,7 +14,7 @@ describe('PrimaryButton Component', () => {
     render(<PrimaryButton />);
     const button = screen.getByRole('button');
     expect(button).toHaveTextContent('unnamed button');
-    expect(button).toHaveClass('btn', 'btn-primary', 'square', 'btn-lg', 'm-3');
+    expect(button).toHaveClass('btn', 'btn-primary', 'square', 'btn-lg');
   });
 
   test('renders with custom label', () => {
@@ -57,7 +57,6 @@ describe('PrimaryButton Component', () => {
       'btn-primary',
       'square',
       'btn-lg',
-      'm-3',
       'disabled',
       'custom-class',
     );

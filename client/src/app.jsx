@@ -5,14 +5,10 @@ import RatingsAndReviews from './layouts/ratingsAndReviews/index.jsx';
 import QuestionsAndAnswers from './layouts/questionsAndAnswers/index.jsx';
 import RelatedItemsAndOutfitCreation from './layouts/relatedItemsAndOutfitCreation/index.jsx';
 import PrimaryButton from './components/PrimaryButton.jsx';
+import NavBar from './layouts/navBar/index.jsx';
 
 const DEFAULT_PRODUCT_ID = 40344;
 
-const toggleTheme = () => {
-  const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-bs-theme', newTheme);
-};
 export default function App() {
   const [productId, setProductId] = useState(DEFAULT_PRODUCT_ID);
   const [product, setProduct] = useState({ id: DEFAULT_PRODUCT_ID });
@@ -20,6 +16,18 @@ export default function App() {
   const [metaReviews, setMetaReviews] = useState({});
   const [rating, setRating] = useState(0);
   const [numberOfRatings, setNumberOfRatings] = useState(0);
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-bs-theme', newTheme);
+    setTheme(newTheme);
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-bs-theme', 'light');
+  }, []);
 
   // Fetch product data
   useEffect(() => {
@@ -63,10 +71,8 @@ export default function App() {
 
   return (
     <div id="app" className="container my-5">
-      <div className="text-center mb-4">
-        <PrimaryButton onClick={toggleTheme} label="Toggle Theme" />
-      </div>
-      <div className="my-4">
+      <NavBar theme={theme} toggleTheme={toggleTheme} />
+      <div className="my-4" id="product-details">
         {loadingProduct ? (
           <p>Loading product...</p>
         ) : (
@@ -77,7 +83,7 @@ export default function App() {
           />
         )}
       </div>
-      <div className="my-4">
+      <div className="my-4" id="reviews">
         <RatingsAndReviews
           metaReviews={metaReviews}
           product={product}
@@ -86,11 +92,11 @@ export default function App() {
         />
       </div>
       {productId && (
-        <div className="my-4">
-          <QuestionsAndAnswers productId={productId}/>
+        <div className="my-4" id="q-a">
+          <QuestionsAndAnswers productId={productId} />
         </div>
       )}
-      <div className="my-4">
+      <div className="my-4" id="related-items">
         {productId && (
           <RelatedItemsAndOutfitCreation
             productId={String(product.id)}
