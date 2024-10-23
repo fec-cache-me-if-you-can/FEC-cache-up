@@ -6,59 +6,68 @@ import axios from 'axios';
 import Answer from './Answer.jsx';
 
 export default function AnswersList({ answers, question_id }) {
+
+  const [currentAnswers, setCurrentAnswers] = useState(answers);
   const [displayedAnswers, setDisplayedAnswers] = useState(2);
-  const [moreIsHidden, setMoreIsHidden] = useState(true);
+  const [moreIsHidden, setMoreIsHidden] = useState(false);
   const [cantLoadMore, setCantLoadMore] = useState(false);
   const [maxLoadedAnswers, setMaxLoadedAnswers] = useState(
     Object.keys(answers).length,
   );
 
   useEffect(() => {
-    if (displayedAnswers > 2) {
-      setMoreIsHidden(false);
-    } else {
-      setMoreIsHidden(true);
-    }
+    setMaxLoadedAnswers(Object.keys(currentAnswers).length);
+  }, [currentAnswers])
+
+  useEffect(() => {
+    displayedAnswers > 2 ? setMoreIsHidden(false) : setMoreIsHidden(true);
   }, [displayedAnswers]);
 
   useEffect(() => {
-    if (displayedAnswers >= maxLoadedAnswers) {
-      setCantLoadMore(true);
-    } else {
-      setCantLoadMore(false);
-    }
+    displayedAnswers >= maxLoadedAnswers
+      ? setCantLoadMore(true)
+      : setCantLoadMore(false);
   }, [displayedAnswers, maxLoadedAnswers]);
 
   const handleLoadMoreAnswers = () => {
-    setDisplayedAnswers((displayedAnswers) => displayedAnswers + 2);
+    setDisplayedAnswers(Object.keys(answers).length);
   };
 
   const hideMoreAnswers = () => {
     setDisplayedAnswers(2);
   };
 
+  const reloadAnswers = () => {
+    axios.get(`/qa/answers?question_id=${question_id}`)
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="answers-list">
       {Object.keys(answers)
+        .sort((a, b) => answers[b].helpfulness - answers[a].helpfulness)
         .slice(0, displayedAnswers)
         .map((key) => {
           let answer = answers[key];
           return <Answer key={answer.id} answer={answer} />;
         })}
-      <button
-        className="d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-        onClick={handleLoadMoreAnswers}
-        hidden={cantLoadMore}
-      >
-        Load More Answers
-      </button>
-      <button
-        className="d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-        onClick={hideMoreAnswers}
-        hidden={moreIsHidden}
-      >
-        Hide More Answers
-      </button>
+      {!cantLoadMore && (
+        <button
+          className="d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+          onClick={handleLoadMoreAnswers}
+        >
+          Load More Answers
+        </button>
+      )}
+      {!moreIsHidden && (
+        <button
+          className="d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+          onClick={hideMoreAnswers}
+        >
+          Hide More Answers
+        </button>
+      )}
     </div>
   );
 }

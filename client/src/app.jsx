@@ -85,9 +85,11 @@ export default function App() {
           numberOfRatings={numberOfRatings}
         />
       </div>
-      <div className="my-4">
-        <QuestionsAndAnswers />
-      </div>
+      {productId && (
+        <div className="my-4">
+          <QuestionsAndAnswers productId={productId}/>
+        </div>
+      )}
       <div className="my-4">
         {productId && (
           <RelatedItemsAndOutfitCreation
