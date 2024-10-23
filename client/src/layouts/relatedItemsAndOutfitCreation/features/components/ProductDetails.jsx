@@ -5,6 +5,7 @@ import StarRating from '../../../../components/StarRating.jsx';
 const ProductDetails = ({ details, renderIcon, setProductId }) => {
   const handleTitleClick = () => {
     setProductId(details.id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

@@ -12,6 +12,11 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [productDetails, setProductDetails] = useState(null);
 
+  const handleCardClick = (e) => {
+    setProductId(productId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const fetchAndProcessProductData = async () => {
     setIsLoading(true);
     try {
@@ -71,6 +76,11 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
     <div
       className="card square border-05 cursor-pointer card-border"
       style={{ width: '20rem' }}
+      onClick={handleCardClick}
+      role="button"
+      tabIndex="0"
+      aria-label={`View details for ${productDetails?.name}`}
+      onKeyDown={(e) => e.key === 'Enter' && setProductId(productId)}
     >
       {renderImageSection()}
       {renderDetailsSection()}
