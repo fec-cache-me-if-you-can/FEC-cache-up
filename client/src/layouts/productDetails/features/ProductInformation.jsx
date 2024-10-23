@@ -39,10 +39,11 @@ export default function ProductInformation({
   return (
     <div>
       <StarRating rating={rating} />
-      <a href="#ratings" style={{ marginLeft: '10px' }}>
+      <a href="#reviews" style={{ marginLeft: '10px' }}>
         View all {numberOfRatings} reviews{' '}
       </a>
-      <p>{category}</p>
+      <br></br>
+      <p class="card-text fw-light h5 text-size-100 mt-0 mb-2" style={{ textTransform: 'uppercase' }}>{category}</p>
       <h2>{name}</h2>
       {salePrice ? (
         <p>

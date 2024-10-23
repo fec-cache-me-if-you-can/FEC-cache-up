@@ -95,6 +95,26 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
     setSortedReviews(arrayToSort);
   };
 
+  const CustomDropdownSelector = ({ options, selectedOption, onChange }) => (
+    <div className="custom-dropdown" onClick={(e) => e.stopPropagation()}>
+      <span className="selected-option">
+        {selectedOption} <span className="arrow">▼</span>
+      </span>
+      <select
+        value={selectedOption}
+        onChange={(e) => onChange(e.target.value)}
+        style={{ opacity: 0, position: 'absolute', pointerEvents: 'none' }}
+      >
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+
+
   return (
     <div>
       {visibleReviews.length === 0 && (
@@ -103,7 +123,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
           <Button label="Submit a review!" onClick={openModal} />
         </div>
       )}
-
+{visibleReviews.length > 0 && (
       <div className="review-list-container">
         <div className="review-header">
           <span>
@@ -114,6 +134,12 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
               isDisabled={false}
               onChange={onSortChange}
               selectedOption={sortOrder}
+              className="custom-dropdown"
+              customStyles={{
+                display: 'inline',
+                textDecoration: 'underline',
+                cursor: 'pointer'
+              }}
             />
           </span>
         </div>
@@ -158,6 +184,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
           </div>
         </div>
       </div>
+      ) }
     </div>
   );
 }

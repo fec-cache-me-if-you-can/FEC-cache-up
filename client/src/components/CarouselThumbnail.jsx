@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const CarouselThumbnail = ({ selected = false, imageUrl, onClick }) => {
   return (
     <div
-      className={`carousel-thumbnail ${selected ? 'border-dark border-bottom border-3' : ''}`}
+
       onClick={onClick}
       style={{
         width: '70px',
@@ -13,6 +13,7 @@ const CarouselThumbnail = ({ selected = false, imageUrl, onClick }) => {
         overflow: 'hidden',
         display: 'inline-block',
         margin: '10px',
+        borderBottom: selected ? '2px solid #AB1B38'  : 'none'
       }}
     >
       <div
@@ -32,8 +33,9 @@ const CarouselThumbnail = ({ selected = false, imageUrl, onClick }) => {
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
+            border: selected ? '2px solid #AB1B38'  : 'none'
           }}
-          className={`border ${selected ? 'border-dark' : 'border-light'}`}
+
           alt="carousel-thumbnail"
         />
       </div>
