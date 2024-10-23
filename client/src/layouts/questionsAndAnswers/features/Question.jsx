@@ -28,12 +28,10 @@ export default function Question({ question, getQuestions, setQuestions }) {
   const [hasVotedHelpful, setHasVotedHelpful] = useState(false);
 
   const createAnswer = (body) => {
-    console.log(body);
     body.question_id = question_id;
     return axios
       .post(`/qa/answers`, body)
       .then(() => {
-        console.log('aaa');
         axios
           .get(`/qa/questions/${question_id}/answers`)
           .then((result) => setAnswers(result.data.results))
