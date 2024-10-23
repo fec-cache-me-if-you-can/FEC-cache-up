@@ -12,7 +12,7 @@ export default function SearchQuestions({ update }) {
   const updateQuery = (e) => setQuery(e.target.value);
 
   return (
-    <div className="input-group border border-dark square m-3">
+    <div className="input-group question-search square m-3">
       <input
         type="search"
         placeholder="Search..."

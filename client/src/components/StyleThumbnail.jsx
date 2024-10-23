@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CheckmarkNote from './CheckmarkNote.jsx';
+import Icon from './icons.jsx';
 
 export default function StyleThumbnail({
   name,
@@ -47,7 +48,14 @@ export default function StyleThumbnail({
       )}
 
       {isHovered && (
-        <div className="hover-name" style={hoverNameStyle}>
+        <div className="hover-name"  style={{
+          ...hoverNameStyle,
+          borderRadius: '35px',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
           {name}
         </div>
       )}
@@ -63,6 +71,7 @@ const checkmarkNoteStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   zIndex: 1,
+  color: '#AB1B38'
 };
 
 const hoverNameStyle = {

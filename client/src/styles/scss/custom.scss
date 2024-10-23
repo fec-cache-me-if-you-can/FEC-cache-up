@@ -22,7 +22,7 @@ $dark-attention: #c50d32;
   --attention: var($light-attention);
 }
 
-[data-bs-theme='dark'] {
+[data-bs-theme="dark"] {
   --background: var($dark-background);
   --secondary-bg: var($dark-secondary-bg);
   --primary-text: var($dark-primary-text);
@@ -591,7 +591,6 @@ small {
   padding: 20px;
   margin-bottom: 20px;
   position: relative;
-  background-color: #fff;
 }
 
 /* Top Section: Star Rating and User Info */
@@ -609,7 +608,6 @@ small {
 /* Username and Date (Top Right) */
 .review-top .review-user-info {
   font-size: 14px;
-  color: #555;
   align-self: flex-end;
 }
 
@@ -633,7 +631,6 @@ small {
   align-items: center;
   margin-top: 10px;
   font-size: 14px;
-  color: #333;
   cursor: pointer;
 }
 
@@ -705,6 +702,7 @@ small {
 
 .bar-container:hover {
   background-color: rgb(196 228 239);
+  color: black;
 }
 
 .ratings-breakdown-column {
@@ -847,6 +845,11 @@ span.discount-slash {
 
 .attention {
   color: var(--attention) !important;
+}
+
+.question-search {
+  color: var(--bs-body-color) !important;
+  border: 1px solid var(--bs-body-color) !important;
 }
 
 /* Base class for revealing structure */

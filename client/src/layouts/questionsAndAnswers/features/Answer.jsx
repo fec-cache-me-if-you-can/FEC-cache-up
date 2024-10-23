@@ -24,6 +24,11 @@ export default function Answer({ answer }) {
     }
   };
 
+  const reportAnswer = () => {
+    axios.put('/qa/answers/report', { answer_id: id })
+      .catch((err) => console.log(err));
+  };
+
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   return (
     <div className="answer-card p-3">
@@ -42,7 +47,7 @@ export default function Answer({ answer }) {
           {new Date(date).toLocaleDateString('en-US', dateOptions)}
         </div>
         <Helpful onClick={isHelpful} helpfulness={howHelpful} />
-        <Report />
+        <Report onClick={reportAnswer} />
       </div>
     </div>
   );

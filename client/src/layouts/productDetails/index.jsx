@@ -25,6 +25,18 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   const [photos, setPhotos] = useState([]);
   const [showSizeError, setShowSizeError] = useState(false);
 
+
+  // Sync state with product prop when product changes
+  useEffect(() => {
+    if (product) {
+      setName(product.name);
+      setCategory(product.category);
+      setSlogan(product.slogan);
+      setDescription(product.description);
+      // Set other properties if needed, based on your product structure
+    }
+  }, [product]);
+
   //pull info on styles
   useEffect(() => {
     axios.get(`products/${product.id}/styles`).then((response) => {

@@ -24,12 +24,7 @@ export default function Bar({
       {/* Clickable Star Rating Label */}
       <span
         onClick={onClick}
-        style={{
-          color: 'blue',
-          textDecoration: 'underline',
-          cursor: 'pointer',
-          whiteSpace: 'nowrap',
-        }}
+        className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
       >
         {starRating} stars
       </span>
