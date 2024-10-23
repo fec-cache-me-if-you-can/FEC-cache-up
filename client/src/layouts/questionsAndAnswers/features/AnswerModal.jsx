@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function AnswerModal({ onSubmit, toggleModal }) {
+export default function AnswerModal({ onSubmit, toggleModal, productName, questionBody }) {
   const [name, setName] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
@@ -68,7 +68,7 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
 
   return (
     <div
-      className="modal "
+      className="modal review-modal-overlay"
       id="exampleModal"
       tabIndex="-1"
       role="dialog"
@@ -79,7 +79,10 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Add Answer</h5>
+            <div>
+              <div><h5 className="modal-title">Submit your Answer</h5></div>
+              <div>{productName}: {questionBody}</div>
+            </div>
             <button
               type="button"
               className="close-button"
@@ -130,14 +133,6 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
             </form>
           </div>
           <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
-              onClick={toggleModal}
-            >
-              Close
-            </button>
             <button
               type="button"
               className="btn btn-primary"
