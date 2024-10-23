@@ -66,7 +66,7 @@ export default function App() {
       <div className="text-center mb-4">
         <PrimaryButton onClick={toggleTheme} label="Toggle Theme" />
       </div>
-      <div className="my-4" id="product-details">
+      <div className="my-4">
         {loadingProduct ? (
           <p>Loading product...</p>
         ) : (
