@@ -3,6 +3,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function QuestionModal({
+  productName,
   onSubmit,
   toggleModal,
   refreshQuestions,
@@ -74,7 +75,10 @@ export default function QuestionModal({
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Add Question</h5>
+            <div>
+              <div><h5 className="modal-title">Ask Your Question</h5></div>
+              <div><h7 className="modal-sub-title">about the {productName}</h7></div>
+            </div>
             <button
               type="button"
               className="close-button"
@@ -140,6 +144,7 @@ export default function QuestionModal({
 }
 
 QuestionModal.propTypes = {
+  productName: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
   refreshQuestions: PropTypes.func.isRequired,

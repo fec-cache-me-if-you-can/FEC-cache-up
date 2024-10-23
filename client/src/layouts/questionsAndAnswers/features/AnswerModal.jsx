@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function AnswerModal({ onSubmit, toggleModal }) {
+export default function AnswerModal({ onSubmit, toggleModal, productName, questionBody }) {
   const [name, setName] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
@@ -79,7 +79,10 @@ export default function AnswerModal({ onSubmit, toggleModal }) {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Add Answer</h5>
+            <div>
+              <div><h5 className="modal-title">Submit your Answer</h5></div>
+              <div><h7 className="modal-sub-title">{productName}: {questionBody}</h7></div>
+            </div>
             <button
               type="button"
               className="close-button"

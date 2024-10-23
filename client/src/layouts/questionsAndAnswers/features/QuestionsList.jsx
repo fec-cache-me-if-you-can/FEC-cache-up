@@ -8,7 +8,7 @@ import Question from './Question.jsx';
 import PrimaryButton from '../../../components/PrimaryButton.jsx';
 import AddQuestion from './AddQuestion.jsx';
 
-export default function QuestionsList({ productId }) {
+export default function QuestionsList({ productId, productName }) {
   const [questions, setQuestions] = useState([]);
   const [query, setQuery] = useState('');
   const [displayedQuestions, setDisplayedQuestions] = useState(4);
@@ -90,7 +90,7 @@ export default function QuestionsList({ productId }) {
     <div className="question-list container-xl">
       <div className="qa-list-header d-flex">
         <SearchQuestions update={updateQuery} />
-        <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} setQuestions={setQuestions} />
+        <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} setQuestions={setQuestions} productName={productName}/>
       </div>
       <div className="scrollable-qa">
         {!query.length
@@ -99,7 +99,7 @@ export default function QuestionsList({ productId }) {
               .slice(0, displayedQuestions)
               .map((question) => {
                 return (
-                  <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} />
+                  <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} productName={productName} />
                 );
               })
           : questions
@@ -117,7 +117,7 @@ export default function QuestionsList({ productId }) {
               .slice(0, displayedQuestions)
               .map((question) => {
                 return (
-                  <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} />
+                  <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} productName={productName} />
                 );
               })}
       </div>
@@ -160,4 +160,5 @@ export default function QuestionsList({ productId }) {
 }
 QuestionsList.propTypes = {
   productId: PropTypes.number.isRequired,
+  productName: PropTypes.string.isRequired,
 };

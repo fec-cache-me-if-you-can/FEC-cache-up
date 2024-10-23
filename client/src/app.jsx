@@ -93,7 +93,7 @@ export default function App() {
       </div>
       {productId && (
         <div className="my-4" id="q-a">
-          <QuestionsAndAnswers productId={productId} />
+          <QuestionsAndAnswers productId={productId} productName={product.name} />
         </div>
       )}
       <div className="my-4" id="related-items">
