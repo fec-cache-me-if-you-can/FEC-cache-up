@@ -123,7 +123,7 @@ export default function QuestionsList({ productId }) {
       </div>
       {!hideButton && (
           <button
-            className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+            className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1 m-2"
             onClick={handleLoadMoreQuestions}
           >
             More Questions
@@ -148,10 +148,10 @@ export default function QuestionsList({ productId }) {
               </button>
             )}
             <button
-              className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+              className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1 m-2"
               onClick={resetDisplayedQuestions}
             >
-              Hide More Questions
+              Hide
             </button>
           </div>
         )}
