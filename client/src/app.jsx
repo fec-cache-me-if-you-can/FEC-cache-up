@@ -66,7 +66,7 @@ export default function App() {
       <div className="text-center mb-4">
         <PrimaryButton onClick={toggleTheme} label="Toggle Theme" />
       </div>
-      <div className="my-4">
+      <div className="my-4" id="product-details">
         {loadingProduct ? (
           <p>Loading product...</p>
         ) : (
@@ -87,7 +87,7 @@ export default function App() {
       </div>
       {productId && (
         <div className="my-4">
-          <QuestionsAndAnswers productId={productId}/>
+          <QuestionsAndAnswers productId={productId} />
         </div>
       )}
       <div className="my-4">

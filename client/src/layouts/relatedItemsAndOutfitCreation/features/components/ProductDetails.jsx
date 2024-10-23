@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StarRating from '../../../../components/StarRating.jsx';
+import { scrollToTop } from '../../utils.js';
 
 const ProductDetails = ({ details, renderIcon, setProductId }) => {
   const handleTitleClick = () => {
     setProductId(details.id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
