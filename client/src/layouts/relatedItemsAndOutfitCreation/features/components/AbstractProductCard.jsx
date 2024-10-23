@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { fetchCompleteProductDataById } from '../../api.js';
-import { processProductData, scrollToTop } from '../../utils.js';
+import { processProductData } from '../../utils.js';
 import LoadingSpinner from '../../../../components/LoadingSpinner.jsx';
 import ProductImage from './ProductImage.jsx';
 import Placeholder from './Placeholder.jsx';
