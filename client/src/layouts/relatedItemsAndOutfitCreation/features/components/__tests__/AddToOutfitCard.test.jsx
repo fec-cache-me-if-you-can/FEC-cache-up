@@ -73,8 +73,8 @@ describe('AddToOutfitCard Component', () => {
       'btn-primary',
       'square',
       'm-3',
-      'pe-1',
-      'ps-1',
+      'px-3',
+      'py-2',
     );
     expect(button).not.toHaveClass('disabled');
   });
@@ -94,9 +94,8 @@ describe('AddToOutfitCard Component', () => {
       'btn-primary',
       'square',
       'm-3',
-      'pe-1',
-      'ps-1',
-      'disabled',
+      'px-3',
+      'py-2',
     );
   });
 });

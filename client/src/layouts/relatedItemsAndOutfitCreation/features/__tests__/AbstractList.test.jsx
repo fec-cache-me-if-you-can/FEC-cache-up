@@ -46,9 +46,9 @@ describe('AbstractList Component', () => {
     jest.clearAllMocks();
   });
 
-  test('renders loading message when isLoading is true', () => {
+  test('renders loading spinner when products are loading', () => {
     render(<AbstractList {...defaultProps} isLoading={true} />);
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
   });
 
   test('renders error message when error prop is provided', () => {
@@ -59,7 +59,7 @@ describe('AbstractList Component', () => {
 
   test('renders no items message when items array is empty', () => {
     render(<AbstractList {...defaultProps} items={[]} />);
-    expect(screen.getByText('No items found')).toBeInTheDocument();
+    expect(screen.getByTestId('no-items-message')).toBeInTheDocument();
   });
 
   test('renders Swiper carousel with correct number of slides', () => {
