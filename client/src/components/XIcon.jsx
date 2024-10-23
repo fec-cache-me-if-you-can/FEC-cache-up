@@ -15,7 +15,7 @@ const XIcon = ({ size = '' }) => {
 };
 
 XIcon.propTypes = {
-  size: PropTypes.string.isRequired,
+  size: PropTypes.string,
 };
 
 export default XIcon;

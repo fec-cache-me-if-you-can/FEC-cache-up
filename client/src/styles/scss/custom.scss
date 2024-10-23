@@ -1,3 +1,36 @@
+// Define variables globally
+$light-background: #fff;
+$light-secondary-bg: #f2eded;
+$light-primary-text: #222;
+$light-secondary-text: #666;
+$light-accent: #596b80;
+$light-attention: #ab1b38;
+$dark-background: #000;
+$dark-secondary-bg: #1f1f1f;
+$dark-primary-text: #fff;
+$dark-secondary-text: #a8aaaf;
+$dark-accent: #7e90a5;
+$dark-attention: #c50d32;
+
+// Color Schemes
+:root {
+  --background: #{$light-background};
+  --secondary-bg: #{$light-secondary-bg};
+  --primary-text: #{$light-primary-text};
+  --secondary-text: #{$light-secondary-text};
+  --accent: #{$light-accent};
+  --attention: #{$light-attention};
+}
+
+[data-bs-theme='dark'] {
+  --background: #{$dark-background};
+  --secondary-bg: #{$dark-secondary-bg};
+  --primary-text: #{$dark-primary-text};
+  --secondary-text: #{$dark-secondary-text};
+  --accent: #{$dark-accent};
+  --attention: #{$dark-attention};
+}
+
 // Base Styles
 html {
   font-size: 100%;
@@ -124,15 +157,6 @@ small {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-// Color Schemes
-:root {
-  @include color-scheme('light');
-}
-
-[data-bs-theme='dark'] {
-  @include color-scheme('dark');
 }
 
 // Star Rating
@@ -262,7 +286,7 @@ small {
 
 .hover-scale:hover {
   transition: all ease 0.1s;
-  transform: scale(1.01);
+  transform: scale(1.05);
   cursor: pointer;
 }
 
@@ -280,14 +304,16 @@ small {
   padding: 0;
 }
 
-//Eve's image gallery carousel
+// Eve's image gallery carousel
 
+/* General Gallery Container */
 .gallery-container {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
+/* Thumbnails Column */
 .gallery-thumbnails-column {
   display: flex;
   flex-direction: column;
@@ -303,6 +329,7 @@ small {
   justify-content: center;
 }
 
+/* Main Carousel Container */
 .gallery-carousel-container {
   width: 650px;
   height: 650px;
@@ -320,13 +347,11 @@ small {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   overflow: hidden;
-}
-
-.gallery-carousel-main:hover {
   cursor: zoom-in;
+  position: relative;
 }
 
 .gallery-carousel-image {
@@ -336,10 +361,11 @@ small {
   object-position: center;
 }
 
+/* Carousel Controls */
 .gallery-carousel-controls {
   position: absolute;
   top: 50%;
-  width: 100%;
+  width: calc(100% - 20px);
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
@@ -347,20 +373,20 @@ small {
 }
 
 .gallery-carousel-btn {
+  margin: 0;
   background: rgb(0 0 0 / 30%);
   border: none;
   color: white;
   padding: 10px;
   cursor: pointer;
   font-size: 24px;
-  z-index: 1;
   width: 30px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   pointer-events: auto;
-  position: absolute;
+  z-index: 2;
 }
 
 .gallery-carousel-btn:hover {
@@ -368,11 +394,105 @@ small {
 }
 
 .gallery-prev {
+  position: absolute;
   left: 0;
+  margin-left: 0;
 }
 
 .gallery-next {
+  position: absolute;
   right: 0;
+  margin-right: 0;
+}
+
+/* Expand Icon */
+.gallery-expand-icon {
+  color: white;
+  background: rgb(0 0 0 / 50%);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.gallery-expand-icon:hover {
+  background: rgb(0 0 0 / 80%);
+}
+
+/* Expanded View Overlay */
+.gallery-expanded-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 90%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.gallery-expanded-main {
+  max-width: 1500px;
+  max-height: 1500px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.gallery-expanded-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  cursor: zoom-in;
+  z-index: 1;
+}
+
+.gallery-expanded-thumbnails {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+.gallery-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.gallery-icon {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.gallery-expanded-image.zoomed {
+  transform-origin: center;
+  transition: transform 0.1s ease-out;
+  cursor: zoom-out;
+  position: relative;
 }
 
 .product-details-container {
@@ -400,27 +520,240 @@ small {
 
 .cart-selectors-container {
   display: flex;
-  gap: 10px; /* Adjust spacing between the selectors */
+  gap: 10px;
   align-items: center;
-  width: 100% !important; /* Ensure container spans full width */
+  width: 100% !important;
 }
 
 .size-selector {
-  flex: 2 !important; /* 2/3 of the space */
-  width: 100% !important; /* Force full width within flex container */
+  flex: 2 !important;
+  width: 100% !important;
 }
 
 .quantity-selector {
-  flex: 1 !important; /* 1/3 of the space */
-  width: 100% !important; /* Force full width within flex container */
+  flex: 1 !important;
+  width: 100% !important;
 }
 
 .full-width-button {
-  width: 100% !important; /* Make button full width */
-  margin-top: 10px !important; /* Add some space above the button */
+  width: 100% !important;
+  margin-top: 10px !important;
 }
 
-//the end of Eve's CSS
+.review-list {
+  flex: 2;
+  max-width: 66%;
+}
+
+.review-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Header: Fixed, outside scrollable area */
+.review-header {
+  margin-bottom: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Scrollable Review List */
+.scrollable-reviews {
+  max-height: 650px; /* Set a height limit */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Button: Positioned outside the scrollable list */
+.more-reviews-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.more-reviews-btn:hover {
+  background-color: #0056b3;
+}
+
+.review-tile {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  background-color: #fff;
+}
+
+/* Top Section: Star Rating and User Info */
+.review-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Star Rating (Top Left) */
+.review-top .review-star-rating {
+  align-self: flex-start;
+}
+
+/* Username and Date (Top Right) */
+.review-top .review-user-info {
+  font-size: 14px;
+  color: #555;
+  align-self: flex-end;
+}
+
+/* Summary as a Small Header */
+.review-summary {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* Review Body */
+.review-body {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Helpful Section (Bottom Left) */
+.review-helpful {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.review-helpful a {
+  margin-left: 5px;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+/* Separator Line */
+.review-separator {
+  margin-top: 15px;
+  border-top: 1px solid #8f8f8f;
+}
+
+/* Content container for RatingsBreakdown and ReviewList */
+.ratings-reviews-content {
+  display: flex;
+  gap: 20px; /* Spacing between the two sections */
+  margin-top: 20px;
+  padding: 10px; /* Adds a little internal padding */
+}
+
+/* RatingsBreakdown should take up 1/3 of the space */
+.ratings-reviews-content > :first-child {
+  flex: 1; /* Equivalent to 1/3 of the space */
+  min-width: 250px; /* Ensures the section does not get too small */
+}
+
+/* ReviewList should take up 2/3 of the space */
+.ratings-reviews-content > :last-child {
+  flex: 2; /* Equivalent to 2/3 of the space */
+}
+
+.ratings-reviews-container {
+  max-width: 1200px; /* Ensures it doesn't stretch across the whole page */
+  margin: 0 auto; /* Centers the container horizontally */
+  padding: 20px; /* Adds space around the content */
+}
+
+.rating-breakdown {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  gap: 10px; /* Adds space between the rating number and stars */
+}
+
+.rating-bar {
+  display: flex;
+  height: 15px;
+  width: 100%;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+
+.rating-bar:hover {
+  background-color: rgb(0 128 0 / 10%); /* Highlight effect */
+}
+
+.rating-bar-filled {
+  transition: width 0.3s;
+}
+
+.rating-bar-empty {
+  transition: width 0.3s;
+}
+
+.bar-container:hover {
+  background-color: rgb(196 228 239);
+}
+
+.ratings-breakdown-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 40%; /* Ensure it only takes 1/3 of the width */
+}
+
+.product-breakdown-container {
+  width: 80%; /* Ensures it takes the full width of its parent */
+  display: flex;
+  justify-content: center; /* Centers the content horizontally */
+}
+
+.product-breakdown {
+  width: 100%; /* Limits the width of the actual content */
+  margin: 0 auto; /* Centers the inner content */
+}
+
+.review-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 50%);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.review-modal-overlay.visible {
+  display: flex;
+}
+
+.review-modal-content {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+  position: relative;
+}
+
+// the end of Eve's CSS
 
 .trash-button.clicked {
   animation: trash-shake 0.3s ease-in-out;
@@ -447,4 +780,112 @@ small {
   font-weight: 400;
   margin-top: 5rem;
   margin-bottom: 3rem;
+}
+
+.test-border {
+  border: solid red;
+  border-width: 1px;
+}
+
+.modal-header {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.add-to-outfit-card {
+  border-color: var(--bs-secondary-bg);
+}
+
+.secondary-bg {
+  background-color: var(--bs-secondary-bg);
+}
+
+.section {
+  margin-top: 3rem;
+  padding: 6rem 1.2rem;
+}
+
+.outfit-container {
+  margin-top: 3rem;
+  padding: 6rem;
+}
+
+span.discount-slash {
+  color: var(--attention) !important;
+  text-decoration: line-through;
+}
+
+/* Base class for revealing structure */
+.reveal-structure {
+  background-clip: content-box;
+  box-shadow: 0 0 0 1px red inset;
+}
+
+/* Reveal margin */
+.reveal-margin {
+  background-color: rgb(255 0 0 / 20%) !important;
+}
+
+/* Reveal padding */
+.reveal-padding {
+  background-color: rgb(0 255 0 / 20%) !important;
+  background-clip: content-box !important;
+}
+
+/* Reveal border */
+.reveal-border {
+  border-color: rgb(0 0 255 / 50%) !important;
+  border-style: solid !important;
+}
+
+/* Reveal all (margin, padding, and border) */
+.reveal-all {
+  background-color: rgb(255 0 0 / 20%) !important;
+  background-clip: content-box !important;
+  box-shadow:
+    0 0 0 1px blue inset,
+    0 0 0 2px rgb(0 255 0 / 20%);
+}
+
+// changes the color of search icon when cursor is placed in .search-field
+// used for FAQ search bar
+.custom-search-input:focus + .search-icon {
+  transition: all 0.3s;
+  color: var(--bs-body-color);
+  opacity: 1;
+}
+
+.custom-search-input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.no-outline {
+  outline: none;
+  box-shadow: none;
+}
+
+.faded-icon {
+  opacity: 0.7;
+}
+
+// end FAQ search bar
+
+.scrollable-qa {
+  max-height: 550px; /* Set a height limit */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.modal-warning {
+  color: red;
+  font-size: small;
 }

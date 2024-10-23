@@ -11,6 +11,8 @@ export default function ImageGallery({ photos }) {
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedThumbnail, setSelectedThumbnail] = useState('');
   const [expandedView, setExpandedView] = useState(false);
+  const [zoom, setZoom] = useState(false);
+  const [mousePosition, setMousePosition] = useState(null);
 
   const maxThumbnails = 5;
 
@@ -86,6 +88,39 @@ export default function ImageGallery({ photos }) {
     setExpandedView(true);
   };
 
+  const toggleExpandedView = () => {
+    setExpandedView(!expandedView);
+    if (!expandedView) {
+      document.body.classList.add('expanded-view-active');
+    } else {
+      document.body.classList.remove('expanded-view-active');
+    }
+  };
+
+  const toggleZoomView = () => {
+    setZoom(!zoom);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!zoom) return;
+    const rect = e.target.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const smoothingFactor = 0.5;
+    setMousePosition({
+      x: (x - 50) * smoothingFactor + 50,
+      y: (y - 50) * smoothingFactor + 50,
+    });
+  };
+
+  const getTransformStyle = () => {
+    if (!zoom || !mousePosition) return {};
+    const { x, y } = mousePosition;
+    return {
+      transform: `scale(2.5) translate(${-(x - 50)}%, ${-(y - 50)}%)`,
+    };
+  };
+
   const thumbnailGridStyle = {
     display: 'grid',
     gridTemplateColumns: '1fr',
@@ -96,67 +131,143 @@ export default function ImageGallery({ photos }) {
   };
 
   return (
-    <div className="gallery-container">
-      {/* Thumbnails Column */}
-      <div className="gallery-thumbnails-column">
-        {/* Up Arrow */}
-        {!visibleThumbnails.includes(thumbnails[0]) && (
-          <div onClick={scrollThumbnailsUp} style={{ cursor: 'pointer' }}>
-            <Icon icon="fa-chevron-up" />
-          </div>
-        )}
-        <div className="gallery-thumbnails" style={thumbnailGridStyle}>
-          {visibleThumbnails.map((thumbnail) => (
-            <CarouselThumbnail
-              key={thumbnail}
-              selected={thumbnail === selectedThumbnail}
-              imageUrl={thumbnail}
-              onClick={() => handleThumbnail(thumbnail)}
+    <>
+      {/* Expanded View Content */}
+      {expandedView && (
+        <div className="gallery-expanded-overlay">
+          {/* Thumbnails/Icons for Expanded View */}
+          {!zoom && (
+            <div className="gallery-expanded-thumbnails">
+              {thumbnails.map((thumbnail, i) => (
+                <div
+                  key={thumbnail}
+                  className="gallery-icon-wrapper"
+                  onClick={() => handleThumbnail(thumbnail)}
+                  style={{
+                    color: thumbnail === selectedThumbnail ? 'white' : 'grey', // Conditionally apply color
+                    fontSize: '24px',
+                    transition: 'color 0.3s',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Icon
+                    icon={
+                      thumbnail === selectedThumbnail
+                        ? 'fa-solid fa-circle-dot'
+                        : 'fa-solid fa-circle'
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="gallery-expanded-main">
+            {/* Navigation */}
+            {!zoom && (
+              <div className="gallery-carousel-controls">
+                {index > 0 && (
+                  <button
+                    onClick={handlePrevImage}
+                    className="gallery-carousel-btn gallery-prev"
+                  >
+                    <Icon icon="fa-chevron-left" />
+                  </button>
+                )}
+                {index < imageGallery.length - 1 && (
+                  <button
+                    onClick={handleNextImage}
+                    className="gallery-carousel-btn gallery-next"
+                  >
+                    <Icon icon="fa-chevron-right" />
+                  </button>
+                )}
+              </div>
+            )}
+
+            {/* Expand Image */}
+            <img
+              src={imageGallery[index]}
+              onClick={toggleZoomView}
+              onMouseMove={handleMouseMove}
+              className={`gallery-expanded-image ${zoom ? 'zoomed' : ''}`}
+              style={zoom ? getTransformStyle() : {}}
             />
-          ))}
-        </div>
-
-        {/* Down Arrow */}
-        {!visibleThumbnails.includes(thumbnails[thumbnails.length - 1]) && (
-          <div onClick={scrollThumbnailsDown} style={{ cursor: 'pointer' }}>
-            <Icon icon="fa-chevron-down" />
+            {/* Expand Icon */}
+            <div className="gallery-expand-icon" onClick={toggleExpandedView}>
+              <Icon icon="fa-regular fa-compress" />
+            </div>
           </div>
-        )}
-      </div>
-
-      {/* Main Image Carousel */}
-      <div className="gallery-carousel-container">
-        {/* Carousel Image */}
-        <div className="gallery-carousel-main" onClick={handleImageClick}>
-          <img
-            src={imageGallery[index]}
-            alt={`Slide ${index}`}
-            className="gallery-carousel-image"
-          />
         </div>
+      )}
 
-        {/* Navigation */}
-        <div className="gallery-carousel-controls">
-          {index > 0 && (
-            <button
-              onClick={handlePrevImage}
-              className="gallery-carousel-btn gallery-prev"
-            >
-              <Icon icon="fa-chevron-left" />
-            </button>
+      {/* Defualt View */}
+      <div className="gallery-container">
+        {/* Thumbnails Column */}
+        <div className="gallery-thumbnails-column">
+          {/* Up Arrow */}
+          {!visibleThumbnails.includes(thumbnails[0]) && (
+            <div onClick={scrollThumbnailsUp} style={{ cursor: 'pointer' }}>
+              <Icon icon="fa-chevron-up" />
+            </div>
           )}
+          <div className="gallery-thumbnails" style={thumbnailGridStyle}>
+            {visibleThumbnails.map((thumbnail) => (
+              <CarouselThumbnail
+                key={thumbnail}
+                selected={thumbnail === selectedThumbnail}
+                imageUrl={thumbnail}
+                onClick={() => handleThumbnail(thumbnail)}
+              />
+            ))}
+          </div>
 
-          {index < imageGallery.length - 1 && (
-            <button
-              onClick={handleNextImage}
-              className="gallery-carousel-btn gallery-next"
-            >
-              <Icon icon="fa-chevron-right" />
-            </button>
+          {/* Down Arrow */}
+          {!visibleThumbnails.includes(thumbnails[thumbnails.length - 1]) && (
+            <div onClick={scrollThumbnailsDown} style={{ cursor: 'pointer' }}>
+              <Icon icon="fa-chevron-down" />
+            </div>
           )}
         </div>
+
+        {/* Main Image Carousel */}
+        <div className="gallery-carousel-container">
+          {/* Carousel Image */}
+          <div className="gallery-carousel-main" onClick={handleImageClick}>
+            <img
+              src={imageGallery[index]}
+              alt={`Slide ${index}`}
+              className="gallery-carousel-image"
+            />
+            {/* Expand Icon */}
+            <div className="gallery-expand-icon" onClick={toggleExpandedView}>
+              <Icon icon="fa regular fa-expand" />
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="gallery-carousel-controls">
+            {index > 0 && (
+              <button
+                onClick={handlePrevImage}
+                className="gallery-carousel-btn gallery-prev"
+              >
+                <Icon icon="fa-chevron-left" />
+              </button>
+            )}
+
+            {index < imageGallery.length - 1 && (
+              <button
+                onClick={handleNextImage}
+                className="gallery-carousel-btn gallery-next"
+              >
+                <Icon icon="fa-chevron-right" />
+              </button>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

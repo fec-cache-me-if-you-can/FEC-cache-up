@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 
 export default function DropdownSelector({
@@ -9,7 +9,9 @@ export default function DropdownSelector({
   onChange,
   selectedOption,
 }) {
-  const [localSelectedOption, setLocalSelectedOption] = useState('');
+  const [localSelectedOption, setLocalSelectedOption] = useState(
+    selectedOption || '',
+  );
 
   useEffect(() => {
     setLocalSelectedOption(selectedOption || '');

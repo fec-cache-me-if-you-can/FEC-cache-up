@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const LoadingSpinner = ({ size = '24', color = 'currentColor' }) => (
   <svg
+    data-testid="loading-spinner"
     width={size}
     height={size}
     viewBox="0 0 24 24"
@@ -32,9 +33,25 @@ const LoadingSpinner = ({ size = '24', color = 'currentColor' }) => (
         }
       `}
     </style>
-    <g className="spinner">
-      <rect x="11" y="1" width="2" height="5" opacity=".14" />
+    <g data-testid="spinner-group" className="spinner">
       <rect
+        data-testid="spinner-rectangle"
+        x="11"
+        y="1"
+        width="2"
+        height="5"
+        opacity=".14"
+      />
+      <rect
+        data-testid="spinner-rectangle"
+        x="11"
+        y="1"
+        width="2"
+        height="5"
+        opacity=".14"
+      />
+      <rect
+        data-testid="spinner-rectangle"
         x="11"
         y="1"
         width="2"
@@ -43,6 +60,7 @@ const LoadingSpinner = ({ size = '24', color = 'currentColor' }) => (
         opacity=".29"
       />
       <rect
+        data-testid="spinner-rectangle"
         x="11"
         y="1"
         width="2"
@@ -51,6 +69,7 @@ const LoadingSpinner = ({ size = '24', color = 'currentColor' }) => (
         opacity=".43"
       />
       <rect
+        data-testid="spinner-rectangle"
         x="11"
         y="1"
         width="2"
@@ -59,6 +78,7 @@ const LoadingSpinner = ({ size = '24', color = 'currentColor' }) => (
         opacity=".57"
       />
       <rect
+        data-testid="spinner-rectangle"
         x="11"
         y="1"
         width="2"
@@ -67,6 +87,7 @@ const LoadingSpinner = ({ size = '24', color = 'currentColor' }) => (
         opacity=".71"
       />
       <rect
+        data-testid="spinner-rectangle"
         x="11"
         y="1"
         width="2"
