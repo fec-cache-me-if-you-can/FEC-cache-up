@@ -23,7 +23,7 @@ export default function DropdownSelector({
   };
 
   return (
-    <div className="dropdown d-inline-block">
+     <div className="dropdown d-inline-block">
       <button
         className="btn btn-primary btn-lg dropdown-toggle square border-0"
         type="button"
@@ -62,4 +62,5 @@ DropdownSelector.propTypes = {
   isDisabled: PropTypes.bool,
   onChange: PropTypes.func,
   selectedOption: PropTypes.any,
+
 };

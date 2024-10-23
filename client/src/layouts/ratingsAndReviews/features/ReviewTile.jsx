@@ -75,7 +75,8 @@ export default function ReviewTile({
         {body.length > 10 && (
           <span
             onClick={toggleExpanded}
-            style={{ color: 'blue', cursor: 'pointer', marginLeft: '5px' }}
+            className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+            style={{  cursor: 'pointer', marginLeft: '5px' }}
           >
             {bodyExpanded ? 'Show less' : 'Show more'}
           </span>
@@ -137,32 +138,17 @@ export default function ReviewTile({
       >
         Helpful?
         <button
+         className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
           onClick={markAsHelpful}
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: '0',
-            color: 'blue',
-            textDecoration: 'underline',
-            cursor: 'pointer',
-            font: 'inherit',
-          }}
         >
-          {'  '}
-          Yes{'  '}
+
+          Yes{'  '}({helpfulCount})
         </button>{' '}
-        ({helpfulCount}) |{' '}
+             |{' '}
         <button
+        className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
           onClick={reportReview}
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: '0',
-            color: 'blue',
-            textDecoration: 'underline',
-            cursor: 'pointer',
-            font: 'inherit',
-          }}
+
         >
           {'  '}
           Report{'  '}

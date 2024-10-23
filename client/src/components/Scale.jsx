@@ -50,7 +50,7 @@ export default function Scale({
                   height: '0',
                   borderLeft: '10px solid transparent',
                   borderRight: '10px solid transparent',
-                  borderTop: '10px solid black',
+                  borderTop: '10px solid green',
                 }}
               ></div>
             )}
