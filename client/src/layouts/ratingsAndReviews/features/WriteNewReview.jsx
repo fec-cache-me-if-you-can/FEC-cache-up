@@ -137,7 +137,9 @@ export default function WriteNewReview({
     return newErrors.length === 0;
   };
 
-  const submitReview = () => {
+  const submitReview = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     if (validateForm()) {
       console.log('Submitting review...');
       axios
@@ -345,11 +347,10 @@ export default function WriteNewReview({
         </div>
       </Modal.Body>
 
-      <Modal.Footer className="border-0">
-        <PrimaryButton label="Submit Review" onClick={submitReview} />
+      <Modal.Footer className="border-0 justify-content-center">
         {errors.length > 0 && (
-          <div className="text-danger small mt-2">
-            <p className="fw-medium mb-1">
+          <div className="text-danger small mt-2 d-flex align-content-center justify-content-center gap-3 p4">
+            <p className="fw-bold mb-1">
               Review not submitted. Fix these inputs:
             </p>
             {errors.map((error, index) => (
@@ -359,6 +360,7 @@ export default function WriteNewReview({
             ))}
           </div>
         )}
+        <PrimaryButton label="Submit Review" onClick={submitReview} />
       </Modal.Footer>
     </Modal>
   );
