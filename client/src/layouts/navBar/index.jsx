@@ -46,7 +46,7 @@ const NavBar = ({ theme, toggleTheme }) => {
             </Nav.Link>
             <Nav.Link
               href="#reviews"
-              className="hover-scale hover-underline my-2"
+              className="hover-scale hover-underline my-3"
             >
               REVIEWS
             </Nav.Link>

@@ -1,14 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import AnswerModal from './AnswerModal.jsx';
 
-export default function AddAnswer({ onClick, productName, questionBody }) {
+export default function AddAnswer({ onSubmit, productName, questionBody }) {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
-    setShowModal(!showModal);
+    setShowModal((prev) => !prev);
   };
 
   return (
@@ -19,18 +18,19 @@ export default function AddAnswer({ onClick, productName, questionBody }) {
       >
         Add answer
       </button>
-      {showModal && (
-        <AnswerModal
-          onSubmit={onClick}
-          toggleModal={toggleModal}
-          productName={productName}
-          questionBody={questionBody}
-        />
-      )}
+      <AnswerModal
+        onSubmit={onSubmit}
+        toggleModal={toggleModal}
+        productName={productName}
+        questionBody={questionBody}
+        showModal={showModal}
+      />
     </div>
   );
 }
 
 AddAnswer.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  productName: PropTypes.string.isRequired,
+  questionBody: PropTypes.string.isRequired,
 };

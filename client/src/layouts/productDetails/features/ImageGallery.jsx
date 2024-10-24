@@ -96,6 +96,7 @@ export default function ImageGallery({ photos }) {
 
   const handleImageClick = () => {
     setExpandedView(true);
+    console.debug('Image Clicked');
   };
 
   const toggleExpandedView = () => {
@@ -105,6 +106,7 @@ export default function ImageGallery({ photos }) {
     } else {
       document.body.classList.remove('expanded-view-active');
     }
+    console.debug('Expanded View Toggled');
   };
 
   const toggleZoomView = () => {
@@ -141,7 +143,7 @@ export default function ImageGallery({ photos }) {
   };
 
   return (
-    <>
+    <div>
       {/* Expanded View Content */}
       {expandedView && (
         <div className="gallery-expanded-overlay">
@@ -203,26 +205,19 @@ export default function ImageGallery({ photos }) {
             )}
 
             {/* Expand Image */}
-            <div
-              className="gallery-expanded-image-wrapper"
-              style={{ cursor: 'zoom-in' }}
+
+            <img
+              src={imageGallery[index]}
               onClick={toggleZoomView}
-              role="button"
-              tabIndex={0}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  toggleZoomView();
-                }
-              }}
-            >
-              <img
-                src={imageGallery[index]}
-                alt={`Expanded view of slide ${index}`}
-                onMouseMove={handleMouseMove}
-                className={`gallery-expanded-image ${zoom ? 'zoomed' : ''}`}
-                style={zoom ? getTransformStyle() : {}}
-              />
+              onMouseMove={handleMouseMove}
+              className={`gallery-expanded-image ${zoom ? 'zoomed' : ''}`}
+              style={zoom ? getTransformStyle() : {}}
+            />
+            {/* Expand Icon */}
+            <div>
+              <Icon icon="fa-regular fa-expand" />
             </div>
+
             {/* Expand Icon */}
             <div
               className="gallery-expand-icon"
@@ -315,7 +310,7 @@ export default function ImageGallery({ photos }) {
               />
               {/* Expand Icon */}
               <div
-                className="position-absolute top-0 end-0 p-3 bg-dark bg-opacity-25 m-2 rounded-1"
+                className="position-absolute top-0 end-0 p-3 bg-dark bg-opacity-50 m-2 rounded-1 text-white"
                 onClick={toggleExpandedView}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -332,9 +327,15 @@ export default function ImageGallery({ photos }) {
           </div>
 
           {/* Navigation */}
-          <div className="position-absolute top-0 bottom-0 start-0 end-0">
+          <div
+            className="position-absolute top-0 bottom-0 start-0 end-0"
+            style={{ pointerEvents: 'none' }}
+          >
             {/* Previous Button - Always on left */}
-            <div className="position-absolute top-50 translate-middle-y start-0">
+            <div
+              className="position-absolute top-50 translate-middle-y start-0"
+              style={{ pointerEvents: 'auto' }}
+            >
               {index > 0 && (
                 <div className="bg-dark bg-opacity-25 rounded-end d-flex align-items-center">
                   <button
@@ -349,7 +350,10 @@ export default function ImageGallery({ photos }) {
             </div>
 
             {/* Next Button - Always on right */}
-            <div className="position-absolute top-50 translate-middle-y end-0">
+            <div
+              className="position-absolute top-50 translate-middle-y end-0"
+              style={{ pointerEvents: 'auto' }}
+            >
               {index < imageGallery.length - 1 && (
                 <div className="bg-dark bg-opacity-25 rounded-start d-flex align-items-center">
                   <button
@@ -365,7 +369,7 @@ export default function ImageGallery({ photos }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

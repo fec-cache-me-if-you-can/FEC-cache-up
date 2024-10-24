@@ -1,11 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import QuestionModal from './QuestionModal.jsx';
 
 export default function AddQuestion({
-  onClick,
+  onSubmit,
   refreshQuestions,
   setQuestions,
   productName,
@@ -13,7 +12,7 @@ export default function AddQuestion({
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
-    setShowModal(!showModal);
+    setShowModal((prev) => !prev);
   };
 
   return (
@@ -25,21 +24,20 @@ export default function AddQuestion({
       >
         Add a Question
       </button>
-      {showModal && (
-        <QuestionModal
-          productName={productName}
-          refreshQuestions={refreshQuestions}
-          setQuestions={setQuestions}
-          onSubmit={onClick}
-          toggleModal={toggleModal}
-        />
-      )}
+      <QuestionModal
+        productName={productName}
+        refreshQuestions={refreshQuestions}
+        setQuestions={setQuestions}
+        onSubmit={onSubmit}
+        toggleModal={toggleModal}
+        showModal={showModal}
+      />
     </div>
   );
 }
 
 AddQuestion.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   refreshQuestions: PropTypes.func.isRequired,
   setQuestions: PropTypes.func.isRequired,
   productName: PropTypes.string.isRequired,
