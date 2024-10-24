@@ -138,7 +138,6 @@ export default function WriteNewReview({
   };
 
   const submitReview = (e) => {
-    e.stopPropagation();
     e.preventDefault();
     if (validateForm()) {
       console.log('Submitting review...');
@@ -177,6 +176,8 @@ export default function WriteNewReview({
       onHide={onClose}
       centered
       size="xl"
+      backdrop="static"
+      keyboard={false}
       contentClassName="square px-4 px-md-5 py-4"
     >
       <Modal.Header closeButton className="border-0">

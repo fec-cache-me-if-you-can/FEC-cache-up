@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function CharacteristicsForm({
@@ -9,9 +9,10 @@ export default function CharacteristicsForm({
   labels,
 }) {
   const handleRadioChange = (event) => {
-    const selectedValue = Number(event.target.value); // Ensure the value is numeric.
-    onChange(charId, selectedValue); // Update state with ID and selected value.
+    const selectedValue = Number(event.target.value);
+    onChange(charId, selectedValue);
   };
+
   return (
     <div>
       <p>
@@ -27,11 +28,7 @@ export default function CharacteristicsForm({
               checked={value === num}
               onChange={handleRadioChange}
             />
-            {num === 1 && ` ${labels[0]}`}
-            {num === 2 && ` ${labels[1]}`}
-            {num === 3 && ` ${labels[2]}`}
-            {num === 4 && ` ${labels[3]}`}
-            {num === 5 && ` ${labels[4]}`}
+            {` ${labels[num - 1]}`}
           </label>
         ))}
       </div>
@@ -44,5 +41,5 @@ CharacteristicsForm.propTypes = {
   charId: PropTypes.string.isRequired,
   value: PropTypes.number,
   onChange: PropTypes.func.isRequired,
-  labels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  labels: PropTypes.arrayOf(PropTypes.string).required,
 };

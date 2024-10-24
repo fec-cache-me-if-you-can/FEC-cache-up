@@ -186,6 +186,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
                 overflow: 'auto',
                 marginTop: '2rem',
               }}
+              onClick={(event) => event.stopPropagation()}
             >
               <WriteNewReview
                 productName={product.name}
