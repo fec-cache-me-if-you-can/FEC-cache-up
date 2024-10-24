@@ -4,8 +4,14 @@ import StarRating from '../../../components/StarRating.jsx';
 import PrimaryButton from '../../../components/PrimaryButton.jsx';
 import CharacteristicsForm from './CharacteristicsForm.jsx';
 import PropTypes from 'prop-types';
+import { Modal } from 'react-bootstrap';
 
-export default function WriteNewReview({ productName, product_id, onClose }) {
+export default function WriteNewReview({
+  productName,
+  product_id,
+  onClose,
+  show,
+}) {
   const [rating, setRating] = useState(null);
   const [recommend, setRecommend] = useState(null);
   const [characteristics, setCharacteristics] = useState({});
@@ -164,212 +170,205 @@ export default function WriteNewReview({ productName, product_id, onClose }) {
   }
 
   return (
-    <div>
-      <h1> Write your review </h1>
-      <h6> About the {productName}</h6>
-      {/* Star rating */}
-      <div>
-        <p>
-          <b>Overall rating *</b>
-        </p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <StarRating rating={rating} onClick={handleRatingClick} />
-          <p>
-            {rating === 1 && 'Poor'}
-            {rating === 2 && 'Fair'}
-            {rating === 3 && 'Average'}
-            {rating === 4 && 'Good'}
-            {rating === 5 && 'Great'}
-          </p>
+    <Modal
+      show={show}
+      onHide={onClose}
+      centered
+      size="xl"
+      contentClassName="square px-4 px-md-5 py-4"
+    >
+      <Modal.Header closeButton className="border-0">
+        <Modal.Title className="fs-4 fw-medium">
+          Write Your Review About the {productName}
+        </Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body className="py-2">
+        {/* Star Rating */}
+        <div className="mb-4">
+          <p className="fw-medium mb-2">Overall Rating *</p>
+          <div className="d-flex align-items-center gap-3">
+            <StarRating rating={rating} onClick={handleRatingClick} />
+            <p className="mb-0 text-secondary">
+              {rating === 1 && 'Poor'}
+              {rating === 2 && 'Fair'}
+              {rating === 3 && 'Average'}
+              {rating === 4 && 'Good'}
+              {rating === 5 && 'Great'}
+            </p>
+          </div>
         </div>
-      </div>
-      {/* Recommend  */}
-      <div>
-        <fieldset>
-          <p>
-            <b>Do you recommend this product? *</b>
-          </p>
-          <div>
-            <input
-              type="radio"
-              id="yes"
-              name="recommend"
-              value="yes"
-              onClick={handleRecommendClick}
-            />
-            <label htmlFor="yes"> Yes</label>
-          </div>
 
-          <div>
-            <input
-              type="radio"
-              id="no"
-              name="recommend"
-              value="no"
-              onClick={handleRecommendClick}
-            />
-            <label htmlFor="no"> No</label>
-          </div>
-        </fieldset>
-      </div>
-      {/*Characteristic  */}
-      <div>
-        {Object.entries(characteristicOptions).map(([charName, labels]) => (
-          <CharacteristicsForm
-            key={charName}
-            name={charName}
-            charId={characteristicIds[charName]}
-            value={characteristics[characteristicIds[charName]] || null}
-            onChange={handleCharacteristicChange}
-            labels={labels}
-          />
-        ))}
-      </div>
-      {/* review Summary  */}
-      <div>
-        <p>
-          <b>Review Summary:</b>
-        </p>
-        <textarea
-          type="text"
-          name="summary"
-          cols="60"
-          rows="1"
-          maxLength="60"
-          placeholder="Example: Best purchase ever!"
-          value={summary}
-          onChange={handleSummary}
-        ></textarea>
-      </div>
-      {/* review body  */}
-      <div>
-        <p>
-          <b>Gives us your detailed feedback: *</b>
-        </p>
-        <textarea
-          name="body"
-          cols="60"
-          rows="5"
-          maxLength="1000"
-          placeholder="Why did you like the product or not?"
-          value={body}
-          onChange={handleBody}
-        ></textarea>
-        {body.length < 50 ? (
-          <p>Minimum required characters left: {50 - body.length}</p>
-        ) : (
-          <p> Minimum reached</p>
-        )}
-      </div>
-
-      {/* Upload photos */}
-      <div>
-        <p>
-          <b>Upload your photos</b>
-        </p>
-
-        {/* Show the "Add Photos" button only if less than 5 photos */}
-        {photos.length < 5 && (
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handlePhotoUpload}
-          />
-        )}
-
-        {/* Display thumbnails */}
-        <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-          {photos.map((photo, index) => (
-            <div key={index} style={{ position: 'relative' }}>
-              <img
-                src={photo.url}
-                alt={`Uploaded preview ${index + 1}`}
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  objectFit: 'cover',
-                  borderRadius: '5px',
-                }}
-              />
-              <button
-                style={{
-                  position: 'absolute',
-                  top: '-5px',
-                  right: '-5px',
-                  backgroundColor: 'red',
-                  color: 'white',
-                  borderRadius: '50%',
-                  border: 'none',
-                  cursor: 'pointer',
-                }}
-                onClick={() => handleRemovePhoto(index)}
-              >
-                X
-              </button>
+        {/* Recommend */}
+        <div className="mb-4">
+          <fieldset>
+            <p className="fw-medium mb-2">Do you recommend this product? *</p>
+            <div className="d-flex gap-4">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  id="yes"
+                  name="recommend"
+                  value="yes"
+                  onClick={handleRecommendClick}
+                />
+                <label className="form-check-label" htmlFor="yes">
+                  Yes
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  id="no"
+                  name="recommend"
+                  value="no"
+                  onClick={handleRecommendClick}
+                />
+                <label className="form-check-label" htmlFor="no">
+                  No
+                </label>
+              </div>
             </div>
+          </fieldset>
+        </div>
+
+        {/* Characteristics */}
+        <div className="mb-4">
+          {Object.entries(characteristicOptions).map(([charName, labels]) => (
+            <CharacteristicsForm
+              key={charName}
+              name={charName}
+              charId={characteristicIds[charName]}
+              value={characteristics[characteristicIds[charName]] || null}
+              onChange={handleCharacteristicChange}
+              labels={labels}
+            />
           ))}
         </div>
-      </div>
 
-      {/* Nickname  */}
-      <div>
-        <p>
-          <b>What is your nickname? *</b>
-        </p>
-        <textarea
-          name="name"
-          cols="60"
-          rows="1"
-          maxLength="60"
-          placeholder="Example: jackson11!"
-          value={name}
-          onChange={handleReviewerName}
-        ></textarea>
-        <p>For privacy reasons, do not use your full name or email address</p>
-      </div>
+        {/* Review Summary */}
+        <div className="mb-4">
+          <p className="fw-medium mb-2">Review Summary</p>
+          <textarea
+            className="form-control"
+            name="summary"
+            rows="1"
+            maxLength="60"
+            placeholder="Example: Best purchase ever!"
+            value={summary}
+            onChange={handleSummary}
+          />
+        </div>
 
-      {/* Email  */}
-      <div>
-        <p>
-          <b>What is your email? *</b>
-        </p>
-        <textarea
-          name="email"
-          cols="60"
-          rows="1"
-          maxLength="60"
-          placeholder="Example: jackson11@email.com"
-          value={email}
-          onChange={handleEmail}
-        ></textarea>
-        <p>For authentication reasons, you will not be emailed</p>
-      </div>
+        {/* Review Body */}
+        <div className="mb-4">
+          <p className="fw-medium mb-2">Give us your detailed feedback *</p>
+          <textarea
+            className="form-control mb-2"
+            name="body"
+            rows="5"
+            maxLength="1000"
+            placeholder="Why did you like the product or not?"
+            value={body}
+            onChange={handleBody}
+          />
+          <small className="text-secondary">
+            {body.length < 50
+              ? `Minimum required characters left: ${50 - body.length}`
+              : 'Minimum reached'}
+          </small>
+        </div>
 
-      {/* Submit  */}
-      <div>
-        <PrimaryButton label={'Submit review'} onClick={submitReview} />
+        {/* Photo Upload */}
+        <div className="mb-4">
+          <p className="fw-medium mb-2">Upload your photos</p>
+          {photos.length < 5 && (
+            <input
+              type="file"
+              className="form-control mb-3"
+              accept="image/*"
+              multiple
+              onChange={handlePhotoUpload}
+            />
+          )}
+          <div className="d-flex gap-2 flex-wrap">
+            {photos.map((photo, index) => (
+              <div key={index} className="position-relative">
+                <img
+                  src={photo.url}
+                  alt={`Upload ${index + 1}`}
+                  className="rounded"
+                  style={{
+                    width: '60px',
+                    height: '60px',
+                    objectFit: 'cover',
+                  }}
+                />
+                <button
+                  className="btn btn-danger btn-sm rounded-circle position-absolute top-0 end-0 translate-middle p-0"
+                  style={{ width: '20px', height: '20px', fontSize: '10px' }}
+                  onClick={() => handleRemovePhoto(index)}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Nickname */}
+        <div className="mb-4">
+          <p className="fw-medium mb-2">What is your nickname? *</p>
+          <input
+            type="text"
+            className="form-control mb-1"
+            name="name"
+            maxLength="60"
+            placeholder="Example: jackson11!"
+            value={name}
+            onChange={handleReviewerName}
+          />
+          <small className="text-secondary">
+            For privacy reasons, do not use your full name or email address
+          </small>
+        </div>
+
+        {/* Email */}
+        <div className="mb-4">
+          <p className="fw-medium mb-2">What is your email? *</p>
+          <input
+            type="email"
+            className="form-control mb-1"
+            name="email"
+            maxLength="60"
+            placeholder="Example: jackson11@email.com"
+            value={email}
+            onChange={handleEmail}
+          />
+          <small className="text-secondary">
+            For authentication reasons, you will not be emailed
+          </small>
+        </div>
+      </Modal.Body>
+
+      <Modal.Footer className="border-0">
+        <PrimaryButton label="Submit Review" onClick={submitReview} />
         {errors.length > 0 && (
-          <div
-            style={{
-              color: 'red',
-              fontSize: '12px',
-              lineHeight: '1.2',
-              marginTop: '5px',
-            }}
-          >
-            <p>
-              <b>Review not submitted. Fix these inputs:</b>
+          <div className="text-danger small mt-2">
+            <p className="fw-medium mb-1">
+              Review not submitted. Fix these inputs:
             </p>
             {errors.map((error, index) => (
-              <p key={index} style={{ margin: '2px 0' }}>
+              <p key={index} className="mb-0">
                 {error}
               </p>
             ))}
           </div>
         )}
-      </div>
-    </div>
+      </Modal.Footer>
+    </Modal>
   );
 }
 
@@ -377,4 +376,5 @@ WriteNewReview.propTypes = {
   productName: PropTypes.string,
   product_id: PropTypes.number,
   onClose: PropTypes.func.isRequired,
+  show: PropTypes.bool,
 };

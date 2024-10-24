@@ -41,8 +41,8 @@ export default function RatingsBreakdown({
           starRating={star}
           onClick={() => onFilterClick(star)}
           style={{
-            backgroundColor: isFilterActive(star) ? 'lightgreen' : '',
-            color:  isFilterActive(star) ? 'black' : '',
+            backgroundColor: isFilterActive(star) ? 'var(--secondary-bg)' : '',
+            color: isFilterActive(star) ? 'black' : '',
           }}
         />
       ))}

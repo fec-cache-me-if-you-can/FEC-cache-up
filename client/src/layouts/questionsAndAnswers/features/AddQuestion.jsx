@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 
 import QuestionModal from './QuestionModal.jsx';
 
-export default function AddQuestion({ onClick, refreshQuestions, setQuestions, productName }) {
+export default function AddQuestion({
+  onClick,
+  refreshQuestions,
+  setQuestions,
+  productName,
+}) {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
@@ -14,8 +19,9 @@ export default function AddQuestion({ onClick, refreshQuestions, setQuestions, p
   return (
     <div>
       <button
-        className="add-question btn btn-primary square btn-lg m-3"
+        className="btn btn-primary square ms-3 my-3 me-0 d-flex flex-nowrap text-nowrap"
         onClick={toggleModal}
+        style={{ whiteSpace: 'nowrap' }}
       >
         Add a Question
       </button>
@@ -35,4 +41,6 @@ export default function AddQuestion({ onClick, refreshQuestions, setQuestions, p
 AddQuestion.propTypes = {
   onClick: PropTypes.func.isRequired,
   refreshQuestions: PropTypes.func.isRequired,
+  setQuestions: PropTypes.func.isRequired,
+  productName: PropTypes.string.isRequired,
 };

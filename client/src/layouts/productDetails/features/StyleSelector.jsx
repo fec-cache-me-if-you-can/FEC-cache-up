@@ -8,33 +8,32 @@ export default function StyleSelector({
   styleOptions,
   onChange,
 }) {
-  const thumbnailGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, auto)', // Each column adjusts to the size of its content
-    gap: '5px', // Adds small spacing between the thumbnails
-    justifyContent: 'left', // Centers the grid
-    maxWidth: '500px', // Optional: restricts the width of the grid container to avoid spreading out too much
-    margin: '0 5px', // Adds spacing between the thumbnails
-  };
-
   if (!selectedStyle || !styleOptions.length) {
     return <div>Loading styles...</div>;
   }
   return (
-    <div>
-      <p>
-        <strong>STYLE</strong> &gt; {selectedStyle.name || 'SELECTED STYLE'}
+    <div className="my-3">
+      <p className="">
+        <span className="fw-bold">STYLE</span>
+        <span className="px-2">&gt;</span>
+        <span>{selectedStyle.name || 'SELECTED STYLE'}</span>
       </p>
 
-      <div className="style-thumbnails" style={thumbnailGridStyle}>
+      <div className="row g-4" style={{ maxWidth: '400px' }}>
         {styleOptions.map((style) => (
-          <StyleThumbnail
-            key={style.style_id}
-            name={style.name}
-            url={style.photos[0].thumbnail_url}
-            isSelected={style.style_id === selectedStyle.style_id}
-            onClick={() => onChange(style)}
-          />
+          <div className="col-3" key={style.style_id}>
+            <div
+              className="position-relative"
+              style={{ paddingBottom: '100%' }}
+            >
+              <StyleThumbnail
+                name={style.name}
+                url={style.photos[0].thumbnail_url}
+                isSelected={style.style_id === selectedStyle.style_id}
+                onClick={() => onChange(style)}
+              />
+            </div>
+          </div>
         ))}
       </div>
     </div>

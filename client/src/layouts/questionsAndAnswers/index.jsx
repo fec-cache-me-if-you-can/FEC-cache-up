@@ -12,7 +12,6 @@ export default function QuestionsAndAnswers({ productId, productName }) {
   );
 }
 
-
 QuestionsAndAnswers.propTypes = {
   productId: PropTypes.number.isRequired,
   productName: PropTypes.string.isRequired,

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 export default function AdditionalInfo({ slogan = '', description = '' }) {
   return (
-    <div style={{ width: '75%' }}>
-      <h3>{slogan}</h3>
+    <div className="section bg-accent p-5 my-5 text-primary">
+      <h4>{slogan}</h4>
       <p>{description}</p>
     </div>
   );

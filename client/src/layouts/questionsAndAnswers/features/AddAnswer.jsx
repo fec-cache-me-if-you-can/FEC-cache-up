@@ -12,15 +12,20 @@ export default function AddAnswer({ onClick, productName, questionBody }) {
   };
 
   return (
-    <div className="add-answer d-inline-flex">
+    <div className="add-answer">
       <button
-        className="helpfulness d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+        className="text-secondary text-size-90 bg-transparent border-0 text-decoration-underline text-nowrap"
         onClick={toggleModal}
       >
-        Add Answer
+        Add answer
       </button>
       {showModal && (
-        <AnswerModal onSubmit={onClick} toggleModal={toggleModal} productName={productName} questionBody={questionBody} />
+        <AnswerModal
+          onSubmit={onClick}
+          toggleModal={toggleModal}
+          productName={productName}
+          questionBody={questionBody}
+        />
       )}
     </div>
   );

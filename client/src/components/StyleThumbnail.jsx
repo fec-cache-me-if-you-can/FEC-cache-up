@@ -15,48 +15,50 @@ export default function StyleThumbnail({
 
   return (
     <div
-      className={`cursor-pointer ${isSelected ? 'selected' : ''}`}
+      className="position-absolute top-0 start-0 w-100 h-100 hover-scale"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      style={{
-        width: '60px',
-        height: '60px',
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'inline-block',
-        margin: '10px',
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          onClick();
+        }
       }}
+      role="button"
+      tabIndex={0}
     >
-      <img
-        src={url}
-        alt={name}
-        style={{
-          width: '100%',
-          height: '100%',
-          borderRadius: '35px',
-          border: isSelected ? '2px solid #AB1B38' : '1px solid grey',
-          objectFit: 'cover',
-          objectPosition: 'center',
-        }}
-      />
+      <div className="rounded-circle overflow-hidden position-absolute top-0 start-0 w-100 h-100">
+        <img src={url} alt={name} className="w-100 h-100 object-fit-cover" />
+      </div>
+      <div
+        className={`position-absolute top-0 start-0 w-100 h-100 rounded-circle ${
+          isSelected
+            ? 'border border-5 border-attention'
+            : 'border border-secondary'
+        }`}
+        style={{ zIndex: 1 }}
+      ></div>
 
       {isSelected && (
-        <div style={checkmarkNoteStyle}>
+        <div
+          className="position-absolute top-0 end-0 p-1"
+          style={{ zIndex: 2 }}
+        >
           <CheckmarkNote label="Selected" />
         </div>
       )}
 
       {isHovered && (
-        <div className="hover-name"  style={{
-          ...hoverNameStyle,
-          borderRadius: '35px',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          {name}
+        <div
+          className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-50 rounded-circle"
+          style={{ zIndex: 1 }}
+        >
+          <small
+            className="text-white text-center fw-semibold px-3 py-1"
+            style={{ fontSize: '0.7rem' }}
+          >
+            {name}
+          </small>
         </div>
       )}
     </div>
@@ -71,7 +73,7 @@ const checkmarkNoteStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   zIndex: 1,
-  color: '#AB1B38'
+  color: '#AB1B38',
 };
 
 const hoverNameStyle = {

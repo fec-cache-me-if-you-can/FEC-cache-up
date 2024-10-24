@@ -23,43 +23,53 @@ Logo.propTypes = {
 
 const NavBar = ({ theme, toggleTheme }) => {
   return (
-    <Navbar expand="lg" className="secondary-bg  mb-5 ">
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="w-100 justify-content-between align-items-center fs-6 py-5 px-5 text-primary bg-secondary">
-          <Navbar.Brand href="#home" className="mx-3">
-            <Logo theme={theme} />
-          </Navbar.Brand>
-          <div className="d-flex justify-content-end align-content-center gap-4 align-items-center">
+    <Navbar
+      expand="lg"
+      className="bg-secondary mb-5 border-bottom border-bottom-thick border-primary"
+    >
+      <Container fluid className="p-5">
+        <Navbar.Brand href="#home" className="ms-4 mx-lg-0 mx-auto px-3">
+          <Logo theme={theme} />
+        </Navbar.Brand>
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          className="border-0 shadow-none p-0"
+        />
+
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto text-center fs-5 fw-medium py-3 d-flex align-items-center">
             <Nav.Link
               href="#product-details"
-              className="hover-scale hover-underline"
+              className="hover-scale hover-underline my-2"
             >
               PRODUCT DETAILS
             </Nav.Link>
-            <Nav.Link href="#reviews" className="hover-scale hover-underline">
+            <Nav.Link
+              href="#reviews"
+              className="hover-scale hover-underline my-2"
+            >
               REVIEWS
             </Nav.Link>
-            <Nav.Link href="#q-a" className="hover-scale hover-underline">
+            <Nav.Link href="#q-a" className="hover-scale hover-underline my-2">
               Q&A
             </Nav.Link>
             <Nav.Link
               href="#related-products"
-              className="hover-scale hover-underline"
+              className="hover-scale hover-underline my-2"
             >
               RELATED PRODUCTS
             </Nav.Link>
             <button
               onClick={toggleTheme}
-              className={`btn btn-primary square m-3 pe-1 ps-1 text-primary bg-main`}
+              className="btn btn-primary square m-3 pe-1 ps-1 text-primary bg-main me-4"
               style={{ minWidth: '40px', minHeight: '40px', padding: '0' }}
               aria-label={`toggle ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
             >
               <Icon icon={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'}`} />
             </button>
-          </div>
-        </Nav>
-      </Navbar.Collapse>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
   );
 };

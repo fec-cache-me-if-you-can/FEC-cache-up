@@ -1,0 +1,42 @@
+.scrollable-reviews {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bs-secondary) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--bs-secondary);
+    border-radius: 3px;
+  }
+}
+
+.review-modal-overlay {
+  backdrop-filter: blur(2px);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .review-modal-content {
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+
+    @include media-breakpoint-up(md) {
+      width: 600px;
+    }
+  }
+
+  &.visible .review-modal-content {
+    transform: translateY(0);
+  }
+}

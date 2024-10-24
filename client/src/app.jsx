@@ -70,7 +70,7 @@ export default function App() {
   }, [product.id]);
 
   return (
-    <div id="app" className="app">
+    <div id="app" className="app bg-main mb-5">
       <NavBar theme={theme} toggleTheme={toggleTheme} />
       <div className="container-xl mt-5 pt-5" id="product-details">
         {loadingProduct ? (
@@ -83,6 +83,22 @@ export default function App() {
           />
         )}
       </div>
+      <div className="container-xl" id="related-products">
+        {productId && (
+          <RelatedItemsAndOutfitCreation
+            productId={String(product.id)}
+            setProductId={setProductId}
+          />
+        )}
+      </div>
+      {productId && (
+        <div className="container-xl" id="q-a">
+          <QuestionsAndAnswers
+            productId={productId}
+            productName={product.name}
+          />
+        </div>
+      )}
       <div className="container-xl" id="reviews">
         <RatingsAndReviews
           metaReviews={metaReviews}
@@ -90,19 +106,6 @@ export default function App() {
           rating={rating}
           numberOfRatings={numberOfRatings}
         />
-      </div>
-      {productId && (
-        <div className="container-lg" id="q-a">
-          <QuestionsAndAnswers productId={productId} productName={product.name} />
-        </div>
-      )}
-      <div className="container-xl" id="related-items">
-        {productId && (
-          <RelatedItemsAndOutfitCreation
-            productId={String(product.id)}
-            setProductId={setProductId}
-          />
-        )}
       </div>
     </div>
   );

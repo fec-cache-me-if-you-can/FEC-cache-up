@@ -2,13 +2,18 @@ import React from 'react';
 
 import { useState, useEffect } from 'react';
 import Helpful from '../../../components/helpful.jsx';
-import Report from '../../../components/report.jsx'
+import Report from '../../../components/report.jsx';
 import AddAnswer from './AddAnswer.jsx';
 import AnswersList from './AnswersList.jsx';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-export default function Question({ question, getQuestions, setQuestions, productName }) {
+export default function Question({
+  question,
+  getQuestions,
+  setQuestions,
+  productName,
+}) {
   const [currentQuestion, setCurrentQuestion] = useState(question);
   const [question_id, setQuestion_id] = useState(question.question_id);
   const [answers, setAnswers] = useState(question.answers);
@@ -59,26 +64,44 @@ export default function Question({ question, getQuestions, setQuestions, product
   };
 
   return (
-    <div className="question-card p-3">
-      <div className="-question-header row text-start d-flex">
-        <div className="question-main col-8 d-inline-flex">
-          <div className="question-text fs-4 d-inline-flex pe-2">Q:</div>
-          <div className="question-text fs-5 d-inline-flex ">
-            {question_body}
+    <div className="p-3 p-md-5 mb-3 bg-secondary bg-opacity-50">
+      <div className="row text-start">
+        <div className="col-12 col-md-7 mb-3 mb-md-0">
+          <div className="d-flex align-items-center">
+            <div className="fs-3 fs-md-4 fs-sm-5 pe-2 fw-bold text-primary">
+              Q:
+            </div>
+            <div className="fs-3 fs-md-4 fs-sm-5 fw-bold text-primary">
+              {question.question_body}
+            </div>
           </div>
         </div>
-        <div className="header-interaction col-4 d--flex ">
-          <Helpful onClick={isHelpful} helpfulness={howHelpful} />
-          <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
-          <AddAnswer onClick={createAnswer} productName={productName} questionBody={question_body} />
-          <div className="divider ps-1 pe-1 d-inline-flex ">|</div>
-          <Report onClick={reportQuestion} />
+
+        <div className="col-12 col-md-5">
+          <div className="d-flex align-items-center flex-wrap flex-md-nowrap justify-content-start justify-content-md-end gap-2 pe-md-3">
+            <Helpful onClick={isHelpful} helpfulness={howHelpful} />
+            <div className="text-secondary d-none d-md-block">|</div>
+            <AddAnswer
+              onClick={createAnswer}
+              productName={productName}
+              questionBody={question_body}
+            />
+            <div className="text-secondary d-none d-md-block">|</div>
+            <Report onClick={reportQuestion} />
+          </div>
         </div>
       </div>
-      <div className="question-footer">
-        <AnswersList answers={answers} question_id={question_id} productName={productName}/>
-        <div className="question-date d-inline-flex fs-12">
-          {new Date(question_date).toLocaleDateString('en-US', dateOptions)}
+
+      <div>
+        <AnswersList
+          answers={answers}
+          question_id={question_id}
+          productName={productName}
+        />
+        <div className="d-inline-flex mt-2">
+          <small className="text-secondary">
+            {new Date(question_date).toLocaleDateString('en-US', dateOptions)}
+          </small>
         </div>
       </div>
     </div>
@@ -89,4 +112,5 @@ Question.propTypes = {
   question: PropTypes.object.isRequired,
   getQuestions: PropTypes.func.isRequired,
   setQuestions: PropTypes.func.isRequired,
+  productName: PropTypes.string.isRequired,
 };

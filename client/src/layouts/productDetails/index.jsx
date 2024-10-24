@@ -25,7 +25,6 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   const [photos, setPhotos] = useState([]);
   const [showSizeError, setShowSizeError] = useState(false);
 
-
   // Sync state with product prop when product changes
   useEffect(() => {
     if (product) {
@@ -123,40 +122,56 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   };
 
   return (
-    <div className="d-flex align-content-between">
-      {/* Left Column: Image Gallery and Additional Info */}
-      <div className="">
-        <ImageGallery photos={photos} />
-        <AdditionalInfo slogan={slogan || ''} description={description || ''} />
+    <div className="container-fluid px-0">
+      <div className="row g-5">
+        <div className="col-12 col-lg-7">
+          <ImageGallery photos={photos} />
+        </div>
+
+        <div className="col-12 col-lg-5">
+          <div className="d-flex flex-column gap-4 h-100">
+            <div className="mb-auto">
+              {' '}
+              {/* Added to push content to top */}
+              <ProductInformation
+                name={name}
+                category={category}
+                price={price}
+                salePrice={salePrice}
+                rating={rating}
+                numberOfRatings={numberOfRatings}
+              />
+              <StyleSelector
+                selectedStyle={selectedStyle}
+                styleOptions={styleOptions}
+                onChange={handleStyleChange}
+              />
+            </div>
+
+            <AddToCart
+              productId={product.id}
+              selectedStyleId={selectedStyleId}
+              sizes={sizes}
+              selectedSize={selectedSize}
+              quantity={quantity}
+              selectedQuantity={selectedQuantity}
+              onSizeChange={handleSizeChange}
+              onQuanChange={handleQuantityChange}
+              showSizeError={showSizeError}
+              handleAddToCart={handleAddToCart}
+            />
+          </div>
+        </div>
       </div>
 
-      {/* Right Column: Product Info, Style Selector, and Add to Cart */}
-      <div className="">
-        <ProductInformation
-          name={name}
-          category={category}
-          price={price}
-          salePrice={salePrice}
-          rating={rating}
-          numberOfRatings={numberOfRatings}
-        />
-        <StyleSelector
-          selectedStyle={selectedStyle}
-          styleOptions={styleOptions}
-          onChange={handleStyleChange}
-        />
-        <AddToCart
-          productId={product.id}
-          selectedStyleId={selectedStyleId}
-          sizes={sizes}
-          selectedSize={selectedSize}
-          quantity={quantity}
-          selectedQuantity={selectedQuantity}
-          onSizeChange={handleSizeChange}
-          onQuanChange={handleQuantityChange}
-          showSizeError={showSizeError}
-          handleAddToCart={handleAddToCart}
-        />
+      {/* Additional Information Section */}
+      <div className="row mt-5">
+        <div className="col-12 ps-0 pe-0">
+          <AdditionalInfo
+            slogan={slogan || ''}
+            description={description || ''}
+          />
+        </div>
       </div>
     </div>
   );

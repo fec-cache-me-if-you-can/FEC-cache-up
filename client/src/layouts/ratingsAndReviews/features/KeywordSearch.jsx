@@ -8,38 +8,46 @@ export default function KeywordSearch({ handleSearchFilter }) {
   const [search, setSearch] = useState('');
 
   const handleSearch = (e) => {
-    if (e.target.value < 3) {
-      setSearch('');
-    } else {
-      setSearch(e.target.value);
-    }
+    setSearch(e.target.value);
   };
+
+  const handleClearSearch = () => {
+    if (search) setSearch('');
+  };
+
   useEffect(() => {
     handleSearchFilter(search);
   }, [search, handleSearchFilter]);
 
   return (
-    <div className="input-group question-search square m-3 ms-5">
+    <div className="input-group question-search square me-3 my-3 d-flex align-items-center">
       <input
-         type="search"
-         className="form-control border-0 py-2 fs-4 custom-search-input no-outline"
-        placeholder="Search Reviews.."
-         aria-label="Search"
+        type="search"
+        placeholder="Search..."
+        className="form-control border-0 fs-5 custom-search-input no-outline"
+        value={search}
+        aria-label="Search"
         id="search-input"
-        style={{ boxShadow: 'none', outline: 'none' }}
         onChange={handleSearch}
+        style={{ boxShadow: 'none', outline: 'none' }}
       />
-       <Icon
-        icon={`fa-regular ${search ? 'fa-xmark' : 'fa-search'}`}
-        size="lg"
-        style={{
-          position: 'absolute',
-          top: '50%',
-          right: '10px',
-          transform: 'translateY(-50%)',
-          opacity: !search ? 0.7 : 1,
+      <div
+        className="icon-container p-3 pe-4"
+        onClick={handleClearSearch}
+        style={{ cursor: search ? 'pointer' : 'default' }}
+        role="button"
+        tabIndex={0}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            handleClearSearch();
+          }
         }}
-      />
+      >
+        <Icon
+          icon={`fa-regular ${search ? 'fa-xmark' : 'fa-search'}`}
+          size="lg"
+        />
+      </div>
     </div>
   );
 }

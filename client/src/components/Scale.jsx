@@ -34,7 +34,7 @@ export default function Scale({
             style={{
               flex: 1, // Each segment takes equal space
               height: '10px',
-              backgroundColor: 'lightgray',
+              backgroundColor: 'var(--secondary-bg)',
               position: 'relative',
             }}
           >
@@ -50,7 +50,7 @@ export default function Scale({
                   height: '0',
                   borderLeft: '10px solid transparent',
                   borderRight: '10px solid transparent',
-                  borderTop: '10px solid green',
+                  borderTop: '10px solid var(--attention)',
                 }}
               ></div>
             )}

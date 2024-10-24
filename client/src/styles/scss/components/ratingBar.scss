@@ -1,0 +1,17 @@
+.rating-bar {
+  height: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+
+  .rating-bar-filled {
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  .rating-bar-empty {
+    background-color: var(--secondary-bg);
+    transition: width 0.3s ease;
+  }
+}

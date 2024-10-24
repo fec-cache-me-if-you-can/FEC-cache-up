@@ -50,37 +50,40 @@ export default function RatingsAndReviews({
   const clearFilters = () => setSelectedFilters([]);
 
   return (
-    <>
+    <div className="container-fluid px-4 px-md-0">
+      <h5 className="section-header mb-4">Ratings And Reviews</h5>
 
-
-      <div className="d-flex gap-5">
+      <div className="row g-4">
         {/* Left Column: Ratings + Product Breakdown */}
-        <div className="col-3">
-        <h5 className="section-header">Ratings And Reviews</h5>{' '}
-          <RatingsBreakdown
-            rating={rating}
-            numberOfRatings={numberOfRatings}
-            metaReviews={metaReviews}
-            selectedFilters={selectedFilters}
-            onFilterClick={handleFilterClick}
-            onClearFilters={clearFilters}
-          />
+        <div className="col-12 col-lg-4 col-xl-3">
+          <div className="mb-4">
+            <RatingsBreakdown
+              rating={rating}
+              numberOfRatings={numberOfRatings}
+              metaReviews={metaReviews}
+              selectedFilters={selectedFilters}
+              onFilterClick={handleFilterClick}
+              onClearFilters={clearFilters}
+            />
+          </div>
           <div>
             <ProductBreakdown metaReviews={metaReviews} />
           </div>
         </div>
 
         {/* Right Column: Review List */}
-        <div className="w-100">
-        <KeywordSearch handleSearchFilter={handleSearchFilter} />
-        <ReviewList
-          numberOfRatings={numberOfRatings}
-          reviews={filteredReviews}
-          product={product}
-        />
+        <div className="col-12 col-lg-8 col-xl-9">
+          <div className="d-flex flex-column gap-3">
+            <KeywordSearch handleSearchFilter={handleSearchFilter} />
+            <ReviewList
+              numberOfRatings={numberOfRatings}
+              reviews={filteredReviews}
+              product={product}
+            />
+          </div>
+        </div>
       </div>
-      </div>
-    </>
+    </div>
   );
 }
 

@@ -9,9 +9,11 @@ export default function PrimaryButton({
   extraStyles = '',
   plus = false,
 }) {
-  const buttonStyle = `btn btn-primary square btn-lg ${isDisabled && 'disabled'} ${extraStyles}`;
   return (
-    <button onClick={onClick} className={buttonStyle}>
+    <button
+      onClick={onClick}
+      className={`btn btn-primary square btn-lg w-100 ${isDisabled ? 'disabled' : ''} ${extraStyles}`}
+    >
       <span className="me-2">{label}</span>
       {plus && <Icon icon="fa-plus" />}
     </button>

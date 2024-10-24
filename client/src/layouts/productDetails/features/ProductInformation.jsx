@@ -37,39 +37,53 @@ export default function ProductInformation({
   };
 
   return (
-    <div>
-      <StarRating rating={rating} />
-      <a href="#reviews" style={{ marginLeft: '10px' }}>
-        View all {numberOfRatings} reviews{' '}
-      </a>
-      <br></br>
-      <p class="card-text fw-light h5 text-size-100 mt-0 mb-2" style={{ textTransform: 'uppercase' }}>{category}</p>
-      <h2>{name}</h2>
-      {salePrice ? (
-        <p>
-          <span style={{ color: 'red', marginRight: '8px' }}>${salePrice}</span>
-          <span style={{ textDecoration: 'line-through', color: 'grey' }}>
-            ${price}
-          </span>
-        </p>
-      ) : (
-        <p>${price}</p>
-      )}
+    <div className="product-info">
+      <div className="d-flex align-items-center mb-3">
+        <StarRating rating={rating} />
+        <a href="#reviews" className="ms-3 text-secondary-hover">
+          View all {numberOfRatings} reviews
+        </a>
+      </div>
 
-      {/* Social Media Share Buttons */}
-      <div
-        className="share-icons cursor-pointer"
-        style={{ display: 'flex', gap: '10px' }}
-      >
-        <span onClick={() => handleShare('facebook')}>
+      <p className="text-uppercase text-primary fs-6 mb-2">{category}</p>
+
+      <h2 className="mb-3">{name}</h2>
+
+      <p className="mb-4">
+        {salePrice ? (
+          <>
+            <span className="text-attention me-2">${salePrice}</span>
+            <span className="text-secondary text-decoration-line-through">
+              ${price}
+            </span>
+          </>
+        ) : (
+          <span>${price}</span>
+        )}
+      </p>
+
+      <div className="d-flex gap-3">
+        <button
+          className="btn btn-link p-0 text-primary"
+          onClick={() => handleShare('facebook')}
+          aria-label="Share on Facebook"
+        >
           <FacebookIcon size={'xl'} />
-        </span>
-        <span onClick={() => handleShare('x')}>
+        </button>
+        <button
+          className="btn btn-link p-0 text-primary"
+          onClick={() => handleShare('x')}
+          aria-label="Share on X"
+        >
           <XIcon size={'xl'} />
-        </span>
-        <span onClick={() => handleShare('pinterest')}>
+        </button>
+        <button
+          className="btn btn-link p-0 text-primary"
+          onClick={() => handleShare('pinterest')}
+          aria-label="Share on Pinterest"
+        >
           <PinterestIcon size={'xl'} />
-        </span>
+        </button>
       </div>
     </div>
   );
@@ -79,6 +93,7 @@ ProductInformation.propTypes = {
   name: PropTypes.string,
   category: PropTypes.string,
   price: PropTypes.string,
+  salePrice: PropTypes.string,
   rating: PropTypes.number,
   numberOfRatings: PropTypes.number,
 };
