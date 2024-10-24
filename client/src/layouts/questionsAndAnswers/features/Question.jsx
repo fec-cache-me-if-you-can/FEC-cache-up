@@ -82,7 +82,7 @@ export default function Question({
             <Helpful onClick={isHelpful} helpfulness={howHelpful} />
             <div className="text-secondary d-none d-md-block">|</div>
             <AddAnswer
-              onClick={createAnswer}
+              onSubmit={createAnswer}
               productName={productName}
               questionBody={question_body}
             />

@@ -45,7 +45,6 @@ export default function AnswerModal({
       onSubmit(submitObject)
         .then(() => {
           toggleModal();
-          // Optionally reset form fields
           setName('');
           setEmail('');
           setBody('');

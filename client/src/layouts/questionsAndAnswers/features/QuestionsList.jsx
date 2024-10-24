@@ -92,7 +92,7 @@ export default function QuestionsList({ productId, productName }) {
         <SearchQuestions update={updateQuery} />
         <AddQuestion
           refreshQuestions={getQuestions}
-          onClick={createQuestion}
+          onSubmit={createQuestion}
           setQuestions={setQuestions}
           productName={productName}
         />
