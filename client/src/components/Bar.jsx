@@ -12,51 +12,36 @@ export default function Bar({
 
   return (
     <div
-      className="bar-container"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px',
-        marginBottom: '8px',
-        ...style,
-      }}
+      className="d-flex align-items-center gap-3 mb-2 py-2 rounded-2"
+      style={style}
     >
-      {/* Clickable Star Rating Label */}
-      <span
+      <button
         onClick={onClick}
-        className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+        className="btn btn-link text-secondary p-0 text-decoration-underline fs-6 flex-nowrap"
       >
         {starRating} stars
-      </span>
+      </button>
 
-      {/* Rating Bar */}
       <div
-        className="rating-bar"
+        className="rating-bar position-relative flex-grow-1"
         onClick={onClick}
-        style={{
-          display: 'flex',
-          width: '50%',
-          height: '8px',
-          cursor: 'pointer',
-          borderRadius: '4px', // Rounded corners for the bar
-          overflow: 'hidden',
-        }}
         title={`${starRating} Stars: ${ratingCount} reviews`}
+        role="button"
+        tabIndex={0}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            onClick();
+          }
+        }}
       >
         <div
           className="rating-bar-filled"
-          style={{
-            width: `${percentage}%`,
-            backgroundColor: 'green',
-          }}
-        ></div>
+          style={{ width: `${percentage}%` }}
+        />
         <div
           className="rating-bar-empty"
-          style={{
-            width: `${100 - percentage}%`,
-            backgroundColor: 'lightgray',
-          }}
-        ></div>
+          style={{ width: `${100 - percentage}%` }}
+        />
       </div>
     </div>
   );

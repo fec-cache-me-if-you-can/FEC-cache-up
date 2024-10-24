@@ -1,31 +1,36 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import AnswerModal from './AnswerModal.jsx';
 
-export default function AddAnswer({ onClick, productName, questionBody }) {
+export default function AddAnswer({ onSubmit, productName, questionBody }) {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
-    setShowModal(!showModal);
+    setShowModal((prev) => !prev);
   };
 
   return (
-    <div className="add-answer d-inline-flex">
+    <div className="add-answer">
       <button
-        className="helpfulness d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+        className="text-secondary text-size-90 bg-transparent border-0 text-decoration-underline text-nowrap"
         onClick={toggleModal}
       >
-        Add Answer
+        Add answer
       </button>
-      {showModal && (
-        <AnswerModal onSubmit={onClick} toggleModal={toggleModal} productName={productName} questionBody={questionBody} />
-      )}
+      <AnswerModal
+        onSubmit={onSubmit}
+        toggleModal={toggleModal}
+        productName={productName}
+        questionBody={questionBody}
+        showModal={showModal}
+      />
     </div>
   );
 }
 
 AddAnswer.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  productName: PropTypes.string.isRequired,
+  questionBody: PropTypes.string.isRequired,
 };

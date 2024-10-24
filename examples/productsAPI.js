@@ -1,13 +1,3 @@
-/*
-GET /products
-Status: 200 OK
-+-----------+---------+-----------------------------------------------------------+
-| Parameter |  Type   |                        Description                        |
-+-----------+---------+-----------------------------------------------------------+
-| page      | integer | Selects the page of results to return. Default 1.         |
-| count     | integer | Specifies how many results per page to return. Default 5. |
-+-----------+---------+-----------------------------------------------------------+
-*/
 
 [
   {
@@ -37,15 +27,6 @@ Status: 200 OK
 	// ...
 ]
 
-/*
-GET /products/:product_id
-Status: 200 OK
-+------------+---------+--------------------------------------+
-| Parameter  |  Type   |             Description              |
-+------------+---------+--------------------------------------+
-| product_id | integer | Required ID of the Product requested |
-+------------+---------+--------------------------------------+
-*/
 
 {
 	"id": 11,
@@ -67,15 +48,6 @@ Status: 200 OK
 	],
 }
 
-/*
-GET /products/:product_id/styles
-Status: 200 OK
-+------------+---------+--------------------------------------+
-| Parameter  |  Type   |             Description              |
-+------------+---------+--------------------------------------+
-| product_id | integer | Required ID of the Product requested |
-+------------+---------+--------------------------------------+
-*/
 
 {
 	"product_id": "1",
@@ -145,15 +117,6 @@ Status: 200 OK
   // ...
 }
 
-/*
-GET /products/:product_id/related
-Status: 200 OK
-+------------+---------+--------------------------------------+
-| Parameter  |  Type   |             Description              |
-+------------+---------+--------------------------------------+
-| product_id | integer | Required ID of the Product requested |
-+------------+---------+--------------------------------------+
-*/
 
 [
   2,

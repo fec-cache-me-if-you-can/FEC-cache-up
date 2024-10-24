@@ -28,13 +28,11 @@ export default function AddToCart({
 
   return (
     <div className="d-flex flex-column gap-3">
-      {showSizeError && <p style={{ color: 'red' }}>Please select a size</p>}
-      <div className="d-flex gap-3">
-        {/* d-flex: creates a flex container */}
-        {/* gap-3: adds spacing between flex items */}
-        <div className="flex-grow-1 flex-basis-0">
-          {/* flex-grow-1: allows the item to grow */}
-          {/* flex-basis-0: sets the initial main size of the item to 0 */}
+      {showSizeError && (
+        <p className="text-attention mb-0">Please select a size</p>
+      )}
+      <div className="d-flex flex-column flex-sm-row gap-3">
+        <div className="flex-grow-1">
           <DropdownSelector
             options={sizes}
             placeholder={sizes.length === 0 ? 'OUT OF STOCK' : 'Select Size'}
@@ -43,9 +41,7 @@ export default function AddToCart({
             selectedOption={selectedSize}
           />
         </div>
-        <div className="flex-grow-1 flex-basis-0">
-          {/* flex-grow-1: allows the item to grow */}
-          {/* flex-basis-0: sets the initial main size of the item to 0 */}
+        <div className="flex-grow-1">
           <DropdownSelector
             options={quantity}
             placeholder="-"
@@ -55,17 +51,17 @@ export default function AddToCart({
           />
         </div>
       </div>
-      {/* <div> */}
-      {/* uncomment above div for a half width button (prevents button from acting a flex item) */}
 
-      {sizes.length !== 0 ? (
-        <PrimaryButton
-          label="Add to Cart"
-          onClick={handleAddToCart}
-          plus={true}
-        />
-      ) : null}
-      {/* </div> */}
+      {sizes.length !== 0 && (
+        <div className="w-100 w-sm-auto">
+          <PrimaryButton
+            label="Add to Cart"
+            onClick={handleAddToCart}
+            plus={true}
+            fullWidth={true}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -87,74 +87,84 @@ export default function QuestionsList({ productId, productName }) {
   };
 
   return (
-    <div className="question-list container-xl">
-      <div className="qa-list-header d-flex">
+    <div className="questions-container w-100">
+      <div className="d-flex justify-content-between mb-4 w-100">
         <SearchQuestions update={updateQuery} />
-        <AddQuestion refreshQuestions={getQuestions} onClick={createQuestion} setQuestions={setQuestions} productName={productName}/>
+        <AddQuestion
+          refreshQuestions={getQuestions}
+          onSubmit={createQuestion}
+          setQuestions={setQuestions}
+          productName={productName}
+        />
       </div>
-      <div className="scrollable-qa">
-        {!query.length
-          ? questions
-              .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
-              .slice(0, displayedQuestions)
-              .map((question) => {
-                return (
-                  <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} productName={productName} />
-                );
-              })
+
+      <div
+        className="overflow-y-scroll overflow-x-hidden mb-3"
+        style={{ maxHeight: '50vh' }}
+      >
+        {(query.length
+          ? questions.reduce((acc, question) => {
+              if (
+                question.question_body
+                  .toLowerCase()
+                  .includes(query.toLowerCase())
+              ) {
+                acc.push(question);
+              }
+              return acc;
+            }, [])
           : questions
-              .reduce((acc, question) => {
-                if (
-                  question.question_body
-                    .toLowerCase()
-                    .includes(query.toLowerCase())
-                ) {
-                  acc.push(question);
-                }
-                return acc;
-              }, [])
-              .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
-              .slice(0, displayedQuestions)
-              .map((question) => {
-                return (
-                  <Question key={question.question_id} question={question} getQuestions={getQuestions} setQuestions={setQuestions} productName={productName} />
-                );
-              })}
+        )
+          .sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+          .slice(0, displayedQuestions)
+          .map((question) => (
+            <Question
+              key={question.question_id}
+              question={question}
+              getQuestions={getQuestions}
+              setQuestions={setQuestions}
+              productName={productName}
+            />
+          ))}
       </div>
-      {!hideButton && (
+
+      <div className="questions-navigation d-flex flex-wrap gap-3">
+        {!hideButton && (
           <button
-            className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1 m-2"
+            className="text-secondary text-size-90 bg-transparent border-0 text-decoration-underline text-nowrap ps-0"
             onClick={handleLoadMoreQuestions}
           >
             More Questions
           </button>
         )}
+
         {!moreIsHidden && (
-          <div className="d-inline-flex">
+          <div className="d-flex flex-wrap gap-3">
             {!hidePreviousPage && (
               <button
-                className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+                className="text-secondary text-size-90 bg-transparent border-0 text-decoration-underline text-nowrap"
                 onClick={handlePreviousPage}
               >
-                previous page
+                Previous Page
               </button>
             )}
             {!hideNextPage && (
               <button
-                className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+                className="text-secondary text-size-90 bg-transparent border-0 text-decoration-underline text-nowrap"
                 onClick={handleNextPage}
               >
-                next page
+                Next Page
               </button>
             )}
             <button
-              className="d-inline-flex d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1 m-2"
+              className="text-secondary text-size-90 bg-transparent border-0 text-decoration-underline text-nowrap"
               onClick={resetDisplayedQuestions}
             >
               Hide
             </button>
           </div>
         )}
+      </div>
     </div>
   );
 }

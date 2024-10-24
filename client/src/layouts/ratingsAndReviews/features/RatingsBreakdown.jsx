@@ -24,6 +24,10 @@ export default function RatingsBreakdown({
 
   const isFilterActive = (starRating) => selectedFilters.includes(starRating);
 
+  // Debug logging to check the data
+  console.log('metaReviews ratings:', metaReviews?.ratings);
+  console.log('selectedFilters:', selectedFilters);
+
   return (
     <div>
       <div className="rating-breakdown">
@@ -32,20 +36,29 @@ export default function RatingsBreakdown({
       </div>
       <div>{recommended}% of reviews recommend this product</div>
       <br></br>
-      {/* Rating Bars */}
-      {[5, 4, 3, 2, 1].map((star) => (
-        <Bar
-          key={star}
-          totalReviews={numberOfRatings}
-          ratingCount={metaReviews?.ratings?.[`${star}`] || 0}
-          starRating={star}
-          onClick={() => onFilterClick(star)}
-          style={{
-            backgroundColor: isFilterActive(star) ? 'lightgreen' : '',
-            color:  isFilterActive(star) ? 'black' : '',
-          }}
-        />
-      ))}
+      {[5, 4, 3, 2, 1].map((star) => {
+        // Convert the rating count to a number
+        const ratingCount = parseInt(
+          metaReviews?.ratings?.[star.toString()] || 0,
+          10,
+        );
+
+        return (
+          <Bar
+            key={star}
+            totalReviews={numberOfRatings}
+            ratingCount={ratingCount}
+            starRating={star}
+            onClick={() => onFilterClick(star)}
+            style={{
+              backgroundColor: isFilterActive(star)
+                ? 'var(--secondary-bg)'
+                : '',
+              color: isFilterActive(star) ? 'black' : '',
+            }}
+          />
+        );
+      })}
       {selectedFilters.length > 0 && (
         <div>
           <p>

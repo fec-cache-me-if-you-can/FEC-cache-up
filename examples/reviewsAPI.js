@@ -1,15 +1,3 @@
-/*
-GET /reviews/
-Status: 200 OK
-+------------+---------+-------------------------------------------------------------------------------------+
-| Parameter  |  Type   |                                     Description                                     |
-+------------+---------+-------------------------------------------------------------------------------------+
-| page       | integer | Selects the page of results to return. Default 1.                                   |
-| count      | integer | Specifies how many results per page to return. Default 5.                           |
-| sort       | text    | Changes the sort order of reviews to be based on "newest", "helpful", or "relevant" |
-| product_id | integer | Specifies the product for which to retrieve reviews.                                |
-+------------+---------+-------------------------------------------------------------------------------------+
-*/
 
 {
   "product": "2",
@@ -53,15 +41,6 @@ Status: 200 OK
   ]
 }
 
-/*
-GET /reviews/meta
-Status: 200 OK
-+------------+---------+--------------------------------------------------------------+
-| Parameter  |  Type   |                         Description                          |
-+------------+---------+--------------------------------------------------------------+
-| product_id | integer | Required ID of the product for which data should be returned |
-+------------+---------+--------------------------------------------------------------+
-*/
 
 {
   "product_id": "2",
@@ -91,33 +70,7 @@ Status: 200 OK
     // ...
 }
 
-/*
-POST /reviews
-Status: 201 CREATED
-+-----------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------+
-|    Parameter    |  Type   |                                                                Description                                                                |
-+-----------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| product_id      | integer | Required ID of the product to post the review for                                                                                         |
-| rating          | int     | Integer (1-5) indicating the review rating                                                                                                |
-| summary         | text    | Summary text of the review                                                                                                                |
-| body            | text    | Continued or full text of the review                                                                                                      |
-| recommend       | bool    | Value indicating if the reviewer recommends the product                                                                                   |
-| name            | text    | Username for question asker                                                                                                               |
-| email           | text    | Email address for question asker                                                                                                          |
-| photos          | [text]  | Array of text urls that link to images to be shown                                                                                        |
-| characteristics | object  | Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...} |
-+-----------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------+
-*/
 
-/*
-PUT /reviews/:review_id/helpful
-Status: 204 NO CONTENT
-+-----------+---------+-------------------------------------+
-| Parameter |  Type   |             Description             |
-+-----------+---------+-------------------------------------+
-| review_id | integer | Required ID of the review to update |
-+-----------+---------+-------------------------------------+
-*/
 
 /*
 PUT /reviews/:review_id/report

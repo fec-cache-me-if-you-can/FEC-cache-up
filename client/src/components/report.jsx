@@ -3,7 +3,6 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 export default function Report({ onClick }) {
-
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
@@ -11,14 +10,17 @@ export default function Report({ onClick }) {
       onClick();
       setClicked(true);
     }
-  }
+  };
   return (
-    <button onClick={handleClick} className="report-button d-inline-flex text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1">
-      { !clicked ? <div>report</div> : <div>reported</div> }
+    <button
+      onClick={handleClick}
+      className="text-secondary text-size-90 bg-transparent border-0 text-decoration-underline text-nowrap"
+    >
+      {!clicked ? 'Report' : 'Reported'}
     </button>
-  )
+  );
 }
 
-Report.PropTypes = {
+Report.propTypes = {
   onClick: PropTypes.func.isRequired,
-}
+};

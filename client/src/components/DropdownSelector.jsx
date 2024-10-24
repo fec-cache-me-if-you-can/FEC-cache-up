@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 export default function DropdownSelector({
@@ -12,6 +11,15 @@ export default function DropdownSelector({
   const [localSelectedOption, setLocalSelectedOption] = useState(
     selectedOption || '',
   );
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+  const [menuHeight, setMenuHeight] = useState(0);
+
+  useEffect(() => {
+    if (menuRef.current) {
+      setMenuHeight(menuRef.current.scrollHeight);
+    }
+  }, [options]);
 
   useEffect(() => {
     setLocalSelectedOption(selectedOption || '');
@@ -19,39 +27,54 @@ export default function DropdownSelector({
 
   const handleSelectChange = (option) => {
     setLocalSelectedOption(option);
+    setIsOpen(false);
     onChange(option);
   };
 
+  const toggleDropdown = () => {
+    if (!isDisabled && options.length > 0) {
+      setIsOpen(!isOpen);
+    }
+  };
+
   return (
-     <div className="dropdown d-inline-block">
+    <div className="dropdown w-100">
       <button
-        className="btn btn-primary btn-lg dropdown-toggle square border-0"
+        className="btn btn-primary btn-lg dropdown-toggle square border-0 w-100"
         type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
+        onClick={toggleDropdown}
+        aria-expanded={isOpen}
         disabled={isDisabled || options.length === 0}
       >
         {localSelectedOption || placeholder}
       </button>
-      <ul className="dropdown-menu square w-100 my-0 py-0">
-        {options.length === 0 ? (
-          <li>
-            <span className="dropdown-item disabled">OUT OF STOCK</span>
-          </li>
-        ) : (
-          options.map((option, index) => (
-            <li key={index}>
-              <button
-                className="dropdown-item text-size-200 p-3"
-                type="button"
-                onClick={() => handleSelectChange(option)}
-              >
-                {option}
-              </button>
+      <div
+        className="dropdown-drawer-container"
+        style={{ height: isOpen ? menuHeight : 0 }}
+      >
+        <ul
+          ref={menuRef}
+          className={`dropdown-menu square w-100 my-0 py-0 ${isOpen ? 'show' : ''}`}
+        >
+          {options.length === 0 ? (
+            <li>
+              <span className="dropdown-item disabled">OUT OF STOCK</span>
             </li>
-          ))
-        )}
-      </ul>
+          ) : (
+            options.map((option, index) => (
+              <li key={index}>
+                <button
+                  className="dropdown-item p-3"
+                  type="button"
+                  onClick={() => handleSelectChange(option)}
+                >
+                  {option}
+                </button>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -62,5 +85,4 @@ DropdownSelector.propTypes = {
   isDisabled: PropTypes.bool,
   onChange: PropTypes.func,
   selectedOption: PropTypes.any,
-
 };

@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPinterest } from '@fortawesome/free-brands-svg-icons';
 
 // usage:
-// <PinterestIcon size="2x" />
-
 // valid sizes: 2xs, xs, sm, '', lg, xl and 2xl
 const PinterestIcon = ({ size = '' }) => {
   if (['2xs', 'xs', 'sm', '', 'lg', 'xl', '2xl'].indexOf(size) === -1) {

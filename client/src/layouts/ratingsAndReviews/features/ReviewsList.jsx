@@ -95,94 +95,109 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
     setSortedReviews(arrayToSort);
   };
 
-  const CustomDropdownSelector = ({ options, selectedOption, onChange }) => (
-    <div className="custom-dropdown" onClick={(e) => e.stopPropagation()}>
-      <span className="selected-option">
-        {selectedOption} <span className="arrow">▼</span>
-      </span>
-      <select
-        value={selectedOption}
-        onChange={(e) => onChange(e.target.value)}
-        style={{ opacity: 0, position: 'absolute', pointerEvents: 'none' }}
-      >
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-
-
   return (
-    <div className="ms-5">
+    <div className="">
       {visibleReviews.length === 0 && (
-        <div>
-          <p>Be the first to review! </p>
+        <div className="text-center py-4">
+          <p className="mb-3">Be the first to review!</p>
           <Button label="Submit a review!" onClick={openModal} />
         </div>
       )}
-{visibleReviews.length > 0 && (
-      <div>
-        <span className="fs-5 fw-medium">
-            {numberOfRatings} reviews, sorted by{' '}
-            <DropdownSelectorSecondary
-              options={['relevant', 'helpful', 'newest']}
-              placeholder={sortOrder}
-              isDisabled={false}
-              onChange={onSortChange}
-              selectedOption={sortOrder}
-              className="custom-dropdown"
-              customStyles={{
-                display: 'inline',
-                textDecoration: 'underline',
-                cursor: 'pointer'
-              }}
-            />
-        </span>
 
-        <div className="overflow-y-scroll scrollable-reviews">
-          {visibleReviews.map((review) => (
-            <ReviewTile
-              key={review.review_id}
-              reviewId={review.review_id}
-              rating={review.rating}
-              reviewerName={review.reviewer_name}
-              date={review.date}
-              summary={review.summary}
-              body={review.body}
-              recommend={review.recommend}
-              response={review.response}
-              helpfulness={review.helpfulness}
-              photos={review.photos}
-            />
-          ))}
-        </div>
+      {visibleReviews.length > 0 && (
+        <div className="d-flex flex-column gap-4">
+          <div className="d-flex align-items-start align-items-md-center gap-2">
+            <span className="fs-6 fs-md-5 fw-medium">
+              {numberOfRatings} reviews, sorted by
+            </span>
+            <div style={{ width: '150px' }}>
+              {' '}
+              <DropdownSelectorSecondary
+                options={['relevant', 'helpful', 'newest']}
+                placeholder={sortOrder}
+                isDisabled={false}
+                onChange={onSortChange}
+                selectedOption={sortOrder}
+              />
+            </div>
+          </div>
 
-        {hasMoreReviews && (
-          <Button label="More reviews" onClick={loadMoreReviews} />
-        )}
-        <Button label="add a review +" onClick={openModal} />
-
-        {/* Modal Section */}
-        <div
-          className={`review-modal-overlay ${isModalVisible ? 'visible' : ''}`}
-          onClick={closeModal}
-        >
           <div
-            className="review-modal-content"
-            onClick={(e) => e.stopPropagation()}
+            className="overflow-y-scroll scrollable-reviews"
+            style={{
+              maxHeight: '60vh',
+              scrollbarWidth: 'thin',
+            }}
           >
-            <WriteNewReview
-              productName={product.name}
-              product_id={product.id}
-              onClose={closeModal}
+            {visibleReviews.map((review) => (
+              <ReviewTile
+                key={review.review_id}
+                reviewId={review.review_id}
+                rating={review.rating}
+                reviewerName={review.reviewer_name}
+                date={review.date}
+                summary={review.summary}
+                body={review.body}
+                recommend={review.recommend}
+                response={review.response}
+                helpfulness={review.helpfulness}
+                photos={review.photos}
+              />
+            ))}
+          </div>
+
+          <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mt-3">
+            {hasMoreReviews && (
+              <Button
+                label="More reviews"
+                onClick={loadMoreReviews}
+                className="w-100 w-md-auto"
+              />
+            )}
+            <Button
+              label="Add a review +"
+              onClick={openModal}
+              className="w-100 w-md-auto"
             />
           </div>
+
+          <div
+            className={`review-modal-overlay position-fixed top-0 start-0 w-100 h-100 ${
+              isModalVisible ? 'visible' : ''
+            }`}
+            onClick={closeModal}
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              zIndex: 1050,
+            }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                closeModal();
+              }
+            }}
+          >
+            <div
+              className="review-modal-content position-relative bg-white p-4 rounded-3 mx-auto my-4"
+              style={{
+                maxWidth: '90%',
+                maxHeight: '90vh',
+                overflow: 'auto',
+                marginTop: '2rem',
+              }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <WriteNewReview
+                productName={product.name}
+                product_id={product.id}
+                onClose={closeModal}
+                show={isModalVisible}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-      ) }
+      )}
     </div>
   );
 }

@@ -54,8 +54,7 @@ export default function ReviewTile({
   const closeModal = () => setSelectedPhoto(null);
 
   return (
-    <div className="review-tile">
-      {/* Top Section: Star Rating & User Info */}
+    <div className="my-3 pe-4">
       <div className="review-top">
         <div className="review-star-rating">
           <StarRating rating={rating} />
@@ -66,24 +65,21 @@ export default function ReviewTile({
         </div>
       </div>
 
-      {/* Review Summary */}
       <div className="review-summary">{summary}</div>
 
-      {/* Review Body */}
       <div className="review-body">
         {displayedBody}
         {body.length > 10 && (
           <span
             onClick={toggleExpanded}
             className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-            style={{  cursor: 'pointer', marginLeft: '5px' }}
+            style={{ cursor: 'pointer', marginLeft: '5px' }}
           >
             {bodyExpanded ? 'Show less' : 'Show more'}
           </span>
         )}
       </div>
 
-      {/* Photos */}
       <div className="review-photos">
         {photos &&
           photos.map((photo) => (
@@ -114,7 +110,6 @@ export default function ReviewTile({
           ))}
       </div>
 
-      {/* Recommendation */}
       {recommend && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
           <Icon icon="fa-check" />
@@ -122,7 +117,6 @@ export default function ReviewTile({
         </div>
       )}
 
-      {/* Response */}
       {response && (
         <div className="review-response">
           <p>
@@ -131,31 +125,27 @@ export default function ReviewTile({
         </div>
       )}
 
-      {/* Helpful Section */}
       <div
         className="review-helpful"
         style={{ display: 'inline-flex', gap: '5px', alignItems: 'center' }}
       >
         Helpful?
         <button
-         className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+          className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
           onClick={markAsHelpful}
         >
-
           Yes{'  '}({helpfulCount})
         </button>{' '}
-             |{' '}
+        |{' '}
         <button
-        className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+          className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
           onClick={reportReview}
-
         >
           {'  '}
           Report{'  '}
         </button>{' '}
       </div>
 
-      {/* Modal for full-resolution images */}
       {selectedPhoto && (
         <div
           className="modal"
@@ -182,7 +172,6 @@ export default function ReviewTile({
         </div>
       )}
 
-      {/* Separator Line */}
       <div className="review-separator" />
     </div>
   );

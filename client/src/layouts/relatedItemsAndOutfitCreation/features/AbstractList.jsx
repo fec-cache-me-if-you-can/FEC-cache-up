@@ -20,18 +20,22 @@ const AbstractList = ({
   handleAddToOutfit = () => {},
   setProductId = () => {},
 }) => {
-  const renderLoadingMessage = () => <LoadingSpinner />
+  const renderLoadingMessage = () => <LoadingSpinner />;
 
   const renderErrorMessage = () => (
     <p className="error-message text-center secondary-color">{error}</p>
   );
 
-  const renderNoItemsMessage = () => <p data-testid="no-items-message" className={"text-center text-secondary"}>You don't have any items added to your outfit.</p>;
+  const renderNoItemsMessage = () => (
+    <p data-testid="no-items-message" className="text-center text-secondary">
+      You don&apos;t have any items added to your outfit.
+    </p>
+  );
 
   const renderNavigationButton = (direction) => (
     <button
       id={`custom-swiper-button-${direction}-${isOutfit}`}
-      className={`transparent-button custom-swiper-button-${direction} m-2 z-0`}
+      className={`transparent-button custom-swiper-button-${direction} m-2 z-0 d-none d-md-block`}
       aria-label={`Scroll ${direction}`}
     >
       <Icon
@@ -49,7 +53,7 @@ const AbstractList = ({
         {hasMultipleItems && renderNavigationButton('prev')}
         <Swiper
           spaceBetween={5}
-          slidesPerView={3}
+          slidesPerView={1}
           loop
           centeredSlides
           navigation={{
@@ -59,6 +63,24 @@ const AbstractList = ({
           modules={hasMultipleItems ? [Navigation] : []}
           className="mySwiper"
           watchOverflow
+          breakpoints={{
+            576: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
+            992: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1300: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+          }}
         >
           {items.map((itemId, index) => (
             <SwiperSlide key={`${itemId}-${index}`}>
@@ -96,7 +118,7 @@ const AbstractList = ({
           />
         )}
       </h5>
-      <div className="secondary-bg z-n1 section">{renderContent()}</div>
+      <div className="bg-secondary z-n1 section">{renderContent()}</div>
     </>
   );
 };

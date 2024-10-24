@@ -10,30 +10,38 @@ export default function SearchQuestions({ update }) {
   }, [query, update]);
 
   const updateQuery = (e) => setQuery(e.target.value);
-
+  const handleClearSearch = () => {
+    if (query) setQuery('');
+  };
   return (
-    <div className="input-group question-search square m-3">
+    <div className="input-group question-search square me-3 my-3 d-flex align-items-center">
       <input
         type="search"
         placeholder="Search..."
-        className="form-control border-0 py-2 fs-4 custom-search-input no-outline"
+        className="form-control border-0 fs-5 custom-search-input no-outline"
         value={query}
         aria-label="Search"
         id="search-input"
         onChange={updateQuery}
         style={{ boxShadow: 'none', outline: 'none' }}
       />
-      <Icon
-        icon={`fa-regular ${query ? 'fa-xmark' : 'fa-search'}`}
-        size="lg"
-        style={{
-          position: 'absolute',
-          top: '50%',
-          right: '10px',
-          transform: 'translateY(-50%)',
-          opacity: !query ? 0.7 : 1,
+      <div
+        style={{ cursor: query ? 'pointer' : 'default' }}
+        className="icon-container p-3 pe-4"
+        onClick={handleClearSearch}
+        role="button"
+        tabIndex={0}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            handleClearSearch();
+          }
         }}
-      />
+      >
+        <Icon
+          icon={`fa-regular ${query ? 'fa-xmark' : 'fa-search'}`}
+          size="lg"
+        />
+      </div>
     </div>
   );
 }

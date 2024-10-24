@@ -1,14 +1,3 @@
-/*
-GET /qa/questions
-Status: 200 OK
-+------------+---------+-----------------------------------------------------------+
-| Parameter  |  Type   |                        Description                        |
-+------------+---------+-----------------------------------------------------------+
-| product_id | integer | Specifies the product for which to retrieve questions.    |
-| page       | integer | Selects the page of results to return. Default 1.         |
-| count      | integer | Specifies how many results per page to return. Default 5. |
-+------------+---------+-----------------------------------------------------------+
-*/
 
 {
   "product_id": "5",
@@ -61,23 +50,6 @@ Status: 200 OK
   ]
 }
 
-/*
-GET /qa/questions/:question_id/answers
-Status: 200 OK
-+-------------+---------+---------------------------------------------------------+
-|  Parameter  |  Type   |                       Description                       |
-+-------------+---------+---------------------------------------------------------+
-| question_id | integer | Required ID of the question for wich answers are needed |
-+-------------+---------+---------------------------------------------------------+
-===================================================================================
-query parameters
-+-----------+---------+-----------------------------------------------------------+
-| Parameter |  Type   |                        Description                        |
-+-----------+---------+-----------------------------------------------------------+
-| page      | integer | Selects the page of results to return. Default 1.         |
-| count     | integer | Specifies how many results per page to return. Default 5. |
-+-----------+---------+-----------------------------------------------------------+
-*/
 
 {
   "question": "1",
@@ -113,68 +85,10 @@ query parameters
   ]
 }
 
-/*
-POST /qa/questions
-Status: 201 CREATED
-+------------+---------+-------------------------------------------------------------+
-| Parameter  |  Type   |                         Description                         |
-+------------+---------+-------------------------------------------------------------+
-| body       | text    | Text of question being asked                                |
-| name       | text    | Username for question asker                                 |
-| email      | text    | Email address for question asker                            |
-| product_id | integer | Required ID of the Product for which the question is posted |
-+------------+---------+-------------------------------------------------------------+
-*/
 
-/*
-POST /qa/questions/:question_id/answers
-Status: 201 CREATED
-+-------------+---------+----------------------------------------------------+
-|  Parameter  |  Type   |                    Description                     |
-+-------------+---------+----------------------------------------------------+
-| question_id | integer | Required ID of the question to post the answer for |
-+-------------+---------+----------------------------------------------------+
-==============================================================================
-body parameters
-+-----------+--------+-----------------------------------------------------+
-| Parameter |  Type  |                     Description                     |
-+-----------+--------+-----------------------------------------------------+
-| body      | text   | Text of question being asked                        |
-| name      | text   | Username for question asker                         |
-| email     | text   | Email address for question asker                    |
-| photos    | [text] | An array of urls corresponding to images to display |
-+-----------+--------+-----------------------------------------------------+
-*/
 
-/*
-PUT /qa/questions/:question_id/helpful
-Status: 204 NO CONTENT
-+-------------+---------+---------------------------------------+
-|  Parameter  |  Type   |              Description              |
-+-------------+---------+---------------------------------------+
-| question_id | integer | Required ID of the question to update |
-+-------------+---------+---------------------------------------+
-*/
 
-/*
-PUT /qa/questions/:question_id/report
-Status: 204 NO CONTENT
-+-------------+---------+---------------------------------------+
-|  Parameter  |  Type   |              Description              |
-+-------------+---------+---------------------------------------+
-| question_id | integer | Required ID of the question to update |
-+-------------+---------+---------------------------------------+
-*/
 
-/*
-PUT /qa/answers/:answer_id/helpful
-Status: 204 NO CONTENT
-+-----------+---------+-------------------------------------+
-| Parameter |  Type   |             Description             |
-+-----------+---------+-------------------------------------+
-| answer_id | integer | Required ID of the answer to update |
-+-----------+---------+-------------------------------------+
-*/
 
 /*
 PUT /qa/answers/:answer_id/report

@@ -24,8 +24,6 @@ app.use(express.json());
 app.use(sessionOptions);
 app.use(outfitInit);
 app.use(express.static(path.join(__dirname, '../client/dist')));
-// other configuration...
-
 app.use('/products', productRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/qa', qaRouter);

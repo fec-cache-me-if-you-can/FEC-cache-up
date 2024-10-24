@@ -1,13 +1,3 @@
-/*
-GET /cart
-Status: 200 OK
-+-----------+---------+-----------------------------------------------------------+
-| Parameter |  Type   |                        Description                        |
-+-----------+---------+-----------------------------------------------------------+
-| page      | integer | Selects the page of results to return. Default 1.         |
-| count     | integer | Specifies how many results per page to return. Default 5. |
-+-----------+---------+-----------------------------------------------------------+
-*/
 
 [
   {
@@ -25,12 +15,3 @@ Status: 200 OK
   //...
 ];
 
-/*
-POST /cart
-Status: 201 CREATED
-+-----------+------+--------------------------------------------+
-| Parameter | Type |                Description                 |
-+-----------+------+--------------------------------------------+
-| sku_id    | int  | ID for the product being added to the cart |
-+-----------+------+--------------------------------------------+
-*/

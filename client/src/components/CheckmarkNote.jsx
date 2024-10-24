@@ -5,8 +5,6 @@ function CheckmarkNote({ label = 'undefined label' }) {
   return (
     <div className="container">
       <Icon icon="fa-check" />
-      {/* Eve commented the lable out since it is printed on the image */}
-      {/* <span className="body-color ms-2">{label}</span> */}
     </div>
   );
 }

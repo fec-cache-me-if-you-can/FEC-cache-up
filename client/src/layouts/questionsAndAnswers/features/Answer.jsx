@@ -25,28 +25,33 @@ export default function Answer({ answer }) {
   };
 
   const reportAnswer = () => {
-    axios.put('/qa/answers/report', { answer_id: id })
+    axios
+      .put('/qa/answers/report', { answer_id: id })
       .catch((err) => console.log(err));
   };
 
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   return (
-    <div className="answer-card p-3">
-      <div className="fs-5 d-inline-flex">A: </div>
-      <div className="fs-7 d-inline-flex ps-1">{body}</div>
-      <div className="photoList">
-        {photos.map((photo) => {
-          <AnswerPhoto photo={photo} />;
-        })}
+    <div className="answer-card py-2 py-md-3">
+      <div className="d-flex align-items-start">
+        <div className="text-primary fs-5 fs-md-6 fw-medium">A:</div>
+        <div className="text-primary fs-5 fs-md-6 fw-medium ps-2">{body}</div>
       </div>
-      <div className="answer-footer">
-        <div className="fw-light text-size-90 d-inline-flex p-2">
-          {answerer_name}
-        </div>
-        <div className="fw-lighter text-size-90 d-inline-flex p-2">
+
+      <div className="photoList ms-2 ms-md-4 mt-2">
+        {photos.map((photo, i) => (
+          <AnswerPhoto photo={photo} key={i} />
+        ))}
+      </div>
+
+      <div className="answer-footer d-flex flex-wrap gap-2 justify-content-start align-items-center mt-2">
+        <div className="text-secondary small">{answerer_name}</div>
+        <div className="text-secondary small">
           {new Date(date).toLocaleDateString('en-US', dateOptions)}
         </div>
+        <div className="vr d-none d-md-block"></div>
         <Helpful onClick={isHelpful} helpfulness={howHelpful} />
+        <div className="vr d-none d-md-block"></div>
         <Report onClick={reportAnswer} />
       </div>
     </div>
