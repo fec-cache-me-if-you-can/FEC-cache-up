@@ -26,7 +26,13 @@ export default function SearchQuestions({ update }) {
       <Icon
         icon={`fa-regular ${query ? 'fa-xmark' : 'fa-search'}`}
         size="lg"
-        style={!query && { opacity: 0.7 }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          right: '10px',
+          transform: 'translateY(-50%)',
+          opacity: !query ? 0.7 : 1,
+        }}
       />
     </div>
   );
