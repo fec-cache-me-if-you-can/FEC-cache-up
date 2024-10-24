@@ -40,7 +40,7 @@ export default function Answer({ answer }) {
 
       <div className="photoList ms-2 ms-md-4 mt-2">
         {photos.map((photo, i) => (
-          <AnswerPhoto photo={photo} key={i} />
+          <AnswerPhoto url={photo} key={i} />
         ))}
       </div>
 
