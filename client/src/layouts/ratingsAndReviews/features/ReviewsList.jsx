@@ -113,13 +113,17 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
             <span className="fs-6 fs-md-5 fw-medium">
               {numberOfRatings} reviews, sorted by
             </span>
-            <DropdownSelectorSecondary
-              options={['relevant', 'helpful', 'newest']}
-              placeholder={sortOrder}
-              isDisabled={false}
-              onChange={onSortChange}
-              selectedOption={sortOrder}
-            />
+            <div style={{ width: '150px' }}>
+              {' '}
+              {/* Add fixed-width wrapper */}
+              <DropdownSelectorSecondary
+                options={['relevant', 'helpful', 'newest']}
+                placeholder={sortOrder}
+                isDisabled={false}
+                onChange={onSortChange}
+                selectedOption={sortOrder}
+              />
+            </div>
           </div>
 
           {/* Reviews List */}

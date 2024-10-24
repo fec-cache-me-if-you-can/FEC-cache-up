@@ -23,17 +23,21 @@ export default function DropdownSelectorSecondary({
   };
 
   return (
-    <div className="dropdown-simple d-inline-block align-content-center align-items-center">
+    <div
+      className="dropdown-simple d-inline-block align-content-center align-items-center"
+      style={{ minWidth: '150px', maxWidth: '150px' }}
+    >
       <button
         className="d-flex btn dropdown-toggle text-decoration-underline square border-0 fw-bold text-center p-0 py-0 fs-5 align-items-center"
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
         disabled={isDisabled || options.length === 0}
+        style={{ width: '150px' }}
       >
         {localSelectedOption || placeholder}
       </button>
-      <ul className="dropdown-menu square w-100 my-0 py-0">
+      <ul className="dropdown-menu square my-0 py-0" style={{ width: '150px' }}>
         {options.length === 0 ? (
           <li>
             <span className="dropdown-item disabled">OUT OF STOCK</span>
