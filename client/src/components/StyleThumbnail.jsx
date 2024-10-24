@@ -40,10 +40,7 @@ export default function StyleThumbnail({
       ></div>
 
       {isSelected && (
-        <div
-          className="position-absolute top-0 end-0 p-1"
-          style={{ zIndex: 2 }}
-        >
+        <div className="p-1" style={checkmarkNoteStyle}>
           <CheckmarkNote label="Selected" />
         </div>
       )}
@@ -67,13 +64,13 @@ export default function StyleThumbnail({
 
 const checkmarkNoteStyle = {
   position: 'absolute',
-  top: '-5px',
-  right: '-5px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  top: '3px',
+  right: '3px',
   zIndex: 1,
-  color: '#AB1B38',
+  color: 'var(--bs-black)',
+  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+  borderRadius: '50%',
+  border: '1px solid rgba(20, 20, 20)',
 };
 
 const hoverNameStyle = {
