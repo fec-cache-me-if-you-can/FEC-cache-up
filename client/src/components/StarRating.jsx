@@ -24,7 +24,18 @@ const StarRating = ({ rating, onClick }) => {
     }
 
     stars.push(
-      <div key={i} className="star-wrapper" onClick={() => handleStarClick(i)}>
+      <div
+        key={i}
+        className="star-wrapper"
+        onClick={() => handleStarClick(i)}
+        role={'button'}
+        tabIndex={onClick ? 0 : -1}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && onClick) {
+            handleStarClick(i);
+          }
+        }}
+      >
         <FontAwesomeIcon
           icon="fa-solid fa-star fa-sharp fa-xs"
           className="star-back"

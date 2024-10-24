@@ -47,7 +47,7 @@ export default function ProductInformation({
 
       <p className="text-uppercase text-primary fs-6 mb-2">{category}</p>
 
-      <h2 className="mb-3">{name}</h2>
+      <h2 className="mb-3 fs-1">{name}</h2>
 
       <p className="mb-4">
         {salePrice ? (

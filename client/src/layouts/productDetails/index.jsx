@@ -122,7 +122,7 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   };
 
   return (
-    <div className="container-fluid px-0">
+    <div className="container-fluid px-3 p-md-0">
       <div className="row g-5">
         <div className="col-12 col-lg-7">
           <ImageGallery photos={photos} />

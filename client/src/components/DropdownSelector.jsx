@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-// DropdownSelector Component
 export default function DropdownSelector({
   options,
   placeholder = 'Select',

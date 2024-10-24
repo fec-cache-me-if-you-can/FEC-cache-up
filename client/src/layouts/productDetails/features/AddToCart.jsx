@@ -31,7 +31,7 @@ export default function AddToCart({
       {showSizeError && (
         <p className="text-attention mb-0">Please select a size</p>
       )}
-      <div className="d-flex flex-column flex-sm-row gap-2 gap-sm-3">
+      <div className="d-flex flex-column flex-sm-row gap-3">
         <div className="flex-grow-1">
           <DropdownSelector
             options={sizes}

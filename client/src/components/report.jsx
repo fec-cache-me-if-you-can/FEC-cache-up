@@ -21,6 +21,6 @@ export default function Report({ onClick }) {
   );
 }
 
-Report.PropTypes = {
+Report.propTypes = {
   onClick: PropTypes.func.isRequired,
 };

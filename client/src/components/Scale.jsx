@@ -18,13 +18,12 @@ export default function Scale({
         </p>
       </div>
 
-      {/* Wrapper for three segmented bars */}
       <div
         className="bar-wrapper"
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          gap: '5px', // Space between each segment
+          gap: '5px',
         }}
       >
         {[...Array(3)].map((_, index) => (
@@ -32,13 +31,12 @@ export default function Scale({
             key={index}
             className="bar-segment"
             style={{
-              flex: 1, // Each segment takes equal space
+              flex: 1,
               height: '10px',
               backgroundColor: 'var(--secondary-bg)',
               position: 'relative',
             }}
           >
-            {/* Marker will only be rendered on the appropriate segment */}
             {index === Math.floor(markerPosition / 33.33) && (
               <div
                 className="marker"
