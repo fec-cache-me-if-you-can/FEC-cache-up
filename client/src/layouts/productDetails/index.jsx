@@ -124,11 +124,11 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   return (
     <div className="container-fluid px-3 p-md-0">
       <div className="row g-5">
-        <div className="col-12 col-lg-7">
+        <div className="col-12 col-xl-7">
           <ImageGallery photos={photos} />
         </div>
 
-        <div className="col-12 col-lg-5">
+        <div className="col-12 col-xl-5">
           <div className="d-flex flex-column gap-4 h-100">
             <div className="mb-auto">
               {' '}

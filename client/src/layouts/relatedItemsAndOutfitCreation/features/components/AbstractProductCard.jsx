@@ -14,7 +14,7 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
 
   const handleCardClick = (e) => {
     setProductId(productId);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const fetchAndProcessProductData = async () => {
@@ -39,7 +39,7 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
   const renderImageSection = () => (
     <div
       className="ratio d-flex justify-content-center align-items-center"
-      style={{ '--bs-aspect-ratio': '100%' }}
+      style={{ '--bs-aspect-ratio': '90%' }}
       onClick={handleCardClick}
       role="button"
       tabIndex="0"
@@ -80,7 +80,7 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
   return (
     <div
       className="card square border-05 cursor-pointer card-border"
-      style={{ width: '20rem' }}
+      style={{ width: '15rem' }}
     >
       {renderImageSection()}
       {renderDetailsSection()}

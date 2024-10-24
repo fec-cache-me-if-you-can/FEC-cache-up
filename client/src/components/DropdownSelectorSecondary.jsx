@@ -24,11 +24,11 @@ export default function DropdownSelectorSecondary({
 
   return (
     <div
-      className="dropdown-simple d-inline-block align-content-center align-items-center"
+      className="dropdown-simple d-inline-block align-content-center align-items-center flex-nowrap"
       style={{ minWidth: '150px', maxWidth: '150px' }}
     >
       <button
-        className="d-flex btn dropdown-toggle text-decoration-underline square border-0 fw-bold text-center p-0 py-0 fs-5 align-items-center"
+        className="d-flex btn dropdown-toggle text-decoration-underline square border-0 fw-bold text-center p-0 py-0 fs-6 fs-md-5 align-items-center"
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"

@@ -27,7 +27,7 @@ const AbstractList = ({
   );
 
   const renderNoItemsMessage = () => (
-    <p data-testid="no-items-message" className={'text-center text-secondary'}>
+    <p data-testid="no-items-message" className="text-center text-secondary">
       You don&apos;t have any items added to your outfit.
     </p>
   );
@@ -35,7 +35,7 @@ const AbstractList = ({
   const renderNavigationButton = (direction) => (
     <button
       id={`custom-swiper-button-${direction}-${isOutfit}`}
-      className={`transparent-button custom-swiper-button-${direction} m-2 z-0`}
+      className={`transparent-button custom-swiper-button-${direction} m-2 z-0 d-none d-md-block`}
       aria-label={`Scroll ${direction}`}
     >
       <Icon
@@ -65,20 +65,20 @@ const AbstractList = ({
           watchOverflow
           breakpoints={{
             576: {
-              slidesPerView: 1,
+              slidesPerView: 2,
               spaceBetween: 10,
             },
             768: {
-              slidesPerView: 1,
+              slidesPerView: 2,
               spaceBetween: 15,
             },
             992: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               spaceBetween: 20,
             },
-            1200: {
+            1300: {
               slidesPerView: 3,
-              spaceBetween: 30,
+              spaceBetween: 20,
             },
           }}
         >

@@ -109,7 +109,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
       {visibleReviews.length > 0 && (
         <div className="d-flex flex-column gap-4">
           {/* Header with Sort */}
-          <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
+          <div className="d-flex align-items-start align-items-md-center gap-2">
             <span className="fs-6 fs-md-5 fw-medium">
               {numberOfRatings} reviews, sorted by
             </span>

@@ -15,7 +15,7 @@ const ProductDetails = ({ details, renderIcon, setProductId }) => {
         {(details.category || '').toUpperCase()}
       </p>
       <button
-        className="card-title my-1 text-size-300 fw-semibold two-line-title hover-scale w-75"
+        className="card-title my-1 text-size-200 fw-semibold two-line-title hover-scale w-75"
         onClick={handleTitleClick}
         style={{
           background: 'none',

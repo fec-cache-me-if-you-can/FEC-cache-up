@@ -54,7 +54,7 @@ export default function ReviewTile({
   const closeModal = () => setSelectedPhoto(null);
 
   return (
-    <div className="review-tile">
+    <div className="my-3 pe-4">
       {/* Top Section: Star Rating & User Info */}
       <div className="review-top">
         <div className="review-star-rating">
@@ -76,7 +76,7 @@ export default function ReviewTile({
           <span
             onClick={toggleExpanded}
             className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-            style={{  cursor: 'pointer', marginLeft: '5px' }}
+            style={{ cursor: 'pointer', marginLeft: '5px' }}
           >
             {bodyExpanded ? 'Show less' : 'Show more'}
           </span>
@@ -138,17 +138,15 @@ export default function ReviewTile({
       >
         Helpful?
         <button
-         className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+          className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
           onClick={markAsHelpful}
         >
-
           Yes{'  '}({helpfulCount})
         </button>{' '}
-             |{' '}
+        |{' '}
         <button
-        className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
+          className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
           onClick={reportReview}
-
         >
           {'  '}
           Report{'  '}

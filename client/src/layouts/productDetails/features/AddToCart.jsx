@@ -58,6 +58,7 @@ export default function AddToCart({
             label="Add to Cart"
             onClick={handleAddToCart}
             plus={true}
+            fullWidth={true}
           />
         </div>
       )}

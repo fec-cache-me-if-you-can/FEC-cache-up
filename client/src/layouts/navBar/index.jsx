@@ -27,7 +27,7 @@ const NavBar = ({ theme, toggleTheme }) => {
       expand="lg"
       className="bg-secondary mb-5 border-bottom border-bottom-thick border-primary"
     >
-      <Container fluid className="p-5">
+      <Container fluid className="p-5 flex-nowrap">
         <Navbar.Brand href="#home" className="ms-4 mx-lg-0 mx-auto px-3">
           <Logo theme={theme} />
         </Navbar.Brand>
