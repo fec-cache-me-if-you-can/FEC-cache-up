@@ -144,10 +144,8 @@ export default function ImageGallery({ photos }) {
 
   return (
     <div>
-      {/* Expanded View Content */}
       {expandedView && (
         <div className="gallery-expanded-overlay">
-          {/* Thumbnails/Icons for Expanded View */}
           {!zoom && (
             <div className="gallery-expanded-thumbnails">
               {thumbnails.map((thumbnail, i) => (
@@ -182,7 +180,6 @@ export default function ImageGallery({ photos }) {
           )}
 
           <div className="gallery-expanded-main">
-            {/* Navigation */}
             {!zoom && (
               <div className="gallery-carousel-controls">
                 {index > 0 && (
@@ -204,8 +201,6 @@ export default function ImageGallery({ photos }) {
               </div>
             )}
 
-            {/* Expand Image */}
-
             <img
               src={imageGallery[index]}
               onClick={toggleZoomView}
@@ -213,12 +208,10 @@ export default function ImageGallery({ photos }) {
               className={`gallery-expanded-image ${zoom ? 'zoomed' : ''}`}
               style={zoom ? getTransformStyle() : {}}
             />
-            {/* Expand Icon */}
             <div>
               <Icon icon="fa-regular fa-expand" />
             </div>
 
-            {/* Expand Icon */}
             <div
               className="gallery-expand-icon"
               onClick={toggleExpandedView}
@@ -236,12 +229,9 @@ export default function ImageGallery({ photos }) {
         </div>
       )}
 
-      {/* Defualt View */}
       <div className="gallery-container">
-        {/* Thumbnails Column */}
         {!isMobile && (
           <div className="gallery-thumbnails-column">
-            {/* Up Arrow */}
             {!visibleThumbnails.includes(thumbnails[0]) && (
               <div
                 onClick={scrollThumbnailsUp}
@@ -268,7 +258,6 @@ export default function ImageGallery({ photos }) {
               ))}
             </div>
 
-            {/* Down Arrow */}
             {!visibleThumbnails.includes(thumbnails[thumbnails.length - 1]) && (
               <div
                 onClick={scrollThumbnailsDown}
@@ -287,9 +276,7 @@ export default function ImageGallery({ photos }) {
           </div>
         )}
 
-        {/* Main Image Carousel */}
         <div className="position-relative w-100">
-          {/* Carousel Image Container */}
           <div className="position-relative" style={{ paddingBottom: '100%' }}>
             <div
               className="position-absolute top-0 start-0 w-100 h-100"
@@ -308,7 +295,6 @@ export default function ImageGallery({ photos }) {
                 alt={`Slide ${index}`}
                 className="w-100 h-100 object-fit-cover"
               />
-              {/* Expand Icon */}
               <div
                 className="position-absolute top-0 end-0 p-3 bg-dark bg-opacity-50 m-2 rounded-1 text-white"
                 onClick={toggleExpandedView}
@@ -326,12 +312,10 @@ export default function ImageGallery({ photos }) {
             </div>
           </div>
 
-          {/* Navigation */}
           <div
             className="position-absolute top-0 bottom-0 start-0 end-0"
             style={{ pointerEvents: 'none' }}
           >
-            {/* Previous Button - Always on left */}
             <div
               className="position-absolute top-50 translate-middle-y start-0"
               style={{ pointerEvents: 'auto' }}
@@ -349,7 +333,6 @@ export default function ImageGallery({ photos }) {
               )}
             </div>
 
-            {/* Next Button - Always on right */}
             <div
               className="position-absolute top-50 translate-middle-y end-0"
               style={{ pointerEvents: 'auto' }}

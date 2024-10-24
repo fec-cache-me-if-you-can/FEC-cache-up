@@ -184,7 +184,6 @@ export default function WriteNewReview({
       </Modal.Header>
 
       <Modal.Body className="py-2">
-        {/* Star Rating */}
         <div className="mb-4">
           <p className="fw-medium mb-2">Overall Rating *</p>
           <div className="d-flex align-items-center gap-3">
@@ -199,7 +198,6 @@ export default function WriteNewReview({
           </div>
         </div>
 
-        {/* Recommend */}
         <div className="mb-4">
           <fieldset>
             <p className="fw-medium mb-2">Do you recommend this product? *</p>
@@ -234,7 +232,6 @@ export default function WriteNewReview({
           </fieldset>
         </div>
 
-        {/* Characteristics */}
         <div className="mb-4">
           {Object.entries(characteristicOptions).map(([charName, labels]) => (
             <CharacteristicsForm
@@ -248,7 +245,6 @@ export default function WriteNewReview({
           ))}
         </div>
 
-        {/* Review Summary */}
         <div className="mb-4">
           <p className="fw-medium mb-2">Review Summary</p>
           <textarea
@@ -262,7 +258,6 @@ export default function WriteNewReview({
           />
         </div>
 
-        {/* Review Body */}
         <div className="mb-4">
           <p className="fw-medium mb-2">Give us your detailed feedback *</p>
           <textarea
@@ -281,7 +276,6 @@ export default function WriteNewReview({
           </small>
         </div>
 
-        {/* Photo Upload */}
         <div className="mb-4">
           <p className="fw-medium mb-2">Upload your photos</p>
           {photos.length < 5 && (
@@ -318,7 +312,6 @@ export default function WriteNewReview({
           </div>
         </div>
 
-        {/* Nickname */}
         <div className="mb-4">
           <p className="fw-medium mb-2">What is your nickname? *</p>
           <input
@@ -335,7 +328,6 @@ export default function WriteNewReview({
           </small>
         </div>
 
-        {/* Email */}
         <div className="mb-4">
           <p className="fw-medium mb-2">What is your email? *</p>
           <input

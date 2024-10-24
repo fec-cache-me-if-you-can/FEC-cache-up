@@ -14,8 +14,7 @@ export default function ProductInformation({
   rating,
   numberOfRatings,
 }) {
-  const url = window.location.href; // Get the current page URL to share
-
+  const url = window.location.href;
   const handleShare = (platform) => {
     let shareUrl = '';
     const text = `Check out this product: ${name} - ${category}`;
@@ -33,7 +32,7 @@ export default function ProductInformation({
       default:
         return;
     }
-    window.open(shareUrl, '_blank'); // Open the share URL in a new tab
+    window.open(shareUrl, '_blank');
   };
 
   return (

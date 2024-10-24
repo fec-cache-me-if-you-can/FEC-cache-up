@@ -54,7 +54,6 @@ export default function RatingsAndReviews({
       <h5 className="section-header mb-4">Ratings And Reviews</h5>
 
       <div className="row g-4">
-        {/* Left Column: Ratings + Product Breakdown */}
         <div className="col-12 col-lg-4 col-xl-3 pe-lg-5">
           <div className="mb-4">
             <RatingsBreakdown
@@ -71,7 +70,6 @@ export default function RatingsAndReviews({
           </div>
         </div>
 
-        {/* Right Column: Review List */}
         <div className="col-12 col-lg-8 col-xl-9">
           <div className="d-flex flex-column gap-3">
             <KeywordSearch handleSearchFilter={handleSearchFilter} />

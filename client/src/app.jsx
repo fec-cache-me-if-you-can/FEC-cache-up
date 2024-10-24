@@ -114,7 +114,6 @@ export default function App() {
           />
         </div>
       </div>
-      {/* a blank black full width footer */}
       <div
         className="d-flex w-100 justify-content-center align-items-center bg-black text-white py-3 mt-5"
         style={{ height: '100px' }}

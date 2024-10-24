@@ -36,7 +36,6 @@ export default function RatingsBreakdown({
       </div>
       <div>{recommended}% of reviews recommend this product</div>
       <br></br>
-      {/* Rating Bars */}
       {[5, 4, 3, 2, 1].map((star) => {
         // Convert the rating count to a number
         const ratingCount = parseInt(

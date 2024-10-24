@@ -15,7 +15,6 @@ export default function Bar({
       className="d-flex align-items-center gap-3 mb-2 py-2 rounded-2"
       style={style}
     >
-      {/* Clickable Star Rating Label */}
       <button
         onClick={onClick}
         className="btn btn-link text-secondary p-0 text-decoration-underline fs-6 flex-nowrap"
@@ -23,7 +22,6 @@ export default function Bar({
         {starRating} stars
       </button>
 
-      {/* Rating Bar */}
       <div
         className="rating-bar position-relative flex-grow-1"
         onClick={onClick}

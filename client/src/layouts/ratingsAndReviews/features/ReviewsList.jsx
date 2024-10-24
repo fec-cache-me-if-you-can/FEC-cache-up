@@ -97,7 +97,6 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
 
   return (
     <div className="">
-      {/* No Reviews State */}
       {visibleReviews.length === 0 && (
         <div className="text-center py-4">
           <p className="mb-3">Be the first to review!</p>
@@ -105,17 +104,14 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
         </div>
       )}
 
-      {/* Reviews Present State */}
       {visibleReviews.length > 0 && (
         <div className="d-flex flex-column gap-4">
-          {/* Header with Sort */}
           <div className="d-flex align-items-start align-items-md-center gap-2">
             <span className="fs-6 fs-md-5 fw-medium">
               {numberOfRatings} reviews, sorted by
             </span>
             <div style={{ width: '150px' }}>
               {' '}
-              {/* Add fixed-width wrapper */}
               <DropdownSelectorSecondary
                 options={['relevant', 'helpful', 'newest']}
                 placeholder={sortOrder}
@@ -126,7 +122,6 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
             </div>
           </div>
 
-          {/* Reviews List */}
           <div
             className="overflow-y-scroll scrollable-reviews"
             style={{
@@ -151,7 +146,6 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
             ))}
           </div>
 
-          {/* Action Buttons */}
           <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mt-3">
             {hasMoreReviews && (
               <Button
@@ -167,7 +161,6 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
             />
           </div>
 
-          {/* Modal */}
           <div
             className={`review-modal-overlay position-fixed top-0 start-0 w-100 h-100 ${
               isModalVisible ? 'visible' : ''

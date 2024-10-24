@@ -132,7 +132,6 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
           <div className="d-flex flex-column gap-4 h-100">
             <div className="mb-auto">
               {' '}
-              {/* Added to push content to top */}
               <ProductInformation
                 name={name}
                 category={category}
@@ -164,7 +163,6 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
         </div>
       </div>
 
-      {/* Additional Information Section */}
       <div className="row mt-5">
         <div className="col-12 ps-0 pe-0">
           <AdditionalInfo

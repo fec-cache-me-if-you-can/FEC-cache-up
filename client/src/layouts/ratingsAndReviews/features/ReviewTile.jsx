@@ -55,7 +55,6 @@ export default function ReviewTile({
 
   return (
     <div className="my-3 pe-4">
-      {/* Top Section: Star Rating & User Info */}
       <div className="review-top">
         <div className="review-star-rating">
           <StarRating rating={rating} />
@@ -66,10 +65,8 @@ export default function ReviewTile({
         </div>
       </div>
 
-      {/* Review Summary */}
       <div className="review-summary">{summary}</div>
 
-      {/* Review Body */}
       <div className="review-body">
         {displayedBody}
         {body.length > 10 && (
@@ -83,7 +80,6 @@ export default function ReviewTile({
         )}
       </div>
 
-      {/* Photos */}
       <div className="review-photos">
         {photos &&
           photos.map((photo) => (
@@ -114,7 +110,6 @@ export default function ReviewTile({
           ))}
       </div>
 
-      {/* Recommendation */}
       {recommend && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
           <Icon icon="fa-check" />
@@ -122,7 +117,6 @@ export default function ReviewTile({
         </div>
       )}
 
-      {/* Response */}
       {response && (
         <div className="review-response">
           <p>
@@ -131,7 +125,6 @@ export default function ReviewTile({
         </div>
       )}
 
-      {/* Helpful Section */}
       <div
         className="review-helpful"
         style={{ display: 'inline-flex', gap: '5px', alignItems: 'center' }}
@@ -153,7 +146,6 @@ export default function ReviewTile({
         </button>{' '}
       </div>
 
-      {/* Modal for full-resolution images */}
       {selectedPhoto && (
         <div
           className="modal"
@@ -180,7 +172,6 @@ export default function ReviewTile({
         </div>
       )}
 
-      {/* Separator Line */}
       <div className="review-separator" />
     </div>
   );

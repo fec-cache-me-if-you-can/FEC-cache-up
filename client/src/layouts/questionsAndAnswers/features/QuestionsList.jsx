@@ -88,7 +88,6 @@ export default function QuestionsList({ productId, productName }) {
 
   return (
     <div className="questions-container w-100">
-      {/* Search and Add Question Header */}
       <div className="d-flex justify-content-between mb-4 w-100">
         <SearchQuestions update={updateQuery} />
         <AddQuestion
@@ -99,7 +98,6 @@ export default function QuestionsList({ productId, productName }) {
         />
       </div>
 
-      {/* Questions Scrollable List */}
       <div
         className="overflow-y-scroll overflow-x-hidden mb-3"
         style={{ maxHeight: '50vh' }}
@@ -130,7 +128,6 @@ export default function QuestionsList({ productId, productName }) {
           ))}
       </div>
 
-      {/* Navigation Buttons */}
       <div className="questions-navigation d-flex flex-wrap gap-3">
         {!hideButton && (
           <button
