@@ -25,18 +25,18 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   const [photos, setPhotos] = useState([]);
   const [showSizeError, setShowSizeError] = useState(false);
 
-  // Sync state with product prop when product changes
+
   useEffect(() => {
     if (product) {
       setName(product.name);
       setCategory(product.category);
       setSlogan(product.slogan);
       setDescription(product.description);
-      // Set other properties if needed, based on your product structure
+
     }
   }, [product]);
 
-  //pull info on styles
+
   useEffect(() => {
     axios.get(`products/${product.id}/styles`).then((response) => {
       setStyleOptions(response.data.results);
@@ -45,7 +45,7 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
     });
   }, [product.id]);
 
-  //update sizes:
+
   useEffect(() => {
     if (selectedStyle) {
       const sizesArray = Object.values(selectedStyle.skus).map(
@@ -59,7 +59,7 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
     }
   }, [selectedStyle]);
 
-  //update quantities:
+
   useEffect(() => {
     if (selectedSize && selectedStyle) {
       const skuForSelectedSize = Object.values(selectedStyle.skus).find(
@@ -97,7 +97,7 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
     );
 
     if (selectedSku) {
-      setSelectedSkuId(selectedSku[0]); // SKU ID is the key
+      setSelectedSkuId(selectedSku[0]);
     }
   };
 

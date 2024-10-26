@@ -154,7 +154,7 @@ export default function ImageGallery({ photos }) {
                   className="gallery-icon-wrapper"
                   onClick={() => handleThumbnail(thumbnail)}
                   style={{
-                    color: thumbnail === selectedThumbnail ? 'white' : 'grey', // Conditionally apply color
+                    color: thumbnail === selectedThumbnail ? 'white' : 'grey',
                     fontSize: '24px',
                     transition: 'color 0.3s',
                     cursor: 'pointer',

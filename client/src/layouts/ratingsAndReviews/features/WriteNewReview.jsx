@@ -154,8 +154,7 @@ export default function WriteNewReview({
           characteristics: characteristics,
         })
         .then(() => {
-          console.log('review submitted sucessfully!');
-          setIsSubmitted(true); // Show thank-you message
+          setIsSubmitted(true);
           setTimeout(onClose, 2000);
         })
         .catch((error) => {

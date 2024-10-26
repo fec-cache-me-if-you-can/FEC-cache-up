@@ -24,9 +24,6 @@ export default function RatingsBreakdown({
 
   const isFilterActive = (starRating) => selectedFilters.includes(starRating);
 
-  // Debug logging to check the data
-  console.log('metaReviews ratings:', metaReviews?.ratings);
-  console.log('selectedFilters:', selectedFilters);
 
   return (
     <div>
@@ -37,7 +34,7 @@ export default function RatingsBreakdown({
       <div>{recommended}% of reviews recommend this product</div>
       <br></br>
       {[5, 4, 3, 2, 1].map((star) => {
-        // Convert the rating count to a number
+
         const ratingCount = parseInt(
           metaReviews?.ratings?.[star.toString()] || 0,
           10,
