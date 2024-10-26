@@ -3,7 +3,6 @@ import OutfitList from './features/OutfitList.jsx';
 import RelatedProductList from './features/RelatedProductList.jsx';
 import PropTypes from 'prop-types';
 
-// TODO: receive productId from the parent component
 const RelatedItemsAndOutfitCreation = ({ productId, setProductId }) => {
   return (
     <>

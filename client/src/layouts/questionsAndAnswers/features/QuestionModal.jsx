@@ -119,7 +119,7 @@ export default function QuestionModal({
       </Modal.Body>
       <Modal.Footer className="border-0">
         <PrimaryButton
-          label="Submit Answer"
+          label="Submit Question"
           onClick={handleSubmit}
           isDisabled={false}
           fullWidth={false}
