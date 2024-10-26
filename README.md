@@ -51,10 +51,10 @@ To set up the project locally, follow these steps:
    ```shell
    $ cd fec-cache-up
    ```
-1. **switch to node version 16.x**:
+1. **switch to node version 20.x**:
 
    ```shell
-   $ nvm use 16
+   $ nvm use 20
    ```
 1. set up script node path prepending by running the following command:
 
@@ -72,7 +72,7 @@ To set up the project locally, follow these steps:
 
    ```env
     GITHUB_TOKEN='your_github_token'
-    PORT=3000
+    API_URL='your_api_url'
     ```
 
 4. **Spin up the Application**:
@@ -94,23 +94,6 @@ To set up the project locally, follow these steps:
   $ npm run server-dev
   ```
 
-  This command will run the server with webpack.
-
-  ```bash
-  $ npm run serve
-  ```
-
-  This command will run nodemon to watch the server files and restart the server when changes are made.
-
-  ```bash
-  $ npm run server-dev
-  ```
-
-  This command will run the server with webpack.
-
-  ```bash
-  $ npm run serve
-  ```
   This command will run the webpack build and start the server in development mode and watch the server files for changes.
 
   ```shell
