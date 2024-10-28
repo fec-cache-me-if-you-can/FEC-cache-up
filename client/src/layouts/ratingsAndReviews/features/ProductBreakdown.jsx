@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Scale from '../../../components/Scale.jsx';
+import Scale from '@/components/Scale.jsx';
 
 export default function ProductBreakdown({ metaReviews }) {
   const [characteristics, setCharacteristics] = useState(null);

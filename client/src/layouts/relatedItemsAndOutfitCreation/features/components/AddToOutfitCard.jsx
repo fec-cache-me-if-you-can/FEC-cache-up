@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../../../../components/icons.jsx';
-import PrimaryButton from '../../../../components/PrimaryButton.jsx';
+import Icon from '@/components/icons.jsx';
 
 const AddToOutfitCard = ({ productId, action, items = [] }) => {
   const handleAddToOutfit = (event) => {
@@ -15,26 +14,28 @@ const AddToOutfitCard = ({ productId, action, items = [] }) => {
 
   const isProductInOutfit = items.includes(productId);
 
+  const buttonClass = `btn btn-primary square m-3 px-3 py-2 fs-5 ${isProductInOutfit ? 'disabled' : ''}`;
+  const buttonIcon = isProductInOutfit ? 'fa-check' : 'fa-plus';
+  const buttonText = isProductInOutfit ? 'added' : 'add to outfit';
+  const ariaLabel = isProductInOutfit
+    ? 'Product already in outfit'
+    : 'Add product to outfit';
+
   return (
     <button
       onClick={handleAddToOutfit}
-      className={`btn btn-primary square m-3 px-3 py-2 fs-5 ${isProductInOutfit ? 'disabled' : ''}`}
+      className={buttonClass}
       style={{
         minWidth: '40px',
         minHeight: '40px',
         padding: '0',
       }}
       disabled={isProductInOutfit}
-      aria-label={
-        isProductInOutfit
-          ? 'Product already in outfit'
-          : 'Add product to outfit'
-      }
+      aria-label={ariaLabel}
+      aria-pressed={isProductInOutfit}
     >
-      <Icon icon={isProductInOutfit ? 'fa-check' : 'fa-plus'} />
-      <span className="ms-2">
-        {isProductInOutfit ? 'added' : 'add to outfit'}
-      </span>
+      <Icon icon={buttonIcon} aria-hidden="true" />
+      <span className="ms-2">{buttonText}</span>
     </button>
   );
 };
@@ -45,4 +46,4 @@ AddToOutfitCard.propTypes = {
   items: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default AddToOutfitCard;
+export default memo(AddToOutfitCard);

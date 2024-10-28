@@ -4,7 +4,6 @@ import ProductDetails from './layouts/productDetails/index.jsx';
 import RatingsAndReviews from './layouts/ratingsAndReviews/index.jsx';
 import QuestionsAndAnswers from './layouts/questionsAndAnswers/index.jsx';
 import RelatedItemsAndOutfitCreation from './layouts/relatedItemsAndOutfitCreation/index.jsx';
-import PrimaryButton from './components/PrimaryButton.jsx';
 import NavBar from './layouts/navBar/index.jsx';
 
 const DEFAULT_PRODUCT_ID = 40344;

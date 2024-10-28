@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import StarRating from '../../../components/StarRating.jsx';
-import Icon from '../../../components/icons.jsx';
-import CheckmarkNote from '../../../components/CheckmarkNote.jsx';
+import StarRating from '@/components/StarRating.jsx';
+import Icon from '@/components/icons.jsx';
 import PropTypes from 'prop-types';
 
 export default function ReviewTile({
@@ -72,8 +71,14 @@ export default function ReviewTile({
         {body.length > 10 && (
           <span
             onClick={toggleExpanded}
-            className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1"
-            style={{ cursor: 'pointer', marginLeft: '5px' }}
+            className="helpfulness text-secondary text-size-90 bg-transparent hstack border-0 shadow-none text-decoration-underline ps-1 cursor-pointer ms-1"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                toggleExpanded();
+              }
+            }}
           >
             {bodyExpanded ? 'Show less' : 'Show more'}
           </span>
@@ -85,15 +90,19 @@ export default function ReviewTile({
           photos.map((photo) => (
             <div
               key={photo.id}
-              className="thumbnail"
+              className="thumbnail d-inline-block overflow-hidden cursor-pointer"
               onClick={() => openModal(photo.url)}
               style={{
                 width: '60px',
                 height: '60px',
-                overflow: 'hidden',
-                display: 'inline-block',
                 margin: '10px',
-                cursor: 'pointer',
+              }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  openModal(photo.url);
+                }
               }}
             >
               <img
@@ -148,20 +157,17 @@ export default function ReviewTile({
 
       {selectedPhoto && (
         <div
-          className="modal"
+          className="modal d-flex justify-content-center align-items-center cursor-pointer"
           onClick={closeModal}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              closeModal();
+            }
+          }}
           style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
             backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 1000,
-            cursor: 'pointer',
           }}
         >
           <img

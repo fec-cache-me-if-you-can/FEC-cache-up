@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { fetchCompleteProductDataById } from '../../api.js';
 import { processProductData } from '../../utils.js';
-import LoadingSpinner from '../../../../components/LoadingSpinner.jsx';
+import LoadingSpinner from '@/components/LoadingSpinner.jsx';
 import ProductImage from './ProductImage.jsx';
 import Placeholder from './Placeholder.jsx';
 import ProductDetails from './ProductDetails.jsx';
@@ -12,12 +12,12 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [productDetails, setProductDetails] = useState(null);
 
-  const handleCardClick = (e) => {
+  const handleCardClick = () => {
     setProductId(productId);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  const fetchAndProcessProductData = async () => {
+  const fetchAndProcessProductData = React.useCallback(async () => {
     setIsLoading(true);
     try {
       const productData = await fetchCompleteProductDataById(productId);
@@ -30,11 +30,11 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [productId]);
 
   useEffect(() => {
     fetchAndProcessProductData();
-  }, [productId]);
+  }, [productId, fetchAndProcessProductData]);
 
   const renderImageSection = () => (
     <div
@@ -44,16 +44,21 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
       role="button"
       tabIndex="0"
       aria-label={`View details for ${productDetails?.name}`}
+      aria-pressed="false"
       onKeyDown={(e) => e.key === 'Enter' && setProductId(productId)}
     >
       {isLoading ? (
-        <div className="d-flex justify-content-center align-items-center w-100 h-100">
+        <div
+          className="d-flex justify-content-center align-items-center w-100 h-100"
+          role="status"
+          aria-live="polite"
+        >
           <LoadingSpinner size={48} />
         </div>
       ) : (
         <ProductImage
           src={productDetails?.imageUrl}
-          alt={productDetails?.name}
+          alt={productDetails?.name || 'Product image'}
         />
       )}
     </div>
@@ -78,13 +83,13 @@ const AbstractProductCard = ({ productId, renderIcon, setProductId }) => {
   }
 
   return (
-    <div
+    <article
       className="card square border-05 cursor-pointer card-border"
       style={{ width: '15rem' }}
     >
       {renderImageSection()}
       {renderDetailsSection()}
-    </div>
+    </article>
   );
 };
 

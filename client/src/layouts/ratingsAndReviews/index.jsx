@@ -4,8 +4,6 @@ import KeywordSearch from './features/KeywordSearch.jsx';
 import ProductBreakdown from './features/ProductBreakdown.jsx';
 import RatingsBreakdown from './features/RatingsBreakdown.jsx';
 import ReviewList from './features/ReviewsList.jsx';
-import ReviewTile from './features/ReviewTile.jsx';
-import WriteNewReview from './features/WriteNewReview.jsx';
 import PropTypes from 'prop-types';
 
 export default function RatingsAndReviews({

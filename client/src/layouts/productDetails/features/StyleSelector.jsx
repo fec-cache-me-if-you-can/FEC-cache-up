@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import PropTypes from 'prop-types';
-import StyleThumbnail from '../../../components/StyleThumbnail.jsx';
+import StyleThumbnail from '@/components/StyleThumbnail.jsx';
 
 export default function StyleSelector({
   selectedStyle,

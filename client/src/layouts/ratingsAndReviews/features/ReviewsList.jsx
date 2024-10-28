@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import PropTypes from 'prop-types';
-import Button from '../../../components/PrimaryButton.jsx';
-import DropdownSelectorSecondary from '../../../components/DropdownSelectorSecondary.jsx';
+import Button from '@/components/PrimaryButton.jsx';
+import DropdownSelectorSecondary from '@/components/DropdownSelectorSecondary.jsx';
 import WriteNewReview from './WriteNewReview.jsx';
 
 export default function ReviewList({ numberOfRatings, reviews, product }) {
@@ -13,70 +13,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
   const [index, setIndex] = useState(2);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  useEffect(() => {
-    if (isModalVisible) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isModalVisible]);
-
-  useEffect(() => {
-    if (reviews.length) {
-      relevantSort();
-    }
-  }, [reviews]);
-
-  useEffect(() => {
-    setVisibleReviews(sortedReviews.slice(0, index));
-    setHasMoreReviews(sortedReviews.length > index);
-  }, [sortedReviews]);
-
-  const loadMoreReviews = () => {
-    if (visibleReviews.length >= sortedReviews.length) return;
-    const moreReviews = sortedReviews.slice(index, index + 2);
-    setVisibleReviews(visibleReviews.concat(moreReviews));
-    if (index + 2 >= sortedReviews.length) {
-      setHasMoreReviews(false);
-    }
-    setIndex(index + 2);
-  };
-
-  const openModal = () => setIsModalVisible(true);
-  const closeModal = () => setIsModalVisible(false);
-
-  const onSortChange = (selectedOption) => {
-    setSortOrder(selectedOption);
-    if (selectedOption === 'relevant') {
-      relevantSort();
-    } else if (selectedOption === 'helpful') {
-      helpfulSort();
-    } else {
-      dateSort();
-    }
-  };
-
-  const helpfulSort = () => {
-    const arrayToSort = reviews.slice();
-    arrayToSort.sort((a, b) => {
-      const helpfulnessA = a.helpfulness || 0;
-      const helpfulnessB = b.helpfulness || 0;
-      return helpfulnessB - helpfulnessA;
-    });
-    setSortedReviews(arrayToSort);
-  };
-
-  const dateSort = () => {
-    const arrayToSort = reviews.slice();
-    arrayToSort.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateB - dateA;
-    });
-    setSortedReviews(arrayToSort);
-  };
-
-  const relevantSort = () => {
+  const relevantSort = useCallback(() => {
     const arrayToSort = reviews.slice();
     arrayToSort.sort((a, b) => {
       const dateA = new Date(a.date);
@@ -93,7 +30,73 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
       return scoreB - scoreA;
     });
     setSortedReviews(arrayToSort);
-  };
+  }, [reviews]);
+
+  const helpfulSort = useCallback(() => {
+    const arrayToSort = reviews.slice();
+    arrayToSort.sort((a, b) => {
+      const helpfulnessA = a.helpfulness || 0;
+      const helpfulnessB = b.helpfulness || 0;
+      return helpfulnessB - helpfulnessA;
+    });
+    setSortedReviews(arrayToSort);
+  }, [reviews]);
+
+  const dateSort = useCallback(() => {
+    const arrayToSort = reviews.slice();
+    arrayToSort.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB - dateA;
+    });
+    setSortedReviews(arrayToSort);
+  }, [reviews]);
+
+  useEffect(() => {
+    if (isModalVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isModalVisible]);
+
+  useEffect(() => {
+    if (reviews.length) {
+      relevantSort();
+    }
+  }, [reviews, relevantSort]);
+
+  useEffect(() => {
+    setVisibleReviews(sortedReviews.slice(0, index));
+    setHasMoreReviews(sortedReviews.length > index);
+  }, [sortedReviews, index]);
+
+  const loadMoreReviews = useCallback(() => {
+    if (visibleReviews.length >= sortedReviews.length) return;
+    setIndex((prevIndex) => {
+      const newIndex = prevIndex + 2;
+      return newIndex;
+    });
+  }, [sortedReviews.length, visibleReviews.length]);
+
+  const openModal = useCallback(() => setIsModalVisible(true), []);
+  const closeModal = useCallback(() => setIsModalVisible(false), []);
+
+  const onSortChange = useCallback(
+    (selectedOption) => {
+      setSortOrder(selectedOption);
+      if (selectedOption === 'relevant') {
+        relevantSort();
+      } else if (selectedOption === 'helpful') {
+        helpfulSort();
+      } else {
+        dateSort();
+      }
+    },
+    [relevantSort, helpfulSort, dateSort],
+  );
+
+  const sortOptions = useMemo(() => ['relevant', 'helpful', 'newest'], []);
 
   return (
     <div className="">
@@ -113,7 +116,7 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
             <div style={{ width: '150px' }}>
               {' '}
               <DropdownSelectorSecondary
-                options={['relevant', 'helpful', 'newest']}
+                options={sortOptions}
                 placeholder={sortOrder}
                 isDisabled={false}
                 onChange={onSortChange}
@@ -187,6 +190,13 @@ export default function ReviewList({ numberOfRatings, reviews, product }) {
                 marginTop: '2rem',
               }}
               onClick={(event) => event.stopPropagation()}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.stopPropagation();
+                }
+              }}
             >
               <WriteNewReview
                 productName={product.name}

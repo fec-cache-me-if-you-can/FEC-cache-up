@@ -1,8 +1,6 @@
-// This is a low priority component
-// Feel free to work on it if you have completed the rest of the layouts functionality
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../../../components/icons.jsx';
+import Icon from '@/components/icons.jsx';
 
 export default function KeywordSearch({ handleSearchFilter }) {
   const [search, setSearch] = useState('');

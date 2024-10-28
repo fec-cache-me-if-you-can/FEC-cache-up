@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { PropTypes } from 'prop-types';
 import Icon from '../icons.jsx';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { all } from '@awesome.me/kit-60350fbc81/icons';

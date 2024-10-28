@@ -1,4 +1,3 @@
-// components/OutfitList.jsx
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useOutfitData } from './hooks/UseOutfitData.jsx';

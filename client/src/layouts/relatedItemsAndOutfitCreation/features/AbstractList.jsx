@@ -20,14 +20,27 @@ const AbstractList = ({
   handleAddToOutfit = () => {},
   setProductId = () => {},
 }) => {
-  const renderLoadingMessage = () => <LoadingSpinner />;
+  const renderLoadingMessage = () => (
+    <LoadingSpinner aria-label="Loading content" />
+  );
 
   const renderErrorMessage = () => (
-    <p className="error-message text-center secondary-color">{error}</p>
+    <p
+      className="error-message text-center secondary-color"
+      role="alert"
+      aria-live="assertive"
+    >
+      {error}
+    </p>
   );
 
   const renderNoItemsMessage = () => (
-    <p data-testid="no-items-message" className="text-center text-secondary">
+    <p
+      data-testid="no-items-message"
+      className="text-center text-secondary"
+      role="status"
+      aria-live="polite"
+    >
       You don&apos;t have any items added to your outfit.
     </p>
   );
@@ -37,10 +50,12 @@ const AbstractList = ({
       id={`custom-swiper-button-${direction}-${isOutfit}`}
       className={`transparent-button custom-swiper-button-${direction} m-2 z-0 d-none d-md-block`}
       aria-label={`Scroll ${direction}`}
+      tabIndex="0"
     >
       <Icon
         icon={`fa-chevron-${direction === 'prev' ? 'left' : 'right'}`}
         className="fs-3"
+        aria-hidden="true"
       />
     </button>
   );
@@ -49,7 +64,10 @@ const AbstractList = ({
     const hasMultipleItems = items.length > 3;
 
     return (
-      <div className="abstract-list-container d-flex">
+      <section
+        className="abstract-list-container d-flex"
+        aria-label="Product carousel"
+      >
         {hasMultipleItems && renderNavigationButton('prev')}
         <Swiper
           spaceBetween={5}
@@ -83,19 +101,24 @@ const AbstractList = ({
           }}
         >
           {items.map((itemId, index) => (
-            <SwiperSlide key={`${itemId}-${index}`}>
+            <SwiperSlide
+              key={`${itemId}-${index}`}
+              role="group"
+              aria-roledescription="slide"
+            >
               <div className="d-flex align-items-center justify-content-center">
                 <CardComponent
                   productId={itemId}
                   action={action}
                   setProductId={setProductId}
+                  aria-label={`Product card for item ${itemId}`}
                 />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
         {hasMultipleItems && renderNavigationButton('next')}
-      </div>
+      </section>
     );
   };
 
@@ -107,19 +130,22 @@ const AbstractList = ({
   };
 
   return (
-    <>
-      <h5 className="section-header">
-        {heading}
-        {isOutfit && (
-          <AddToOutfitCard
-            productId={selectedProduct}
-            action={handleAddToOutfit}
-            items={items}
-          />
-        )}
-      </h5>
+    <main>
+      <header>
+        <h5 className="section-header">
+          {heading}
+          {isOutfit && (
+            <AddToOutfitCard
+              productId={selectedProduct}
+              action={handleAddToOutfit}
+              items={items}
+              aria-label="Add to outfit card"
+            />
+          )}
+        </h5>
+      </header>
       <div className="bg-secondary z-n1 section">{renderContent()}</div>
-    </>
+    </main>
   );
 };
 

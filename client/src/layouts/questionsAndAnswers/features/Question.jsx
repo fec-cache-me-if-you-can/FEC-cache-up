@@ -1,19 +1,15 @@
 import React from 'react';
 
 import { useState, useEffect } from 'react';
-import Helpful from '../../../components/helpful.jsx';
-import Report from '../../../components/report.jsx';
+import Helpful from '@/components/helpful.jsx';
+import Report from '@/components/report.jsx';
 import AddAnswer from './AddAnswer.jsx';
 import AnswersList from './AnswersList.jsx';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-export default function Question({
-  question,
-  getQuestions,
-  setQuestions,
-  productName,
-}) {
+export default function Question({ question, productName }) {
+  /* eslint-disable */
   const [currentQuestion, setCurrentQuestion] = useState(question);
   const [question_id, setQuestion_id] = useState(question.question_id);
   const [answers, setAnswers] = useState(question.answers);
@@ -22,6 +18,7 @@ export default function Question({
   const [question_helpfulness, setQuestion_helpfulness] = useState(
     question.question_helpfulness,
   );
+  /* eslint-enable */
 
   useEffect(() => {
     setAnswers(currentQuestion.answers);

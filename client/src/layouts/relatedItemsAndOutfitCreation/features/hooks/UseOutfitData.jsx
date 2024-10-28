@@ -1,4 +1,3 @@
-// hooks/useOutfitData.js
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   fetchOutfitProductIds,
@@ -32,7 +31,7 @@ export const useOutfitData = () => {
   const addProduct = useCallback(async (productId) => {
     try {
       const updatedOutfit = await addProductByIdToOutfit(productId);
-      setOutfitIds((prev) => updatedOutfit.map((product) => product.id));
+      setOutfitIds(() => updatedOutfit.map((product) => product.id));
     } catch (error) {
       console.error('Hook: Error adding product to outfit:', error);
     }
@@ -41,7 +40,7 @@ export const useOutfitData = () => {
   const removeProduct = useCallback(async (productId) => {
     try {
       const updatedOutfit = await removeProductByIdFromOutfit(productId);
-      setOutfitIds((prev) => updatedOutfit.map((product) => product.id));
+      setOutfitIds(() => updatedOutfit.map((product) => product.id));
     } catch (error) {
       console.error('Error removing product from outfit:', error);
     }

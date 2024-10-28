@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import DropdownSelector from '../../../components/DropdownSelector.jsx';
-import PrimaryButton from '../../../components/PrimaryButton.jsx';
+import DropdownSelector from '@/components/DropdownSelector.jsx';
+import PrimaryButton from '@/components/PrimaryButton.jsx';
 import PropTypes from 'prop-types';
 
 export default function AddToCart({
-  productId,
-  selectedStyleId,
   sizes,
   selectedSize,
   quantity,

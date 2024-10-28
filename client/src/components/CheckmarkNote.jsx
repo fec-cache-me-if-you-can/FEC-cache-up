@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from './icons.jsx';
-function CheckmarkNote({ label = 'undefined label' }) {
+function CheckmarkNote() {
   return (
     <div
       className="d-flex align-items-center align-content-center justify-content-center"

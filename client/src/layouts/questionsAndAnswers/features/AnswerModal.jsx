@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import PrimaryButton from '@/components/PrimaryButton.jsx';
 
 export default function AnswerModal({

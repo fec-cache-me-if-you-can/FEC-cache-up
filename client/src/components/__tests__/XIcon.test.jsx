@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import XIcon from '../XIcon.jsx';
-import { PropTypes } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import StarRating from '../../../components/StarRating.jsx';
-import PrimaryButton from '../../../components/PrimaryButton.jsx';
+import StarRating from '@/components/StarRating.jsx';
+import PrimaryButton from '@/components/PrimaryButton.jsx';
 import CharacteristicsForm from './CharacteristicsForm.jsx';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';

@@ -2,9 +2,8 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ProductDetails from '../ProductDetails';
-import PropTypes from 'prop-types';
 
-jest.mock('../../../../../components/StarRating.jsx', () => {
+jest.mock('@/components/StarRating.jsx', () => {
   // eslint-disable-next-line
   const DummyStarRating = ({ rating }) => {
     return <div data-testid="star-rating">Rating: {rating}</div>;
@@ -84,7 +83,7 @@ describe('ProductDetails Component', () => {
 
     const titleButton = screen.getByText('Test Product');
     expect(titleButton).toHaveClass(
-      'card-title my-1 text-size-300 fw-semibold two-line-title hover-scale w-75',
+      'card-title my-1 text-size-200 fw-semibold two-line-title hover-scale w-75',
     );
   });
 

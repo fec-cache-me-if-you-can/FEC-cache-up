@@ -10,3 +10,17 @@
   transition: all 0.3s;
   min-width: 300px;
 }
+
+.custom-search-input:focus + .search-icon {
+  transition: all 0.3s;
+  color: var(--secondary-text);
+}
+
+.custom-search-input::-webkit-search-cancel-button {
+  appearance: none;
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}

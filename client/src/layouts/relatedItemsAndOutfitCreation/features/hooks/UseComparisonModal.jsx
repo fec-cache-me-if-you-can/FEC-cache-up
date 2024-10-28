@@ -1,4 +1,3 @@
-// useComparisonModal.js
 import { useState, useCallback } from 'react';
 import { fetchProductInformationById } from '../../api.js';
 

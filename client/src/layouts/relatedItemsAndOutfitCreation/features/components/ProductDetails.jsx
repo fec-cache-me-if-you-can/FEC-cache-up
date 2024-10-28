@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StarRating from '../../../../components/StarRating.jsx';
+import StarRating from '@/components/StarRating.jsx';
 
 const ProductDetails = ({ details, renderIcon, setProductId }) => {
   const handleTitleClick = () => {
