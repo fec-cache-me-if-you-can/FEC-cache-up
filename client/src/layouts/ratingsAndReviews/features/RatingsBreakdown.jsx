@@ -1,7 +1,7 @@
 import React from 'react';
-import StarRating from '../../../components/StarRating.jsx';
-import Bar from '../../../components/Bar.jsx';
-import PrimaryButton from '../../../components/PrimaryButton.jsx';
+import StarRating from '@/components/StarRating.jsx';
+import Bar from '@/components/Bar.jsx';
+import PrimaryButton from '@/components/PrimaryButton.jsx';
 import PropTypes from 'prop-types';
 
 export default function RatingsBreakdown({
@@ -24,7 +24,6 @@ export default function RatingsBreakdown({
 
   const isFilterActive = (starRating) => selectedFilters.includes(starRating);
 
-
   return (
     <div>
       <div className="rating-breakdown">
@@ -34,7 +33,6 @@ export default function RatingsBreakdown({
       <div>{recommended}% of reviews recommend this product</div>
       <br></br>
       {[5, 4, 3, 2, 1].map((star) => {
-
         const ratingCount = parseInt(
           metaReviews?.ratings?.[star.toString()] || 0,
           10,

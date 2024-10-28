@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import SearchQuestions from './SearchQuestions.jsx';
 import Question from './Question.jsx';
-import PrimaryButton from '../../../components/PrimaryButton.jsx';
 import AddQuestion from './AddQuestion.jsx';
 
 export default function QuestionsList({ productId, productName }) {
@@ -18,17 +17,20 @@ export default function QuestionsList({ productId, productName }) {
   const [hideNextPage, setHideNextPage] = useState(false);
   const [hidePreviousPage, setHidePreviousPage] = useState(true);
 
-  const getQuestions = (product_id = productId, page = 1, count = 10000000) => {
-    return axios.get(
-      `/qa/questions?product_id=${product_id}&page=${page}&count=${count}`,
-    );
-  };
+  const getQuestions = React.useCallback(
+    (product_id = productId, page = 1, count = 10000000) => {
+      return axios.get(
+        `/qa/questions?product_id=${product_id}&page=${page}&count=${count}`,
+      );
+    },
+    [productId],
+  );
 
   useEffect(() => {
     getQuestions(productId)
       .then((result) => setQuestions(result.data.results))
       .catch((err) => console.log(err));
-  }, [productId]);
+  }, [productId, getQuestions]);
 
   useEffect(() => {
     displayedQuestions > 4 ? setMoreIsHidden(false) : setMoreIsHidden(true);
@@ -50,7 +52,7 @@ export default function QuestionsList({ productId, productName }) {
           : setHideNextPage(true);
       })
       .catch((err) => console.log(err));
-  }, [currentPage, productId]);
+  }, [currentPage, getQuestions, productId]);
 
   useEffect(() => {
     currentPage > 1 ? setHidePreviousPage(false) : setHidePreviousPage(true);
@@ -60,7 +62,7 @@ export default function QuestionsList({ productId, productName }) {
     getQuestions(productId, currentPage)
       .then((result) => setQuestions(result.data.results))
       .catch((err) => console.log(err));
-  }, [currentPage, productId]);
+  }, [currentPage, productId, getQuestions]);
 
   const updateQuery = (value) => setQuery(value);
 

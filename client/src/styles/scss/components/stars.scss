@@ -1,0 +1,38 @@
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+}
+
+.star-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  font-size: 0.9rem; // this changes the size of the stars
+  margin-right: 2px;
+}
+
+.star-back,
+.star-front,
+.star-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.star-back {
+  color: var(--bs-secondary-bg);
+  z-index: 1;
+}
+
+.star-front {
+  color: var(--bs-body-color);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.star-mask {
+  color: var(--bs-body-bg);
+  z-index: 3;
+  opacity: 0.5;
+}

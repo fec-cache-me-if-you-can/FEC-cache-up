@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StarRating from '../../../components/StarRating.jsx';
-import Icon from '../../../components/icons.jsx';
-import PinterestIcon from '../../../components/PinterestIcon.jsx';
-import FacebookIcon from '../../../components/FacebookIcon.jsx';
-import XIcon from '../../../components/XIcon.jsx';
+import StarRating from '@/components/StarRating.jsx';
+import PinterestIcon from '@/components/PinterestIcon.jsx';
+import FacebookIcon from '@/components/FacebookIcon.jsx';
+import XIcon from '@/components/XIcon.jsx';
 
 export default function ProductInformation({
   name,

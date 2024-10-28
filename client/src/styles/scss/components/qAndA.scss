@@ -1,0 +1,45 @@
+.scrollable-qa {
+  max-height: 80vh;
+}
+
+.modal-warning {
+  color: var(--attention);
+  font-size: small;
+}
+
+.questions-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.question-card {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.question-main {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-interaction {
+  flex-shrink: 0;
+}
+
+.question-search {
+  color: var(--bs-body-color) !important;
+  border: 1px solid var(--bs-body-color) !important;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.modal-header {
+  position: relative;
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import StarRating from '../StarRating';
-import PropTypes from 'prop-types';
 
 jest.mock('@fortawesome/react-fontawesome', () => ({
   // eslint-disable-next-line react/prop-types

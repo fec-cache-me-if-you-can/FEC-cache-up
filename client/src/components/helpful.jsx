@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Helpful({ helpfulness, onClick }) {
-  const handleClick = () => {
-    onClick();
-  };
-
   return (
     <div className="helpful-button d-flex align-items-center gap-2">
       <span className="text-secondary text-size-90">Helpful?</span>

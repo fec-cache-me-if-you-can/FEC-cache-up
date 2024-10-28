@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { PropTypes } from 'prop-types';
 import FacebookIcon from '../FacebookIcon.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';

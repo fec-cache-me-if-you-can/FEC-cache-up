@@ -25,17 +25,14 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
   const [photos, setPhotos] = useState([]);
   const [showSizeError, setShowSizeError] = useState(false);
 
-
   useEffect(() => {
     if (product) {
       setName(product.name);
       setCategory(product.category);
       setSlogan(product.slogan);
       setDescription(product.description);
-
     }
   }, [product]);
-
 
   useEffect(() => {
     axios.get(`products/${product.id}/styles`).then((response) => {
@@ -44,7 +41,6 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
       setSelectedStyleId(response.data.results[0].style_id);
     });
   }, [product.id]);
-
 
   useEffect(() => {
     if (selectedStyle) {
@@ -58,7 +54,6 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
       setSelectedStyleId(selectedStyle.style_id);
     }
   }, [selectedStyle]);
-
 
   useEffect(() => {
     if (selectedSize && selectedStyle) {
@@ -93,7 +88,7 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
     setSelectedQuantity(1);
     setShowSizeError(false);
     const selectedSku = Object.entries(selectedStyle.skus).find(
-      ([sku, details]) => details.size === size,
+      ([sku, details]) => details.size === size, // eslint-disable-line no-unused-vars
     );
 
     if (selectedSku) {
@@ -112,7 +107,7 @@ export default function ProductDetails({ product, rating, numberOfRatings }) {
       setShowSizeError(false);
       axios
         .post('/cart', { sku_id: selectedSkuId })
-        .then((response) => {
+        .then(() => {
           console.log('Item successfully added to cart!');
         })
         .catch((error) => {

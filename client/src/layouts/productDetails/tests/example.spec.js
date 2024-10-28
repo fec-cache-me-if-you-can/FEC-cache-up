@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import DropdownSelector from '../../../components/DropdownSelector.jsx';
+import { render, screen } from '@testing-library/react';
+import DropdownSelector from '@/components/DropdownSelector.jsx';
 import '@testing-library/jest-dom';
-import axios from 'axios';
 
 jest.mock('axios');
 

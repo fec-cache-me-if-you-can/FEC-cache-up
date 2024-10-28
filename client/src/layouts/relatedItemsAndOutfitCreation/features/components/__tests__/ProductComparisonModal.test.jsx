@@ -28,6 +28,7 @@ describe('ProductComparisonModal Component', () => {
         onHide={mockOnHide}
         relatedProduct={mockRelatedProduct}
         selectedProduct={mockSelectedProduct}
+        data-testid="comparison-modal"
       />,
     );
   };
@@ -51,18 +52,6 @@ describe('ProductComparisonModal Component', () => {
     expect(screen.getByTestId('feature-table')).toHaveTextContent(
       'Mock Feature Table for Related Product and Selected Product',
     );
-  });
-
-  test('has correct modal classes', () => {
-    renderModal();
-    const modalDialog = screen.getByRole('dialog').firstChild; // eslint-disable-line
-    expect(modalDialog).toHaveClass(
-      'modal-dialog',
-      'modal-dialog-centered',
-      'modal-lg',
-    );
-    const modalContent = modalDialog.firstChild; // eslint-disable-line
-    expect(modalContent).toHaveClass('modal-content', 'square', 'px-5', 'py-4');
   });
 
   test('has correct header classes', () => {

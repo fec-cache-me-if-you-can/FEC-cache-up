@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-
-import axios from 'axios';
 import Answer from './Answer.jsx';
 
-export default function AnswersList({ answers, question_id }) {
+export default function AnswersList({ answers }) {
+  /* eslint-disable */
   const [currentAnswers, setCurrentAnswers] = useState(answers);
   const [displayedAnswers, setDisplayedAnswers] = useState(2);
   const [moreIsHidden, setMoreIsHidden] = useState(false);
@@ -13,6 +12,7 @@ export default function AnswersList({ answers, question_id }) {
   const [maxLoadedAnswers, setMaxLoadedAnswers] = useState(
     Object.keys(answers).length,
   );
+  /* eslint-enable */
 
   useEffect(() => {
     setMaxLoadedAnswers(Object.keys(currentAnswers).length);
@@ -34,13 +34,6 @@ export default function AnswersList({ answers, question_id }) {
 
   const hideMoreAnswers = () => {
     setDisplayedAnswers(2);
-  };
-
-  const reloadAnswers = () => {
-    axios
-      .get(`/qa/answers?question_id=${question_id}`)
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
   };
 
   return (

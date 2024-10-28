@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../../../components/icons.jsx';
+import Icon from '@/components/icons.jsx';
 
 export default function SearchQuestions({ update }) {
   const [query, setQuery] = useState('');

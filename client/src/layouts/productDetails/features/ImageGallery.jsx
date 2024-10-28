@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import CarouselThumbnail from '../../../components/CarouselThumbnail.jsx';
-import Icon from '../../../components/icons.jsx';
+import CarouselThumbnail from '@/components/CarouselThumbnail.jsx';
+import Icon from '@/components/icons.jsx';
 
 export default function ImageGallery({ photos }) {
   const [imageGallery, setImageGallery] = useState([]);
   const [index, setIndex] = useState(0);
   const [thumbnails, setThumbnails] = useState([]);
   const [visibleThumbnails, setVisibleThumbnails] = useState([]);
-  const [selectedImage, setSelectedImage] = useState('');
   const [selectedThumbnail, setSelectedThumbnail] = useState('');
   const [expandedView, setExpandedView] = useState(false);
   const [zoom, setZoom] = useState(false);
@@ -21,7 +20,6 @@ export default function ImageGallery({ photos }) {
     const photosArray = photos.map((photo) => photo.url);
     const thumbnailArray = photos.map((photo) => photo.thumbnail_url);
     setImageGallery(photosArray);
-    setSelectedImage(photosArray[0]);
     setThumbnails(thumbnailArray);
     setVisibleThumbnails(thumbnailArray.slice(0, maxThumbnails));
     setSelectedThumbnail(thumbnailArray[0]);
@@ -41,7 +39,6 @@ export default function ImageGallery({ photos }) {
     setSelectedThumbnail(thumbnail);
     const i = thumbnails.indexOf(thumbnail);
     setIndex(i);
-    setSelectedImage(imageGallery[i]);
   };
 
   const scrollThumbnailsUp = () => {
@@ -71,7 +68,6 @@ export default function ImageGallery({ photos }) {
   const handleNextImage = () => {
     const nextIndex = (index + 1) % imageGallery.length;
     setIndex(nextIndex);
-    setSelectedImage(imageGallery[nextIndex]);
     setSelectedThumbnail(thumbnails[nextIndex]);
 
     const lastVisibleIndex = thumbnails.indexOf(
@@ -85,7 +81,6 @@ export default function ImageGallery({ photos }) {
   const handlePrevImage = () => {
     const prevIndex = (index - 1 + imageGallery.length) % imageGallery.length;
     setIndex(prevIndex);
-    setSelectedImage(imageGallery[prevIndex]);
     setSelectedThumbnail(thumbnails[prevIndex]);
 
     const firstVisibleIndex = thumbnails.indexOf(visibleThumbnails[0]);
@@ -150,7 +145,7 @@ export default function ImageGallery({ photos }) {
             <div className="gallery-expanded-thumbnails">
               {thumbnails.map((thumbnail, i) => (
                 <div
-                  key={thumbnail}
+                  key={thumbnail + i}
                   className="gallery-icon-wrapper"
                   onClick={() => handleThumbnail(thumbnail)}
                   style={{
@@ -200,13 +195,19 @@ export default function ImageGallery({ photos }) {
                 )}
               </div>
             )}
-
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
             <img
               src={imageGallery[index]}
               onClick={toggleZoomView}
               onMouseMove={handleMouseMove}
               className={`gallery-expanded-image ${zoom ? 'zoomed' : ''}`}
               style={zoom ? getTransformStyle() : {}}
+              alt={`Slide ${index}`}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  toggleZoomView();
+                }
+              }}
             />
             <div>
               <Icon icon="fa-regular fa-expand" />

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-import Helpful from '../../../components/helpful.jsx';
-import Report from '../../../components/report.jsx';
+import Helpful from '@/components/helpful.jsx';
+import Report from '@/components/report.jsx';
 import AnswerPhoto from './AnswerPhoto.jsx';
 import axios from 'axios';
 

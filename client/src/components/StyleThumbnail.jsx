@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CheckmarkNote from './CheckmarkNote.jsx';
-import Icon from './icons.jsx';
 
 export default function StyleThumbnail({
   name,
@@ -71,19 +70,6 @@ const checkmarkNoteStyle = {
   backgroundColor: 'rgba(255, 255, 255, 0.95)',
   borderRadius: '50%',
   border: '1px solid rgba(20, 20, 20)',
-};
-
-const hoverNameStyle = {
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  width: '100%',
-  backgroundColor: 'rgba(0, 0, 0, 0.7)',
-  color: 'white',
-  textAlign: 'center',
-  padding: '5px',
-  boxSizing: 'border-box',
-  fontSize: '12px',
 };
 
 StyleThumbnail.propTypes = {

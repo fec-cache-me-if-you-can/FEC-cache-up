@@ -1,13 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AbstractProductCard from './AbstractProductCard.jsx';
 import DeleteButton from './DeleteButton.jsx';
 
 const OutfitCard = ({ productId, action, setProductId }) => {
-  const handleDelete = useCallback(() => {
-    action(productId);
-  }, [productId, action]);
-
   const renderDeleteIcon = (id) => (
     <DeleteButton productId={id} onDelete={action} />
   );

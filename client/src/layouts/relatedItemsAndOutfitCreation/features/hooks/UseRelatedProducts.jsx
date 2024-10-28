@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { fetchRelatedProductIds } from '../../api.js';
 
 export const useRelatedProducts = (productId) => {
@@ -6,7 +6,7 @@ export const useRelatedProducts = (productId) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const getRelatedProductIds = async () => {
+  const getRelatedProductIds = useCallback(async () => {
     try {
       setIsLoading(true);
       const data = await fetchRelatedProductIds(productId);
@@ -17,10 +17,10 @@ export const useRelatedProducts = (productId) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [productId]);
   useEffect(() => {
     getRelatedProductIds();
-  }, [productId]);
+  }, [productId, getRelatedProductIds]);
 
   return {
     relatedProducts,

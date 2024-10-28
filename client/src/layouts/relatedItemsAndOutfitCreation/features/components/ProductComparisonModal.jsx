@@ -1,4 +1,3 @@
-// ProductComparisonModal.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
@@ -17,11 +16,16 @@ const ProductComparisonModal = ({
       centered
       contentClassName="square px-5 py-4"
       size="lg"
+      aria-labelledby="comparison-modal-title"
+      aria-describedby="comparison-modal-description"
+      role="dialog"
     >
       <Modal.Header closeButton className="border-0 d-flex align-items-start">
-        <Modal.Title className="mt-1 fw-medium">COMPARISON</Modal.Title>
+        <Modal.Title id="comparison-modal-title" className="mt-1 fw-medium">
+          COMPARISON
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body id="comparison-modal-description">
         <div className="fs-6 fw-light">
           <FeatureTable
             relatedProduct={relatedProduct}
